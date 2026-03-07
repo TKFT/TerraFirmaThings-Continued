@@ -41,8 +41,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Snow Shoes
 
-![Snow Shoes Item/Block Image](docs/images/snow_shoes_item_block.png)
-![Snow Shoes Recipe Image](docs/images/snow_shoes_recipe.png)
+![Snow Shoes Item](img/snowshoesuse.png)
+![Snow Shoes Recipe Image](img/snowshoecraft.png)
 
 - **What it does:** Reduces snow movement slowdown when worn in the boots slot. Allows player to walk on powder snow without sinking.
 - **How to get it:** Craft basic snow shoes from cloth/leather/lumber; durable version upgrades through hiking boots.
