@@ -41,8 +41,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Snow Shoes
 
-![Snow Shoes Item](img/snowshoesuse.png)
-![Snow Shoes Recipe Image](img/snowshoecraft.png)
+![Snow Shoes](img/snowshoeuse.png)
+![Snow Shoes Recipe Image](img/snowshoescraft.png)
 
 - **What it does:** Reduces snow movement slowdown when worn in the boots slot. Allows player to walk on powder snow without sinking.
 - **How to get it:** Craft basic snow shoes from cloth/leather/lumber; durable version upgrades through hiking boots.
@@ -50,8 +50,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Hiking Boots
 
-![Hiking Boots Item/Block Image](docs/images/hiking_boots_item_block.png)
-![Hiking Boots Recipe Image](docs/images/hiking_boots_recipe.png)
+![Hiking Boots](img/hikingbootsuse)
+![Hiking Boots Recipe Image](imghikingbootscraft.png)
 
 - **What it does:** Reduces movement slowdown from dense plants and brush.
 - **How to get it:** Forge metal bracing, then craft with leather boots and fiber.
