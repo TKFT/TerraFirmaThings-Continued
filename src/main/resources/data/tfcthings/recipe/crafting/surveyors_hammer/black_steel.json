@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableProspectorsHammers"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "S"
+  ],
+  "key": {
+    "H": {
+      "item": "tfcthings:surveyors_hammer_head/black_steel"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:surveyors_hammer/black_steel"
+  }
+}

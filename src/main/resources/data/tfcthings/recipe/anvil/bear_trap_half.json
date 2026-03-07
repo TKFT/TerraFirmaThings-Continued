@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableBearTrap"
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:sheets/steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:bear_trap_half"
+  },
+  "rules": [
+    "shrink_third_last",
+    "draw_second_last",
+    "hit_last"
+  ],
+  "tier": 4
+}

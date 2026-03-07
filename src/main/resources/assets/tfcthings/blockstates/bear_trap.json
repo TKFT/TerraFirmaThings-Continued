@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,closed=false,buried=false": {"model": "tfcthings:block/bear_trap_open"},
+    "facing=south,closed=false,buried=false": {"model": "tfcthings:block/bear_trap_open", "y": 180},
+    "facing=east,closed=false,buried=false": {"model": "tfcthings:block/bear_trap_open", "y": 90},
+    "facing=west,closed=false,buried=false": {"model": "tfcthings:block/bear_trap_open", "y": 270},
+    "facing=north,closed=true,buried=false": {"model": "tfcthings:block/bear_trap_closed"},
+    "facing=south,closed=true,buried=false": {"model": "tfcthings:block/bear_trap_closed", "y": 180},
+    "facing=east,closed=true,buried=false": {"model": "tfcthings:block/bear_trap_closed", "y": 90},
+    "facing=west,closed=true,buried=false": {"model": "tfcthings:block/bear_trap_closed", "y": 270},
+    "facing=north,closed=false,buried=true": {"model": "tfcthings:block/bear_trap_buried"},
+    "facing=south,closed=false,buried=true": {"model": "tfcthings:block/bear_trap_buried", "y": 180},
+    "facing=east,closed=false,buried=true": {"model": "tfcthings:block/bear_trap_buried", "y": 90},
+    "facing=west,closed=false,buried=true": {"model": "tfcthings:block/bear_trap_buried", "y": 270},
+    "facing=north,closed=true,buried=true": {"model": "tfcthings:block/bear_trap_closed"},
+    "facing=south,closed=true,buried=true": {"model": "tfcthings:block/bear_trap_closed", "y": 180},
+    "facing=east,closed=true,buried=true": {"model": "tfcthings:block/bear_trap_closed", "y": 90},
+    "facing=west,closed=true,buried=true": {"model": "tfcthings:block/bear_trap_closed", "y": 270}
+  }
+}

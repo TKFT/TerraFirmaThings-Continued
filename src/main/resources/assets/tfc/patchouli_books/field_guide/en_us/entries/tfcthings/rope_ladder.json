@@ -1,0 +1,50 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableRopeLadder"}
+  ],
+  "name": "Rope Ladder",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:rope_ladder",
+  "sortnum": 3,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Rope Ladders$() automatically extend downward from placement, building a vertical climb path while consuming ladders from your inventory."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_ladder",
+      "text": "Crafted from jute fiber and lumber. Each craft yields 16 rope ladders."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Behavior",
+      "text": "Breaking a section can collapse sections below it depending on support.$(br2)Shift-right-click to pick up placed rope ladder segments."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Rope Ladder",
+      "multiblock": {
+        "pattern": [
+          ["DDL"],
+          ["WWL"],
+          ["W 0"],
+          ["W L"],
+          ["W L"]
+        ],
+        "mapping": {
+          "D": "tfc:grass/alfisol",
+          "W": "tfc:rock/raw/chert",
+          "L": "tfcthings:rope_ladder[facing=south]",
+          "0": "tfcthings:rope_ladder[facing=south]"
+        }
+      },
+      "enable_visualize": false,
+      "text": "A wall-mounted, auto-extending rope ladder."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:rope_ladder": 1
+  }
+}

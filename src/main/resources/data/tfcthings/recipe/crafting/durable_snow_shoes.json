@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {"type": "tfcthings:config_enabled", "flag": "enableHikingBoots"},
+        {"type": "tfcthings:config_enabled", "flag": "enableSnowShoes"}
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "SBS",
+    "LLL"
+  ],
+  "key": {
+    "C": {
+      "item": "tfc:burlap_cloth"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "B": {
+      "item": "tfcthings:hiking_boots"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:durable_snow_shoes",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "tfcthings:block/gem_display/claystone"},
+    "facing=south": {"model": "tfcthings:block/gem_display/claystone", "y": 180},
+    "facing=east": {"model": "tfcthings:block/gem_display/claystone", "y": 90},
+    "facing=west": {"model": "tfcthings:block/gem_display/claystone", "y": 270}
+  }
+}

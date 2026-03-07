@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSnowShoes"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "SBS",
+    "LLL"
+  ],
+  "key": {
+    "C": {
+      "item": "tfc:burlap_cloth"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "B": {
+      "item": "minecraft:leather_boots"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:snow_shoes",
+    "count": 1
+  }
+}

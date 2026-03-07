@@ -1,0 +1,67 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableSlings"}
+  ],
+  "name": "Sling and Ammunition",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:sling",
+  "sortnum": 12,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tfcthings:sling",
+      "text": "$(thing)Slings$() are charge-and-release ranged weapons. Basic slings fire loose rocks; reinforced slings add access to metal ammo types."
+    },
+    {
+      "type": "tfc:knapping_recipe",
+      "recipe": "tfcthings:knapping/sling",
+      "text": "Knapp a sling from leather."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/metal_bracing_wrought_iron",
+      "text": "Forge $(thing)Metal Bracing$() first (wrought iron shown; steel also available)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/sling_metal",
+      "text": "Combine a sling and metal bracing to create a $(thing)Reinforced Sling$()."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/sling_ammo_wrought_iron",
+      "text": "Forge heavy sling ammo on an anvil (wrought iron shown)."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/sling_ammo_steel",
+      "text": "Steel heavy ammo variant."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/sling_ammo_spread",
+      "recipe2": "tfcthings:crafting/sling_ammo_light",
+      "text": "Convert heavy ammo into Scatter or High-Velocity variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/sling_ammo_fire",
+      "text": "Sparking ammo adds fire damage behavior on impact."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ammo Types",
+      "text": "$(li)$(thing)Heavy$(): direct damage$(li)$(thing)Scatter$(): multi-projectile spread$(li)$(thing)High-Velocity$(): flatter/faster trajectory$(li)$(thing)Sparking$(): ignites targets"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:sling": 1,
+    "tfcthings:sling_metal": 3,
+    "tfcthings:sling_ammo": 4,
+    "tfcthings:sling_ammo_spread": 6,
+    "tfcthings:sling_ammo_light": 6,
+    "tfcthings:sling_ammo_fire": 7,
+    "tfcthings:metal_bracing": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:double_sheets/gold"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:crown/gold_empty"
+  },
+  "rules": [
+    "shrink_third_last",
+    "upset_second_last",
+    "hit_last"
+  ],
+  "tier": 2
+}

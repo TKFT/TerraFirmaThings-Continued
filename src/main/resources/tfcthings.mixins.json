@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.rustysnail.terrafirmathings.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntitySpeedMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

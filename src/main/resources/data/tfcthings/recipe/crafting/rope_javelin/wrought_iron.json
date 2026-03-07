@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableRopeJavelin"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RJR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:jute_fiber"
+    },
+    "J": {
+      "item": "tfc:metal/javelin/wrought_iron"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:wrought_iron_rope_javelin"
+  }
+}

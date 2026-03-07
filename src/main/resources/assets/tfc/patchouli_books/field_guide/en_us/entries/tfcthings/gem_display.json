@@ -1,0 +1,98 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableGemDisplays"}
+  ],
+  "name": "Gem Display",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:gem_display/granite",
+  "sortnum": 9,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Gem Displays$() are decorative stone stands that hold cut gems. They are available for every TFC rock type and output comparator signal when occupied."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/andesite",
+      "recipe2": "tfcthings:crafting/gem_display/basalt"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/chalk",
+      "recipe2": "tfcthings:crafting/gem_display/chert"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/claystone",
+      "recipe2": "tfcthings:crafting/gem_display/conglomerate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/dacite",
+      "recipe2": "tfcthings:crafting/gem_display/diorite"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/dolomite",
+      "recipe2": "tfcthings:crafting/gem_display/gabbro"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/gneiss",
+      "recipe2": "tfcthings:crafting/gem_display/granite"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/limestone",
+      "recipe2": "tfcthings:crafting/gem_display/marble"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/phyllite",
+      "recipe2": "tfcthings:crafting/gem_display/quartzite"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/rhyolite",
+      "recipe2": "tfcthings:crafting/gem_display/schist"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/shale",
+      "recipe2": "tfcthings:crafting/gem_display/slate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/gem_display/tuff"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Using Displays",
+      "text": "Right-click with a cut gem to insert. Right-click empty-hand to remove.$(br2)Supported gems: amethyst, diamond, emerald, lapis lazuli, opal, pyrite, ruby, sapphire, and topaz."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:gem_display/andesite": 1,
+    "tfcthings:gem_display/basalt": 1,
+    "tfcthings:gem_display/chalk": 2,
+    "tfcthings:gem_display/chert": 2,
+    "tfcthings:gem_display/claystone": 3,
+    "tfcthings:gem_display/conglomerate": 3,
+    "tfcthings:gem_display/dacite": 4,
+    "tfcthings:gem_display/diorite": 4,
+    "tfcthings:gem_display/dolomite": 5,
+    "tfcthings:gem_display/gabbro": 5,
+    "tfcthings:gem_display/gneiss": 6,
+    "tfcthings:gem_display/granite": 6,
+    "tfcthings:gem_display/limestone": 7,
+    "tfcthings:gem_display/marble": 7,
+    "tfcthings:gem_display/phyllite": 8,
+    "tfcthings:gem_display/quartzite": 8,
+    "tfcthings:gem_display/rhyolite": 9,
+    "tfcthings:gem_display/schist": 9,
+    "tfcthings:gem_display/shale": 10,
+    "tfcthings:gem_display/slate": 10,
+    "tfcthings:gem_display/tuff": 11
+  }
+}

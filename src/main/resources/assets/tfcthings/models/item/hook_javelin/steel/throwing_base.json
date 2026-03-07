@@ -1,0 +1,6 @@
+{
+  "parent": "item/trident_throwing",
+  "textures": {
+    "particle": "tfcthings:item/hook_javelin/steel"
+  }
+}

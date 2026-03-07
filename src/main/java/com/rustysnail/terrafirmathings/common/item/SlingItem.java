@@ -1,0 +1,152 @@
+package com.rustysnail.terrafirmathings.common.item;
+
+import com.rustysnail.terrafirmathings.TFCThingsConfig;
+import com.rustysnail.terrafirmathings.common.entity.SlingStoneEntity;
+import javax.annotation.Nullable;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+
+public class SlingItem extends Item
+{
+
+    public static final TagKey<Item> LOOSE_STONES = TagKey.create(Registries.ITEM,
+        ResourceLocation.fromNamespaceAndPath("c", "stones/loose"));
+
+    private final int tier;
+
+    public SlingItem(int tier, Properties properties)
+    {
+        super(properties);
+        this.tier = tier;
+    }
+
+    public int getTier()
+    {
+        return tier;
+    }
+
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    {
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableSlings.get())
+        {
+            return InteractionResultHolder.fail(stack);
+        }
+
+        if (findAmmo(player) == null && !player.getAbilities().instabuild)
+        {
+            return InteractionResultHolder.fail(stack);
+        }
+
+        player.startUsingItem(hand);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+            SoundEvents.WOOL_PLACE, SoundSource.PLAYERS, 0.5f, 0.4f);
+        return InteractionResultHolder.consume(stack);
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack)
+    {
+        return UseAnim.BOW;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack stack, LivingEntity entity)
+    {
+        return 72000;
+    }
+
+    @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft)
+    {
+        if (!(entity instanceof Player player)) return;
+        if (level.isClientSide()) return;
+
+        int chargeTime = getUseDuration(stack, entity) - timeLeft;
+        int maxPower = TFCThingsConfig.ITEMS.SLING.maxPower.get();
+        int chargeSpeed = TFCThingsConfig.ITEMS.SLING.chargeSpeed.get();
+
+        float power = Math.min((float) chargeTime / chargeSpeed, maxPower);
+        if (power < 0.5f) return;
+
+        AmmoResult ammo = findAmmo(player);
+        if (ammo == null && !player.getAbilities().instabuild) return;
+
+        SlingAmmoItem.AmmoType ammoType = SlingAmmoItem.AmmoType.STONE;
+        if (ammo != null && ammo.stack().getItem() instanceof SlingAmmoItem slingAmmo)
+        {
+            ammoType = slingAmmo.getAmmoType();
+        }
+
+        float totalPower = power + ammoType.getPowerBonus();
+        float velocity = 1.6f * (power / maxPower) * ammoType.getVelocityMultiplier();
+        float inaccuracy = 0.5f * (8 - Math.min(power, 8));
+
+        spawnProjectile(level, player, totalPower, velocity, inaccuracy, ammoType);
+
+        for (int i = 0; i < ammoType.getScatterCount(); i++)
+        {
+            spawnProjectile(level, player, power, velocity * 0.75f, inaccuracy + 2.5f, ammoType);
+        }
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(),
+            SoundEvents.SNOWBALL_THROW, SoundSource.PLAYERS, 0.5f, 0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f));
+
+        if (ammo != null && !player.getAbilities().instabuild)
+        {
+            ammo.stack().shrink(1);
+        }
+
+        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
+    }
+
+    private void spawnProjectile(Level level, Player player, float power, float velocity, float inaccuracy, SlingAmmoItem.AmmoType ammoType)
+    {
+        SlingStoneEntity stone = new SlingStoneEntity(level, player, power, ammoType);
+        stone.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, velocity, inaccuracy);
+        level.addFreshEntity(stone);
+    }
+
+    @Nullable
+    private AmmoResult findAmmo(Player player)
+    {
+        ItemStack offhand = player.getOffhandItem();
+        if (isValidAmmo(offhand)) return new AmmoResult(offhand);
+
+        ItemStack mainHand = player.getMainHandItem();
+        if (isValidAmmo(mainHand)) return new AmmoResult(mainHand);
+
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++)
+        {
+            ItemStack s = player.getInventory().getItem(i);
+            if (isValidAmmo(s)) return new AmmoResult(s);
+        }
+
+        return null;
+    }
+
+    private boolean isValidAmmo(ItemStack stack)
+    {
+        if (stack.isEmpty()) return false;
+
+        if (stack.is(LOOSE_STONES)) return true;
+
+        return tier >= 1 && stack.getItem() instanceof SlingAmmoItem;
+    }
+
+    private record AmmoResult(ItemStack stack) {}
+}

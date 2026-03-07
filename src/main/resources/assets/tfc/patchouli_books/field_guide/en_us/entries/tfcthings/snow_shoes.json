@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableSnowShoes"}
+  ],
+  "name": "Snow Shoes",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:snow_shoes",
+  "sortnum": 0,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Snow Shoes$() prevent movement slowdown in snowy terrain. Equip them in the boots slot when traveling in cold biomes.$(br2)They take durability damage while actively negating the slowdown effect."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/snow_shoes",
+      "text": "Basic snow shoes crafted from burlap cloth, sticks, leather boots, and lumber."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/durable_snow_shoes",
+      "text": "A sturdier variant that uses $(thing)Hiking Boots$() as the base — much more durable than the basic version."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:snow_shoes": 1,
+    "tfcthings:durable_snow_shoes": 2
+  }
+}

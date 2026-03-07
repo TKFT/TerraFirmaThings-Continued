@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableRopeBridge"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "LLL",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:jute_fiber"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:rope_bridge_bundle",
+    "count": 16
+  }
+}

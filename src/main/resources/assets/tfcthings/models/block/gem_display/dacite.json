@@ -1,0 +1,6 @@
+{
+  "parent": "tfcthings:block/gem_display/gem_display",
+  "textures": {
+    "all": "tfc:block/rock/smooth/dacite"
+  }
+}

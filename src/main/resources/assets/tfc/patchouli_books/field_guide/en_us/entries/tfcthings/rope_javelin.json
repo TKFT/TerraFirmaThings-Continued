@@ -1,0 +1,61 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableRopeJavelin"}
+  ],
+  "name": "Rope Javelin",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:steel_rope_javelin",
+  "sortnum": 4,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Rope Javelins$() are tethered throwing weapons. Charge with right-click, release to throw, then right-click again while deployed to pull/reel behavior on the tether."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_javelin/copper",
+      "recipe2": "tfcthings:crafting/rope_javelin/bronze",
+      "text": "Copper and Bronze rope javelins."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_javelin/bismuth_bronze",
+      "recipe2": "tfcthings:crafting/rope_javelin/black_bronze",
+      "text": "Bismuth Bronze and Black Bronze rope javelins."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_javelin/wrought_iron",
+      "recipe2": "tfcthings:crafting/rope_javelin/steel",
+      "text": "Wrought Iron and Steel rope javelins."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_javelin/black_steel",
+      "recipe2": "tfcthings:crafting/rope_javelin/blue_steel",
+      "text": "Black Steel and Blue Steel rope javelins."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_javelin/red_steel",
+      "text": "Red Steel rope javelin."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Capture and Retract",
+      "text": "On entity hit, targets can be tethered and reeled. Rope javelins also auto-retract if the tether exceeds range or a valid tether path can no longer be maintained."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:copper_rope_javelin": 1,
+    "tfcthings:bronze_rope_javelin": 1,
+    "tfcthings:bismuth_bronze_rope_javelin": 2,
+    "tfcthings:black_bronze_rope_javelin": 2,
+    "tfcthings:wrought_iron_rope_javelin": 3,
+    "tfcthings:steel_rope_javelin": 3,
+    "tfcthings:black_steel_rope_javelin": 4,
+    "tfcthings:blue_steel_rope_javelin": 4,
+    "tfcthings:red_steel_rope_javelin": 5
+  }
+}

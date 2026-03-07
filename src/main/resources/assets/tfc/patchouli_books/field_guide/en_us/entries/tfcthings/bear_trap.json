@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableBearTrap"}
+  ],
+  "name": "Bear Trap",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:bear_trap",
+  "sortnum": 5,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Bear Traps$() immobilize and damage creatures that trigger them. Build them in two stages: forge trap halves, then weld halves into a full trap."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/bear_trap_half",
+      "text": "Forge $(thing)Bear Trap Halves$() on an anvil from wrought iron."
+    },
+    {
+      "type": "tfc:welding_recipe",
+      "recipe": "tfcthings:welding/bear_trap",
+      "text": "Weld two trap halves into a finished bear trap."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Usage",
+      "text": "Use a $(thing)Shovel$() to bury a trap for concealment.$(br2)Shift-right-click a closed trap to reset it.$(br2)Captured entities are heavily hindered and can occasionally break free."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:bear_trap_half": 1,
+    "tfcthings:bear_trap": 2
+  }
+}

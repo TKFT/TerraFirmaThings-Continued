@@ -1,0 +1,8 @@
+{
+  "forging_temperature": 636.0,
+  "heat_capacity": 3.333333,
+  "ingredient": {
+    "item": "tfcthings:crown/gold_empty"
+  },
+  "welding_temperature": 848.0
+}

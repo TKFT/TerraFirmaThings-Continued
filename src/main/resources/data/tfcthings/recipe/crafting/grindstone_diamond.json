@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DGD",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "tfc:powder/diamond"
+    },
+    "G": {
+      "item": "tfcthings:grindstone_steel"
+    }
+  },
+  "result": {
+    "id": "tfcthings:grindstone_diamond",
+    "count": 1
+  }
+}

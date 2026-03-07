@@ -1,0 +1,103 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableCrowns"}
+  ],
+  "name": "Crowns",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:crown/gold_diamond",
+  "sortnum": 8,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Crowns$() are decorative helmet-slot items. Start from an empty gold or platinum crown and set a gem with a hammer using advanced shapeless crafting."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/crown/gold_empty",
+      "text": "Forge an empty gold crown from a gold double sheet."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/crown/platinum_empty",
+      "text": "Forge an empty platinum crown from a platinum double sheet."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_amethyst",
+      "recipe2": "tfcthings:crafting/crown/platinum_amethyst",
+      "text": "Amethyst crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_diamond",
+      "recipe2": "tfcthings:crafting/crown/platinum_diamond",
+      "text": "Diamond crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_emerald",
+      "recipe2": "tfcthings:crafting/crown/platinum_emerald",
+      "text": "Emerald crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_opal",
+      "recipe2": "tfcthings:crafting/crown/platinum_opal",
+      "text": "Opal crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_ruby",
+      "recipe2": "tfcthings:crafting/crown/platinum_ruby",
+      "text": "Ruby crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_sapphire",
+      "recipe2": "tfcthings:crafting/crown/platinum_sapphire",
+      "text": "Sapphire crown variants."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crown/gold_topaz",
+      "recipe2": "tfcthings:crafting/crown/platinum_topaz",
+      "text": "Topaz crown variants."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Additional Registered Variants",
+      "text": "Item variants for agate, beryl, garnet, jade, jasper, and tourmaline are registered. If recipe data for those is added later, they will appear in the same two-step workflow."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:crown/gold_empty": 1,
+    "tfcthings:crown/platinum_empty": 2,
+    "tfcthings:crown/gold_amethyst": 3,
+    "tfcthings:crown/platinum_amethyst": 3,
+    "tfcthings:crown/gold_diamond": 4,
+    "tfcthings:crown/platinum_diamond": 4,
+    "tfcthings:crown/gold_emerald": 5,
+    "tfcthings:crown/platinum_emerald": 5,
+    "tfcthings:crown/gold_opal": 6,
+    "tfcthings:crown/platinum_opal": 6,
+    "tfcthings:crown/gold_ruby": 7,
+    "tfcthings:crown/platinum_ruby": 7,
+    "tfcthings:crown/gold_sapphire": 8,
+    "tfcthings:crown/platinum_sapphire": 8,
+    "tfcthings:crown/gold_topaz": 9,
+    "tfcthings:crown/platinum_topaz": 9,
+    "tfcthings:crown/gold_agate": 10,
+    "tfcthings:crown/platinum_agate": 10,
+    "tfcthings:crown/gold_beryl": 10,
+    "tfcthings:crown/platinum_beryl": 10,
+    "tfcthings:crown/gold_garnet": 10,
+    "tfcthings:crown/platinum_garnet": 10,
+    "tfcthings:crown/gold_jade": 10,
+    "tfcthings:crown/platinum_jade": 10,
+    "tfcthings:crown/gold_jasper": 10,
+    "tfcthings:crown/platinum_jasper": 10,
+    "tfcthings:crown/gold_tourmaline": 10,
+    "tfcthings:crown/platinum_tourmaline": 10
+  }
+}

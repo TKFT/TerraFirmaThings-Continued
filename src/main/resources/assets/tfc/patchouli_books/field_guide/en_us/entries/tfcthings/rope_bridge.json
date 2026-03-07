@@ -1,0 +1,48 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableRopeBridge"}
+  ],
+  "name": "Rope Bridge",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:rope_bridge_bundle",
+  "sortnum": 2,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Rope Bridge Bundles$() are throwable placement tools that create rope bridge spans across gaps.$(br2)Hold right-click to charge, release to throw, and a bridge will form along a valid straight path to the hit point."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/rope_bridge_bundle",
+      "text": "Crafted from jute fiber and lumber. Each craft yields 16 bundles."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Adjusting and Pickup",
+      "text": "Right-click placed bridge planks with a $(thing)Stick$() to adjust local height offsets.$(br2)Shift-right-click a rope bridge segment to retrieve the bridge."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Rope Bridge",
+      "multiblock": {
+        "pattern": [
+          ["A     A"],["SBC0CBS"]
+        ],
+        "mapping": {
+          "S": "tfc:grass/alfisol",
+          "A": "tfcthings:rope_bridge[axis=true,offset=0]",
+          "B": "tfcthings:rope_bridge[axis=true,offset=7]",
+          "C": "tfcthings:rope_bridge[axis=true,offset=6]",
+          "0": "tfcthings:rope_bridge[axis=true,offset=5]"
+        }
+      },
+      "enable_visualize": false,
+      "text": "A simple bridge span between two anchor surfaces."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:rope_bridge_bundle": 1,
+    "tfcthings:rope_bridge": 0
+  }
+}

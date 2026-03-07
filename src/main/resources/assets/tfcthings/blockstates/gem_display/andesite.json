@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "tfcthings:block/gem_display/andesite"},
+    "facing=south": {"model": "tfcthings:block/gem_display/andesite", "y": 180},
+    "facing=east": {"model": "tfcthings:block/gem_display/andesite", "y": 90},
+    "facing=west": {"model": "tfcthings:block/gem_display/andesite", "y": 270}
+  }
+}

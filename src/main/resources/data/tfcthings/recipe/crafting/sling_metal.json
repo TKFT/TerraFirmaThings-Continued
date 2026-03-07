@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSlings"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tfcthings:sling"
+    },
+    {
+      "item": "tfcthings:metal_bracing"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:sling_metal"
+  }
+}

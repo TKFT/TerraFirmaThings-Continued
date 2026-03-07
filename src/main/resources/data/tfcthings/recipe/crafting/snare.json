@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSnare"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "LRL",
+    "LRL"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    },
+    "R": {
+      "item": "tfc:jute_fiber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:snare",
+    "count": 1
+  }
+}

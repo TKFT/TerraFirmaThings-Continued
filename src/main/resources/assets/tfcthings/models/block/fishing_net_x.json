@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "tfcthings:block/fishing_net",
+    "net": "tfcthings:block/fishing_net"
+  },
+  "elements": [
+    {
+      "from": [0, 1, 7],
+      "to": [16, 15, 9],
+      "faces": {
+        "north": {"texture": "#net", "uv": [0, 0, 16, 16]},
+        "south": {"texture": "#net", "uv": [0, 0, 16, 16]}
+      }
+    }
+  ]
+}

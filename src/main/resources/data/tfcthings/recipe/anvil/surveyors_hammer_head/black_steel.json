@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableProspectorsHammers"
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:ingots/black_steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:surveyors_hammer_head/black_steel"
+  },
+  "rules": [
+    "punch_last",
+    "draw_not_last",
+    "shrink_not_last"
+  ],
+  "tier": 5
+}

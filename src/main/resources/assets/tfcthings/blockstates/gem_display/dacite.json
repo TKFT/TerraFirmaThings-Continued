@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "tfcthings:block/gem_display/dacite"},
+    "facing=south": {"model": "tfcthings:block/gem_display/dacite", "y": 180},
+    "facing=east": {"model": "tfcthings:block/gem_display/dacite", "y": 90},
+    "facing=west": {"model": "tfcthings:block/gem_display/dacite", "y": 270}
+  }
+}

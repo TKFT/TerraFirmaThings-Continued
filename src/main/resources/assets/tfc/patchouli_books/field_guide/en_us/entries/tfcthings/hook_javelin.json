@@ -1,0 +1,54 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableHookJavelins"}
+  ],
+  "name": "Hook Javelin",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:hook_javelin/steel",
+  "sortnum": 10,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tfcthings:hook_javelin/steel",
+      "text": "$(thing)Hook Javelins$() are grappling weapons with a tether. Throw into terrain to anchor and swing, then retract or recover as needed."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/hook_javelin_head/steel",
+      "text": "Forge a steel hook javelin head from a double ingot."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/hook_javelin_head/black_steel",
+      "text": "Higher-tier hook heads are forged the same way (Black/Blue/Red Steel)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/hook_javelin/steel",
+      "recipe2": "tfcthings:crafting/hook_javelin/black_steel",
+      "text": "Assemble the head with a wooden rod and jute fiber wrapping."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/hook_javelin/blue_steel",
+      "recipe2": "tfcthings:crafting/hook_javelin/red_steel",
+      "text": "Blue Steel and Red Steel variants."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Traversal",
+      "text": "While tethered, use right-click interactions to retract and reposition. Sneak-right-click retrieves the hook. If tether constraints become invalid, the hook retracts."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:hook_javelin/steel": 3,
+    "tfcthings:hook_javelin/black_steel": 3,
+    "tfcthings:hook_javelin/blue_steel": 4,
+    "tfcthings:hook_javelin/red_steel": 4,
+    "tfcthings:hook_javelin_head/steel": 1,
+    "tfcthings:hook_javelin_head/black_steel": 2,
+    "tfcthings:hook_javelin_head/blue_steel": 2,
+    "tfcthings:hook_javelin_head/red_steel": 2
+  }
+}

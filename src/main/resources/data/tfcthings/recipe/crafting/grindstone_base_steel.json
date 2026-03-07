@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LRL",
+    "L L"
+  ],
+  "key": {
+    "R": {
+      "tag": "c:rods/steel"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:grindstone",
+    "count": 1
+  }
+}

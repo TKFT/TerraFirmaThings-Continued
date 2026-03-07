@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#tfc:natural_regrowing_plants",
+      "required": false
+    },
+    {
+      "id": "#tfc:spreading_bushes",
+      "required": false
+    },
+    {
+      "id": "#tfc:thorny_bushes",
+      "required": false
+    }
+  ]
+}

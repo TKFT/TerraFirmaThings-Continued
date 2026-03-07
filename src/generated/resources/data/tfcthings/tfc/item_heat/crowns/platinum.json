@@ -1,0 +1,28 @@
+{
+  "forging_temperature": 636.0,
+  "heat_capacity": 3.333333,
+  "ingredient": [
+    {
+      "item": "tfcthings:crown/platinum_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/platinum_diamond"
+    },
+    {
+      "item": "tfcthings:crown/platinum_emerald"
+    },
+    {
+      "item": "tfcthings:crown/platinum_opal"
+    },
+    {
+      "item": "tfcthings:crown/platinum_ruby"
+    },
+    {
+      "item": "tfcthings:crown/platinum_sapphire"
+    },
+    {
+      "item": "tfcthings:crown/platinum_topaz"
+    }
+  ],
+  "welding_temperature": 848.0
+}

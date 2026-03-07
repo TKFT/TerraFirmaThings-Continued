@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableBearTrap"
+    }
+  ],
+  "type": "tfc:welding",
+  "first_input": {
+    "item": "tfcthings:bear_trap_half"
+  },
+  "second_input": {
+    "item": "tfcthings:bear_trap_half"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:bear_trap"
+  },
+  "tier": 4
+}

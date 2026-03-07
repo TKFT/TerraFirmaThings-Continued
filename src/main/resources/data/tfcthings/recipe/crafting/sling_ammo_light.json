@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSlings"
+    }
+  ],
+  "type": "tfc:advanced_shapeless_crafting",
+  "ingredients": [
+    {
+      "item": "tfcthings:sling_ammo"
+    },
+    {
+      "tag": "c:tools/hammer"
+    },
+    {
+      "tag": "c:tools/chisel"
+    }
+  ],
+  "primary_ingredient": {
+    "tag": "c:tools/hammer"
+  },
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:sling_ammo_light"
+  }
+}

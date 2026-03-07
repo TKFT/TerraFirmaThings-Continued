@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSlings"
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "result": {
+    "count": 16,
+    "id": "tfcthings:sling_ammo"
+  },
+  "rules": [
+    "hit_last",
+    "hit_not_last",
+    "bend_not_last"
+  ],
+  "tier": 4
+}

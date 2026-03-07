@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {"type": "tfcthings:config_enabled", "flag": "enableHikingBoots"},
+        {"type": "tfcthings:config_enabled", "flag": "enableSlings"}
+      ]
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "result": {
+    "count": 2,
+    "id": "tfcthings:metal_bracing"
+  },
+  "rules": [
+    "bend_last",
+    "hit_not_last",
+    "draw_not_last"
+  ],
+  "tier": 4
+}

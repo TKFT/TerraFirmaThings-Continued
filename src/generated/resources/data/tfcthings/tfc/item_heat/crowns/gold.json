@@ -1,0 +1,28 @@
+{
+  "forging_temperature": 636.0,
+  "heat_capacity": 3.333333,
+  "ingredient": [
+    {
+      "item": "tfcthings:crown/gold_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/gold_diamond"
+    },
+    {
+      "item": "tfcthings:crown/gold_emerald"
+    },
+    {
+      "item": "tfcthings:crown/gold_opal"
+    },
+    {
+      "item": "tfcthings:crown/gold_ruby"
+    },
+    {
+      "item": "tfcthings:crown/gold_sapphire"
+    },
+    {
+      "item": "tfcthings:crown/gold_topaz"
+    }
+  ],
+  "welding_temperature": 848.0
+}

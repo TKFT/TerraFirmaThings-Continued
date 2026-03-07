@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tfcthings:item/mold/surveyhammer_head_fired"
+  }
+}

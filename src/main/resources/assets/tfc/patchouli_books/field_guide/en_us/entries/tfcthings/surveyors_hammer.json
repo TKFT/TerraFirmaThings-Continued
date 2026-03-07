@@ -1,0 +1,69 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableProspectorsHammers"}
+  ],
+  "name": "Surveyor's Hammer",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:surveyors_hammer/wrought_iron",
+  "sortnum": 11,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tfcthings:surveyors_hammer/wrought_iron",
+      "text": "The $(thing)Surveyor's Hammer$() checks cave stability and scans local rock layers. It is available from Copper through all thesteels."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Functions",
+      "text": "Right-click reports cave-in risk around the target.$(br2)Shift-right-click scans local rock layering beneath your position. Higher-tier hammer metals improve effectiveness."
+    },
+    {
+      "type": "tfc:knapping_recipe",
+      "recipe": "tfcthings:knapping/surveyors_hammer_head_mold",
+      "text": "Knapp an unfired surveyor's hammer head mold from clay."
+    },
+    {
+      "type": "tfc:heat_recipe",
+      "recipe": "tfcthings:heating/surveyors_hammer_head_mold",
+      "text": "Fire the unfired mold to produce a reusable casting mold."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/surveyors_hammer_head/wrought_iron",
+      "text": "Hammer heads can be forged on an anvil (all tool metals have recipes)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/surveyors_hammer/wrought_iron",
+      "text": "Assemble a forged/cast head with a wooden rod to make the tool."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Casting Option",
+      "text": "Heads can also be cast into the mold using molten metals."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:surveyors_hammer/copper": 0,
+    "tfcthings:surveyors_hammer/bronze": 0,
+    "tfcthings:surveyors_hammer/bismuth_bronze": 0,
+    "tfcthings:surveyors_hammer/black_bronze": 0,
+    "tfcthings:surveyors_hammer/wrought_iron": 0,
+    "tfcthings:surveyors_hammer/steel": 0,
+    "tfcthings:surveyors_hammer/black_steel": 0,
+    "tfcthings:surveyors_hammer/blue_steel": 0,
+    "tfcthings:surveyors_hammer/red_steel": 0,
+    "tfcthings:surveyors_hammer_head/copper": 4,
+    "tfcthings:surveyors_hammer_head/bronze": 4,
+    "tfcthings:surveyors_hammer_head/bismuth_bronze": 4,
+    "tfcthings:surveyors_hammer_head/black_bronze": 4,
+    "tfcthings:surveyors_hammer_head/wrought_iron": 4,
+    "tfcthings:surveyors_hammer_head/steel": 4,
+    "tfcthings:surveyors_hammer_head/black_steel": 4,
+    "tfcthings:surveyors_hammer_head/blue_steel": 4,
+    "tfcthings:surveyors_hammer_head/red_steel": 4,
+    "tfcthings:surveyors_hammer_head_mold": 3,
+    "tfcthings:unfired_surveyors_hammer_head_mold": 2
+  }
+}

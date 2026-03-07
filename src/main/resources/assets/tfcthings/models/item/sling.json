@@ -1,0 +1,17 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "tfcthings:item/sling"
+  },
+  "overrides": [
+    {"predicate": {"tfcthings:spinning": 1}, "model": "tfcthings:item/sling/stage_1"},
+    {"predicate": {"tfcthings:spinning": 2}, "model": "tfcthings:item/sling/stage_2"},
+    {"predicate": {"tfcthings:spinning": 3}, "model": "tfcthings:item/sling/stage_3"},
+    {"predicate": {"tfcthings:spinning": 4}, "model": "tfcthings:item/sling/stage_4"},
+    {"predicate": {"tfcthings:spinning": 5}, "model": "tfcthings:item/sling/stage_5"},
+    {"predicate": {"tfcthings:spinning": 6}, "model": "tfcthings:item/sling/stage_6"},
+    {"predicate": {"tfcthings:spinning": 7}, "model": "tfcthings:item/sling/stage_7"},
+    {"predicate": {"tfcthings:spinning": 8}, "model": "tfcthings:item/sling/stage_8"}
+  ]
+}
+

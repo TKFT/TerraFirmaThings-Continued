@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableHikingBoots"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RBR",
+    "LML"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:jute_fiber"
+    },
+    "B": {
+      "item": "minecraft:leather_boots"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "M": {
+      "item": "tfcthings:metal_bracing"
+    }
+  },
+  "result": {
+    "id": "tfcthings:hiking_boots",
+    "count": 1
+  }
+}

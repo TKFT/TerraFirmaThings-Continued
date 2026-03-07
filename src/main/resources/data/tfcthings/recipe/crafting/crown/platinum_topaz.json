@@ -1,0 +1,28 @@
+{
+  "type": "tfc:advanced_shapeless_crafting",
+  "ingredients": [
+    {
+      "item": "tfcthings:crown/platinum_empty"
+    },
+    {
+      "tag": "c:tools/hammer"
+    },
+    {
+      "item": "tfc:gem/topaz"
+    }
+  ],
+  "primary_ingredient": {
+    "tag": "c:tools/hammer"
+  },
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:crown/platinum_topaz"
+  }
+}

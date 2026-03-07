@@ -1,0 +1,15 @@
+{
+  "ingredient": [
+    {
+      "item": "tfcthings:grindstone_quartz"
+    },
+    {
+      "item": "tfcthings:grindstone_steel"
+    },
+    {
+      "item": "tfcthings:grindstone_diamond"
+    }
+  ],
+  "size": "large",
+  "weight": "heavy"
+}

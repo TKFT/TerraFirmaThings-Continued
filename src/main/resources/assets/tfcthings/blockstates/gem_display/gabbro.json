@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "tfcthings:block/gem_display/gabbro"},
+    "facing=south": {"model": "tfcthings:block/gem_display/gabbro", "y": 180},
+    "facing=east": {"model": "tfcthings:block/gem_display/gabbro", "y": 90},
+    "facing=west": {"model": "tfcthings:block/gem_display/gabbro", "y": 270}
+  }
+}

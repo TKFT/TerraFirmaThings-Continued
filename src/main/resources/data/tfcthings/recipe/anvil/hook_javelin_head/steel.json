@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableHookJavelins"
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:double_ingots/steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:hook_javelin_head/steel"
+  },
+  "rules": [
+    "draw_last",
+    "upset_not_last",
+    "bend_not_last"
+  ],
+  "tier": 4
+}

@@ -1,0 +1,12 @@
+{
+  "ingredient": [
+    {
+      "item": "tfcthings:snow_shoes"
+    },
+    {
+      "item": "tfcthings:durable_snow_shoes"
+    }
+  ],
+  "size": "large",
+  "weight": "heavy"
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "tfcthings:block/gem_display/shale"},
+    "facing=south": {"model": "tfcthings:block/gem_display/shale", "y": 180},
+    "facing=east": {"model": "tfcthings:block/gem_display/shale", "y": 90},
+    "facing=west": {"model": "tfcthings:block/gem_display/shale", "y": 270}
+  }
+}

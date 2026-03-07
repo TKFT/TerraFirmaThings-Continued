@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableSnare"}
+  ],
+  "name": "Snare",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:snare",
+  "sortnum": 6,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Snares$() are passive small-creature traps. Place them where wildlife passes and they will capture valid small mobs that enter the trap area."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/snare",
+      "text": "Crafted from wooden rods, lumber, and jute fiber."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Handling Captures",
+      "text": "Shift-right-click a triggered snare to release and reset it.$(br2)If the snare block is broken, the captured entity is released."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:snare": 1
+  }
+}

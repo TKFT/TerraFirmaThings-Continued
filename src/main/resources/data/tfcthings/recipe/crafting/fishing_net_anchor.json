@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableFishingNet"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " J ",
+    "JSJ",
+    " J "
+  ],
+  "key": {
+    "J": {
+      "item": "tfcthings:fishing_net"
+    },
+    "S": {
+      "tag": "c:fences/wooden"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:fishing_net_anchor"
+  }
+}

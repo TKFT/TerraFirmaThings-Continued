@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=x": {"model": "tfcthings:block/fishing_net_x"},
+    "axis=z": {"model": "tfcthings:block/fishing_net_z"}
+  }
+}

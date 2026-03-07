@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:stones"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:whetstone"
+  }
+}

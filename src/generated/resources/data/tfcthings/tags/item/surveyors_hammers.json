@@ -1,0 +1,13 @@
+{
+  "values": [
+    "tfcthings:surveyors_hammer/copper",
+    "tfcthings:surveyors_hammer/bismuth_bronze",
+    "tfcthings:surveyors_hammer/black_bronze",
+    "tfcthings:surveyors_hammer/bronze",
+    "tfcthings:surveyors_hammer/wrought_iron",
+    "tfcthings:surveyors_hammer/steel",
+    "tfcthings:surveyors_hammer/black_steel",
+    "tfcthings:surveyors_hammer/blue_steel",
+    "tfcthings:surveyors_hammer/red_steel"
+  ]
+}

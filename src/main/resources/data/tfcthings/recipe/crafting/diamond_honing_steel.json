@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "S",
+    "S"
+  ],
+  "key": {
+    "H": {
+      "item": "tfcthings:diamond_honing_steel_head"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:diamond_honing_steel"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#tfc:any_fresh_water",
+      "required": false
+    },
+    {
+      "id": "tfc:salt_water",
+      "required": false
+    },
+    {
+      "id": "tfc:flowing_salt_water",
+      "required": false
+    }
+  ]
+}

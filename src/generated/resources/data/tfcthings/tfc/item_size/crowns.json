@@ -1,0 +1,54 @@
+{
+  "ingredient": [
+    {
+      "item": "tfcthings:crown/gold_empty"
+    },
+    {
+      "item": "tfcthings:crown/gold_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/gold_diamond"
+    },
+    {
+      "item": "tfcthings:crown/gold_emerald"
+    },
+    {
+      "item": "tfcthings:crown/gold_opal"
+    },
+    {
+      "item": "tfcthings:crown/gold_ruby"
+    },
+    {
+      "item": "tfcthings:crown/gold_sapphire"
+    },
+    {
+      "item": "tfcthings:crown/gold_topaz"
+    },
+    {
+      "item": "tfcthings:crown/platinum_empty"
+    },
+    {
+      "item": "tfcthings:crown/platinum_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/platinum_diamond"
+    },
+    {
+      "item": "tfcthings:crown/platinum_emerald"
+    },
+    {
+      "item": "tfcthings:crown/platinum_opal"
+    },
+    {
+      "item": "tfcthings:crown/platinum_ruby"
+    },
+    {
+      "item": "tfcthings:crown/platinum_sapphire"
+    },
+    {
+      "item": "tfcthings:crown/platinum_topaz"
+    }
+  ],
+  "size": "large",
+  "weight": "heavy"
+}

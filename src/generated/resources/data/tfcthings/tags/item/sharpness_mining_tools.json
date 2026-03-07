@@ -1,0 +1,48 @@
+{
+  "values": [
+    "#minecraft:pickaxes",
+    "#minecraft:axes",
+    "#minecraft:shovels",
+    "#minecraft:hoes",
+    {
+      "id": "#tfc:tools/stone",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/copper",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/bismuth_bronze",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/black_bronze",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/bronze",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/wrought_iron",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/steel",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/black_steel",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/blue_steel",
+      "required": false
+    },
+    {
+      "id": "#tfc:tools/red_steel",
+      "required": false
+    }
+  ]
+}

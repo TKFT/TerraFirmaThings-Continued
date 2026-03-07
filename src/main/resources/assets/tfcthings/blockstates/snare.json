@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,triggered=false": {"model": "tfcthings:block/snare"},
+    "facing=south,triggered=false": {"model": "tfcthings:block/snare", "y": 180},
+    "facing=east,triggered=false": {"model": "tfcthings:block/snare", "y": 90},
+    "facing=west,triggered=false": {"model": "tfcthings:block/snare", "y": 270},
+    "facing=north,triggered=true": {"model": "tfcthings:block/snare_triggered"},
+    "facing=south,triggered=true": {"model": "tfcthings:block/snare_triggered", "y": 180},
+    "facing=east,triggered=true": {"model": "tfcthings:block/snare_triggered", "y": 90},
+    "facing=west,triggered=true": {"model": "tfcthings:block/snare_triggered", "y": 270}
+  }
+}

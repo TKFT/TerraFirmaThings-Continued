@@ -1,0 +1,85 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableWhetstones"}
+  ],
+  "name": "Sharpening and Grindstones",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:grindstone",
+  "sortnum": 13,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sharpening adds $(thing)charges$() to axes, picks, shovels, swords, and other sharpenable tools. Charges boost $(thing)mining speed$() while digging and add $(thing)flat damage$() on the next hit — then consume one charge.$(br2)Three tiers of sharpener determine the charge cap and power."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/whetstone",
+      "text": "$(thing)Whetstones$() are the simplest sharpener. Hold in one hand, sharpenable tool in the other, then right-click. Each use takes one durability from the whetstone. Caps at 64 charges ($(#008000)Tier 1$())."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/honing_steel_head",
+      "text": "Forge a honing steel head from steel."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/honing_steel",
+      "text": "$(thing)Honing Steel$() — assemble from head and two wooden rods. Faster than a whetstone, adds more charges per use, and caps at 128 charges ($(#0000AA)Tier 2$()). Takes durability per use."
+    },
+    {
+      "type": "tfc:welding_recipe",
+      "recipe": "tfcthings:anvil/diamond_honing_steel_head",
+      "text": "Weld together the diamond honing steel head."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/diamond_honing_steel",
+      "text": "$(thing)Diamond Honing Steel$() — the most powerful sharpener. Adds the most charges per use, caps at 256 charges ($(#550055)Tier 3$()), and is nearly instant. Takes durability per use."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sharpness Tiers",
+      "text": "$(li)$(#008000)Tier 1$() (1–64 charges): +3× mining speed, +1 weapon damage$(li)$(#0000AA)Tier 2$() (65–128 charges): +5× mining speed, +2 weapon damage$(li)$(#550055)Tier 3$() (129–256 charges): +7× mining speed, +3 weapon damage$(br2)Charge count is shown in the item tooltip."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/grindstone_base_wrought_iron",
+      "recipe2": "tfcthings:crafting/grindstone_base_steel",
+      "text": "The $(thing)Grindstone$() block is an automated sharpening station. Craft the base frame from iron or steel rods and lumber."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/grindstone_quartz",
+      "text": "$(thing)Quartz Wheel$() — the basic grindstone wheel. Crafted from quartzite blocks around an axle. Corresponds to Tier 1 sharpening."
+    },
+    {
+      "type": "tfc:welding_recipe",
+      "recipe": "tfcthings:welding/grindstone_steel",
+      "text": "$(thing)Steel Wheel$() — weld a Quartz Wheel with a Black Steel double sheet. Corresponds to Tier 2 sharpening."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/grindstone_diamond",
+      "text": "$(thing)Diamond Wheel$() — surround a Steel Wheel with diamond powder. Corresponds to Tier 3 sharpening."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Using the Grindstone",
+      "text": "Right-click the block to insert a $(thing)wheel item$(), then insert a sharpenable tool. Connect a TFC axle to either of the two sides $(italic)perpendicular to the wheel face$(). Sufficient axle speed is required to operate — faster rotation means faster sharpening progress."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:whetstone": 1,
+    "tfcthings:honing_steel": 3,
+    "tfcthings:diamond_honing_steel": 5,
+    "tfcthings:honing_steel_head": 2,
+    "tfcthings:diamond_honing_steel_head": 4,
+    "tfcthings:grindstone": 7,
+    "tfcthings:honing_steel_grindstone": 7,
+    "tfcthings:diamond_grindstone": 7,
+    "tfcthings:grindstone_quartz": 8,
+    "tfcthings:grindstone_steel": 9,
+    "tfcthings:grindstone_diamond": 10
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableFishingNet"}
+  ],
+  "name": "Fishing Net",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:fishing_net",
+  "sortnum": 7,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tfcthings:fishing_net",
+      "text": "$(thing)Fishing Nets$() are passive catch systems stretched between two anchors near water."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/fishing_net",
+      "recipe2": "tfcthings:crafting/fishing_net_anchor",
+      "text": "Craft net segments and anchors from jute fiber (and stone for anchors)."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Placement",
+      "text": "Place two $(thing)Fishing Net Anchors$() at the same Y level on a straight axis, then shift-right-click each anchor with a Fishing Net to span segments between them."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Retrieval",
+      "text": "Right-click an anchor with empty hand to collect stored fish.$(br2)Shift-right-click an anchor to recover deployed net segments. Breaking anchors also removes attached segments."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Fishing Net",
+      "multiblock": {
+        "pattern": [
+          ["A   A"],
+          ["SNNNS"],
+          ["SN0NS"],
+          ["SSNSS"]
+        ],
+        "mapping": {
+          "A": "tfcthings:fishing_net_anchor[axis=z]",
+          "N": "tfcthings:fishing_net[axis=z,fluid=water,sag=0]",
+          "0": "tfcthings:fishing_net[axis=z,fluid=water,sag=0]",
+          "S": "tfc:rock/raw/chert"
+        }
+      },
+      "enable_visualize": false,
+      "text": "Concept layout. Real spans can extend much farther."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:fishing_net": 1,
+    "tfcthings:fishing_net_anchor": 1,
+    "tfcthings:fishing_net_segment": 0
+  }
+}

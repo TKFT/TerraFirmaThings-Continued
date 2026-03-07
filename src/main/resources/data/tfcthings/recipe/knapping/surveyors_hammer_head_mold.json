@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableProspectorsHammers"
+    }
+  ],
+  "type": "tfc:knapping",
+  "knapping_type": "tfc:clay",
+  "pattern": [
+    "#####",
+    " ### ",
+    "     ",
+    " # # ",
+    "#####"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:unfired_surveyors_hammer_head_mold"
+  }
+}

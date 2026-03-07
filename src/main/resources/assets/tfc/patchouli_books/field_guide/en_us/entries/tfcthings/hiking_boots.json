@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableHikingBoots"}
+  ],
+  "name": "Hiking Boots",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:hiking_boots",
+  "sortnum": 1,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Hiking Boots$() reduce slow movement from dense plants and brush, making overland travel through vegetation much easier.$(br2)Like Snow Shoes, they consume durability while actively negating slowdown."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/metal_bracing_wrought_iron",
+      "text": "First, forge $(thing)Metal Bracing$() on an anvil (wrought iron shown; steel also works)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/hiking_boots",
+      "text": "Combine leather boots, leather, jute fiber, and metal bracing to craft Hiking Boots."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:hiking_boots": 2,
+    "tfcthings:metal_bracing": 1
+  }
+}

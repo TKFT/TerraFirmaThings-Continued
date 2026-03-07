@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableHookJavelins"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RHR",
+    "RSR"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:jute_fiber"
+    },
+    "H": {
+      "item": "tfcthings:hook_javelin_head/blue_steel"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:hook_javelin/blue_steel"
+  }
+}

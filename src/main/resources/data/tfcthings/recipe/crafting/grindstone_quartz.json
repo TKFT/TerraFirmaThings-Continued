@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RSR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:rock/raw/quartzite"
+    },
+    "S": {
+      "tag": "tfc:axles"
+    }
+  },
+  "result": {
+    "id": "tfcthings:grindstone_quartz",
+    "count": 1
+  }
+}

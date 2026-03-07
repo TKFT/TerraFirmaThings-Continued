@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableRopeLadder"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RLR",
+    "RLR",
+    "RLR"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:jute_fiber"
+    },
+    "L": {
+      "tag": "tfc:lumber"
+    }
+  },
+  "result": {
+    "id": "tfcthings:rope_ladder",
+    "count": 16
+  }
+}

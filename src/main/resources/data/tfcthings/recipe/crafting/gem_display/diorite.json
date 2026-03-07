@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableGemDisplays"
+    }
+  ],
+  "type": "tfc:advanced_shaped_crafting",
+  "pattern": [
+    "RCR",
+    "RRR",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "item": "tfc:rock/smooth/diorite"
+    },
+    "C": {
+      "tag": "c:tools/chisel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:gem_display/diorite"
+  },
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "input_row": 0,
+  "input_column": 1
+}
