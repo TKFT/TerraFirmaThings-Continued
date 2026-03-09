@@ -1,3 +1,16 @@
+### Major Bugs
+
+
+### Minor Bugs
+- [ ] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
+- [ ] Fix grindstone not transferring rotational power through it.
+- [ ] Fix tags
+
+### Improvements
+- [ ] Improve readme and documentation in field guide.
+- [ ] Better localization.
+- [ ] Add auto catch and bait to snare traps.
+
 ### New Features to add
 
 #### Crampons
@@ -26,3 +39,6 @@
 #### Log Minecraft/Rock Minecart
 - [ ] Minecart that functions like a flat bed train car that holds logs. 
 - [ ] Minecart that functions like a traditional minecart holding rock and ore
+
+#### TFC Enchantments
+- [ ] Unbreaking with harder forging

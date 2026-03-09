@@ -50,17 +50,17 @@ public class TFCThingsConfig
 
         public static class SnowShoes
         {
-            public final ModConfigSpec.IntValue damageTicks;
+            public final ModConfigSpec.IntValue damageDistance;
             public final ModConfigSpec.DoubleValue shoePower;
 
             SnowShoes(ModConfigSpec.Builder builder)
             {
                 builder.comment("Snow Shoes Settings").push("snowShoes");
 
-                damageTicks = builder
-                    .comment("The number of ticks of walking through snow required to apply one damage to the shoes.",
-                        "0 = snow shoes won't get damaged by walking through snow.")
-                    .defineInRange("damageTicks", 500, 0, Integer.MAX_VALUE);
+                damageDistance = builder
+                    .comment("The distance in centimeters walked through snow required to apply one damage to the shoes.",
+                        "Approximately 100 cm = 1 block. 0 = snow shoes won't be damaged by walking through snow.")
+                    .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 shoePower = builder
                     .comment("The percentage of the TFC slowdown effect that the snow shoes will negate.",
@@ -74,17 +74,17 @@ public class TFCThingsConfig
 
         public static class HikingBoots
         {
-            public final ModConfigSpec.IntValue damageTicks;
+            public final ModConfigSpec.IntValue damageDistance;
             public final ModConfigSpec.DoubleValue bootPower;
 
             HikingBoots(ModConfigSpec.Builder builder)
             {
                 builder.comment("Hiking Boots Settings").push("hikingBoots");
 
-                damageTicks = builder
-                    .comment("The number of ticks of walking through plants required to apply one damage to the boots.",
-                        "0 = hiking boots won't get damaged by walking through plants.")
-                    .defineInRange("damageTicks", 500, 0, Integer.MAX_VALUE);
+                damageDistance = builder
+                    .comment("The distance in centimeters walked through plants required to apply one damage to the boots.",
+                        "Approximately 100 cm = 1 block. 0 = hiking boots won't be damaged by walking through plants.")
+                    .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 bootPower = builder
                     .comment("The percentage of the TFC plant slowdown effect that the hiking boots will negate.",
@@ -99,7 +99,7 @@ public class TFCThingsConfig
         public static class BearTrap
         {
             public final ModConfigSpec.DoubleValue breakChance;
-            public final ModConfigSpec.DoubleValue breakoutChance;
+            public final ModConfigSpec.IntValue breakoutChance;
             public final ModConfigSpec.IntValue debuffDuration;
             public final ModConfigSpec.DoubleValue healthCut;
             public final ModConfigSpec.DoubleValue fixedDamage;
@@ -114,9 +114,10 @@ public class TFCThingsConfig
                     .defineInRange("breakChance", 0.1D, 0.0D, 1.0D);
 
                 breakoutChance = builder
-                    .comment("The chance a predator has to break out of a bear trap each tick.",
-                        "0 = no breakouts. Keep this very small or breakouts happen very fast. 1 = instant breakout.")
-                    .defineInRange("breakoutChance", 0.001D, 0.0D, 1.0D);
+                    .comment("The percentage chance (0-100) for a predator to break out of a bear trap per in-game day (24000 ticks).",
+                        "0 = no breakouts. 100 = guaranteed breakout within one in-game day (~20 minutes real-time).",
+                        "Default 25 = approximately 25% chance per day, expected ~4 in-game days to break out.")
+                    .defineInRange("breakoutChance", 25, 0, 100);
 
                 debuffDuration = builder
                     .comment("The duration of the debuffs applied by the bear trap in ticks.",
@@ -199,7 +200,7 @@ public class TFCThingsConfig
 
                 maxLength = builder
                     .comment("The maximum length of a rope ladder that can be deployed.")
-                    .defineInRange("maxLength", 64, 1, 64);
+                    .defineInRange("maxLength", 64, 1, 128);
 
                 builder.pop();
             }
@@ -238,7 +239,7 @@ public class TFCThingsConfig
 
                 maxRopeLength = builder
                     .comment("The maximum length of rope for the hook javelin grapple.")
-                    .defineInRange("maxRopeLength", 30, 10, 30);
+                    .defineInRange("maxRopeLength", 30, 10, 64);
 
                 retractAmount = builder
                     .comment("The amount of rope retracted per right-click while airborne.",

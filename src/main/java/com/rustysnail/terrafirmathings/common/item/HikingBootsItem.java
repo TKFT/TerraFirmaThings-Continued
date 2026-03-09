@@ -1,6 +1,6 @@
 package com.rustysnail.terrafirmathings.common.item;
 
-import com.rustysnail.terrafirmathings.common.TFCThingsDataComponents;
+import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -10,27 +10,13 @@ import net.minecraft.world.item.ItemStack;
 public class HikingBootsItem extends ArmorItem
 {
 
-    public static int getTicksTraveled(ItemStack stack)
+    public static void addDistance(ItemStack stack, int distanceCm, Runnable damageCallback)
     {
-        return SnowShoesItem.getDistanceTraveled(stack);
-    }
+        int current = SnowShoesItem.getDistanceTraveled(stack);
+        int total = current + distanceCm;
 
-    public static void setTicksTraveled(ItemStack stack, int ticks)
-    {
-        stack.set(TFCThingsDataComponents.DISTANCE_TRAVELED.get(), ticks);
-    }
-
-    public static void addTicks(ItemStack stack, int ticks, int damageThreshold, Runnable damageCallback)
-    {
-        if (damageThreshold <= 0)
-        {
-            return;
-        }
-
-        int current = getTicksTraveled(stack);
-        int total = current + ticks;
-
-        if (total >= damageThreshold)
+        int damageThreshold = TFCThingsConfig.ITEMS.HIKING_BOOTS.damageDistance.get();
+        if (damageThreshold > 0 && total >= damageThreshold)
         {
             int damageTimes = total / damageThreshold;
             total = total % damageThreshold;
@@ -41,7 +27,7 @@ public class HikingBootsItem extends ArmorItem
             }
         }
 
-        setTicksTraveled(stack, total);
+        SnowShoesItem.setDistanceTraveled(stack, total);
     }
 
     public HikingBootsItem(Holder<ArmorMaterial> armorMaterial, ArmorItem.Type type, Item.Properties properties)

@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -122,9 +123,15 @@ public class BearTrapBlock extends Block implements EntityBlock
 
         if (heldItem.getItem() instanceof ShovelItem)
         {
+            boolean newBuried = !state.getValue(BURIED);
+            if(newBuried){
+                BlockState belowState = level.getBlockState(pos.below());
+                if(!belowState.is(BlockTags.MINEABLE_WITH_SHOVEL)){
+                    return InteractionResult.PASS;
+                }
+            }
             if (!level.isClientSide())
             {
-                boolean newBuried = !state.getValue(BURIED);
                 level.setBlock(pos, state.setValue(BURIED, newBuried), 3);
                 level.playSound(null, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0f, 1.0f);
                 heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(InteractionHand.MAIN_HAND));

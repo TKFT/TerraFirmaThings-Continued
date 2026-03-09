@@ -77,11 +77,12 @@ public final class TFCThingsEvents
             return;
         }
 
+        int distanceCm = (int) (distanceBlocks * 100);
+
         if (wearingSnowShoes && TFCThingsConfig.ITEMS.MASTER_LIST.enableSnowShoes.get())
         {
             if (isPlayerOnTag(player, level, TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW))
             {
-                int distanceCm = (int) (distanceBlocks * 100);
                 SnowShoesItem.addDistance(feetItem, distanceCm, () ->
                     feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
@@ -91,8 +92,7 @@ public final class TFCThingsEvents
         {
             if (isPlayerOnTag(player, level, TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW))
             {
-                int damageTicks = TFCThingsConfig.ITEMS.HIKING_BOOTS.damageTicks.get();
-                HikingBootsItem.addTicks(feetItem, 1, damageTicks, () ->
+                HikingBootsItem.addDistance(feetItem, distanceCm, () ->
                     feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
         }

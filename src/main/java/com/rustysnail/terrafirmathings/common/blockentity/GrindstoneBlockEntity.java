@@ -45,7 +45,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
 
         float multiplier = TFCThingsConfig.ITEMS.WHETSTONE.grindstoneSpeedMultiplier.get().floatValue();
         be.progressTicks += speed * multiplier;
-        if (be.progressTicks < grindstoneItem.getTier().getTicksPerOperation()) return;
+        if (be.progressTicks < Math.max(1, grindstoneItem.getTier().getTicksPerOperation())) return;
         be.progressTicks = 0;
 
         int maxCharges = grindstoneItem.getTier().getMaxToolCharges();

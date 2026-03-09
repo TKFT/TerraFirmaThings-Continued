@@ -29,7 +29,7 @@
     },
     {
       "type": "tfc:welding_recipe",
-      "recipe": "tfcthings:anvil/diamond_honing_steel_head",
+      "recipe": "tfcthings:welding/diamond_honing_steel_head",
       "text": "Weld together the diamond honing steel head."
     },
     {

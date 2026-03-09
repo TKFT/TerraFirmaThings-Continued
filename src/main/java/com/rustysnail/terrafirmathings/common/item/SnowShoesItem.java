@@ -28,7 +28,7 @@ public class SnowShoesItem extends ArmorItem
         int current = getDistanceTraveled(stack);
         int total = current + distanceCm;
 
-        int damageThreshold = TFCThingsConfig.ITEMS.SNOW_SHOES.damageTicks.get();
+        int damageThreshold = TFCThingsConfig.ITEMS.SNOW_SHOES.damageDistance.get();
         if (damageThreshold > 0 && total >= damageThreshold)
         {
             int damageTimes = total / damageThreshold;

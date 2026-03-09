@@ -67,8 +67,8 @@ public class BearTrapBlockEntity extends BlockEntity
 
         if (captured instanceof Predator)
         {
-            double breakoutChance = TFCThingsConfig.ITEMS.BEAR_TRAP.breakoutChance.get();
-            if (level.random.nextDouble() < breakoutChance)
+            int breakoutPercent = TFCThingsConfig.ITEMS.BEAR_TRAP.breakoutChance.get();
+            if (breakoutPercent > 0 && level.random.nextDouble() < breakoutPercent / 100.0 / 24000.0)
             {
                 breakTrap();
                 return;

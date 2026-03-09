@@ -15,8 +15,6 @@ import net.minecraft.world.level.Level;
 
 public class HoningSteelItem extends Item
 {
-    private static final int MAX_USE_DURATION = 72000;
-
     private final boolean diamond;
 
     public HoningSteelItem(boolean diamond, Properties properties)
@@ -68,31 +66,17 @@ public class HoningSteelItem extends Item
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity)
     {
-        return MAX_USE_DURATION;
+        return Math.max(1, getRequiredUseTicks());
     }
 
     @Override
-    public void releaseUsing(ItemStack honingSteel, Level level, LivingEntity entity, int timeLeft)
+    public ItemStack finishUsingItem(ItemStack honingSteel, Level level, LivingEntity entity)
     {
-        if (level.isClientSide() || !(entity instanceof Player player))
+        if (!level.isClientSide() && entity instanceof Player player)
         {
-            return;
+            trySharpen(level, player, honingSteel, player.getUsedItemHand());
         }
-
-        int required = getRequiredUseTicks();
-        if (required <= 0)
-        {
-            return;
-        }
-
-        int usedTicks = getUseDuration(honingSteel, entity) - timeLeft;
-        if (usedTicks < required)
-        {
-            return;
-        }
-
-        InteractionHand sharpeningHand = player.getUsedItemHand();
-        trySharpen(level, player, honingSteel, sharpeningHand);
+        return honingSteel;
     }
 
 

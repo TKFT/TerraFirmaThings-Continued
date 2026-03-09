@@ -1,3 +1,5 @@
 /.idea/
 /build/
 /.gradle/
+/run/
+/CLAUDE.md

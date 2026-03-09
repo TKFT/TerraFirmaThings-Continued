@@ -226,9 +226,9 @@ public final class TFCThingsItems
     public static final DeferredItem<WhetstoneItem> WHETSTONE = ITEMS.register("whetstone",
         () -> new WhetstoneItem(new Item.Properties().stacksTo(64).durability(250)));
     public static final DeferredItem<HoningSteelItem> HONING_STEEL = ITEMS.register("honing_steel",
-        () -> new HoningSteelItem(false, new Item.Properties().stacksTo(1).durability(4200)));
+        () -> new HoningSteelItem(false, new Item.Properties().stacksTo(1).durability(3300)));
     public static final DeferredItem<HoningSteelItem> DIAMOND_HONING_STEEL = ITEMS.register("diamond_honing_steel",
-        () -> new HoningSteelItem(true, new Item.Properties().stacksTo(1).durability(4200)));
+        () -> new HoningSteelItem(true, new Item.Properties().stacksTo(1).durability(3300)));
     public static final DeferredItem<Item> HONING_STEEL_HEAD = ITEMS.register("honing_steel_head",
         () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIAMOND_HONING_STEEL_HEAD = ITEMS.register("diamond_honing_steel_head",
