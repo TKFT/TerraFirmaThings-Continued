@@ -46,39 +46,39 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 - **What it does:** Reduces snow movement slowdown when worn in the boots slot. Allows player to walk on powder snow without sinking.
 - **How to get it:** Craft basic snow shoes from cloth/leather/lumber; durable version upgrades through hiking boots.
-- **Notes:** Durability is only consumed while actively negating slowdown.
+- **Notes:** Durability is consumed while actively negating slowdown.
 
 ### Hiking Boots
 
-![Hiking Boots](img/hikingbootuse.png)
-![Hiking Boots Recipe Image](img/hikingbootscraft.png)
+![Hiking Boots](img/hikingbootsuse)
+![Hiking Boots Recipe Image](imghikingbootscraft.png)
 
 - **What it does:** Reduces movement slowdown from dense plants and brush.
 - **How to get it:** Forge metal bracing, then craft with leather boots and fiber.
-- **Notes:** Durability is only consumed while actively negating slowdown.
+- **Notes:** Durability is consumed while slowdown reduction is active.
 
 ### Rope Bridge
 
-![Rope Bridge Item/Block Image](img/ropebridgecraft.png)
-![Rope Bridge Recipe Image](img/ropebridgeuse.png)
+![Rope Bridge Item/Block Image](docs/images/rope_bridge_item_block.png)
+![Rope Bridge Recipe Image](docs/images/rope_bridge_recipe.png)
 
-- **What it does:** Throwable rope bridge that can bridge a gap between two blocks.
+- **What it does:** Throwable bundle that places rope bridge segments across valid straight gaps.
 - **How to get it:** Craft rope bridge bundles from jute fiber and lumber.
-- **Notes:** Stick right-click adjusts segment height for different looks; shift-right-click retrieves placed bridge sections. Bridge only connects blocks on the same x or z axis.
+- **Notes:** Stick right-click adjusts segment height; shift-right-click retrieves placed bridge sections.
 
 ### Rope Ladder
 
-![Rope Ladder Item/Block Image](img/ropeladdercraft.png)
-![Rope Ladder Recipe Image](img/ropeladderuse.png)
+![Rope Ladder Item/Block Image](docs/images/rope_ladder_item_block.png)
+![Rope Ladder Recipe Image](docs/images/rope_ladder_recipe.png)
 
-- **What it does:** Wall-mounted ladder that auto-extends downward till it reaches a block.
+- **What it does:** Wall-mounted ladder that auto-extends downward while consuming ladders from inventory.
 - **How to get it:** Craft from jute fiber and lumber.
-- **Notes:** Shift-right-click the top ladder allows picking up of ladder chains.
+- **Notes:** Shift-right-click allows pickup of ladder chains.
 
 ### Rope Javelin
 
-![Rope Javelin Item/Block Image](img/ropejavelincraft.png)
-![Rope Javelin Recipe Image](img/ropejavelinuse.png)
+![Rope Javelin Item/Block Image](docs/images/rope_javelin_item_block.png)
+![Rope Javelin Recipe Image](docs/images/rope_javelin_recipe.png)
 
 - **What it does:** Tethered throwing weapon with reel/retract behavior.
 - **How to get it:** Crafted per metal tier (copper through red steel).
@@ -86,8 +86,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Bear Trap
 
-![Bear Trap Item/Block Image](img/beartrapuse.png)
-![Bear Trap Recipe Image](img/beartrapuse.png)
+![Bear Trap Item/Block Image](docs/images/bear_trap_item_block.png)
+![Bear Trap Recipe Image](docs/images/bear_trap_recipe.png)
 
 - **What it does:** Immobilizes and damages entities that trigger it.
 - **How to get it:** Forge bear trap halves on an anvil, then weld halves into a trap.
@@ -95,8 +95,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Snare
 
-![Snare Item/Block Image](img/snarecraft.png)
-![Snare Recipe Image](img/snareuse.png)
+![Snare Item/Block Image](docs/images/snare_item_block.png)
+![Snare Recipe Image](docs/images/snare_recipe.png)
 
 - **What it does:** Passive trap for small creatures.
 - **How to get it:** Crafted from rods, lumber, and jute fiber.
@@ -104,8 +104,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Fishing Net
 
-![Fishing Net Item/Block Image](img/fishingnetanchorcraft.png)
-![Fishing Net Recipe Image](img/fishingnetuse.png)
+![Fishing Net Item/Block Image](docs/images/fishing_net_item_block.png)
+![Fishing Net Recipe Image](docs/images/fishing_net_recipe.png)
 
 - **What it does:** Passive fish-catching net stretched between anchors.
 - **How to get it:** Craft net segments and fishing net anchors.
@@ -113,8 +113,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Crowns
 
-![Crowns Item/Block Image](img/gemcrowncraft.png)
-![Crowns Recipe Image](img/crownuse.png)
+![Crowns Item/Block Image](docs/images/crowns_item_block.png)
+![Crowns Recipe Image](docs/images/crowns_recipe.png)
 
 - **What it does:** Decorative helmet-slot crowns with gem variants.
 - **How to get it:** Forge empty gold/platinum crowns, then set gems via crafting.
@@ -122,8 +122,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Gem Display
 
-![Gem Display Item/Block Image](img/gemdisplaycraft.png)
-![Gem Display Recipe Image](img/gemdisplayuse.png)
+![Gem Display Item/Block Image](docs/images/gem_display_item_block.png)
+![Gem Display Recipe Image](docs/images/gem_display_recipe.png)
 
 - **What it does:** Decorative display stand for cut gems (all TFC rock types).
 - **How to get it:** Craft variant by rock type.
@@ -131,8 +131,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Hook Javelin
 
-![Hook Javelin Item/Block Image](img/hookjavelincraft.png)
-![Hook Javelin Recipe Image](img/hookjavelinuse.png)
+![Hook Javelin Item/Block Image](docs/images/hook_javelin_item_block.png)
+![Hook Javelin Recipe Image](docs/images/hook_javelin_recipe.png)
 
 - **What it does:** Grappling javelin for tethered traversal and recovery.
 - **How to get it:** Forge hook heads (steel tiers), then craft assembled javelin.
@@ -140,8 +140,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Surveyor's Hammer
 
-![Surveyors Hammer Item/Block Image](img/hammercraft.png)
-![Surveyors Hammer Recipe Image](img/hammeruse.png)
+![Surveyors Hammer Item/Block Image](docs/images/surveyors_hammer_item_block.png)
+![Surveyors Hammer Recipe Image](docs/images/surveyors_hammer_recipe.png)
 
 - **What it does:** Cave stability checks and local rock-layer surveying.
 - **How to get it:** Forge or cast hammer heads, then craft with a rod.
@@ -149,8 +149,8 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Sling and Ammunition
 
-![Sling Item/Block Image](img/slingcraft.png)
-![Sling Recipe Image](img/slinguse.png)
+![Sling Item/Block Image](docs/images/sling_item_block.png)
+![Sling Recipe Image](docs/images/sling_recipe.png)
 
 - **What it does:** Charge-and-release ranged weapon with multiple ammo types.
 - **How to get it:** Knapp base sling; reinforce via metal bracing; craft/forge ammo variants.
@@ -158,9 +158,17 @@ Common config is under `config/tfcthings-common.toml` and includes:
 
 ### Sharpening and Grindstones
 
-![Grindstone Base Recipe](img/grindstonebasecraft.png)
-![Grindstone Image](img/grindstoneuse.png)
+![Sharpening Item/Block Image](docs/images/sharpening_grindstone_item_block.png)
+![Sharpening Recipe Image](docs/images/sharpening_grindstone_recipe.png)
 
 - **What it does:** Adds and consumes tool/weapon sharpness charges.
 - **How to get it:** Use whetstones, honing steels, diamond honing steels, and grindstone systems.
 - **Notes:** Grindstone block accepts wheel + tool; axle speed affects operation rate.
+
+### Materials and Components
+
+![Materials Components Item/Block Image](docs/images/materials_components_item_block.png)
+![Materials Components Recipe Image](docs/images/materials_components_recipe.png)
+
+- **What it covers:** Shared components used across recipes and systems.
+- **Examples:** Rope bridge bundles, metal bracing, bear trap halves, hook javelin heads.
