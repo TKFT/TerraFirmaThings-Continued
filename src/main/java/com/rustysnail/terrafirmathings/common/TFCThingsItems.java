@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.item.BearTrapHalfItem;
+import com.rustysnail.terrafirmathings.common.item.CramponsItem;
 import com.rustysnail.terrafirmathings.common.item.CrownItem;
 import com.rustysnail.terrafirmathings.common.item.FishingNetItem;
 import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
@@ -40,11 +41,15 @@ public final class TFCThingsItems
         () -> new SnowShoesItem(TFCThingsArmorMaterials.SNOW_SHOES, ArmorItem.Type.BOOTS, new Item.Properties().durability(182)));
 
     public static final DeferredItem<SnowShoesItem> DURABLE_SNOW_SHOES = ITEMS.register("durable_snow_shoes",
-        () -> new SnowShoesItem(TFCThingsArmorMaterials.DURABLE_SNOW_SHOES, ArmorItem.Type.BOOTS, new Item.Properties().durability(182)));
+        () -> new SnowShoesItem(TFCThingsArmorMaterials.DURABLE_SNOW_SHOES, ArmorItem.Type.BOOTS, new Item.Properties().durability(364)));
 
     // Hiking Boots
     public static final DeferredItem<HikingBootsItem> HIKING_BOOTS = ITEMS.register("hiking_boots",
         () -> new HikingBootsItem(TFCThingsArmorMaterials.HIKING_BOOTS, ArmorItem.Type.BOOTS, new Item.Properties().durability(364)));
+
+    // Crampons
+    public static final DeferredItem<CramponsItem> CRAMPONS = ITEMS.register("crampons",
+        () -> new CramponsItem(TFCThingsArmorMaterials.CRAMPONS, ArmorItem.Type.BOOTS, new Item.Properties().durability(364)));
 
     // Rope Bridge Bundle
     public static final DeferredItem<RopeBridgeBundleItem> ROPE_BRIDGE_BUNDLE = ITEMS.register("rope_bridge_bundle",

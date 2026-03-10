@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
+import com.rustysnail.terrafirmathings.common.item.CramponsItem;
 import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
 import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
 import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
@@ -32,6 +33,35 @@ public final class TFCThingsEvents
     private static final Map<UUID, Vec3> lastPlayerPositions = new HashMap<>();
 
     @SubscribeEvent
+    public static void onPlayerTickPre(PlayerTickEvent.Pre event)
+    {
+        Player player = event.getEntity();
+        Level level = player.level();
+
+        if (player.isPassenger() || player.getAbilities().instabuild)
+        {
+            return;
+        }
+
+        ItemStack feetItem = player.getItemBySlot(EquipmentSlot.FEET);
+        if (!(feetItem.getItem() instanceof CramponsItem))
+        {
+            return;
+        }
+
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableCrampons.get())
+        {
+            return;
+        }
+
+        if (player.onGround() && level.getBlockState(player.getBlockPosBelowThatAffectsMyMovement()).is(TFCThingsTags.Blocks.CRAMPONS_NEGATE_SLIP))
+        {
+            Vec3 motion = player.getDeltaMovement();
+            player.setDeltaMovement(0.0, motion.y, 0.0);
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerTickPost(PlayerTickEvent.Post event)
     {
         Player player = event.getEntity();
@@ -47,8 +77,9 @@ public final class TFCThingsEvents
 
         boolean wearingSnowShoes = feetItem.getItem() instanceof SnowShoesItem;
         boolean wearingHikingBoots = feetItem.getItem() instanceof HikingBootsItem;
+        boolean wearingCrampons = feetItem.getItem() instanceof CramponsItem;
 
-        if (!wearingSnowShoes && !wearingHikingBoots)
+        if (!wearingSnowShoes && !wearingHikingBoots && !wearingCrampons)
         {
             lastPlayerPositions.remove(playerId);
             return;
@@ -93,6 +124,15 @@ public final class TFCThingsEvents
             if (isPlayerOnTag(player, level, TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW))
             {
                 HikingBootsItem.addDistance(feetItem, distanceCm, () ->
+                    feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
+            }
+        }
+
+        if (wearingCrampons && TFCThingsConfig.ITEMS.MASTER_LIST.enableCrampons.get())
+        {
+            if (level.getBlockState(player.getBlockPosBelowThatAffectsMyMovement()).is(TFCThingsTags.Blocks.CRAMPONS_NEGATE_SLIP))
+            {
+                CramponsItem.addDistance(feetItem, distanceCm, () ->
                     feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
         }

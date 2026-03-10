@@ -2,4 +2,5 @@
 /build/
 /.gradle/
 /run/
-/CLAUDE.md
+/.claude/
+/src/generated/resources/.cache/

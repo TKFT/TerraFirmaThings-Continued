@@ -3,6 +3,7 @@
   "item.tfcthings.snow_shoes": "Snow Shoes",
   "item.tfcthings.durable_snow_shoes": "Durable Snow Shoes",
   "item.tfcthings.hiking_boots": "Hiking Boots",
+  "item.tfcthings.crampons": "Crampons",
   "item.tfcthings.rope_bridge_bundle": "Rope Bridge Bundle",
   "item.tfcthings.rope": "Rope",
   "item.tfcthings.bismuth_bronze_rope_javelin": "Bismuth Bronze Rope Javelin",
@@ -205,5 +206,18 @@
   "jei.tfcthings.sling_ammo_light.desc": "Sling ammo refined with a hammer and chisel for improved aerodynamics. Travels faster with less arc, ideal for long-range shots.",
   "jei.tfcthings.sling_ammo_fire.desc": "Sling ammo packed with gunpowder and a fire starter. Ignites the target on impact, setting them ablaze for several seconds.",
   "container.tfcthings.fishing_net": "Fishing Net",
-  "tfcthings.tooltip.prohammer_unsafe_low_tier": "This area has instability"
+  "tfcthings.tooltip.prohammer_unsafe_low_tier": "This area has instability",
+
+  "config.jade.plugin_tfcthings.grindstone": "Grindstone",
+  "config.jade.plugin_tfcthings.fishing_net_anchor": "Fishing Net Anchor",
+
+  "jade.tfcthings.grindstone.tool": "Tool: %s (%s)",
+  "jade.tfcthings.grindstone.wheel": "Wheel: %s",
+  "jade.tfcthings.grindstone.sharpness": "%d / %d",
+  "jade.tfcthings.grindstone.spinning": "Spinning",
+  "jade.tfcthings.grindstone.no_rotation": "No rotation",
+
+  "jade.tfcthings.fishing_net_anchor.linked": "Linked",
+  "jade.tfcthings.fishing_net_anchor.unlinked": "Not linked",
+  "jade.tfcthings.fishing_net_anchor.other_anchor": "Other anchor: %s, %s, %s"
 }

@@ -21,6 +21,7 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     private static final TagKey<Item> C_TOOLS_SPEAR = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear"));
     private static final TagKey<Item> C_TOOLS_SHARPENING = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/sharpening"));
     private static final TagKey<Item> C_TOOLS_SURVEYORS_HAMMER = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/surveyors_hammer"));
+    private static final TagKey<Item> C_ARMOR_BOOTS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "armor/boots"));
 
     public TFCThingsItemTags(
         PackOutput output,
@@ -116,6 +117,18 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
             .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")))
             .addTag(TFCThingsTags.Items.JAVELINS);
+
+        tag(net.minecraft.tags.ItemTags.FOOT_ARMOR)
+            .add(TFCThingsItems.HIKING_BOOTS.get())
+            .add(TFCThingsItems.SNOW_SHOES.get())
+            .add(TFCThingsItems.DURABLE_SNOW_SHOES.get())
+            .add(TFCThingsItems.CRAMPONS.get());
+
+        tag(C_ARMOR_BOOTS)
+            .add(TFCThingsItems.HIKING_BOOTS.get())
+            .add(TFCThingsItems.SNOW_SHOES.get())
+            .add(TFCThingsItems.DURABLE_SNOW_SHOES.get())
+            .add(TFCThingsItems.CRAMPONS.get());
 
         tag(C_TOOLS_RANGED_WEAPON)
             .addTag(TFCThingsTags.Items.JAVELINS)

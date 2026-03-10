@@ -125,6 +125,11 @@ public class FishingNetAnchorBlockEntity extends BlockEntity implements MenuProv
         return true;
     }
 
+    public ItemStackHandler getInventory()
+    {
+        return inventory;
+    }
+
     public BlockPos getMasterPos()
     {
         if (isLinked() && otherAnchor != null) return worldPosition.asLong() <= otherAnchor.asLong() ? worldPosition : otherAnchor;

@@ -19,6 +19,7 @@ public class TFCThingsConfig
     {
         public final SnowShoes SNOW_SHOES;
         public final HikingBoots HIKING_BOOTS;
+        public final Crampons CRAMPONS;
         public final BearTrap BEAR_TRAP;
         public final Snare SNARE;
         public final RopeBridge ROPE_BRIDGE;
@@ -35,6 +36,7 @@ public class TFCThingsConfig
 
             SNOW_SHOES = new SnowShoes(builder);
             HIKING_BOOTS = new HikingBoots(builder);
+            CRAMPONS = new Crampons(builder);
             BEAR_TRAP = new BearTrap(builder);
             SNARE = new Snare(builder);
             ROPE_BRIDGE = new RopeBridge(builder);
@@ -91,6 +93,23 @@ public class TFCThingsConfig
                         "1 = no slowdown when walking through plants.",
                         "0 = the boots are useless.")
                     .defineInRange("bootPower", 1.0D, 0.0D, 1.0D);
+
+                builder.pop();
+            }
+        }
+
+        public static class Crampons
+        {
+            public final ModConfigSpec.IntValue damageDistance;
+
+            Crampons(ModConfigSpec.Builder builder)
+            {
+                builder.comment("Crampon Settings").push("crampons");
+
+                damageDistance = builder
+                    .comment("The distance in centimeters walked on ice required to apply one damage to the crampons.",
+                        "Approximately 100 cm = 1 block. 0 = crampons won't be damaged by walking on ice.")
+                    .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 builder.pop();
             }
@@ -372,6 +391,7 @@ public class TFCThingsConfig
         {
             public final ModConfigSpec.BooleanValue enableSnowShoes;
             public final ModConfigSpec.BooleanValue enableHikingBoots;
+            public final ModConfigSpec.BooleanValue enableCrampons;
             public final ModConfigSpec.BooleanValue enableBearTrap;
             public final ModConfigSpec.BooleanValue enableSnare;
             public final ModConfigSpec.BooleanValue enableFishingNet;
@@ -391,6 +411,7 @@ public class TFCThingsConfig
 
                 enableSnowShoes = builder.define("enableSnowShoes", true);
                 enableHikingBoots = builder.define("enableHikingBoots", true);
+                enableCrampons = builder.define("enableCrampons", true);
                 enableBearTrap = builder.define("enableBearTrap", true);
                 enableSnare = builder.define("enableSnare", true);
                 enableFishingNet = builder.define("enableFishingNet", true);

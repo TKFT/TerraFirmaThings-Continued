@@ -60,6 +60,9 @@ public class TerraFirmaThings
                 if (m.enableHikingBoots.get())
                     output.accept(TFCThingsItems.HIKING_BOOTS.get());
 
+                if (m.enableCrampons.get())
+                    output.accept(TFCThingsItems.CRAMPONS.get());
+
                 if (m.enableRopeBridge.get())
                 {
                     output.accept(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get());

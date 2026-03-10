@@ -31,5 +31,11 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
             .addOptionalTag(TFCTags.Blocks.NATURAL_REGROWING_PLANTS)
             .addOptionalTag(TFCTags.Blocks.SPREADING_BUSHES)
             .addOptionalTag(TFCTags.Blocks.THORNY_BUSHES);
+
+        tag(TFCThingsTags.Blocks.CRAMPONS_NEGATE_SLIP)
+            .add(net.minecraft.world.level.block.Blocks.ICE)
+            .add(net.minecraft.world.level.block.Blocks.PACKED_ICE)
+            .add(net.minecraft.world.level.block.Blocks.BLUE_ICE)
+            .add(net.minecraft.world.level.block.Blocks.FROSTED_ICE);
     }
 }

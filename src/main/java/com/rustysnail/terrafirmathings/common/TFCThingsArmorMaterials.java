@@ -54,6 +54,22 @@ public final class TFCThingsArmorMaterials
             0f,
             0f
         ));
+    public static final Holder<ArmorMaterial> CRAMPONS = ARMOR_MATERIALS.register("crampons",
+        () -> new ArmorMaterial(
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 1);
+                map.put(ArmorItem.Type.LEGGINGS, 0);
+                map.put(ArmorItem.Type.CHESTPLATE, 0);
+                map.put(ArmorItem.Type.HELMET, 0);
+                map.put(ArmorItem.Type.BODY, 0);
+            }),
+            0,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            () -> Ingredient.EMPTY,
+            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "crampons"))),
+            0f,
+            0f
+        ));
     public static final Map<String, Holder<ArmorMaterial>> GOLD_CROWNS = new LinkedHashMap<>();
     public static final Map<String, Holder<ArmorMaterial>> PLATINUM_CROWNS = new LinkedHashMap<>();
     public static final Holder<ArmorMaterial> HIKING_BOOTS = ARMOR_MATERIALS.register("hiking_boots",

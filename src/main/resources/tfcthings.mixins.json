@@ -4,7 +4,8 @@
   "package": "com.rustysnail.terrafirmathings.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EntitySpeedMixin"
+    "EntitySpeedMixin",
+    "LivingEntityCramponsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

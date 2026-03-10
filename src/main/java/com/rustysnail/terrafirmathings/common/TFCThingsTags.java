@@ -18,6 +18,8 @@ public class TFCThingsTags
 
         public static final TagKey<Block> HIKING_BOOTS_NEGATE_SLOW = tag("hiking_boots_negate_slow");
 
+        public static final TagKey<Block> CRAMPONS_NEGATE_SLIP = tag("crampons_negate_slip");
+
         private static TagKey<Block> tag(String name)
         {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, name));
