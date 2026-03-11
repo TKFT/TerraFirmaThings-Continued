@@ -14,11 +14,11 @@
       "item": "minecraft:gunpowder"
     },
     {
-      "tag": "tfcthings:firestarters"
+      "tag": "#c:tools/igniter"
     }
   ],
   "primary_ingredient": {
-    "tag": "tfcthings:firestarters"
+    "tag": "#c:tools/igniter"
   },
   "remainder": {
     "modifiers": [

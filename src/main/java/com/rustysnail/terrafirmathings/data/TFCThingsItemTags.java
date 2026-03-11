@@ -6,22 +6,26 @@ import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.rock.Ore;
+import net.dries007.tfc.common.items.TFCItems;
 
 public final class TFCThingsItemTags extends ItemTagsProvider
 {
-    private static final TagKey<Item> C_TOOLS_RANGED_WEAPON = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/ranged_weapon"));
-    private static final TagKey<Item> C_TOOLS_SPEAR = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear"));
-    private static final TagKey<Item> C_TOOLS_SHARPENING = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/sharpening"));
-    private static final TagKey<Item> C_TOOLS_SURVEYORS_HAMMER = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/surveyors_hammer"));
-    private static final TagKey<Item> C_ARMOR_BOOTS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "armor/boots"));
+    private static final TagKey<Item> C_TOOLS_RANGED_WEAPON = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/ranged_weapon"));
+    private static final TagKey<Item> C_TOOLS_SPEAR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear"));
+    private static final TagKey<Item> C_TOOLS_SHARPENING = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/sharpening"));
+    private static final TagKey<Item> C_TOOLS_SURVEYORS_HAMMER = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/surveyors_hammer"));
+    private static final TagKey<Item> C_ARMOR_BOOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "armor/boots"));
 
     public TFCThingsItemTags(
         PackOutput output,
@@ -37,61 +41,61 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     protected void addTags(HolderLookup.Provider provider)
     {
         tag(TFCThingsTags.Items.SLINGS)
-            .add(TFCThingsItems.SLING.get())
-            .add(TFCThingsItems.SLING_METAL.get());
+            .add(TFCThingsItems.SLING.value())
+            .add(TFCThingsItems.SLING_METAL.value());
 
         tag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
-            .add(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.get())
-            .add(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.get());
+            .add(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.value());
 
         tag(TFCThingsTags.Items.JAVELINS)
-            .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.COPPER_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.STEEL_ROPE_JAVELIN.get())
-            .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.get())
+            .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.COPPER_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value())
 
-            .add(TFCThingsItems.STEEL_HOOK_JAVELIN.get())
-            .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.get())
-            .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.get())
-            .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get());
+            .add(TFCThingsItems.STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.value());
 
         tag(TFCThingsTags.Items.SHARPENING_TOOLS)
-            .add(TFCThingsItems.WHETSTONE.get())
-            .add(TFCThingsItems.HONING_STEEL.get())
-            .add(TFCThingsItems.DIAMOND_HONING_STEEL.get());
+            .add(TFCThingsItems.WHETSTONE.value())
+            .add(TFCThingsItems.HONING_STEEL.value())
+            .add(TFCThingsItems.DIAMOND_HONING_STEEL.value());
 
         tag(TFCThingsTags.Items.SHARPENING_TOOL_HEADS)
-            .add(TFCThingsItems.HONING_STEEL_HEAD.get())
+            .add(TFCThingsItems.HONING_STEEL_HEAD.value())
             .add(TFCThingsItems.DIAMOND_HONING_STEEL_HEAD.get());
 
         tag(TFCThingsTags.Items.GEM_DISPLAY_ELIGIBLE)
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.AMETHYST).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.DIAMOND).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.EMERALD).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.LAPIS_LAZULI).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.OPAL).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.PYRITE).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.RUBY).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.SAPPHIRE).get())
-            .add(net.dries007.tfc.common.items.TFCItems.GEMS.get(net.dries007.tfc.common.blocks.rock.Ore.TOPAZ).get());
+            .add(TFCItems.GEMS.get(Ore.AMETHYST).get())
+            .add(TFCItems.GEMS.get(Ore.DIAMOND).get())
+            .add(TFCItems.GEMS.get(Ore.EMERALD).get())
+            .add(TFCItems.GEMS.get(Ore.LAPIS_LAZULI).get())
+            .add(TFCItems.GEMS.get(Ore.OPAL).get())
+            .add(TFCItems.GEMS.get(Ore.PYRITE).get())
+            .add(TFCItems.GEMS.get(Ore.RUBY).get())
+            .add(TFCItems.GEMS.get(Ore.SAPPHIRE).get())
+            .add(TFCItems.GEMS.get(Ore.TOPAZ).get());
 
         tag(TFCThingsTags.Items.SHARPNESS_MINING_TOOLS)
-            .addTag(net.minecraft.tags.ItemTags.PICKAXES)
-            .addTag(net.minecraft.tags.ItemTags.AXES)
-            .addTag(net.minecraft.tags.ItemTags.SHOVELS)
-            .addTag(net.minecraft.tags.ItemTags.HOES)
+            .addTag(ItemTags.PICKAXES)
+            .addTag(ItemTags.AXES)
+            .addTag(ItemTags.SHOVELS)
+            .addTag(ItemTags.HOES)
             .addOptionalTag(TFCTags.Items.TOOLS_STONE)
             .addOptionalTag(TFCTags.Items.TOOLS_COPPER)
             .addOptionalTag(TFCTags.Items.TOOLS_BISMUTH_BRONZE)
@@ -105,8 +109,8 @@ public final class TFCThingsItemTags extends ItemTagsProvider
 
         tag(TFCThingsTags.Items.SHARPNESS_WEAPONS)
             .addTag(net.minecraft.tags.ItemTags.SWORDS)
-            .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
-            .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")));
+            .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
+            .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")));
 
         tag(TFCThingsTags.Items.SHARPENABLE)
             .addTag(net.minecraft.tags.ItemTags.AXES)
@@ -114,21 +118,22 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(net.minecraft.tags.ItemTags.PICKAXES)
             .addTag(net.minecraft.tags.ItemTags.SHOVELS)
             .addTag(net.minecraft.tags.ItemTags.SWORDS)
-            .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
-            .addOptionalTag(TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")))
+            .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
+            .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")))
             .addTag(TFCThingsTags.Items.JAVELINS);
 
         tag(net.minecraft.tags.ItemTags.FOOT_ARMOR)
-            .add(TFCThingsItems.HIKING_BOOTS.get())
-            .add(TFCThingsItems.SNOW_SHOES.get())
-            .add(TFCThingsItems.DURABLE_SNOW_SHOES.get())
-            .add(TFCThingsItems.CRAMPONS.get());
+            .add(TFCThingsItems.HIKING_BOOTS.value())
+            .add(TFCThingsItems.SNOW_SHOES.value())
+            .add(TFCThingsItems.DURABLE_SNOW_SHOES.value())
+            .add(TFCThingsItems.CRAMPONS.value());
 
+        //C Tags
         tag(C_ARMOR_BOOTS)
-            .add(TFCThingsItems.HIKING_BOOTS.get())
-            .add(TFCThingsItems.SNOW_SHOES.get())
-            .add(TFCThingsItems.DURABLE_SNOW_SHOES.get())
-            .add(TFCThingsItems.CRAMPONS.get());
+            .add(TFCThingsItems.HIKING_BOOTS.value())
+            .add(TFCThingsItems.SNOW_SHOES.value())
+            .add(TFCThingsItems.DURABLE_SNOW_SHOES.value())
+            .add(TFCThingsItems.CRAMPONS.value());
 
         tag(C_TOOLS_RANGED_WEAPON)
             .addTag(TFCThingsTags.Items.JAVELINS)
@@ -137,5 +142,54 @@ public final class TFCThingsItemTags extends ItemTagsProvider
         tag(C_TOOLS_SPEAR).addTag(TFCThingsTags.Items.JAVELINS);
         tag(C_TOOLS_SHARPENING).addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
         tag(C_TOOLS_SURVEYORS_HAMMER).addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
+
+
+        //TFC TAGS
+        tag(TFCTags.Items.TOOL_RACK_TOOLS)
+            .addTag(TFCThingsTags.Items.JAVELINS)
+            .addTag(TFCThingsTags.Items.SLINGS)
+            .addTag(TFCThingsTags.Items.SLINGS)
+            .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
+
+        tag(TFCTags.Items.FIRED_MOLDS).add(TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.value());
+        tag(TFCTags.Items.UNFIRED_MOLDS).add(TFCThingsItems.UNFIRED_PROSPECTORS_HAMMER_HEAD_MOLD.value());
+
+        tag(TFCTags.Items.TOOLS_BISMUTH_BRONZE)
+            .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.value());
+        tag(TFCTags.Items.TOOLS_BLACK_BRONZE)
+            .add(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.value());
+        tag(TFCTags.Items.TOOLS_BRONZE)
+            .add(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.value());
+        tag(TFCTags.Items.TOOLS_BLACK_STEEL)
+            .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.HONING_STEEL.value())
+            .add(TFCThingsItems.DIAMOND_HONING_STEEL.value());
+        tag(TFCTags.Items.TOOLS_COPPER)
+            .add(TFCThingsItems.COPPER_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.value());
+        tag(TFCTags.Items.TOOLS_BLUE_STEEL)
+            .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.value());
+        tag(TFCTags.Items.TOOLS_RED_STEEL)
+            .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.value())
+            .add(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.value());
+        tag(TFCTags.Items.TOOLS_STEEL)
+            .add(TFCThingsItems.STEEL_HOOK_JAVELIN.value())
+            .add(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.STEEL_ROPE_JAVELIN.value());
+        tag(TFCTags.Items.TOOLS_WROUGHT_IRON)
+            .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value());
+
+
+
+
     }
 }

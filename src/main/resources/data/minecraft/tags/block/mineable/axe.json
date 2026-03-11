@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "tfcthings:fishing_net_anchor",
-    "tfcthings:rope_bridge",
-    "tfcthings:rope_ladder",
-    "tfcthings:snare"
-  ]
-}
