@@ -3,6 +3,7 @@
     "minecraft:ice",
     "minecraft:packed_ice",
     "minecraft:blue_ice",
-    "minecraft:frosted_ice"
+    "minecraft:frosted_ice",
+    "tfc:sea_ice"
   ]
 }
