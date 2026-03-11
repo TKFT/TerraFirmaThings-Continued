@@ -40,11 +40,7 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
             Ingredient.of(TFCThingsTags.Items.SHARPENING_TOOLS), Size.SMALL, Weight.LIGHT));
 
         add("grindstone_items", new ItemSizeDefinition(
-            Ingredient.of(
-                TFCThingsItems.GRINDSTONE_QUARTZ.get(),
-                TFCThingsItems.GRINDSTONE_STEEL.get(),
-                TFCThingsItems.GRINDSTONE_DIAMOND.get()),
-            Size.LARGE, Weight.HEAVY));
+            Ingredient.of(TFCThingsTags.Items.GRINDSTONE_WHEELS), Size.LARGE, Weight.HEAVY));
 
         add("surveyors_hammers", new ItemSizeDefinition(
             Ingredient.of(TFCThingsTags.Items.SURVEYORS_HAMMERS), Size.NORMAL, Weight.MEDIUM));
@@ -71,6 +67,9 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
 
         add("hiking_boots", new ItemSizeDefinition(
             Ingredient.of(TFCThingsItems.HIKING_BOOTS.get()), Size.NORMAL, Weight.MEDIUM));
+
+        add("crampons", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsItems.CRAMPONS.get()), Size.NORMAL, Weight.HEAVY));
 
         add("snow_shoes", new ItemSizeDefinition(
             Ingredient.of(

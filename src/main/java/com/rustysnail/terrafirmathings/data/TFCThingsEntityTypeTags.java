@@ -39,5 +39,8 @@ public final class TFCThingsEntityTypeTags extends EntityTypeTagsProvider
 
         tag(TFCThingsTags.Entities.FISHING_NET_CATCHABLE)
             .addOptionalTag(net.dries007.tfc.common.TFCTags.Entities.SMALL_FISH);
+
+        tag(TFCThingsTags.Entities.BEAR_TRAP_BREAKOUT)
+            .addOptionalTag(net.dries007.tfc.common.TFCTags.Entities.LAND_PREDATORS);
     }
 }

@@ -1,15 +1,7 @@
 {
-  "ingredient": [
-    {
-      "item": "tfcthings:grindstone_quartz"
-    },
-    {
-      "item": "tfcthings:grindstone_steel"
-    },
-    {
-      "item": "tfcthings:grindstone_diamond"
-    }
-  ],
+  "ingredient": {
+    "tag": "tfcthings:grindstone_wheels"
+  },
   "size": "large",
   "weight": "heavy"
 }

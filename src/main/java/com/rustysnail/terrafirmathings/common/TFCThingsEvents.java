@@ -185,7 +185,7 @@ public final class TFCThingsEvents
         Player player = event.getEntity();
         ItemStack tool = player.getMainHandItem();
         int charges = getSharpnessCharges(tool);
-        if (charges <= 0 || isSharpnessMiningTool(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
+        if (charges <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
         }
@@ -208,7 +208,7 @@ public final class TFCThingsEvents
         }
 
         ItemStack tool = player.getMainHandItem();
-        if (getSharpnessCharges(tool) <= 0 || isSharpnessMiningTool(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
+        if (getSharpnessCharges(tool) <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
         }
@@ -231,9 +231,11 @@ public final class TFCThingsEvents
             return;
         }
 
-        ChatFormatting color = charges > 128
+        int t2 = TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get();
+        int t1 = TFCThingsConfig.ITEMS.WHETSTONE.maxChargesWhetstone.get();
+        ChatFormatting color = charges > t2
             ? ChatFormatting.DARK_PURPLE
-            : charges > 64 ? ChatFormatting.BLUE : ChatFormatting.DARK_GREEN;
+            : charges > t1 ? ChatFormatting.BLUE : ChatFormatting.DARK_GREEN;
         event.getToolTip().add(net.minecraft.network.chat.Component.translatable("tfcthings.tooltip.sharpness", charges).withStyle(color));
     }
 
@@ -257,15 +259,15 @@ public final class TFCThingsEvents
 
     private static int sharpnessTierMultiplier(int charges)
     {
-        if (charges > 128) return 3;
-        if (charges > 64) return 2;
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get()) return 3;
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesWhetstone.get()) return 2;
         return 1;
     }
 
     private static float getTierMiningBonus(int charges)
     {
-        if (charges > 128) return TFCThingsConfig.ITEMS.WHETSTONE.tier3MiningBonus.get().floatValue();
-        if (charges > 64) return TFCThingsConfig.ITEMS.WHETSTONE.tier2MiningBonus.get().floatValue();
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get()) return TFCThingsConfig.ITEMS.WHETSTONE.tier3MiningBonus.get().floatValue();
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesWhetstone.get()) return TFCThingsConfig.ITEMS.WHETSTONE.tier2MiningBonus.get().floatValue();
         return TFCThingsConfig.ITEMS.WHETSTONE.tier1MiningBonus.get().floatValue();
     }
 
@@ -276,10 +278,10 @@ public final class TFCThingsEvents
             return false;
         }
         return stack.is(TFCThingsTags.Items.SHARPNESS_WEAPONS)
-            || (WhetstoneItem.isSharpenable(stack) && isSharpnessMiningTool(stack));
+            || (WhetstoneItem.isSharpenable(stack) && lacksSharpnessMiningToolTag(stack));
     }
 
-    private static boolean isSharpnessMiningTool(ItemStack stack)
+    private static boolean lacksSharpnessMiningToolTag(ItemStack stack)
     {
         return stack.isEmpty() || !stack.is(TFCThingsTags.Items.SHARPNESS_MINING_TOOLS);
     }

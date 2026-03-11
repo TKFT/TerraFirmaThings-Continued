@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.dries007.tfc.common.entities.predator.Predator;
+import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 
 public class BearTrapBlockEntity extends BlockEntity
 {
@@ -65,7 +65,7 @@ public class BearTrapBlockEntity extends BlockEntity
             return;
         }
 
-        if (captured instanceof Predator)
+        if (captured.getType().is(TFCThingsTags.Entities.BEAR_TRAP_BREAKOUT))
         {
             int breakoutPercent = TFCThingsConfig.ITEMS.BEAR_TRAP.breakoutChance.get();
             if (breakoutPercent > 0 && level.random.nextDouble() < breakoutPercent / 100.0 / 24000.0)

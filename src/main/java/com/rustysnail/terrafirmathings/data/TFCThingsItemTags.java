@@ -23,8 +23,7 @@ public final class TFCThingsItemTags extends ItemTagsProvider
 {
     private static final TagKey<Item> C_TOOLS_RANGED_WEAPON = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/ranged_weapon"));
     private static final TagKey<Item> C_TOOLS_SPEAR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear"));
-    private static final TagKey<Item> C_TOOLS_SHARPENING = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/sharpening"));
-    private static final TagKey<Item> C_TOOLS_SURVEYORS_HAMMER = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/surveyors_hammer"));
+    private static final TagKey<Item> C_TOOLS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools"));
     private static final TagKey<Item> C_ARMOR_BOOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "armor/boots"));
 
     public TFCThingsItemTags(
@@ -122,6 +121,11 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")))
             .addTag(TFCThingsTags.Items.JAVELINS);
 
+        tag(TFCThingsTags.Items.GRINDSTONE_WHEELS)
+            .add(TFCThingsItems.GRINDSTONE_QUARTZ.value())
+            .add(TFCThingsItems.GRINDSTONE_STEEL.value())
+            .add(TFCThingsItems.GRINDSTONE_DIAMOND.value());
+
         tag(net.minecraft.tags.ItemTags.FOOT_ARMOR)
             .add(TFCThingsItems.HIKING_BOOTS.value())
             .add(TFCThingsItems.SNOW_SHOES.value())
@@ -140,8 +144,9 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(TFCThingsTags.Items.SLINGS);
 
         tag(C_TOOLS_SPEAR).addTag(TFCThingsTags.Items.JAVELINS);
-        tag(C_TOOLS_SHARPENING).addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
-        tag(C_TOOLS_SURVEYORS_HAMMER).addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
+        tag(C_TOOLS)
+            .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
+            .addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
 
 
         //TFC TAGS
@@ -187,9 +192,5 @@ public final class TFCThingsItemTags extends ItemTagsProvider
         tag(TFCTags.Items.TOOLS_WROUGHT_IRON)
             .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.value())
             .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value());
-
-
-
-
     }
 }

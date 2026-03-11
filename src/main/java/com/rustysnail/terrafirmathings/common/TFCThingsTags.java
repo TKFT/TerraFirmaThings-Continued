@@ -34,6 +34,9 @@ public class TFCThingsTags
 
         public static final TagKey<EntityType<?>> FISHING_NET_CATCHABLE = tag("fishing_net_catchable");
 
+        /** Entities that attempt to break out of a bear trap over time. */
+        public static final TagKey<EntityType<?>> BEAR_TRAP_BREAKOUT = tag("bear_trap_breakout");
+
         private static TagKey<EntityType<?>> tag(String name)
         {
             return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, name));
@@ -53,6 +56,9 @@ public class TFCThingsTags
         public static final TagKey<Item> SHARPENABLE = tag("sharpenable");
         public static final TagKey<Item> SHARPNESS_MINING_TOOLS = tag("sharpness_mining_tools");
         public static final TagKey<Item> SHARPNESS_WEAPONS = tag("sharpness_weapons");
+
+        /** Items that are valid grindstone wheel items (can be placed in the grindstone block). */
+        public static final TagKey<Item> GRINDSTONE_WHEELS = tag("grindstone_wheels");
 
         private static TagKey<Item> tag(String name)
         {

@@ -2,6 +2,7 @@ package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.jcraft.jorbis.Block;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
@@ -32,6 +33,7 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
         });
 
         tag(TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW)
+            .addTag(BlockTags.SNOW)
             .add(net.dries007.tfc.common.blocks.TFCBlocks.SNOW_PILE.get())
             .add(net.minecraft.world.level.block.Blocks.SNOW)
             .add(net.minecraft.world.level.block.Blocks.SNOW_BLOCK)
@@ -43,11 +45,7 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
             .addOptionalTag(TFCTags.Blocks.THORNY_BUSHES);
 
         tag(TFCThingsTags.Blocks.CRAMPONS_NEGATE_SLIP)
-            .add(net.minecraft.world.level.block.Blocks.ICE)
-            .add(net.minecraft.world.level.block.Blocks.PACKED_ICE)
-            .add(net.minecraft.world.level.block.Blocks.BLUE_ICE)
-            .add(net.minecraft.world.level.block.Blocks.FROSTED_ICE)
-            .add(TFCBlocks.SEA_ICE.key());
+            .addTag(BlockTags.ICE);
 
         tag(BlockTags.MINEABLE_WITH_AXE)
             .add(TFCThingsBlocks.SNARE.get())

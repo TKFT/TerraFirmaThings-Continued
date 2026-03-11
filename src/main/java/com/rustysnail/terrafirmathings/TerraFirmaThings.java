@@ -13,6 +13,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -222,6 +224,13 @@ public class TerraFirmaThings
     private void commonSetup(FMLCommonSetupEvent event)
     {
         LOGGER.info("TerraFirma Things common setup");
+
+        event.enqueueWork(() -> {
+            FireBlock fireBlock = (FireBlock) Blocks.FIRE;
+            fireBlock.setFlammable(TFCThingsBlocks.ROPE_BRIDGE.get(), 5, 20);
+            fireBlock.setFlammable(TFCThingsBlocks.ROPE_LADDER.get(), 5, 20);
+            fireBlock.setFlammable(TFCThingsBlocks.SNARE.get(), 5, 20);
+        });
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event)
