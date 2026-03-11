@@ -56,5 +56,6 @@ public final class TFCThingsDataEntryPoint
 
         event.getGenerator().addProvider(event.includeServer(), new TFCThingsItemSizes(output, lookup));
         event.getGenerator().addProvider(event.includeServer(), new TFCThingsItemHeat(output, lookup));
+        event.getGenerator().addProvider(event.includeServer(), new TFCThingsHeatingRecipes(output, lookup));
     }
 }

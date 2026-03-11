@@ -17,6 +17,21 @@ import net.minecraft.world.level.Level;
 
 public class WhetstoneItem extends Item
 {
+    public static int getCharges(ItemStack stack)
+    {
+        if (!isSharpenable(stack)) return 0;
+        return stack.getOrDefault(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), 0);
+    }
+
+    public static void consumeCharge(ItemStack stack)
+    {
+        int current = getCharges(stack);
+        if (current > 0)
+        {
+            stack.set(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), current - 1);
+        }
+    }
+
     public static int applySharpness(ItemStack target, int chargesToAdd, int max)
     {
         int current = target.getOrDefault(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), 0);

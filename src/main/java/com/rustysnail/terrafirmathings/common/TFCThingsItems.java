@@ -22,6 +22,7 @@ import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -61,44 +62,57 @@ public final class TFCThingsItems
 
     // Rope Javelin
     public static final DeferredItem<RopeJavelinItem> BISMUTH_BRONZE_ROPE_JAVELIN = ITEMS.register("bismuth_bronze_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BISMUTH_BRONZE.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.BISMUTH_BRONZE, new Item.Properties().stacksTo(1).durability(TFCTiers.BISMUTH_BRONZE.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BISMUTH_BRONZE, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> BLACK_BRONZE_ROPE_JAVELIN = ITEMS.register("black_bronze_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_BRONZE.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.BLACK_BRONZE, new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_BRONZE.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BLACK_BRONZE, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> BLACK_STEEL_ROPE_JAVELIN = ITEMS.register("black_steel_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_STEEL.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.BLACK_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BLACK_STEEL, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> BLUE_STEEL_ROPE_JAVELIN = ITEMS.register("blue_steel_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BLUE_STEEL.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.BLUE_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.BLUE_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BLUE_STEEL, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> BRONZE_ROPE_JAVELIN = ITEMS.register("bronze_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BRONZE.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.BRONZE, new Item.Properties().stacksTo(1).durability(TFCTiers.BRONZE.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BRONZE, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> COPPER_ROPE_JAVELIN = ITEMS.register("copper_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.COPPER.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.COPPER, new Item.Properties().stacksTo(1).durability(TFCTiers.COPPER.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.COPPER, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> RED_STEEL_ROPE_JAVELIN = ITEMS.register("red_steel_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.RED_STEEL.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.RED_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.RED_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.RED_STEEL, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> STEEL_ROPE_JAVELIN = ITEMS.register("steel_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.STEEL.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.STEEL, 3, -2.4F))));
 
     public static final DeferredItem<RopeJavelinItem> WROUGHT_IRON_ROPE_JAVELIN = ITEMS.register("wrought_iron_rope_javelin",
-        () -> new RopeJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.WROUGHT_IRON.getUses())));
+        () -> new RopeJavelinItem(TFCTiers.WROUGHT_IRON, new Item.Properties().stacksTo(1).durability(TFCTiers.WROUGHT_IRON.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.WROUGHT_IRON, 3, -2.4F))));
 
     // Hook Javelin
     public static final DeferredItem<HookJavelinItem> STEEL_HOOK_JAVELIN = ITEMS.register("hook_javelin/steel",
-        () -> new HookJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.STEEL.getUses())));
+        () -> new HookJavelinItem(TFCTiers.STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.STEEL, 3, -2.4F))));
 
     public static final DeferredItem<HookJavelinItem> BLACK_STEEL_HOOK_JAVELIN = ITEMS.register("hook_javelin/black_steel",
-        () -> new HookJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_STEEL.getUses())));
+        () -> new HookJavelinItem(TFCTiers.BLACK_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.BLACK_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BLACK_STEEL, 3, -2.4F))));
 
     public static final DeferredItem<HookJavelinItem> BLUE_STEEL_HOOK_JAVELIN = ITEMS.register("hook_javelin/blue_steel",
-        () -> new HookJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.BLUE_STEEL.getUses())));
+        () -> new HookJavelinItem(TFCTiers.BLUE_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.BLUE_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.BLUE_STEEL, 3, -2.4F))));
 
     public static final DeferredItem<HookJavelinItem> RED_STEEL_HOOK_JAVELIN = ITEMS.register("hook_javelin/red_steel",
-        () -> new HookJavelinItem(new Item.Properties().stacksTo(1).durability(TFCTiers.RED_STEEL.getUses())));
+        () -> new HookJavelinItem(TFCTiers.RED_STEEL, new Item.Properties().stacksTo(1).durability(TFCTiers.RED_STEEL.getUses())
+            .attributes(SwordItem.createAttributes(TFCTiers.RED_STEEL, 3, -2.4F))));
 
     // Hook Javelin Heads
     public static final DeferredItem<Item> STEEL_HOOK_JAVELIN_HEAD = ITEMS.register("hook_javelin_head/steel", () -> new Item(new Item.Properties()));
@@ -127,44 +141,46 @@ public final class TFCThingsItems
         () -> new BlockItem(TFCThingsBlocks.FISHING_NET_ANCHOR.get(), new Item.Properties().stacksTo(16)));
 
     // Surveyor's Hammer
-    public static final DeferredItem<SurveyorsHammerItem> COPPER_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/copper",
+    public static final DeferredItem<SurveyorsHammerItem> COPPER_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/copper",
         () -> new SurveyorsHammerItem(TFCTiers.COPPER, new Item.Properties().durability(TFCTiers.COPPER.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> BISMUTH_BRONZE_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/bismuth_bronze",
+    public static final DeferredItem<SurveyorsHammerItem> BISMUTH_BRONZE_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/bismuth_bronze",
         () -> new SurveyorsHammerItem(TFCTiers.BISMUTH_BRONZE, new Item.Properties().durability(TFCTiers.BISMUTH_BRONZE.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> BLACK_BRONZE_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/black_bronze",
+    public static final DeferredItem<SurveyorsHammerItem> BLACK_BRONZE_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/black_bronze",
         () -> new SurveyorsHammerItem(TFCTiers.BLACK_BRONZE, new Item.Properties().durability(TFCTiers.BLACK_BRONZE.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> BRONZE_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/bronze",
+    public static final DeferredItem<SurveyorsHammerItem> BRONZE_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/bronze",
         () -> new SurveyorsHammerItem(TFCTiers.BRONZE, new Item.Properties().durability(TFCTiers.BRONZE.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> WROUGHT_IRON_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/wrought_iron",
+    public static final DeferredItem<SurveyorsHammerItem> WROUGHT_IRON_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/wrought_iron",
         () -> new SurveyorsHammerItem(TFCTiers.WROUGHT_IRON, new Item.Properties().durability(TFCTiers.WROUGHT_IRON.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> STEEL_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/steel",
+    public static final DeferredItem<SurveyorsHammerItem> STEEL_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/steel",
         () -> new SurveyorsHammerItem(TFCTiers.STEEL, new Item.Properties().durability(TFCTiers.STEEL.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> BLACK_STEEL_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/black_steel",
+    public static final DeferredItem<SurveyorsHammerItem> BLACK_STEEL_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/black_steel",
         () -> new SurveyorsHammerItem(TFCTiers.BLACK_STEEL, new Item.Properties().durability(TFCTiers.BLACK_STEEL.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> BLUE_STEEL_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/blue_steel",
+    public static final DeferredItem<SurveyorsHammerItem> BLUE_STEEL_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/blue_steel",
         () -> new SurveyorsHammerItem(TFCTiers.BLUE_STEEL, new Item.Properties().durability(TFCTiers.BLUE_STEEL.getUses())));
-    public static final DeferredItem<SurveyorsHammerItem> RED_STEEL_PROSPECTORS_HAMMER = ITEMS.register("surveyors_hammer/red_steel",
+    public static final DeferredItem<SurveyorsHammerItem> RED_STEEL_SURVEYORS_HAMMER = ITEMS.register("surveyors_hammer/red_steel",
         () -> new SurveyorsHammerItem(TFCTiers.RED_STEEL, new Item.Properties().durability(TFCTiers.RED_STEEL.getUses())));
 
     // Surveyor's Hammer Heads
-    public static final DeferredItem<Item> COPPER_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/copper", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BISMUTH_BRONZE_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/bismuth_bronze", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BLACK_BRONZE_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/black_bronze", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BRONZE_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/bronze", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> WROUGHT_IRON_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/wrought_iron", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> STEEL_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/steel", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BLACK_STEEL_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/black_steel", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BLUE_STEEL_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/blue_steel", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RED_STEEL_PROSPECTORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/red_steel", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> COPPER_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/copper", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/bismuth_bronze", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLACK_BRONZE_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/black_bronze", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BRONZE_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/bronze", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WROUGHT_IRON_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/wrought_iron", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> STEEL_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/steel", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLACK_STEEL_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/black_steel", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLUE_STEEL_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/blue_steel", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> RED_STEEL_SURVEYORS_HAMMER_HEAD = ITEMS.register("surveyors_hammer_head/red_steel", () -> new Item(new Item.Properties()));
 
     // Surveyor's Hammer Molds
-    public static final DeferredItem<Item> UNFIRED_PROSPECTORS_HAMMER_HEAD_MOLD = ITEMS.register("unfired_surveyors_hammer_head_mold",
+    public static final DeferredItem<Item> UNFIRED_SURVEYORS_HAMMER_HEAD_MOLD = ITEMS.register("unfired_surveyors_hammer_head_mold",
         () -> new Item(new Item.Properties()));
-    public static final DeferredItem<MoldItem> PROSPECTORS_HAMMER_HEAD_MOLD = ITEMS.register("surveyors_hammer_head_mold",
+    public static final DeferredItem<MoldItem> SURVEYORS_HAMMER_HEAD_MOLD = ITEMS.register("surveyors_hammer_head_mold",
         () -> new MoldItem(TFCConfig.SERVER.moldHammerHeadCapacity, TFCTags.Fluids.USABLE_IN_TOOL_HEAD_MOLD, new Item.Properties()));
+
     public static final DeferredItem<CrownItem> GOLD_CROWN_EMPTY = ITEMS.register("crown/gold_empty",
         () -> new CrownItem(TFCThingsArmorMaterials.GOLD_CROWNS.get("empty"), ArmorItem.Type.HELMET,
             new Item.Properties().stacksTo(1), null));
+
     /* public static final DeferredItem<CrownItem> GOLD_CROWN_AGATE = goldCrown("agate", "Agate"); */
     public static final DeferredItem<CrownItem> GOLD_CROWN_AMETHYST = goldCrown("amethyst", "Amethyst");
     /* public static final DeferredItem<CrownItem> GOLD_CROWN_BERYL = goldCrown("beryl", "Beryl"); */
@@ -179,10 +195,12 @@ public final class TFCThingsItems
     public static final DeferredItem<CrownItem> GOLD_CROWN_RUBY = goldCrown("ruby", "Ruby");
     public static final DeferredItem<CrownItem> GOLD_CROWN_SAPPHIRE = goldCrown("sapphire", "Sapphire");
     public static final DeferredItem<CrownItem> GOLD_CROWN_TOPAZ = goldCrown("topaz", "Topaz");
+
     //Crowns (Platinum)
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_EMPTY = ITEMS.register("crown/platinum_empty",
         () -> new CrownItem(TFCThingsArmorMaterials.PLATINUM_CROWNS.get("empty"), ArmorItem.Type.HELMET,
             new Item.Properties().stacksTo(1), null));
+
     /* public static final DeferredItem<CrownItem> PLATINUM_CROWN_AGATE = platinumCrown("agate", "Agate"); */
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_AMETHYST = platinumCrown("amethyst", "Amethyst");
     /**
@@ -200,6 +218,7 @@ public final class TFCThingsItems
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_RUBY = platinumCrown("ruby", "Ruby");
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_SAPPHIRE = platinumCrown("sapphire", "Sapphire");
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOPAZ = platinumCrown("topaz", "Topaz");
+
     //Metal Bracing
     public static final DeferredItem<MetalBracingItem> METAL_BRACING = ITEMS.register("metal_bracing",
         () -> new MetalBracingItem(new Item.Properties().stacksTo(64)));

@@ -14,15 +14,15 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.common.items.JavelinItem;
 
-public class HookJavelinItem extends Item
+public class HookJavelinItem extends JavelinItem
 {
     private static final float THROW_VELOCITY = 2.5F;
     private static final float THROW_INACCURACY = 1.0F;
@@ -70,9 +70,9 @@ public class HookJavelinItem extends Item
         return null;
     }
 
-    public HookJavelinItem(Properties properties)
+    public HookJavelinItem(Tier tier, Properties properties)
     {
-        super(properties);
+        super(tier, properties);
     }
 
     @Override
@@ -137,18 +137,6 @@ public class HookJavelinItem extends Item
         {
             clearThrownState(stack);
         }
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack)
-    {
-        return UseAnim.SPEAR;
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity)
-    {
-        return 72000;
     }
 
     @Override

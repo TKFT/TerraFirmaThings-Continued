@@ -44,15 +44,15 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCThingsItems.SLING_METAL.value());
 
         tag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
-            .add(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.value())
-            .add(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.value());
+            .add(TFCThingsItems.COPPER_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.STEEL_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.value())
+            .add(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.value());
 
         tag(TFCThingsTags.Items.JAVELINS)
             .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
@@ -153,44 +153,44 @@ public final class TFCThingsItemTags extends ItemTagsProvider
         tag(TFCTags.Items.TOOL_RACK_TOOLS)
             .addTag(TFCThingsTags.Items.JAVELINS)
             .addTag(TFCThingsTags.Items.SLINGS)
-            .addTag(TFCThingsTags.Items.SLINGS)
+            .addTag(TFCThingsTags.Items.SHARPENING_TOOLS)
             .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
 
-        tag(TFCTags.Items.FIRED_MOLDS).add(TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.value());
-        tag(TFCTags.Items.UNFIRED_MOLDS).add(TFCThingsItems.UNFIRED_PROSPECTORS_HAMMER_HEAD_MOLD.value());
+        tag(TFCTags.Items.FIRED_MOLDS).add(TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.value());
+        tag(TFCTags.Items.UNFIRED_MOLDS).add(TFCThingsItems.UNFIRED_SURVEYORS_HAMMER_HEAD_MOLD.value());
 
         tag(TFCTags.Items.TOOLS_BISMUTH_BRONZE)
             .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.value());
+            .add(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.value());
         tag(TFCTags.Items.TOOLS_BLACK_BRONZE)
-            .add(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.value());
         tag(TFCTags.Items.TOOLS_BRONZE)
-            .add(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.value());
         tag(TFCTags.Items.TOOLS_BLACK_STEEL)
             .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.value())
             .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.HONING_STEEL.value())
             .add(TFCThingsItems.DIAMOND_HONING_STEEL.value());
         tag(TFCTags.Items.TOOLS_COPPER)
             .add(TFCThingsItems.COPPER_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.value());
+            .add(TFCThingsItems.COPPER_SURVEYORS_HAMMER.value());
         tag(TFCTags.Items.TOOLS_BLUE_STEEL)
             .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.value());
         tag(TFCTags.Items.TOOLS_RED_STEEL)
             .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.value())
             .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.value());
+            .add(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.value());
         tag(TFCTags.Items.TOOLS_STEEL)
             .add(TFCThingsItems.STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.STEEL_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.STEEL_ROPE_JAVELIN.value());
         tag(TFCTags.Items.TOOLS_WROUGHT_IRON)
-            .add(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.value())
+            .add(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value());
     }
 }

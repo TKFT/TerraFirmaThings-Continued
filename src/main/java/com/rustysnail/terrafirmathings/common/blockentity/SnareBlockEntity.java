@@ -160,7 +160,11 @@ public class SnareBlockEntity extends BlockEntity
             this.capturedEntityId = null;
             this.capturedEntityCache = null;
         }
+        markDirtyAndSync();
+    }
 
+    private void markDirtyAndSync()
+    {
         setChanged();
         if (level != null && !level.isClientSide())
         {
@@ -192,7 +196,6 @@ public class SnareBlockEntity extends BlockEntity
         }
 
         setCapturedEntity(null);
-        setChanged();
     }
 
     public void reset()

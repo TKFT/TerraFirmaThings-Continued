@@ -27,6 +27,7 @@ import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 
 public class BearTrapBlockEntity extends BlockEntity
 {
+    private static final String NBT_CAPTURED = "CapturedEntity";
 
     @Nullable
     private UUID capturedEntityId;
@@ -131,6 +132,11 @@ public class BearTrapBlockEntity extends BlockEntity
             this.capturedEntityId = null;
             this.capturedEntityCache = null;
         }
+        markDirtyAndSync();
+    }
+
+    private void markDirtyAndSync()
+    {
         setChanged();
         if (level != null && !level.isClientSide())
         {
@@ -152,9 +158,9 @@ public class BearTrapBlockEntity extends BlockEntity
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
-        if (tag.hasUUID("CapturedEntity"))
+        if (tag.hasUUID(NBT_CAPTURED))
         {
-            capturedEntityId = tag.getUUID("CapturedEntity");
+            capturedEntityId = tag.getUUID(NBT_CAPTURED);
         }
         else
         {
@@ -169,7 +175,7 @@ public class BearTrapBlockEntity extends BlockEntity
         super.saveAdditional(tag, registries);
         if (capturedEntityId != null)
         {
-            tag.putUUID("CapturedEntity", capturedEntityId);
+            tag.putUUID(NBT_CAPTURED, capturedEntityId);
         }
     }
 
@@ -195,7 +201,8 @@ public class BearTrapBlockEntity extends BlockEntity
         level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0f, 0.8f);
 
         double breakChance = TFCThingsConfig.ITEMS.BEAR_TRAP.breakChance.get();
-        if (level.random.nextDouble() > 2 * breakChance)
+        double dropChance = Math.max(0.0, 1.0 - 2.0 * breakChance);
+        if (level.random.nextDouble() < dropChance)
         {
             Block.popResource(level, worldPosition, new ItemStack(TFCThingsItems.BEAR_TRAP.get()));
         }

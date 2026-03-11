@@ -29,6 +29,10 @@ import net.dries007.tfc.util.rotation.SinkNode;
 
 public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBlockEntity
 {
+    private static final String NBT_GRINDSTONE = "Grindstone";
+    private static final String NBT_TOOL = "Tool";
+    private static final String NBT_PROGRESS = "Progress";
+
     public static void serverTick(Level level, BlockPos pos, BlockState state, GrindstoneBlockEntity be)
     {
         if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableWhetstones.get()) return;
@@ -49,15 +53,15 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         be.progressTicks = 0;
 
         int maxCharges = grindstoneItem.getTier().getMaxToolCharges();
-        int added = applySharpness(be.tool, grindstoneItem.getTier().getChargesPerOperation(), maxCharges);
+        int added = WhetstoneItem.applySharpness(be.tool, grindstoneItem.getTier().getChargesPerOperation(), maxCharges);
         if (added <= 0) return;
 
-        if (damageOne(be.tool))
+        if (damageStackByOne(be.tool))
         {
             be.tool = ItemStack.EMPTY;
             level.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 0.5f, 0.9f);
         }
-        if (damageOne(be.grindstone))
+        if (damageStackByOne(be.grindstone))
         {
             be.grindstone = ItemStack.EMPTY;
             level.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 0.6f, 0.7f);
@@ -68,12 +72,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         be.markDirtyAndSync();
     }
 
-    private static int applySharpness(ItemStack target, int chargesToAdd, int maxCharges)
-    {
-        return WhetstoneItem.applySharpness(target, chargesToAdd, maxCharges);
-    }
-
-    private static boolean damageOne(ItemStack stack)
+    private static boolean damageStackByOne(ItemStack stack)
     {
         if (stack.isEmpty() || !stack.isDamageableItem())
         {
@@ -126,6 +125,11 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         return grindstone;
     }
 
+    public boolean hasGrindstone()
+    {
+        return !grindstone.isEmpty();
+    }
+
     public void setGrindstone(ItemStack stack)
     {
         this.grindstone = stack.isEmpty() ? ItemStack.EMPTY : stack.copy();
@@ -136,6 +140,11 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     public ItemStack getTool()
     {
         return tool;
+    }
+
+    public boolean hasTool()
+    {
+        return !tool.isEmpty();
     }
 
     public void setTool(ItemStack stack)
@@ -201,13 +210,13 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
-        grindstone = tag.contains("Grindstone")
-            ? ItemStack.parseOptional(registries, tag.getCompound("Grindstone"))
+        grindstone = tag.contains(NBT_GRINDSTONE)
+            ? ItemStack.parseOptional(registries, tag.getCompound(NBT_GRINDSTONE))
             : ItemStack.EMPTY;
-        tool = tag.contains("Tool")
-            ? ItemStack.parseOptional(registries, tag.getCompound("Tool"))
+        tool = tag.contains(NBT_TOOL)
+            ? ItemStack.parseOptional(registries, tag.getCompound(NBT_TOOL))
             : ItemStack.EMPTY;
-        progressTicks = tag.getFloat("Progress");
+        progressTicks = tag.getFloat(NBT_PROGRESS);
     }
 
     @Override
@@ -216,13 +225,13 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         super.saveAdditional(tag, registries);
         if (!grindstone.isEmpty())
         {
-            tag.put("Grindstone", grindstone.save(registries));
+            tag.put(NBT_GRINDSTONE, grindstone.save(registries));
         }
         if (!tool.isEmpty())
         {
-            tag.put("Tool", tool.save(registries));
+            tag.put(NBT_TOOL, tool.save(registries));
         }
-        tag.putFloat("Progress", progressTicks);
+        tag.putFloat(NBT_PROGRESS, progressTicks);
     }
 
     @Nullable

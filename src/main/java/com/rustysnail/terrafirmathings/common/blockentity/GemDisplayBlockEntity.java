@@ -60,7 +60,7 @@ public class GemDisplayBlockEntity extends BlockEntity
             if (gems.get(i).isEmpty())
             {
                 gems.set(i, stack.copyWithCount(1));
-                markUpdated();
+                markDirtyAndSync();
                 return true;
             }
         }
@@ -75,7 +75,7 @@ public class GemDisplayBlockEntity extends BlockEntity
             {
                 ItemStack removed = gems.get(i).copy();
                 gems.set(i, ItemStack.EMPTY);
-                markUpdated();
+                markDirtyAndSync();
                 return removed;
             }
         }
@@ -164,7 +164,7 @@ public class GemDisplayBlockEntity extends BlockEntity
         return tag;
     }
 
-    private void markUpdated()
+    private void markDirtyAndSync()
     {
         setChanged();
         if (level != null && !level.isClientSide())

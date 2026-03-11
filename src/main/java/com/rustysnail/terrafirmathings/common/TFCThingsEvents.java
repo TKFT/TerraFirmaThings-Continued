@@ -163,7 +163,7 @@ public final class TFCThingsEvents
         }
 
         ItemStack weapon = player.getMainHandItem();
-        int charges = getSharpnessCharges(weapon);
+        int charges = WhetstoneItem.getCharges(weapon);
         if (charges <= 0 || !isSharpnessWeapon(weapon))
         {
             return;
@@ -171,7 +171,7 @@ public final class TFCThingsEvents
 
         float bonus = TFCThingsConfig.ITEMS.WHETSTONE.weaponSharpnessBonus.get().floatValue() * sharpnessTierMultiplier(charges);
         event.setAmount(event.getAmount() + bonus);
-        consumeSharpnessCharge(weapon);
+        WhetstoneItem.consumeCharge(weapon);
     }
 
     @SubscribeEvent
@@ -184,7 +184,7 @@ public final class TFCThingsEvents
 
         Player player = event.getEntity();
         ItemStack tool = player.getMainHandItem();
-        int charges = getSharpnessCharges(tool);
+        int charges = WhetstoneItem.getCharges(tool);
         if (charges <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
@@ -208,12 +208,12 @@ public final class TFCThingsEvents
         }
 
         ItemStack tool = player.getMainHandItem();
-        if (getSharpnessCharges(tool) <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
+        if (WhetstoneItem.getCharges(tool) <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
         }
 
-        consumeSharpnessCharge(tool);
+        WhetstoneItem.consumeCharge(tool);
     }
 
     @SubscribeEvent
@@ -225,7 +225,7 @@ public final class TFCThingsEvents
             return;
         }
 
-        int charges = getSharpnessCharges(stack);
+        int charges = WhetstoneItem.getCharges(stack);
         if (charges <= 0)
         {
             return;
@@ -237,24 +237,6 @@ public final class TFCThingsEvents
             ? ChatFormatting.DARK_PURPLE
             : charges > t1 ? ChatFormatting.BLUE : ChatFormatting.DARK_GREEN;
         event.getToolTip().add(net.minecraft.network.chat.Component.translatable("tfcthings.tooltip.sharpness", charges).withStyle(color));
-    }
-
-    private static int getSharpnessCharges(ItemStack stack)
-    {
-        if (!WhetstoneItem.isSharpenable(stack))
-        {
-            return 0;
-        }
-        return stack.getOrDefault(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), 0);
-    }
-
-    private static void consumeSharpnessCharge(ItemStack stack)
-    {
-        int charges = getSharpnessCharges(stack);
-        if (charges > 0)
-        {
-            stack.set(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), charges - 1);
-        }
     }
 
     private static int sharpnessTierMultiplier(int charges)

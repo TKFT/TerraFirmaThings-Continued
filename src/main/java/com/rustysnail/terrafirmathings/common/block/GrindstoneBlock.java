@@ -118,9 +118,9 @@ public class GrindstoneBlock extends Block implements EntityBlock
             return InteractionResult.PASS;
         }
 
-        ItemStack tool = be.getTool();
-        if (!tool.isEmpty())
+        if (be.hasTool())
         {
+            ItemStack tool = be.getTool();
             if (!player.addItem(tool))
             {
                 Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, tool);
@@ -130,9 +130,9 @@ public class GrindstoneBlock extends Block implements EntityBlock
             return InteractionResult.SUCCESS;
         }
 
-        ItemStack grindstone = be.getGrindstone();
-        if (!grindstone.isEmpty())
+        if (be.hasGrindstone())
         {
+            ItemStack grindstone = be.getGrindstone();
             if (!player.addItem(grindstone))
             {
                 Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, grindstone);
@@ -164,7 +164,7 @@ public class GrindstoneBlock extends Block implements EntityBlock
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        if (be.getGrindstone().isEmpty() && stack.getItem() instanceof GrindstoneItem)
+        if (!be.hasGrindstone() && stack.getItem() instanceof GrindstoneItem)
         {
             ItemStack toInsert = stack.copyWithCount(1);
             stack.shrink(1);
@@ -173,7 +173,7 @@ public class GrindstoneBlock extends Block implements EntityBlock
             return ItemInteractionResult.SUCCESS;
         }
 
-        if (be.getTool().isEmpty() && !be.getGrindstone().isEmpty() && WhetstoneItem.isSharpenable(stack))
+        if (!be.hasTool() && be.hasGrindstone() && WhetstoneItem.isSharpenable(stack))
         {
             ItemStack toInsert = stack.copyWithCount(1);
             stack.shrink(1);

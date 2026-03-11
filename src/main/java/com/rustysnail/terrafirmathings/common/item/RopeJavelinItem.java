@@ -12,14 +12,14 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 import net.dries007.tfc.client.TFCSounds;
+import net.dries007.tfc.common.items.JavelinItem;
 
-public class RopeJavelinItem extends Item
+public class RopeJavelinItem extends JavelinItem
 {
     private static final float THROW_VELOCITY = 2.5F;
     private static final float THROW_INACCURACY = 1.0F;
@@ -75,9 +75,9 @@ public class RopeJavelinItem extends Item
         return null;
     }
 
-    public RopeJavelinItem(Properties properties)
+    public RopeJavelinItem(Tier tier, Properties properties)
     {
-        super(properties);
+        super(tier, properties);
     }
 
     @Override
@@ -137,18 +137,6 @@ public class RopeJavelinItem extends Item
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack)
-    {
-        return UseAnim.SPEAR;
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity)
-    {
-        return 72000;
-    }
-
-    @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft)
     {
         if (!(entity instanceof Player player)) return;
@@ -169,5 +157,4 @@ public class RopeJavelinItem extends Item
             level.playSound(null, javelin, TFCSounds.JAVELIN_THROWN.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
-
 }

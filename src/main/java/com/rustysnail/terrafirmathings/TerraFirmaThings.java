@@ -115,26 +115,26 @@ public class TerraFirmaThings
 
                 if (m.enableProspectorsHammers.get())
                 {
-                    output.accept(TFCThingsItems.COPPER_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.STEEL_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER.get());
-                    output.accept(TFCThingsItems.COPPER_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.BISMUTH_BRONZE_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.BLACK_BRONZE_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.BRONZE_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.WROUGHT_IRON_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.STEEL_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.BLACK_STEEL_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.BLUE_STEEL_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.RED_STEEL_PROSPECTORS_HAMMER_HEAD.get());
-                    output.accept(TFCThingsItems.UNFIRED_PROSPECTORS_HAMMER_HEAD_MOLD.get());
-                    output.accept(TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.get());
+                    output.accept(TFCThingsItems.COPPER_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.STEEL_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.get());
+                    output.accept(TFCThingsItems.COPPER_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.BRONZE_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.STEEL_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER_HEAD.get());
+                    output.accept(TFCThingsItems.UNFIRED_SURVEYORS_HAMMER_HEAD_MOLD.get());
+                    output.accept(TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
                 }
 
                 output.accept(TFCThingsItems.GOLD_CROWN_EMPTY.get());
@@ -235,9 +235,9 @@ public class TerraFirmaThings
 
     private void registerCapabilities(RegisterCapabilitiesEvent event)
     {
-        event.registerItem(ItemCapabilities.MOLD, ItemCapabilities::forMold, TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.get());
-        event.registerItem(ItemCapabilities.HEAT, ItemCapabilities::forMold, TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.get());
-        event.registerItem(ItemCapabilities.FLUID, ItemCapabilities::forMold, TFCThingsItems.PROSPECTORS_HAMMER_HEAD_MOLD.get());
+        event.registerItem(ItemCapabilities.MOLD, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
+        event.registerItem(ItemCapabilities.HEAT, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
+        event.registerItem(ItemCapabilities.FLUID, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
