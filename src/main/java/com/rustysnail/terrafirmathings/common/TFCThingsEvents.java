@@ -11,8 +11,12 @@ import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
 import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,6 +25,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -31,6 +36,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public final class TFCThingsEvents
 {
     private static final Map<UUID, Vec3> lastPlayerPositions = new HashMap<>();
+    private static final ResourceLocation SHARPNESS_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "sharpness_bonus");
 
     @SubscribeEvent
     public static void onPlayerTickPre(PlayerTickEvent.Pre event)
@@ -145,6 +151,29 @@ public final class TFCThingsEvents
     }
 
     @SubscribeEvent
+    public static void onItemAttributeModifier(ItemAttributeModifierEvent event)
+    {
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableWhetstones.get())
+        {
+            return;
+        }
+
+        ItemStack stack = event.getItemStack();
+        int charges = WhetstoneItem.getCharges(stack);
+        if (charges <= 0 || !isSharpnessWeapon(stack))
+        {
+            return;
+        }
+
+        float bonus = TFCThingsConfig.ITEMS.WHETSTONE.weaponSharpnessBonus.get().floatValue() * sharpnessTierMultiplier(charges);
+        event.addModifier(
+            Attributes.ATTACK_DAMAGE,
+            new AttributeModifier(SHARPNESS_DAMAGE_ID, bonus, AttributeModifier.Operation.ADD_VALUE),
+            EquipmentSlotGroup.MAINHAND
+        );
+    }
+
+    @SubscribeEvent
     public static void onLivingHurt(LivingIncomingDamageEvent event)
     {
         if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableWhetstones.get())
@@ -169,8 +198,6 @@ public final class TFCThingsEvents
             return;
         }
 
-        float bonus = TFCThingsConfig.ITEMS.WHETSTONE.weaponSharpnessBonus.get().floatValue() * sharpnessTierMultiplier(charges);
-        event.setAmount(event.getAmount() + bonus);
         WhetstoneItem.consumeCharge(weapon);
     }
 

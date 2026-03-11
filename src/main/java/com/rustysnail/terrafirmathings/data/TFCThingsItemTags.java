@@ -12,7 +12,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import net.dries007.tfc.common.TFCTags;
@@ -21,11 +21,6 @@ import net.dries007.tfc.common.items.TFCItems;
 
 public final class TFCThingsItemTags extends ItemTagsProvider
 {
-    private static final TagKey<Item> C_TOOLS_RANGED_WEAPON = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/ranged_weapon"));
-    private static final TagKey<Item> C_TOOLS_SPEAR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear"));
-    private static final TagKey<Item> C_TOOLS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools"));
-    private static final TagKey<Item> C_ARMOR_BOOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "armor/boots"));
-
     public TFCThingsItemTags(
         PackOutput output,
         CompletableFuture<HolderLookup.Provider> lookup,
@@ -133,18 +128,18 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCThingsItems.CRAMPONS.value());
 
         //C Tags
-        tag(C_ARMOR_BOOTS)
+        tag(ItemTags.FOOT_ARMOR)
             .add(TFCThingsItems.HIKING_BOOTS.value())
             .add(TFCThingsItems.SNOW_SHOES.value())
             .add(TFCThingsItems.DURABLE_SNOW_SHOES.value())
             .add(TFCThingsItems.CRAMPONS.value());
 
-        tag(C_TOOLS_RANGED_WEAPON)
+        tag(Tags.Items.RANGED_WEAPON_TOOLS)
             .addTag(TFCThingsTags.Items.JAVELINS)
             .addTag(TFCThingsTags.Items.SLINGS);
 
-        tag(C_TOOLS_SPEAR).addTag(TFCThingsTags.Items.JAVELINS);
-        tag(C_TOOLS)
+        tag(Tags.Items.TOOLS_SPEAR).addTag(TFCThingsTags.Items.JAVELINS);
+        tag(Tags.Items.TOOLS)
             .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
             .addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
 
