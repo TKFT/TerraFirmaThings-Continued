@@ -1,9 +1,9 @@
 package com.rustysnail.terrafirmathings.compat.jade;
 
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
-import com.rustysnail.terrafirmathings.common.TFCThingsDataComponents;
 import com.rustysnail.terrafirmathings.common.blockentity.GrindstoneBlockEntity;
 import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +33,7 @@ public enum GrindstoneProvider implements IBlockComponentProvider
 
         if (!tool.isEmpty())
         {
-            int sharpness = tool.getOrDefault(TFCThingsDataComponents.SHARPNESS_CHARGES.get(), 0);
+            int sharpness = SharpnessHelper.getCharges(tool);
             int maxSharpness = 0;
             if (!grindstone.isEmpty() && grindstone.getItem() instanceof GrindstoneItem grindstoneItem)
             {

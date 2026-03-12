@@ -8,8 +8,8 @@ import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.item.CramponsItem;
 import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
 import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
-import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
 import com.rustysnail.terrafirmathings.common.util.FootwearHelper;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -163,7 +163,7 @@ public final class TFCThingsEvents
         }
 
         ItemStack stack = event.getItemStack();
-        int charges = WhetstoneItem.getCharges(stack);
+        int charges = SharpnessHelper.getCharges(stack);
         if (charges <= 0 || lacksSharpnessWeapon(stack))
         {
             return;
@@ -196,13 +196,13 @@ public final class TFCThingsEvents
         }
 
         ItemStack weapon = player.getMainHandItem();
-        int charges = WhetstoneItem.getCharges(weapon);
+        int charges = SharpnessHelper.getCharges(weapon);
         if (charges <= 0 || lacksSharpnessWeapon(weapon))
         {
             return;
         }
 
-        WhetstoneItem.consumeCharge(weapon);
+        SharpnessHelper.consumeCharge(weapon);
     }
 
     @SubscribeEvent
@@ -215,7 +215,7 @@ public final class TFCThingsEvents
 
         Player player = event.getEntity();
         ItemStack tool = player.getMainHandItem();
-        int charges = WhetstoneItem.getCharges(tool);
+        int charges = SharpnessHelper.getCharges(tool);
         if (charges <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
@@ -239,24 +239,24 @@ public final class TFCThingsEvents
         }
 
         ItemStack tool = player.getMainHandItem();
-        if (WhetstoneItem.getCharges(tool) <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
+        if (SharpnessHelper.getCharges(tool) <= 0 || lacksSharpnessMiningToolTag(tool) || tool.getDestroySpeed(event.getState()) <= 1.0F)
         {
             return;
         }
 
-        WhetstoneItem.consumeCharge(tool);
+        SharpnessHelper.consumeCharge(tool);
     }
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event)
     {
         ItemStack stack = event.getItemStack();
-        if (!WhetstoneItem.isSharpenable(stack))
+        if (!SharpnessHelper.isSharpenable(stack))
         {
             return;
         }
 
-        int charges = WhetstoneItem.getCharges(stack);
+        int charges = SharpnessHelper.getCharges(stack);
         if (charges <= 0)
         {
             return;
@@ -288,7 +288,7 @@ public final class TFCThingsEvents
     {
         if (stack.isEmpty()) return true;
         return !stack.is(TFCThingsTags.Items.SHARPNESS_WEAPONS)
-            && !(WhetstoneItem.isSharpenable(stack) && lacksSharpnessMiningToolTag(stack));
+            && !(SharpnessHelper.isSharpenable(stack) && lacksSharpnessMiningToolTag(stack));
     }
 
     private static boolean lacksSharpnessMiningToolTag(ItemStack stack)

@@ -4,7 +4,7 @@ import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.blockentity.GrindstoneBlockEntity;
 import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
-import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -173,7 +173,7 @@ public class GrindstoneBlock extends Block implements EntityBlock
             return ItemInteractionResult.SUCCESS;
         }
 
-        if (!be.hasTool() && be.hasGrindstone() && WhetstoneItem.isSharpenable(stack))
+        if (!be.hasTool() && be.hasGrindstone() && SharpnessHelper.isSharpenable(stack))
         {
             ItemStack toInsert = stack.copyWithCount(1);
             stack.shrink(1);

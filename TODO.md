@@ -1,5 +1,6 @@
 ### Major Bugs
 - [ ] Sharpening javelins does not affect thrown damage.
+- [ ] Snow Shoes/Hiking Boots do not effect speed if jumping in grass/snow causing short jump distance.
 
 ### Minor Bugs
 - [ ] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.

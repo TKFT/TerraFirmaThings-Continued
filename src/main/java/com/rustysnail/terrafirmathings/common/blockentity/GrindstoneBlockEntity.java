@@ -4,7 +4,7 @@ import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.block.GrindstoneBlock;
 import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
-import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -53,7 +53,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         be.progressTicks = 0;
 
         int maxCharges = grindstoneItem.getTier().getMaxToolCharges();
-        int added = WhetstoneItem.applySharpness(be.tool, grindstoneItem.getTier().getChargesPerOperation(), maxCharges);
+        int added = SharpnessHelper.applySharpness(be.tool, grindstoneItem.getTier().getChargesPerOperation(), maxCharges);
         if (added <= 0) return;
 
         if (damageStackByOne(be.tool))
