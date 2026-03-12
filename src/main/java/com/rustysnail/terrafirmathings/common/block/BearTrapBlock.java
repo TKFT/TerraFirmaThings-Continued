@@ -1,5 +1,6 @@
 package com.rustysnail.terrafirmathings.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.blockentity.BearTrapBlockEntity;
@@ -23,9 +24,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -39,14 +40,21 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BearTrapBlock extends Block implements EntityBlock
+public class BearTrapBlock extends BaseEntityBlock
 {
+    public static final MapCodec<BearTrapBlock> CODEC = simpleCodec(BearTrapBlock::new);
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty CLOSED = BooleanProperty.create("closed");
     public static final BooleanProperty BURIED = BooleanProperty.create("buried");
 
     protected static final VoxelShape TRAP_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+
+    @Override
+    public MapCodec<BearTrapBlock> codec()
+    {
+        return CODEC;
+    }
 
     public BearTrapBlock(Properties properties)
     {
@@ -99,11 +107,8 @@ public class BearTrapBlock extends Block implements EntityBlock
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        if (!level.isClientSide() && blockEntityType == TFCThingsBlockEntities.BEAR_TRAP.get())
-        {
-            return (lvl, pos, st, be) -> ((BearTrapBlockEntity) be).serverTick();
-        }
-        return null;
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, TFCThingsBlockEntities.BEAR_TRAP.get(),
+            (lvl, pos, st, be) -> be.serverTick());
     }
 
     @Override

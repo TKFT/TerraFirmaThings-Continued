@@ -1,11 +1,13 @@
 ### Major Bugs
 - [ ] Sharpening javelins does not affect thrown damage.
 - [ ] Snow Shoes/Hiking Boots do not effect speed if jumping in grass/snow causing short jump distance.
+- [ ] Rope bridge can place bridge off axis if throw if off by less then a block. Should auto center so bridge is always straight on x or z axis
 
 ### Minor Bugs
 - [ ] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
 - [ ] Fix grindstone not transferring rotational power through it.
 - [ ] Fix tags
+- [ ] Grindstone has hardcoded itemsize, move to tags
 
 ### Improvements
 - [ ] Improve readme and documentation in field guide.

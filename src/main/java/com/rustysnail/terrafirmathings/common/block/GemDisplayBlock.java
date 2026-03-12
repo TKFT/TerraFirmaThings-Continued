@@ -1,5 +1,6 @@
 package com.rustysnail.terrafirmathings.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.blockentity.GemDisplayBlockEntity;
 import javax.annotation.Nullable;
@@ -15,8 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,8 +29,16 @@ import net.dries007.tfc.common.component.size.IItemSize;
 import net.dries007.tfc.common.component.size.Size;
 import net.dries007.tfc.common.component.size.Weight;
 
-public class GemDisplayBlock extends Block implements EntityBlock, IItemSize
+public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
 {
+    public static final MapCodec<GemDisplayBlock> CODEC = simpleCodec(GemDisplayBlock::new);
+
+    @Override
+    public MapCodec<GemDisplayBlock> codec()
+    {
+        return CODEC;
+    }
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public GemDisplayBlock(Properties properties)

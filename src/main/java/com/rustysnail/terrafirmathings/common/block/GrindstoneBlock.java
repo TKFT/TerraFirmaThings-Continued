@@ -1,5 +1,6 @@
 package com.rustysnail.terrafirmathings.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.blockentity.GrindstoneBlockEntity;
@@ -18,8 +19,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -30,8 +31,16 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class GrindstoneBlock extends Block implements EntityBlock
+public class GrindstoneBlock extends BaseEntityBlock
 {
+    public static final MapCodec<GrindstoneBlock> CODEC = simpleCodec(GrindstoneBlock::new);
+
+    @Override
+    public MapCodec<GrindstoneBlock> codec()
+    {
+        return CODEC;
+    }
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty HAS_TOOL = BooleanProperty.create("has_tool");
     public static final BooleanProperty HAS_GRINDSTONE = BooleanProperty.create("has_grindstone");
@@ -69,11 +78,8 @@ public class GrindstoneBlock extends Block implements EntityBlock
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type)
     {
-        if (!level.isClientSide() && type == TFCThingsBlockEntities.GRINDSTONE.get())
-        {
-            return (lvl, pos, st, be) -> GrindstoneBlockEntity.serverTick(lvl, pos, st, (GrindstoneBlockEntity) be);
-        }
-        return null;
+        return level.isClientSide() ? null : createTickerHelper(type, TFCThingsBlockEntities.GRINDSTONE.get(),
+            GrindstoneBlockEntity::serverTick);
     }
 
     @Override

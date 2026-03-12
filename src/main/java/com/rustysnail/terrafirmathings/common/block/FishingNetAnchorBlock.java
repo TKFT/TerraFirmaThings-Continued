@@ -1,5 +1,6 @@
 package com.rustysnail.terrafirmathings.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
@@ -16,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -36,8 +37,15 @@ import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
 
-public class FishingNetAnchorBlock extends Block implements EntityBlock, IFluidLoggable
+public class FishingNetAnchorBlock extends BaseEntityBlock implements IFluidLoggable
 {
+    public static final MapCodec<FishingNetAnchorBlock> CODEC = simpleCodec(FishingNetAnchorBlock::new);
+
+    @Override
+    public MapCodec<FishingNetAnchorBlock> codec()
+    {
+        return CODEC;
+    }
 
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
     public static final FluidProperty FLUID = TFCBlockStateProperties.ALL_WATER;
@@ -147,11 +155,8 @@ public class FishingNetAnchorBlock extends Block implements EntityBlock, IFluidL
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        if (level.isClientSide() || blockEntityType != TFCThingsBlockEntities.FISHING_NET_ANCHOR.get())
-        {
-            return null;
-        }
-        return (lvl, pos, st, be) -> FishingNetAnchorBlockEntity.serverTick(lvl, pos, st, (FishingNetAnchorBlockEntity) be);
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, TFCThingsBlockEntities.FISHING_NET_ANCHOR.get(),
+            FishingNetAnchorBlockEntity::serverTick);
     }
 
     @Override
