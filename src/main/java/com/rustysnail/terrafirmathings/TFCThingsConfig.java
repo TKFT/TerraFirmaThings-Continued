@@ -323,23 +323,23 @@ public class TFCThingsConfig
 
                 chargesPerHoningSteel = builder
                     .comment("Sharpness charges added per honing steel use.")
-                    .defineInRange("chargesPerHoningSteel", 4, 1, 256);
+                    .defineInRange("chargesPerHoningSteel", 2, 1, 256);
 
                 chargesPerDiamondHoningSteel = builder
                     .comment("Sharpness charges added per diamond honing steel use.")
-                    .defineInRange("chargesPerDiamondHoningSteel", 8, 1, 256);
+                    .defineInRange("chargesPerDiamondHoningSteel", 4, 1, 256);
 
                 ticksPerWhetstoneUse = builder
                     .comment("Use time in ticks for whetstone sharpening. 20 ticks = 1 second.")
-                    .defineInRange("ticksPerWhetstoneUse", 20, 0, 72000);
+                    .defineInRange("ticksPerWhetstoneUse", 30, 0, 72000);
 
                 ticksPerHoningSteelUse = builder
                     .comment("Use time in ticks for honing steel sharpening. 10 ticks = 0.5 seconds.")
-                    .defineInRange("ticksPerHoningSteelUse", 10, 0, 72000);
+                    .defineInRange("ticksPerHoningSteelUse", 15, 0, 72000);
 
                 ticksPerDiamondHoningSteelUse = builder
                     .comment("Use time in ticks for diamond honing steel sharpening. 0 ticks = instant.")
-                    .defineInRange("ticksPerDiamondHoningSteelUse", 5, 0, 72000);
+                    .defineInRange("ticksPerDiamondHoningSteelUse", 10, 0, 72000);
 
                 maxChargesWhetstone = builder
                     .comment("Maximum sharpness charges a tool can hold from whetstone use.")

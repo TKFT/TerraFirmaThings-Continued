@@ -218,16 +218,17 @@ public final class TFCThingsItems
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_RUBY = platinumCrown("ruby", "Ruby");
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_SAPPHIRE = platinumCrown("sapphire", "Sapphire");
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOPAZ = platinumCrown("topaz", "Topaz");
+    //public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOURMALINE = platinumCrown("tourmaline", "Tourmaline");
 
     //Metal Bracing
     public static final DeferredItem<MetalBracingItem> METAL_BRACING = ITEMS.register("metal_bracing",
         () -> new MetalBracingItem(new Item.Properties().stacksTo(64)));
     //Slings
     public static final DeferredItem<SlingItem> SLING = ITEMS.register("sling",
-        () -> new SlingItem(0, new Item.Properties().stacksTo(1).durability(64)));
-    //public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOURMALINE = platinumCrown("tourmaline", "Tourmaline");
+        () -> new SlingItem(new Item.Properties().stacksTo(1).durability(64)));
+
     public static final DeferredItem<SlingItem> SLING_METAL = ITEMS.register("sling_metal",
-        () -> new SlingItem(1, new Item.Properties().stacksTo(1).durability(256)));
+        () -> new SlingItem(new Item.Properties().stacksTo(1).durability(256)));
     //Sling Ammo
     public static final DeferredItem<SlingAmmoItem> SLING_AMMO = ITEMS.register("sling_ammo",
         () -> new SlingAmmoItem(SlingAmmoItem.AmmoType.HEAVY, new Item.Properties().stacksTo(64)));

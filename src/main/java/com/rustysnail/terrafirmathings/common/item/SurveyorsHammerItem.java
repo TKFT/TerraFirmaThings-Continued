@@ -12,13 +12,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,8 +21,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.LevelTier;
+import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.items.ToolItem;
 import net.dries007.tfc.common.recipes.CollapseRecipe;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.data.Support;
@@ -36,29 +32,13 @@ import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.RockData;
 import net.dries007.tfc.world.settings.RockSettings;
 
-public class SurveyorsHammerItem extends Item
+public class SurveyorsHammerItem extends ToolItem
 {
     private static final int COOLDOWN = 10;
     private static final int SAFETY_CHECK_RADIUS = 4;
     private static final int SAFETY_CHECK_HEIGHT = 2;
 
     private static Map<Block, Rock> BLOCK_TO_ROCK = null;
-
-    public static ItemAttributeModifiers createAttributes(Tier tier)
-    {
-        return ItemAttributeModifiers.builder()
-            .add(Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(BASE_ATTACK_DAMAGE_ID,
-                    0.5f * tier.getAttackDamageBonus(),
-                    AttributeModifier.Operation.ADD_VALUE),
-                EquipmentSlotGroup.MAINHAND)
-            .add(Attributes.ATTACK_SPEED,
-                new AttributeModifier(BASE_ATTACK_SPEED_ID,
-                    -2.8f,
-                    AttributeModifier.Operation.ADD_VALUE),
-                EquipmentSlotGroup.MAINHAND)
-            .build();
-    }
 
     private static Component rockDisplayName(Rock rock)
     {
@@ -93,9 +73,10 @@ public class SurveyorsHammerItem extends Item
 
     public SurveyorsHammerItem(LevelTier tier, Properties properties)
     {
-        super(properties
-            .durability(tier.getUses() / 4)
-            .attributes(createAttributes(tier)));
+        super(tier, TFCTags.Blocks.MINEABLE_WITH_PROPICK,
+            properties
+                .durability(tier.getUses() / 4)
+                .attributes(ToolItem.productAttributes(tier, 0.5f, -2.8f)));
         this.tierLevel = tier.level();
     }
 

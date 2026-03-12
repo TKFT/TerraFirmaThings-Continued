@@ -34,7 +34,6 @@ public class TFCThingsTags
 
         public static final TagKey<EntityType<?>> FISHING_NET_CATCHABLE = tag("fishing_net_catchable");
 
-        /** Entities that attempt to break out of a bear trap over time. */
         public static final TagKey<EntityType<?>> BEAR_TRAP_BREAKOUT = tag("bear_trap_breakout");
 
         private static TagKey<EntityType<?>> tag(String name)
@@ -49,6 +48,7 @@ public class TFCThingsTags
 
         public static final TagKey<Item> JAVELINS = tag("javelins");
         public static final TagKey<Item> SLINGS = tag("slings");
+        public static final TagKey<Item> SLING_AMMO = tag("sling_ammo");
         public static final TagKey<Item> SHARPENING_TOOLS = tag("sharpening_tools");
         public static final TagKey<Item> SURVEYORS_HAMMERS = tag("surveyors_hammers");
         public static final TagKey<Item> SHARPENING_TOOL_HEADS = tag("sharpening_tool_heads");
@@ -57,7 +57,6 @@ public class TFCThingsTags
         public static final TagKey<Item> SHARPNESS_MINING_TOOLS = tag("sharpness_mining_tools");
         public static final TagKey<Item> SHARPNESS_WEAPONS = tag("sharpness_weapons");
 
-        /** Items that are valid grindstone wheel items (can be placed in the grindstone block). */
         public static final TagKey<Item> GRINDSTONE_WHEELS = tag("grindstone_wheels");
 
         private static TagKey<Item> tag(String name)

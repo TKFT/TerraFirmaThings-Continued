@@ -9,6 +9,7 @@ import com.rustysnail.terrafirmathings.common.item.CramponsItem;
 import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
 import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
 import com.rustysnail.terrafirmathings.common.item.WhetstoneItem;
+import com.rustysnail.terrafirmathings.common.util.FootwearHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -120,8 +121,9 @@ public final class TFCThingsEvents
         {
             if (isPlayerOnTag(player, level, TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW))
             {
-                SnowShoesItem.addDistance(feetItem, distanceCm, () ->
-                    feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
+                FootwearHelper.addDistance(feetItem, distanceCm,
+                    TFCThingsConfig.ITEMS.SNOW_SHOES.damageDistance.get(),
+                    () -> feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
         }
 
@@ -129,8 +131,9 @@ public final class TFCThingsEvents
         {
             if (isPlayerOnTag(player, level, TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW))
             {
-                HikingBootsItem.addDistance(feetItem, distanceCm, () ->
-                    feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
+                FootwearHelper.addDistance(feetItem, distanceCm,
+                    TFCThingsConfig.ITEMS.HIKING_BOOTS.damageDistance.get(),
+                    () -> feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
         }
 
@@ -138,8 +141,9 @@ public final class TFCThingsEvents
         {
             if (level.getBlockState(player.getBlockPosBelowThatAffectsMyMovement()).is(TFCThingsTags.Blocks.CRAMPONS_NEGATE_SLIP))
             {
-                CramponsItem.addDistance(feetItem, distanceCm, () ->
-                    feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
+                FootwearHelper.addDistance(feetItem, distanceCm,
+                    TFCThingsConfig.ITEMS.CRAMPONS.damageDistance.get(),
+                    () -> feetItem.hurtAndBreak(1, player, EquipmentSlot.FEET));
             }
         }
     }
@@ -160,7 +164,7 @@ public final class TFCThingsEvents
 
         ItemStack stack = event.getItemStack();
         int charges = WhetstoneItem.getCharges(stack);
-        if (charges <= 0 || !isSharpnessWeapon(stack))
+        if (charges <= 0 || lacksSharpnessWeapon(stack))
         {
             return;
         }
@@ -193,7 +197,7 @@ public final class TFCThingsEvents
 
         ItemStack weapon = player.getMainHandItem();
         int charges = WhetstoneItem.getCharges(weapon);
-        if (charges <= 0 || !isSharpnessWeapon(weapon))
+        if (charges <= 0 || lacksSharpnessWeapon(weapon))
         {
             return;
         }
@@ -280,14 +284,11 @@ public final class TFCThingsEvents
         return TFCThingsConfig.ITEMS.WHETSTONE.tier1MiningBonus.get().floatValue();
     }
 
-    private static boolean isSharpnessWeapon(ItemStack stack)
+    private static boolean lacksSharpnessWeapon(ItemStack stack)
     {
-        if (stack.isEmpty())
-        {
-            return false;
-        }
-        return stack.is(TFCThingsTags.Items.SHARPNESS_WEAPONS)
-            || (WhetstoneItem.isSharpenable(stack) && lacksSharpnessMiningToolTag(stack));
+        if (stack.isEmpty()) return true;
+        return !stack.is(TFCThingsTags.Items.SHARPNESS_WEAPONS)
+            && !(WhetstoneItem.isSharpenable(stack) && lacksSharpnessMiningToolTag(stack));
     }
 
     private static boolean lacksSharpnessMiningToolTag(ItemStack stack)

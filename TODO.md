@@ -1,5 +1,5 @@
 ### Major Bugs
-
+- [ ] Sharpening javelins does not affect thrown damage.
 
 ### Minor Bugs
 - [ ] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
@@ -18,6 +18,8 @@
 
 #### Crampons
 - [x] Crampons for walking on ice.
+- [ ] Crampon recipe
+- [ ] Crampon textures/model
 
 #### Grain piles from TFC Homestead
 - [ ] Grain piles that work similar to log piles but for grain. Grain piles provide a buff to decay of 0.6x or 0.4x if they are sheltered from sunlight.

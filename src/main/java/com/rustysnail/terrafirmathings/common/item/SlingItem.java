@@ -1,41 +1,48 @@
 package com.rustysnail.terrafirmathings.common.item;
 
+import java.util.function.Predicate;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
+import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import com.rustysnail.terrafirmathings.common.entity.SlingStoneEntity;
 import javax.annotation.Nullable;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class SlingItem extends Item
+public class SlingItem extends ProjectileWeaponItem
 {
 
-    public static final TagKey<Item> LOOSE_STONES = TagKey.create(Registries.ITEM,
-        ResourceLocation.fromNamespaceAndPath("c", "stones/loose"));
-
-    private final int tier;
-
-    public SlingItem(int tier, Properties properties)
+    public SlingItem(Properties properties)
     {
         super(properties);
-        this.tier = tier;
     }
 
-    public int getTier()
+    @Override
+    public Predicate<ItemStack> getAllSupportedProjectiles()
     {
-        return tier;
+        return this::isValidAmmo;
     }
 
+    @Override
+    public int getDefaultProjectileRange()
+    {
+        return 8;
+    }
+
+    @Override
+    protected void shootProjectile(
+        LivingEntity shooter, Projectile projectile, int index,
+        float velocity, float inaccuracy, float angle, @Nullable LivingEntity target)
+    {
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
@@ -142,10 +149,7 @@ public class SlingItem extends Item
     private boolean isValidAmmo(ItemStack stack)
     {
         if (stack.isEmpty()) return false;
-
-        if (stack.is(LOOSE_STONES)) return true;
-
-        return tier >= 1 && stack.getItem() instanceof SlingAmmoItem;
+        return stack.is(TFCThingsTags.Items.SLING_AMMO);
     }
 
     private record AmmoResult(ItemStack stack) {}

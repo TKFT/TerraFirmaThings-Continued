@@ -38,6 +38,12 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCThingsItems.SLING.value())
             .add(TFCThingsItems.SLING_METAL.value());
 
+        tag(TFCThingsTags.Items.SLING_AMMO)
+            .add(TFCThingsItems.SLING_AMMO.value())
+            .add(TFCThingsItems.SLING_AMMO_SPREAD.value()).add(TFCThingsItems.SLING_AMMO_LIGHT.value())
+            .add(TFCThingsItems.SLING_AMMO_FIRE.value())
+            .addOptionalTag(TFCTags.Items.STONES_LOOSE);
+
         tag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
             .add(TFCThingsItems.COPPER_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.value())
