@@ -115,7 +115,7 @@ public class SnareBlock extends BaseEntityBlock
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof SnareBlockEntity snareEntity)
             {
-                snareEntity.release();
+                snareEntity.releaseCapture();
                 ItemStack bait = snareEntity.getBait();
                 if (!bait.isEmpty())
                 {

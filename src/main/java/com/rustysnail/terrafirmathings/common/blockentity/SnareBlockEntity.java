@@ -60,28 +60,18 @@ public class SnareBlockEntity extends BlockEntity
             if (captured == null || captured.isDeadOrDying())
             {
                 clearCaptureState();
-                resetBlockTriggered();
             }
             else
             {
                 maintainCapture(captured);
             }
         }
-        else
+        else if (!getBlockState().getValue(SnareBlock.TRIGGERED))
         {
-            // No entity captured — run passive bait timer
             tickPassive();
         }
     }
 
-    // -----------------------------------------------------------------------
-    // Passive bait-based catching
-    // -----------------------------------------------------------------------
-
-    /**
-     * Increments the passive timer and attempts a catch when the check interval is reached.
-     * Only runs when baited and the snare is idle (not triggered).
-     */
     private void tickPassive()
     {
         if (!hasBait()) return;
@@ -96,10 +86,6 @@ public class SnareBlockEntity extends BlockEntity
         attemptPassiveCatch(serverLevel);
     }
 
-    /**
-     * Selects a random catchable entity type, spawns it at the snare, and immediately
-     * captures it. Consumes bait on success.
-     */
     private void attemptPassiveCatch(ServerLevel serverLevel)
     {
         EntityType<?> entityType = selectCatchableEntityType(serverLevel);
@@ -115,13 +101,13 @@ public class SnareBlockEntity extends BlockEntity
 
         if (!serverLevel.addFreshEntity(livingEntity))
         {
-            return; // spawn failed
+            return;
         }
 
         if (beginCapture(livingEntity))
         {
             consumeBait();
-            setBlockTriggered(true);
+            setBlockTriggered();
             level.playSound(null, worldPosition, SoundEvents.TRIPWIRE_CLICK_ON, SoundSource.BLOCKS, 1.0f, 1.2f);
         }
         else
@@ -133,6 +119,7 @@ public class SnareBlockEntity extends BlockEntity
     /**
      * Picks a random entity type from the SNARE_CATCHABLE tag.
      * Falls back to CHICKEN if the tag is empty or missing.
+     * TODO: Pick only mobs that are valid to spawn in that area
      */
     private EntityType<?> selectCatchableEntityType(ServerLevel serverLevel)
     {
@@ -150,14 +137,6 @@ public class SnareBlockEntity extends BlockEntity
         return catchable.get(serverLevel.random.nextInt(catchable.size())).value();
     }
 
-    // -----------------------------------------------------------------------
-    // Capture lifecycle
-    // -----------------------------------------------------------------------
-
-    /**
-     * Attempts to capture a living entity that has contacted or been attracted to the snare.
-     * Returns true if capture succeeded.
-     */
     public boolean beginCapture(LivingEntity entity)
     {
         if (level == null || level.isClientSide()) return false;
@@ -179,6 +158,8 @@ public class SnareBlockEntity extends BlockEntity
             mob.setTarget(null);
         }
 
+        entity.hurt(level.damageSources().generic(), 2.0f);
+
         if (TFCThingsConfig.ITEMS.SNARE.preventDamage.get())
         {
             entity.getPersistentData().putBoolean(TAG_PREV_INVULNERABLE, entity.isInvulnerable());
@@ -193,9 +174,6 @@ public class SnareBlockEntity extends BlockEntity
         return true;
     }
 
-    /**
-     * Keeps a captured entity pinned to the snare position each tick.
-     */
     private void maintainCapture(LivingEntity captured)
     {
         final double x = worldPosition.getX() + 0.5;
@@ -228,11 +206,6 @@ public class SnareBlockEntity extends BlockEntity
         }
     }
 
-    /**
-     * Releases a captured entity, restoring its original NoAI and invulnerability state.
-     * Drops any bait still in the snare (bait was not consumed = contact capture case).
-     * Called by the player via shift-click on a triggered snare.
-     */
     public void releaseCapture()
     {
         if (level == null)
@@ -257,7 +230,6 @@ public class SnareBlockEntity extends BlockEntity
             captured.getPersistentData().remove(TAG_PREV_INVULNERABLE);
         }
 
-        // Return any bait that was not consumed (contact-triggered case)
         if (!bait.isEmpty() && level != null)
         {
             Containers.dropItemStack(level,
@@ -272,35 +244,12 @@ public class SnareBlockEntity extends BlockEntity
         clearCaptureState();
     }
 
-    /**
-     * Clears capture state without restoring entity state (entity is dead or gone).
-     */
     private void clearCaptureState()
     {
         this.capturedEntityId = null;
         this.capturedEntityCache = null;
         markDirtyAndSync();
     }
-
-    /**
-     * Called from SnareBlock.onRemove — silently releases the entity without dropping bait
-     * (the block itself is being broken; item drop is handled by block loot table).
-     */
-    public void release()
-    {
-        releaseCapture();
-    }
-
-    /** @deprecated Use {@link #releaseCapture()} directly. Kept for compatibility. */
-    @Deprecated
-    public void reset()
-    {
-        releaseCapture();
-    }
-
-    // -----------------------------------------------------------------------
-    // Bait management
-    // -----------------------------------------------------------------------
 
     public boolean canInsertBait(ItemStack stack)
     {
@@ -325,9 +274,6 @@ public class SnareBlockEntity extends BlockEntity
         return bait;
     }
 
-    /**
-     * Removes and returns the bait item (e.g. when player manually removes it via shift-click).
-     */
     public ItemStack removeBait()
     {
         ItemStack result = bait.copy();
@@ -343,10 +289,6 @@ public class SnareBlockEntity extends BlockEntity
         this.passiveTimer = 0;
         markDirtyAndSync();
     }
-
-    // -----------------------------------------------------------------------
-    // Entity lookup
-    // -----------------------------------------------------------------------
 
     public boolean hasCapturedEntity()
     {
@@ -377,28 +319,15 @@ public class SnareBlockEntity extends BlockEntity
         return null;
     }
 
-    // -----------------------------------------------------------------------
-    // Block state helpers
-    // -----------------------------------------------------------------------
-
-    private void setBlockTriggered(boolean triggered)
+    private void setBlockTriggered()
     {
         if (level == null) return;
         BlockState state = getBlockState();
-        if (state.hasProperty(SnareBlock.TRIGGERED) && state.getValue(SnareBlock.TRIGGERED) != triggered)
+        if (state.hasProperty(SnareBlock.TRIGGERED) && !state.getValue(SnareBlock.TRIGGERED))
         {
-            level.setBlock(worldPosition, state.setValue(SnareBlock.TRIGGERED, triggered), 3);
+            level.setBlock(worldPosition, state.setValue(SnareBlock.TRIGGERED, true), 3);
         }
     }
-
-    private void resetBlockTriggered()
-    {
-        setBlockTriggered(false);
-    }
-
-    // -----------------------------------------------------------------------
-    // Helpers
-    // -----------------------------------------------------------------------
 
     private boolean isCatchable(LivingEntity entity)
     {
@@ -413,10 +342,6 @@ public class SnareBlockEntity extends BlockEntity
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
-
-    // -----------------------------------------------------------------------
-    // NBT
-    // -----------------------------------------------------------------------
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
