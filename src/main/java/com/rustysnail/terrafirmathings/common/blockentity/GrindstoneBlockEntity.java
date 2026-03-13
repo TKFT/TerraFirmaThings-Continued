@@ -32,6 +32,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     private static final String NBT_GRINDSTONE = "Grindstone";
     private static final String NBT_TOOL = "Tool";
     private static final String NBT_PROGRESS = "Progress";
+    private static final String NBT_CONNECTION = "Connection";
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, GrindstoneBlockEntity be)
     {
@@ -217,6 +218,16 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
             ? ItemStack.parseOptional(registries, tag.getCompound(NBT_TOOL))
             : ItemStack.EMPTY;
         progressTicks = tag.getFloat(NBT_PROGRESS);
+        if (tag.contains(NBT_CONNECTION))
+        {
+            Direction loaded = Direction.byName(tag.getString(NBT_CONNECTION));
+            if (loaded != null && loaded != connection)
+            {
+                connection = loaded;
+                node.connections().clear();
+                node.connections().add(connection);
+            }
+        }
     }
 
     @Override
@@ -232,6 +243,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
             tag.put(NBT_TOOL, tool.save(registries));
         }
         tag.putFloat(NBT_PROGRESS, progressTicks);
+        tag.putString(NBT_CONNECTION, connection.getSerializedName());
     }
 
     @Nullable
@@ -247,6 +259,23 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         CompoundTag tag = new CompoundTag();
         saveAdditional(tag, registries);
         return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.handleUpdateTag(tag, registries);
+        if (level != null && level.isClientSide())
+        {
+            if (node.network() != Node.NO_NETWORK)
+            {
+                performNetworkAction(NetworkAction.UPDATE);
+            }
+            else
+            {
+                performNetworkAction(NetworkAction.ADD);
+            }
+        }
     }
 
     @Override
@@ -266,9 +295,9 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         }
     }
 
-    private void refreshConnectionFromNeighbors(BlockState state)
+    public void refreshConnectionFromNeighbors(BlockState state)
     {
-        if (level == null || level.isClientSide())
+        if (level == null)
         {
             return;
         }
@@ -294,6 +323,11 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
             node.connections().clear();
             node.connections().add(desired);
             connection = desired;
+
+            if (!level.isClientSide())
+            {
+                markDirtyAndSync();
+            }
 
             if (node.network() != Node.NO_NETWORK)
             {
