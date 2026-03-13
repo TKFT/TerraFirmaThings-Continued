@@ -210,6 +210,7 @@
 
   "config.jade.plugin_tfcthings.grindstone": "Grindstone",
   "config.jade.plugin_tfcthings.fishing_net_anchor": "Fishing Net Anchor",
+  "config.jade.plugin_tfcthings.snare": "Snare",
 
   "jade.tfcthings.grindstone.tool": "Tool: %s (%s)",
   "jade.tfcthings.grindstone.wheel": "Wheel: %s",
@@ -219,5 +220,11 @@
 
   "jade.tfcthings.fishing_net_anchor.linked": "Linked",
   "jade.tfcthings.fishing_net_anchor.unlinked": "Not linked",
-  "jade.tfcthings.fishing_net_anchor.other_anchor": "Other anchor: %s, %s, %s"
+  "jade.tfcthings.fishing_net_anchor.other_anchor": "Other anchor: %s, %s, %s",
+
+  "jade.tfcthings.snare.triggered": "Triggered",
+  "jade.tfcthings.snare.waiting": "Waiting",
+  "jade.tfcthings.snare.empty": "Empty",
+  "jade.tfcthings.snare.bait": "Bait: %s",
+  "jade.tfcthings.snare.no_bait": "No bait"
 }

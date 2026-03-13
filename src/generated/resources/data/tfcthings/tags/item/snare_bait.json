@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:foods/grain",
+      "required": false
+    },
+    {
+      "id": "#c:foods/seeds",
+      "required": false
+    }
+  ]
+}

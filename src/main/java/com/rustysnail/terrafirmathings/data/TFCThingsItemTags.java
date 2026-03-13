@@ -12,6 +12,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -30,6 +31,9 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     {
         super(output, lookup, blockTags, TerraFirmaThings.MOD_ID, existingFileHelper);
     }
+
+    private static final TagKey<Item> GRAINS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/grain"));
+    private static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/seeds"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider)
@@ -113,11 +117,11 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")));
 
         tag(TFCThingsTags.Items.SHARPENABLE)
-            .addTag(net.minecraft.tags.ItemTags.AXES)
-            .addTag(net.minecraft.tags.ItemTags.HOES)
-            .addTag(net.minecraft.tags.ItemTags.PICKAXES)
-            .addTag(net.minecraft.tags.ItemTags.SHOVELS)
-            .addTag(net.minecraft.tags.ItemTags.SWORDS)
+            .addTag(ItemTags.AXES)
+            .addTag(ItemTags.HOES)
+            .addTag(ItemTags.PICKAXES)
+            .addTag(ItemTags.SHOVELS)
+            .addTag(ItemTags.SWORDS)
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")))
             .addTag(TFCThingsTags.Items.JAVELINS);
@@ -126,6 +130,10 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCThingsItems.GRINDSTONE_QUARTZ.value())
             .add(TFCThingsItems.GRINDSTONE_STEEL.value())
             .add(TFCThingsItems.GRINDSTONE_DIAMOND.value());
+
+        tag(TFCThingsTags.Items.SNARE_BAIT)
+            .addOptionalTag(GRAINS)
+            .addOptionalTag(SEEDS);
 
         tag(net.minecraft.tags.ItemTags.FOOT_ARMOR)
             .add(TFCThingsItems.HIKING_BOOTS.value())

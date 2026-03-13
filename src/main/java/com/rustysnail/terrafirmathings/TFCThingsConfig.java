@@ -173,17 +173,17 @@ public class TFCThingsConfig
                 checkInterval = builder
                     .comment("The interval in ticks between catch attempts when the snare is baited.",
                         "Lower values check more frequently. 1200 ticks = 1 minute.")
-                    .defineInRange("checkInterval", 1200, 20, 72000);
+                    .defineInRange("checkInterval", 2400, 20, 72000);
 
                 baseCatchChance = builder
                     .comment("The base chance (0-1) to catch an animal on each check.",
                         "The actual chance increases slightly over time while baited.")
-                    .defineInRange("baseCatchChance", 0.15D, 0.0D, 1.0D);
+                    .defineInRange("baseCatchChance", 0.05D, 0.0D, 1.0D);
 
                 holdNoAi = builder
                     .comment("If true, disables AI while an animal is captured so it cannot escape.",
                         "If false, the snare will still pin the entity to the block each tick, but its AI remains enabled.")
-                    .define("holdNoAi", true);
+                    .define("holdNoAi", false);
 
                 preventDamage = builder
                     .comment("If true, captured animals are made invulnerable while trapped to prevent accidental kills.")
