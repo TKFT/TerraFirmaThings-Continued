@@ -2,6 +2,7 @@ package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import net.minecraft.core.HolderLookup;
@@ -85,5 +86,20 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
 
         add("bear_trap_half", new ItemSizeDefinition(
             Ingredient.of(TFCThingsItems.BEAR_TRAP_HALF.get()), Size.NORMAL, Weight.HEAVY));
+
+        add("bear_trap", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsItems.BEAR_TRAP.get()), Size.LARGE, Weight.HEAVY));
+
+        add("fishing_net", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsItems.FISHING_NET_ITEM.get()), Size.SMALL, Weight.LIGHT));
+
+        add("fishing_net_anchor", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsItems.FISHING_NET_ANCHOR.get()), Size.LARGE, Weight.HEAVY));
+
+        add("rope_bridge", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsBlocks.ROPE_BRIDGE.get()), Size.SMALL, Weight.LIGHT));
+
+        add("rope_ladder", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsBlocks.ROPE_LADDER.get()), Size.SMALL, Weight.LIGHT));
     }
 }

@@ -28,11 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.dries007.tfc.common.component.size.IItemSize;
-import net.dries007.tfc.common.component.size.Size;
-import net.dries007.tfc.common.component.size.Weight;
-
-public class RopeBridgeBlock extends BaseEntityBlock implements IItemSize
+public class RopeBridgeBlock extends BaseEntityBlock
 {
 
     public static final IntegerProperty OFFSET = IntegerProperty.create("offset", 0, 7);
@@ -72,18 +68,6 @@ public class RopeBridgeBlock extends BaseEntityBlock implements IItemSize
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(OFFSET, AXIS);
-    }
-
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.LIGHT;
     }
 
     @Override

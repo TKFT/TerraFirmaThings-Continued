@@ -26,11 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.dries007.tfc.common.component.size.IItemSize;
-import net.dries007.tfc.common.component.size.Size;
-import net.dries007.tfc.common.component.size.Weight;
-
-public class RopeLadderBlock extends Block implements IItemSize
+public class RopeLadderBlock extends Block
 {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -136,18 +132,6 @@ public class RopeLadderBlock extends Block implements IItemSize
     public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity)
     {
         return TFCThingsConfig.ITEMS.MASTER_LIST.enableRopeLadder.get();
-    }
-
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.SMALL;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.LIGHT;
     }
 
     @Override
