@@ -24,12 +24,21 @@ public enum GrindstoneProvider implements IBlockComponentProvider
     {
         if (!(accessor.getBlockEntity() instanceof GrindstoneBlockEntity be)) return;
 
+        IThemeHelper t = IThemeHelper.get();
+
+        if (be.isSpinning())
+        {
+            tooltip.add(t.success(Component.translatable("jade.tfcthings.grindstone.spinning")));
+        }
+        else
+        {
+            tooltip.add(t.warning(Component.translatable("jade.tfcthings.grindstone.no_rotation")));
+        }
+
         ItemStack grindstone = be.getGrindstone();
         ItemStack tool = be.getTool();
 
         if (grindstone.isEmpty() && tool.isEmpty()) return;
-
-        IThemeHelper t = IThemeHelper.get();
 
         if (!tool.isEmpty())
         {

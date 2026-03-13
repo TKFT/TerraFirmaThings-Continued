@@ -46,7 +46,7 @@ public class GrindstoneBlockEntityRenderer implements BlockEntityRenderer<Grinds
             poseStack.pushPose();
             poseStack.translate(0.5d, 0.5d, 0.5d);
 
-            final float rotationAngle = be.getRawRotationAngle(partialTick);
+            final float rotationAngle = be.getRotationAngle(partialTick);
             if (facing.getAxis() == Direction.Axis.Z)
             {
                 poseStack.mulPose(Axis.XP.rotation(-rotationAngle));

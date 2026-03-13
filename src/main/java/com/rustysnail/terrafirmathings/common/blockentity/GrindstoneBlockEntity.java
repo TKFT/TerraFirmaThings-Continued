@@ -34,10 +34,9 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     private static final String NBT_PROGRESS = "Progress";
     private static final String NBT_CONNECTION = "Connection";
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, GrindstoneBlockEntity be)
+    public static void serverTick(Level level, BlockPos pos, BlockState ignoredState, GrindstoneBlockEntity be)
     {
         if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableWhetstones.get()) return;
-        be.refreshConnectionFromNeighbors(state);
         if (be.grindstone.isEmpty()) return;
         if (be.tool.isEmpty()) return;
         if (!(be.grindstone.getItem() instanceof GrindstoneItem grindstoneItem)) return;
@@ -155,6 +154,11 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         markDirtyAndSync();
     }
 
+    public boolean isSpinning()
+    {
+        return node.rotation() != null;
+    }
+
     public void syncBlockState()
     {
         if (level == null || level.isClientSide())
@@ -189,7 +193,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     public void onLoad()
     {
         super.onLoad();
-        refreshConnectionFromNeighbors(getBlockState());
+        updateConnectionDirection(getBlockState());
         performNetworkAction(NetworkAction.ADD);
         syncBlockState();
     }
@@ -198,13 +202,6 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     public Node getRotationNode()
     {
         return node;
-    }
-
-    public float getRawRotationAngle(float partialTick)
-    {
-        var rotation = node.rotation();
-        if (rotation == null) return 0f;
-        return rotation.direction().getAxisDirection().getStep() * rotation.angle(partialTick);
     }
 
     @Override
@@ -295,12 +292,9 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
         }
     }
 
-    public void refreshConnectionFromNeighbors(BlockState state)
+    private void updateConnectionDirection(BlockState state)
     {
-        if (level == null)
-        {
-            return;
-        }
+        if (level == null) return;
 
         Direction preferred = preferredConnectionFor(state);
         Direction alternate = preferred.getOpposite();
@@ -323,11 +317,19 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
             node.connections().clear();
             node.connections().add(desired);
             connection = desired;
+        }
+    }
 
-            if (!level.isClientSide())
-            {
-                markDirtyAndSync();
-            }
+    public void refreshConnectionFromNeighbors(BlockState state)
+    {
+        if (level == null || level.isClientSide()) return;
+
+        Direction oldConnection = connection;
+        updateConnectionDirection(state);
+
+        if (connection != oldConnection)
+        {
+            markDirtyAndSync();
 
             if (node.network() != Node.NO_NETWORK)
             {
@@ -343,9 +345,6 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
     private boolean canConnectOnSide(Direction side)
     {
         if (level == null) return false;
-
-        Direction preferred = preferredConnectionFor(getBlockState());
-        if (side != preferred && side != preferred.getOpposite()) return false;
 
         BlockEntity neighbor = level.getBlockEntity(worldPosition.relative(side));
         if (neighbor instanceof RotatingBlockEntity rotating)

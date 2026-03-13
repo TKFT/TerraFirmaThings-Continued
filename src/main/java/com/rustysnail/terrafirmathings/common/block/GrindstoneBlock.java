@@ -90,6 +90,26 @@ public class GrindstoneBlock extends BaseEntityBlock
     }
 
     @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (level.isClientSide() || !state.hasProperty(FACING)) return;
+
+        Direction preferred = state.getValue(FACING).getCounterClockWise();
+        Direction changeDir = Direction.fromDelta(
+            neighborPos.getX() - pos.getX(),
+            neighborPos.getY() - pos.getY(),
+            neighborPos.getZ() - pos.getZ()
+        );
+        if (changeDir != preferred && changeDir != preferred.getOpposite()) return;
+
+        if (level.getBlockEntity(pos) instanceof GrindstoneBlockEntity be)
+        {
+            be.refreshConnectionFromNeighbors(state);
+        }
+    }
+
+    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
     {
         if (!state.is(newState.getBlock()))
