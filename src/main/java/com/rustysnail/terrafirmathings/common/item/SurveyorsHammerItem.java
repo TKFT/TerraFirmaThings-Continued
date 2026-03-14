@@ -146,8 +146,10 @@ public class SurveyorsHammerItem extends ToolItem
                 else
                     msg = Component.translatable("tfcthings.tooltip.prohammer_critical");
             }
-            else {
-                if (unsafeCount > 0){
+            else
+            {
+                if (unsafeCount > 0)
+                {
                     msg = Component.translatable("tfcthings.tooltip.prohammer_unsafe_low_tier");
                 }
                 else

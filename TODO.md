@@ -4,7 +4,7 @@
 - [ ] Rope bridge can place the bridge off axis if the throw is off by less than a block. Should auto center so the bridge is always straight on x or z axis
 
 ### Minor Bugs
-- [x] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
+- [x] Fix the bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
 - [ ] Improve Tags/More Tags
 - [ ] Gem Display has hardcoded ItemSize, move to tags
 
@@ -17,6 +17,8 @@
 - [ ] Implement a FluidLogging system to water log blocks with water other than minecraft water
 - [ ] Fishing net render working so it bows with the current and has some sway in the river.
 - [ ] Better balance/function of the fishing net to have it fit better into TFCs gameplay and theme
+- [ ] Fishing net placement cost tweeks and removal/destorying so if the anchor is broken, the fishing net is also broken
+- [ ] Better fishing net capture mechanic, so it's more involved than just putting a fish in an inventory. Give it a more TFC feel and harder
 
 ### New Features to add
 

@@ -36,13 +36,13 @@ displayName = "${mod_name}" #mandatory
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="tfcthings.png" #optional
+logoFile = "tfcthings.png" #optional
 
 # A text field displayed in the mod UI
-credits="Lyeoj for art and model assest and the orginal mod. Developed for 1.21.1 by RustySnail" #optional
+credits = "Lyeoj for art and model assest and the orginal mod. Developed for 1.21.1 by RustySnail" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-authors="RustySnail"
+authors = "RustySnail"
 
 # The description text for the mod (multi line!) (#mandatory)
 description = '''

@@ -27,7 +27,7 @@
       "name": "Rope Bridge",
       "multiblock": {
         "pattern": [
-          ["A     A"],["SBC0CBS"]
+          ["A     A"], ["SBC0CBS"]
         ],
         "mapping": {
           "S": "tfc:grass/alfisol",

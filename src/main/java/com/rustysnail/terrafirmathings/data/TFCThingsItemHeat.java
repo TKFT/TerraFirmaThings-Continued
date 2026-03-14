@@ -11,7 +11,7 @@ import net.dries007.tfc.common.component.heat.HeatDefinition;
 
 public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDefinition>
 {
-    private static final float CAP_INGOT   = 2.857143f;
+    private static final float CAP_INGOT = 2.857143f;
     private static final float CAP_D_INGOT = 5.714286f;
 
     private static final float CAP_GOLD_D_INGOT = 3.333333f;
@@ -24,15 +24,15 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     @Override
     protected void addData(HolderLookup.Provider provider)
     {
-        hammerHead("copper",        1080f);
-        hammerHead("bronze",         950f);
+        hammerHead("copper", 1080f);
+        hammerHead("bronze", 950f);
         hammerHead("bismuth_bronze", 985f);
-        hammerHead("black_bronze",  1070f);
-        hammerHead("wrought_iron",  1535f);
-        hammerHead("steel",         1540f);
-        hammerHead("black_steel",   1485f);
-        hammerHead("blue_steel",    1540f);
-        hammerHead("red_steel",     1540f);
+        hammerHead("black_bronze", 1070f);
+        hammerHead("wrought_iron", 1535f);
+        hammerHead("steel", 1540f);
+        hammerHead("black_steel", 1485f);
+        hammerHead("blue_steel", 1540f);
+        hammerHead("red_steel", 1540f);
 
         add("honing_steel_head", new HeatDefinition(
             Ingredient.of(TFCThingsItems.HONING_STEEL_HEAD.get()),
@@ -42,35 +42,35 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
             Ingredient.of(TFCThingsItems.DIAMOND_HONING_STEEL_HEAD.get()),
             CAP_INGOT, 1540f * 0.6f, 1540f * 0.8f));
 
-        hookJavelinHead("steel",       1540f);
+        hookJavelinHead("steel", 1540f);
         hookJavelinHead("black_steel", 1485f);
-        hookJavelinHead("blue_steel",  1540f);
-        hookJavelinHead("red_steel",   1540f);
+        hookJavelinHead("blue_steel", 1540f);
+        hookJavelinHead("red_steel", 1540f);
 
-        ropeJavelin("copper",        1080f);
-        ropeJavelin("bronze",         950f);
+        ropeJavelin("copper", 1080f);
+        ropeJavelin("bronze", 950f);
         ropeJavelin("bismuth_bronze", 985f);
-        ropeJavelin("black_bronze",  1070f);
-        ropeJavelin("wrought_iron",  1535f);
-        ropeJavelin("steel",         1540f);
-        ropeJavelin("black_steel",   1485f);
-        ropeJavelin("blue_steel",    1540f);
-        ropeJavelin("red_steel",     1540f);
+        ropeJavelin("black_bronze", 1070f);
+        ropeJavelin("wrought_iron", 1535f);
+        ropeJavelin("steel", 1540f);
+        ropeJavelin("black_steel", 1485f);
+        ropeJavelin("blue_steel", 1540f);
+        ropeJavelin("red_steel", 1540f);
 
-        hookJavelin("steel",       1540f);
+        hookJavelin("steel", 1540f);
         hookJavelin("black_steel", 1485f);
-        hookJavelin("blue_steel",  1540f);
-        hookJavelin("red_steel",   1540f);
+        hookJavelin("blue_steel", 1540f);
+        hookJavelin("red_steel", 1540f);
 
-        surveyorsHammer("copper",        1080f);
-        surveyorsHammer("bronze",         950f);
+        surveyorsHammer("copper", 1080f);
+        surveyorsHammer("bronze", 950f);
         surveyorsHammer("bismuth_bronze", 985f);
-        surveyorsHammer("black_bronze",  1070f);
-        surveyorsHammer("wrought_iron",  1535f);
-        surveyorsHammer("steel",         1540f);
-        surveyorsHammer("black_steel",   1485f);
-        surveyorsHammer("blue_steel",    1540f);
-        surveyorsHammer("red_steel",     1540f);
+        surveyorsHammer("black_bronze", 1070f);
+        surveyorsHammer("wrought_iron", 1535f);
+        surveyorsHammer("steel", 1540f);
+        surveyorsHammer("black_steel", 1485f);
+        surveyorsHammer("blue_steel", 1540f);
+        surveyorsHammer("red_steel", 1540f);
 
         add("honing_steel", new HeatDefinition(
             Ingredient.of(TFCThingsItems.HONING_STEEL.get()),
@@ -115,15 +115,15 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     {
         Ingredient ing = switch (metal)
         {
-            case "copper"        -> Ingredient.of(TFCThingsItems.COPPER_SURVEYORS_HAMMER_HEAD.get());
-            case "bronze"        -> Ingredient.of(TFCThingsItems.BRONZE_SURVEYORS_HAMMER_HEAD.get());
-            case "bismuth_bronze"-> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD.get());
-            case "black_bronze"  -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER_HEAD.get());
-            case "wrought_iron"  -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER_HEAD.get());
-            case "steel"         -> Ingredient.of(TFCThingsItems.STEEL_SURVEYORS_HAMMER_HEAD.get());
-            case "black_steel"   -> Ingredient.of(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER_HEAD.get());
-            case "blue_steel"    -> Ingredient.of(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER_HEAD.get());
-            case "red_steel"     -> Ingredient.of(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER_HEAD.get());
+            case "copper" -> Ingredient.of(TFCThingsItems.COPPER_SURVEYORS_HAMMER_HEAD.get());
+            case "bronze" -> Ingredient.of(TFCThingsItems.BRONZE_SURVEYORS_HAMMER_HEAD.get());
+            case "bismuth_bronze" -> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD.get());
+            case "black_bronze" -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER_HEAD.get());
+            case "wrought_iron" -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER_HEAD.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_SURVEYORS_HAMMER_HEAD.get());
+            case "black_steel" -> Ingredient.of(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER_HEAD.get());
+            case "blue_steel" -> Ingredient.of(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER_HEAD.get());
+            case "red_steel" -> Ingredient.of(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER_HEAD.get());
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("surveyors_hammer_head/" + metal, new HeatDefinition(ing, CAP_INGOT, melt * 0.6f, melt * 0.8f));
@@ -133,10 +133,10 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     {
         Ingredient ing = switch (metal)
         {
-            case "steel"       -> Ingredient.of(TFCThingsItems.STEEL_HOOK_JAVELIN_HEAD.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_HOOK_JAVELIN_HEAD.get());
             case "black_steel" -> Ingredient.of(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN_HEAD.get());
-            case "blue_steel"  -> Ingredient.of(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN_HEAD.get());
-            case "red_steel"   -> Ingredient.of(TFCThingsItems.RED_STEEL_HOOK_JAVELIN_HEAD.get());
+            case "blue_steel" -> Ingredient.of(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN_HEAD.get());
+            case "red_steel" -> Ingredient.of(TFCThingsItems.RED_STEEL_HOOK_JAVELIN_HEAD.get());
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("hook_javelin_head/" + metal, new HeatDefinition(ing, CAP_D_INGOT, melt * 0.6f, melt * 0.8f));
@@ -146,15 +146,15 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     {
         Ingredient ing = switch (metal)
         {
-            case "copper"        -> Ingredient.of(TFCThingsItems.COPPER_ROPE_JAVELIN.get());
-            case "bronze"        -> Ingredient.of(TFCThingsItems.BRONZE_ROPE_JAVELIN.get());
-            case "bismuth_bronze"-> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.get());
-            case "black_bronze"  -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.get());
-            case "wrought_iron"  -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.get());
-            case "steel"         -> Ingredient.of(TFCThingsItems.STEEL_ROPE_JAVELIN.get());
-            case "black_steel"   -> Ingredient.of(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.get());
-            case "blue_steel"    -> Ingredient.of(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.get());
-            case "red_steel"     -> Ingredient.of(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.get());
+            case "copper" -> Ingredient.of(TFCThingsItems.COPPER_ROPE_JAVELIN.get());
+            case "bronze" -> Ingredient.of(TFCThingsItems.BRONZE_ROPE_JAVELIN.get());
+            case "bismuth_bronze" -> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.get());
+            case "black_bronze" -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.get());
+            case "wrought_iron" -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_ROPE_JAVELIN.get());
+            case "black_steel" -> Ingredient.of(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.get());
+            case "blue_steel" -> Ingredient.of(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.get());
+            case "red_steel" -> Ingredient.of(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.get());
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("rope_javelin/" + metal, new HeatDefinition(ing, CAP_INGOT, melt * 0.6f, melt * 0.8f));
@@ -164,15 +164,15 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     {
         Ingredient ing = switch (metal)
         {
-            case "copper"        -> Ingredient.of(TFCThingsItems.COPPER_SURVEYORS_HAMMER.get());
-            case "bronze"        -> Ingredient.of(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.get());
-            case "bismuth_bronze"-> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.get());
-            case "black_bronze"  -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.get());
-            case "wrought_iron"  -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.get());
-            case "steel"         -> Ingredient.of(TFCThingsItems.STEEL_SURVEYORS_HAMMER.get());
-            case "black_steel"   -> Ingredient.of(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.get());
-            case "blue_steel"    -> Ingredient.of(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.get());
-            case "red_steel"     -> Ingredient.of(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.get());
+            case "copper" -> Ingredient.of(TFCThingsItems.COPPER_SURVEYORS_HAMMER.get());
+            case "bronze" -> Ingredient.of(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.get());
+            case "bismuth_bronze" -> Ingredient.of(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.get());
+            case "black_bronze" -> Ingredient.of(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.get());
+            case "wrought_iron" -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_SURVEYORS_HAMMER.get());
+            case "black_steel" -> Ingredient.of(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.get());
+            case "blue_steel" -> Ingredient.of(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.get());
+            case "red_steel" -> Ingredient.of(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.get());
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("surveyors_hammer/" + metal, new HeatDefinition(ing, CAP_INGOT, melt * 0.6f, melt * 0.8f));
@@ -182,10 +182,10 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
     {
         Ingredient ing = switch (metal)
         {
-            case "steel"       -> Ingredient.of(TFCThingsItems.STEEL_HOOK_JAVELIN.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_HOOK_JAVELIN.get());
             case "black_steel" -> Ingredient.of(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.get());
-            case "blue_steel"  -> Ingredient.of(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.get());
-            case "red_steel"   -> Ingredient.of(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get());
+            case "blue_steel" -> Ingredient.of(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.get());
+            case "red_steel" -> Ingredient.of(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get());
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("hook_javelin/" + metal, new HeatDefinition(ing, CAP_D_INGOT, melt * 0.6f, melt * 0.8f));

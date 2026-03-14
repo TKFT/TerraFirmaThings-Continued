@@ -129,9 +129,11 @@ public class BearTrapBlock extends BaseEntityBlock
         if (heldItem.getItem() instanceof ShovelItem)
         {
             boolean newBuried = !state.getValue(BURIED);
-            if(newBuried){
+            if (newBuried)
+            {
                 BlockState belowState = level.getBlockState(pos.below());
-                if(!belowState.is(BlockTags.MINEABLE_WITH_SHOVEL)){
+                if (!belowState.is(BlockTags.MINEABLE_WITH_SHOVEL))
+                {
                     return InteractionResult.PASS;
                 }
             }

@@ -204,21 +204,17 @@
   "jei.tfcthings.sling_ammo_fire.desc": "Sling ammo packed with gunpowder and a fire starter. Ignites the target on impact, setting them ablaze for several seconds.",
   "container.tfcthings.fishing_net": "Fishing Net",
   "tfcthings.tooltip.prohammer_unsafe_low_tier": "This area has instability",
-
   "config.jade.plugin_tfcthings.grindstone": "Grindstone",
   "config.jade.plugin_tfcthings.fishing_net_anchor": "Fishing Net Anchor",
   "config.jade.plugin_tfcthings.snare": "Snare",
-
   "jade.tfcthings.grindstone.tool": "Tool: %s (%s)",
   "jade.tfcthings.grindstone.wheel": "Wheel: %s",
   "jade.tfcthings.grindstone.sharpness": "%d / %d",
   "jade.tfcthings.grindstone.spinning": "Spinning",
   "jade.tfcthings.grindstone.no_rotation": "No rotation",
-
   "jade.tfcthings.fishing_net_anchor.linked": "Linked",
   "jade.tfcthings.fishing_net_anchor.unlinked": "Not linked",
   "jade.tfcthings.fishing_net_anchor.other_anchor": "Other anchor: %s, %s, %s",
-
   "jade.tfcthings.snare.triggered": "Triggered",
   "jade.tfcthings.snare.waiting": "Waiting",
   "jade.tfcthings.snare.empty": "Empty",

@@ -30,49 +30,49 @@ public class TFCThingsHeatingRecipes extends RecipeProvider
     protected void buildRecipes(RecipeOutput output)
     {
         // Rope Javelins (100 mB, use_durability: true)
-        ropeJavelin(output, "copper",         TFCThingsItems.COPPER_ROPE_JAVELIN.get(),         Metal.COPPER,        1080f);
-        ropeJavelin(output, "bronze",          TFCThingsItems.BRONZE_ROPE_JAVELIN.get(),         Metal.BRONZE,         950f);
-        ropeJavelin(output, "bismuth_bronze",  TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.get(), Metal.BISMUTH_BRONZE,  985f);
-        ropeJavelin(output, "black_bronze",    TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.get(),   Metal.BLACK_BRONZE,  1070f);
-        ropeJavelin(output, "wrought_iron",    TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.get(),   Metal.CAST_IRON,     1535f);
-        ropeJavelin(output, "steel",           TFCThingsItems.STEEL_ROPE_JAVELIN.get(),          Metal.STEEL,         1540f);
-        ropeJavelin(output, "black_steel",     TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.get(),    Metal.BLACK_STEEL,   1485f);
-        ropeJavelin(output, "blue_steel",      TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.get(),     Metal.BLUE_STEEL,    1540f);
-        ropeJavelin(output, "red_steel",       TFCThingsItems.RED_STEEL_ROPE_JAVELIN.get(),      Metal.RED_STEEL,     1540f);
+        ropeJavelin(output, "copper", TFCThingsItems.COPPER_ROPE_JAVELIN.get(), Metal.COPPER, 1080f);
+        ropeJavelin(output, "bronze", TFCThingsItems.BRONZE_ROPE_JAVELIN.get(), Metal.BRONZE, 950f);
+        ropeJavelin(output, "bismuth_bronze", TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.get(), Metal.BISMUTH_BRONZE, 985f);
+        ropeJavelin(output, "black_bronze", TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.get(), Metal.BLACK_BRONZE, 1070f);
+        ropeJavelin(output, "wrought_iron", TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.get(), Metal.CAST_IRON, 1535f);
+        ropeJavelin(output, "steel", TFCThingsItems.STEEL_ROPE_JAVELIN.get(), Metal.STEEL, 1540f);
+        ropeJavelin(output, "black_steel", TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.get(), Metal.BLACK_STEEL, 1485f);
+        ropeJavelin(output, "blue_steel", TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.get(), Metal.BLUE_STEEL, 1540f);
+        ropeJavelin(output, "red_steel", TFCThingsItems.RED_STEEL_ROPE_JAVELIN.get(), Metal.RED_STEEL, 1540f);
 
         // Hook Javelins (200 mB, use_durability: true)
-        hookJavelin(output, "steel",       TFCThingsItems.STEEL_HOOK_JAVELIN.get(),       Metal.STEEL,       1540f);
+        hookJavelin(output, "steel", TFCThingsItems.STEEL_HOOK_JAVELIN.get(), Metal.STEEL, 1540f);
         hookJavelin(output, "black_steel", TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.get(), Metal.BLACK_STEEL, 1485f);
-        hookJavelin(output, "blue_steel",  TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.get(),  Metal.BLUE_STEEL,  1540f);
-        hookJavelin(output, "red_steel",   TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get(),   Metal.RED_STEEL,   1540f);
+        hookJavelin(output, "blue_steel", TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.get(), Metal.BLUE_STEEL, 1540f);
+        hookJavelin(output, "red_steel", TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get(), Metal.RED_STEEL, 1540f);
 
         // Hook Javelin Heads (200 mB, use_durability: false)
-        hookJavelinHead(output, "steel",       TFCThingsItems.STEEL_HOOK_JAVELIN_HEAD.get(),       Metal.STEEL,       1540f);
+        hookJavelinHead(output, "steel", TFCThingsItems.STEEL_HOOK_JAVELIN_HEAD.get(), Metal.STEEL, 1540f);
         hookJavelinHead(output, "black_steel", TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN_HEAD.get(), Metal.BLACK_STEEL, 1485f);
-        hookJavelinHead(output, "blue_steel",  TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN_HEAD.get(),  Metal.BLUE_STEEL,  1540f);
-        hookJavelinHead(output, "red_steel",   TFCThingsItems.RED_STEEL_HOOK_JAVELIN_HEAD.get(),   Metal.RED_STEEL,   1540f);
+        hookJavelinHead(output, "blue_steel", TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN_HEAD.get(), Metal.BLUE_STEEL, 1540f);
+        hookJavelinHead(output, "red_steel", TFCThingsItems.RED_STEEL_HOOK_JAVELIN_HEAD.get(), Metal.RED_STEEL, 1540f);
 
         // Surveyor's Hammer Heads (100 mB, use_durability: false)
-        surveyorsHammerHead(output, "copper",         TFCThingsItems.COPPER_SURVEYORS_HAMMER_HEAD.get(),         Metal.COPPER,        1080f);
-        surveyorsHammerHead(output, "bronze",          TFCThingsItems.BRONZE_SURVEYORS_HAMMER_HEAD.get(),       Metal.BRONZE,         950f);
-        surveyorsHammerHead(output, "bismuth_bronze",  TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD.get(), Metal.BISMUTH_BRONZE,  985f);
-        surveyorsHammerHead(output, "black_bronze",    TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER_HEAD.get(), Metal.BLACK_BRONZE,  1070f);
-        surveyorsHammerHead(output, "wrought_iron",    TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER_HEAD.get(), Metal.CAST_IRON,     1535f);
-        surveyorsHammerHead(output, "steel",           TFCThingsItems.STEEL_SURVEYORS_HAMMER_HEAD.get(),        Metal.STEEL,         1540f);
-        surveyorsHammerHead(output, "black_steel",     TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER_HEAD.get(),  Metal.BLACK_STEEL,   1485f);
-        surveyorsHammerHead(output, "blue_steel",      TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER_HEAD.get(),   Metal.BLUE_STEEL,    1540f);
-        surveyorsHammerHead(output, "red_steel",       TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER_HEAD.get(),    Metal.RED_STEEL,     1540f);
+        surveyorsHammerHead(output, "copper", TFCThingsItems.COPPER_SURVEYORS_HAMMER_HEAD.get(), Metal.COPPER, 1080f);
+        surveyorsHammerHead(output, "bronze", TFCThingsItems.BRONZE_SURVEYORS_HAMMER_HEAD.get(), Metal.BRONZE, 950f);
+        surveyorsHammerHead(output, "bismuth_bronze", TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER_HEAD.get(), Metal.BISMUTH_BRONZE, 985f);
+        surveyorsHammerHead(output, "black_bronze", TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER_HEAD.get(), Metal.BLACK_BRONZE, 1070f);
+        surveyorsHammerHead(output, "wrought_iron", TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER_HEAD.get(), Metal.CAST_IRON, 1535f);
+        surveyorsHammerHead(output, "steel", TFCThingsItems.STEEL_SURVEYORS_HAMMER_HEAD.get(), Metal.STEEL, 1540f);
+        surveyorsHammerHead(output, "black_steel", TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER_HEAD.get(), Metal.BLACK_STEEL, 1485f);
+        surveyorsHammerHead(output, "blue_steel", TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER_HEAD.get(), Metal.BLUE_STEEL, 1540f);
+        surveyorsHammerHead(output, "red_steel", TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER_HEAD.get(), Metal.RED_STEEL, 1540f);
 
         // Surveyor's Hammers — finished tools (100 mB, use_durability: true)
-        surveyorsHammer(output, "copper",         TFCThingsItems.COPPER_SURVEYORS_HAMMER.get(),         Metal.COPPER,        1080f);
-        surveyorsHammer(output, "bronze",          TFCThingsItems.BRONZE_SURVEYORS_HAMMER.get(),         Metal.BRONZE,         950f);
-        surveyorsHammer(output, "bismuth_bronze",  TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.get(), Metal.BISMUTH_BRONZE,  985f);
-        surveyorsHammer(output, "black_bronze",    TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.get(),   Metal.BLACK_BRONZE,  1070f);
-        surveyorsHammer(output, "wrought_iron",    TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.get(),   Metal.CAST_IRON,     1535f);
-        surveyorsHammer(output, "steel",           TFCThingsItems.STEEL_SURVEYORS_HAMMER.get(),          Metal.STEEL,         1540f);
-        surveyorsHammer(output, "black_steel",     TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.get(),    Metal.BLACK_STEEL,   1485f);
-        surveyorsHammer(output, "blue_steel",      TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.get(),     Metal.BLUE_STEEL,    1540f);
-        surveyorsHammer(output, "red_steel",       TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.get(),      Metal.RED_STEEL,     1540f);
+        surveyorsHammer(output, "copper", TFCThingsItems.COPPER_SURVEYORS_HAMMER.get(), Metal.COPPER, 1080f);
+        surveyorsHammer(output, "bronze", TFCThingsItems.BRONZE_SURVEYORS_HAMMER.get(), Metal.BRONZE, 950f);
+        surveyorsHammer(output, "bismuth_bronze", TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.get(), Metal.BISMUTH_BRONZE, 985f);
+        surveyorsHammer(output, "black_bronze", TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.get(), Metal.BLACK_BRONZE, 1070f);
+        surveyorsHammer(output, "wrought_iron", TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.get(), Metal.CAST_IRON, 1535f);
+        surveyorsHammer(output, "steel", TFCThingsItems.STEEL_SURVEYORS_HAMMER.get(), Metal.STEEL, 1540f);
+        surveyorsHammer(output, "black_steel", TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.get(), Metal.BLACK_STEEL, 1485f);
+        surveyorsHammer(output, "blue_steel", TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.get(), Metal.BLUE_STEEL, 1540f);
+        surveyorsHammer(output, "red_steel", TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.get(), Metal.RED_STEEL, 1540f);
 
         // Honing Steel Head (100 mB, steel temp, use_durability: false)
         add(output, "honing_steel_head",
