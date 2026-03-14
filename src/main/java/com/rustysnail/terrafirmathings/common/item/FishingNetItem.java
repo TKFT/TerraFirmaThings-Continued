@@ -131,28 +131,8 @@ public class FishingNetItem extends Item
         playerTag.remove(NET_START_POS);
         playerTag.remove(NET_START_TIME);
 
-        if (start.getY() != end.getY())
-        {
-            player.displayClientMessage(Component.translatable("tfcthings.tooltip.fishing_net.anchor_same_y"), true);
-            return InteractionResult.CONSUME;
-        }
-
-        boolean aligned = (start.getX() == end.getX()) || (start.getZ() == end.getZ());
-        if (!aligned)
-        {
-            player.displayClientMessage(Component.translatable("tfcthings.tooltip.fishing_net.no_anchor_aligned"), true);
-            return InteractionResult.CONSUME;
-        }
-
-        int dist = Math.max(Math.abs(start.getX() - end.getX()), Math.abs(start.getZ() - end.getZ()));
-        if (dist > 32)
-        {
-            player.displayClientMessage(Component.translatable("tfcthings.tooltip.fishing_net.anchor_too_far"), true);
-            return InteractionResult.CONSUME;
-        }
-
         FishingNetPlacement.Result preview = FishingNetPlacement.preview((ServerLevel) level, start, end);
-        if (preview.ok())
+        if (preview.hasError())
         {
             showPlacementError(player, preview.status());
             return InteractionResult.CONSUME;
@@ -170,7 +150,7 @@ public class FishingNetItem extends Item
         }
 
         FishingNetPlacement.Result placed = FishingNetPlacement.place((ServerLevel) level, start, end);
-        if (placed.ok())
+        if (placed.hasError())
         {
             showPlacementError(player, placed.status());
             return InteractionResult.CONSUME;

@@ -10,7 +10,7 @@ public final class FishingNetUtil
 {
 
     public static final int MAX_SPAN = 32;
-    private static final int MAX_DEPTH = 20;
+    public static final int MAX_DEPTH = 20;
 
     public static int removeConnectedNets(Level level, BlockPos anchorPos, Direction.Axis axis)
     {

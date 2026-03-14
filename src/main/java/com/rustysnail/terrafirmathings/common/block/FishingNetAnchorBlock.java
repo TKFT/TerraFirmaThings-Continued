@@ -19,6 +19,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -99,6 +100,12 @@ public class FishingNetAnchorBlock extends BaseEntityBlock implements IFluidLogg
         registerDefaultState(stateDefinition.any()
             .setValue(AXIS, Direction.Axis.X)
             .setValue(getFluidProperty(), getFluidProperty().keyFor(Fluids.EMPTY)));
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state)
+    {
+        return RenderShape.MODEL;
     }
 
     @Override

@@ -18,12 +18,10 @@ import org.jetbrains.annotations.NotNull;
 public final class FishingNetPlacement
 {
 
-    private static final int MAX_DEPTH = 20;
-
     public static @NotNull Result place(@NotNull ServerLevel level, @NotNull BlockPos a, @NotNull BlockPos b)
     {
         Plan plan = plan(level, a, b);
-        if (plan.result.ok()) return plan.result;
+        if (plan.result.hasError()) return plan.result;
 
         int placed = 0;
         for (Segment segInfo : plan.toPlace)
@@ -85,7 +83,7 @@ public final class FishingNetPlacement
         Direction.Axis axis = (a.getX() != b.getX()) ? Direction.Axis.X : Direction.Axis.Z;
         int dist = (axis == Direction.Axis.X) ? Math.abs(a.getX() - b.getX()) : Math.abs(a.getZ() - b.getZ());
 
-        if (dist < 2 || dist > 32)
+        if (dist < 2 || dist > FishingNetUtil.MAX_SPAN)
         {
             return new Plan(new Result(Status.TOO_FAR, axis, dist, 0, 0), axis, dist, a.getY(), a.getY(), List.of());
         }
@@ -105,7 +103,7 @@ public final class FishingNetPlacement
             double f = Math.sin(Math.PI * i / (double) dist);
             int sag = (int) Math.round(f * 7.0);
 
-            for (int dy = 0; dy < MAX_DEPTH; dy++)
+            for (int dy = 0; dy < FishingNetUtil.MAX_DEPTH; dy++)
             {
                 int y = yStart - dy;
                 if (y < level.getMinBuildHeight()) break;
@@ -151,7 +149,7 @@ public final class FishingNetPlacement
 
     public record Result(Status status, Direction.Axis axis, int distance, int requiredSegments, int placedSegments)
     {
-        public boolean ok() {return status != Status.OK;}
+        public boolean hasError() {return status != Status.OK;}
     }
 
     private record Segment(BlockPos pos, int sag) {}

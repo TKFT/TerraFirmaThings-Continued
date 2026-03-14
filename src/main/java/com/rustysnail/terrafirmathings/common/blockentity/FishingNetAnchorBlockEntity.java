@@ -1,11 +1,10 @@
 package com.rustysnail.terrafirmathings.common.blockentity;
 
 import java.util.List;
-import java.util.UUID;
-import com.mojang.authlib.GameProfile;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
+import com.rustysnail.terrafirmathings.common.util.FishingNetCatchResolver;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -26,13 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class FishingNetAnchorBlockEntity extends BlockEntity implements MenuProvider
@@ -50,11 +42,6 @@ public class FishingNetAnchorBlockEntity extends BlockEntity implements MenuProv
     private static final String NET_COOLDOWN = "tfcthings_net_cd";
     private static final int SCAN_INTERVAL_TICKS = 5;
     private static final int ENTITY_COOLDOWN_TICKS = 10;
-
-    private static final GameProfile NET_PROFILE = new GameProfile(
-        UUID.fromString("b3f6bfe8-16c3-4d7b-9c75-10b2a3b820b0"),
-        "tfcthings_fishing_net"
-    );
 
     @SuppressWarnings("unused")
     public static void serverTick(Level level, BlockPos pos, BlockState state, FishingNetAnchorBlockEntity be)
@@ -150,29 +137,16 @@ public class FishingNetAnchorBlockEntity extends BlockEntity implements MenuProv
     {
         if (fish.isRemoved() || !fish.isAlive()) return false;
 
-        final FakePlayer player = FakePlayerFactory.get(serverLevel, NET_PROFILE);
-        player.setPos(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5);
-
-        final var lootTableId = fish.getType().getDefaultLootTable();
-        final LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(lootTableId);
-
-        final DamageSource src = serverLevel.damageSources().playerAttack(player);
-
-        final LootParams params = new LootParams.Builder(serverLevel)
-            .withParameter(LootContextParams.ORIGIN, fish.position())
-            .withParameter(LootContextParams.THIS_ENTITY, fish)
-            .withParameter(LootContextParams.DAMAGE_SOURCE, src)
-            .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player)
-            .withOptionalParameter(LootContextParams.ATTACKING_ENTITY, player)
-            .withOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, player)
-            .create(LootContextParamSets.ENTITY);
-
-        final List<ItemStack> drops = lootTable.getRandomItems(params);
-
+        final List<ItemStack> drops = FishingNetCatchResolver.resolve(serverLevel, fish, worldPosition);
         if (drops.isEmpty()) return false;
 
         fish.discard();
+        insertCatch(serverLevel, drops);
+        return true;
+    }
 
+    private void insertCatch(ServerLevel serverLevel, List<ItemStack> drops)
+    {
         boolean any = false;
         for (ItemStack stack : drops)
         {
@@ -187,9 +161,7 @@ public class FishingNetAnchorBlockEntity extends BlockEntity implements MenuProv
                     remaining);
             }
         }
-
         if (any) setChanged();
-        return any;
     }
 
     public void dropAllItems(Level level, BlockPos pos)

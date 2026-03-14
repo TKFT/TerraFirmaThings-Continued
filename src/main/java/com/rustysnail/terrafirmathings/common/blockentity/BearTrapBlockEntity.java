@@ -97,12 +97,11 @@ public class BearTrapBlockEntity extends BlockEntity
     @Nullable
     public LivingEntity getCapturedEntity(Level level)
     {
-        if (capturedEntityId == null)
-        {
-            return null;
-        }
+        if (capturedEntityId == null) return null;
 
-        if (capturedEntityCache != null && capturedEntityCache.isAlive() && capturedEntityCache.getUUID().equals(capturedEntityId))
+        if (capturedEntityCache != null
+            && capturedEntityCache.isAlive()
+            && capturedEntityCache.getUUID().equals(capturedEntityId))
         {
             return capturedEntityCache;
         }
@@ -116,7 +115,6 @@ public class BearTrapBlockEntity extends BlockEntity
                 return livingEntity;
             }
         }
-
         return null;
     }
 

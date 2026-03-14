@@ -1,18 +1,22 @@
 ### Major Bugs
 - [ ] Sharpening javelins does not affect thrown damage.
-- [ ] Snow Shoes/Hiking Boots do not effect speed if jumping in grass/snow causing short jump distance.
-- [ ] Rope bridge can place bridge off axis if throw if off by less then a block. Should auto center so bridge is always straight on x or z axis
+- [ ] Snow Shoes/Hiking Boots do not affect speed if jumping in grass/snow causing short jump distance.
+- [ ] Rope bridge can place the bridge off axis if the throw is off by less than a block. Should auto center so the bridge is always straight on x or z axis
 
 ### Minor Bugs
-- [ ] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
-- [ ] Fix grindstone not transferring rotational power through it.
-- [ ] Fix tags
-- [ ] Grindstone has hardcoded itemsize, move to tags
+- [x] Fix bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
+- [ ] Improve Tags/More Tags
+- [ ] Gem Display has hardcoded ItemSize, move to tags
 
 ### Improvements
 - [ ] Improve readme and documentation in field guide.
 - [ ] Better localization.
-- [ ] Add auto catch and bait to snare traps.
+- [x] Add auto catch and bait to snare traps.
+- [ ] Only auto catch mobs that would be valid for the biome/temp/rainfall/season etc.
+- [ ] Improve how the fishing net catches fish.
+- [ ] Implement a FluidLogging system to water log blocks with water other than minecraft water
+- [ ] Fishing net render working so it bows with the current and has some sway in the river.
+- [ ] Better balance/function of the fishing net to have it fit better into TFCs gameplay and theme
 
 ### New Features to add
 
@@ -22,22 +26,19 @@
 #### Crampons
 - [x] Crampons for walking on ice.
 - [ ] Crampon recipe
-- [ ] Crampon textures/model
+- [ ] Better crampon textures/model
 
 #### Grain piles from TFC Homestead
 - [ ] Grain piles that work similar to log piles but for grain. Grain piles provide a buff to decay of 0.6x or 0.4x if they are sheltered from sunlight.
 - [ ] If multiple gain piles of the same type are stacked ontop of each other they will feed into the lower ones if grain is removed.
 
+#### Pickling Jars from TFC Homestead
+- [ ] Function like the jars in TFC Homestead
+- [ ] Allow food to be stored in jars of vinegar to be preserved.
+
 #### Horse Shoes
 - [ ] Provide a small speed boost for horses
 - [ ] Makes them immune to slowness in snow and long grass
-
-#### Water Well
-- [ ] Checks for groundwater. Allows water to be pumped from underground if there is enough groundwater in the area.
-- [ ] Requires mechanical or manual power to pull water up
-- [ ] With mechanical power it can constantly provide water for crops or aqueducts
-- [ ] Multiblock type structure.
-- [ ] Divining Rod top find good places for well
 
 #### Shellfish/Crab Trap
 - [ ] Produces shellfish or crabs in salt water if they are able to spawn in that area by spawning them in a trapping them.
@@ -48,17 +49,6 @@
 #### Log Minecraft/Rock Minecart
 - [ ] Minecart that functions like a flat bed train car that holds logs. 
 - [ ] Minecart that functions like a traditional minecart holding rock and ore
-
-#### TFC Enchantments
-- [ ] Unbreaking with harder forging
-- [ ] Armor protecting systems
-- [ ] Mace enchantments
-- [ ] Resperation/Aqua Affinity
-- [ ] Depth strider - fins or something similar
-- [ ] Thorns - studded armor
-- [ ] Lunge for javelins
-- [ ] Knockback/Fire Aspect????
-- [ ] Sweeping Edge???
 
 #### Other food storage stuff
 - [ ] Need to look into firmalife more and see what other food storage items and blocks to add
