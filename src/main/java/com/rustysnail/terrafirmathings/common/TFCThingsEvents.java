@@ -7,6 +7,7 @@ import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.item.CramponsItem;
 import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
+import com.rustysnail.terrafirmathings.common.item.HorseshoeItem;
 import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
 import com.rustysnail.terrafirmathings.common.util.FootwearHelper;
 import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
@@ -14,11 +15,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,9 +32,11 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -37,6 +44,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public final class TFCThingsEvents
 {
     private static final Map<UUID, Vec3> lastPlayerPositions = new HashMap<>();
+    private static final Map<UUID, Vec3> lastHorsePositions  = new HashMap<>();
     private static final ResourceLocation SHARPNESS_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "sharpness_bonus");
 
     @SubscribeEvent
@@ -268,6 +276,98 @@ public final class TFCThingsEvents
             ? ChatFormatting.DARK_PURPLE
             : charges > t1 ? ChatFormatting.BLUE : ChatFormatting.DARK_GREEN;
         event.getToolTip().add(net.minecraft.network.chat.Component.translatable("tfcthings.tooltip.sharpness", charges).withStyle(color));
+    }
+
+    // ---- Horseshoe Events ----
+
+    @SubscribeEvent
+    public static void onEntityJoinLevel(EntityJoinLevelEvent event)
+    {
+        if (event.getLevel().isClientSide()) return;
+        if (!(event.getEntity() instanceof AbstractHorse horse)) return;
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableHorseshoes.get()) return;
+
+        CompoundTag data = horse.getPersistentData();
+        if (!data.contains(HorseshoeItem.NBT_HORSESHOE_ID)) return;
+
+        String id = data.getString(HorseshoeItem.NBT_HORSESHOE_ID);
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+        if (!(item instanceof HorseshoeItem horseshoeItem)) return;
+
+        double bonus = horseshoeItem.getBaseSpeedBonus() * TFCThingsConfig.ITEMS.HORSESHOE.speedBonusMultiplier.get();
+        HorseshoeItem.applySpeedModifier(horse, bonus);
+    }
+
+    @SubscribeEvent
+    public static void onHorseTick(PlayerTickEvent.Post event)
+    {
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableHorseshoes.get()) return;
+
+        Player player = event.getEntity();
+        Level level = player.level();
+
+        if (level.isClientSide()) return;
+        if (!(player.getVehicle() instanceof AbstractHorse horse)) return;
+
+        CompoundTag data = horse.getPersistentData();
+        if (!data.contains(HorseshoeItem.NBT_HORSESHOE_ID)) return;
+
+        UUID horseId = horse.getUUID();
+        Vec3 lastPos = lastHorsePositions.put(horseId, horse.position());
+
+        String id = data.getString(HorseshoeItem.NBT_HORSESHOE_ID);
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+        if (item instanceof HorseshoeItem horseshoeItem)
+        {
+            double terrainBonus = horseshoeItem.getBaseSpeedBonus()
+                * TFCThingsConfig.ITEMS.HORSESHOE.speedBonusMultiplier.get();
+            BlockPos below = horse.getBlockPosBelowThatAffectsMyMovement();
+            boolean onDifficult = level.getBlockState(below).is(TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW)
+                || level.getBlockState(below).is(TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW);
+            HorseshoeItem.setTerrainModifier(horse, terrainBonus, onDifficult);
+        }
+
+        if (lastPos == null) return;
+
+        double dx = horse.getX() - lastPos.x;
+        double dz = horse.getZ() - lastPos.z;
+        double distanceCm = Math.sqrt(dx * dx + dz * dz) * 100;
+
+        if (distanceCm <= 0.5) return;
+
+        int threshold = TFCThingsConfig.ITEMS.HORSESHOE.damageDistance.get();
+        if (threshold <= 0) return;
+
+        if (level.random.nextDouble() < distanceCm / threshold)
+        {
+            HorseshoeItem.damageHorseshoe(horse, 1);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onHorseInteract(PlayerInteractEvent.EntityInteract event)
+    {
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableHorseshoes.get()) return;
+
+        Player player = event.getEntity();
+        if (!player.isShiftKeyDown()) return;
+        if (!player.getMainHandItem().isEmpty()) return;
+        if (!(event.getTarget() instanceof AbstractHorse horse)) return;
+        if (player.level().isClientSide()) return;
+
+        ItemStack shoe = HorseshoeItem.removeAndReturnHorseshoe(horse);
+        if (shoe.isEmpty()) return;
+
+        lastHorsePositions.remove(horse.getUUID());
+
+        if (!player.addItem(shoe))
+            horse.spawnAtLocation(shoe);
+
+        horse.playSound(net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_GENERIC.value(), 1.0F, 1.0F);
+        player.displayClientMessage(
+            net.minecraft.network.chat.Component.translatable("tfcthings.tooltip.horseshoe.removed"), true);
+
+        event.setCanceled(true);
     }
 
     private static int sharpnessTierMultiplier(int charges)

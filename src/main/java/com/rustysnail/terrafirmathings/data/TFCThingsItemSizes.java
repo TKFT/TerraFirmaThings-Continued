@@ -101,5 +101,8 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
 
         add("rope_ladder", new ItemSizeDefinition(
             Ingredient.of(TFCThingsBlocks.ROPE_LADDER.get()), Size.SMALL, Weight.LIGHT));
+
+        add("horseshoes", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsTags.Items.HORSESHOES), Size.SMALL, Weight.MEDIUM));
     }
 }

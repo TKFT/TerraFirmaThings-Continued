@@ -61,6 +61,8 @@ public class TFCThingsTags
 
         public static final TagKey<Item> SNARE_BAIT = tag("snare_bait");
 
+        public static final TagKey<Item> HORSESHOES = tag("horseshoes");
+
         private static TagKey<Item> tag(String name)
         {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, name));

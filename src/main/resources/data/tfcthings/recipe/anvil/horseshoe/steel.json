@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableHorseshoes"
+    }
+  ],
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:horseshoe/steel"
+  },
+  "rules": [
+    "bend_last",
+    "draw_not_last",
+    "hit_not_last"
+  ],
+  "tier": 4
+}

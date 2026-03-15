@@ -2,6 +2,7 @@
 - [ ] Sharpening javelins does not affect thrown damage.
 - [ ] Snow Shoes/Hiking Boots do not affect speed if jumping in grass/snow causing short jump distance.
 - [ ] Rope bridge can place the bridge off axis if the throw is off by less than a block. Should auto center so the bridge is always straight on x or z axis
+- [ ] Rope bridge will sometimes place floating in the air, need to make sure it always connects back so at least one segemant has a solid block under it on both sides.
 
 ### Minor Bugs
 - [x] Fix the bug where grindstone only shows spinning animation if power is connected on one side but not on the other side.
@@ -17,7 +18,7 @@
 - [ ] Implement a FluidLogging system to water log blocks with water other than minecraft water
 - [ ] Fishing net render working so it bows with the current and has some sway in the river.
 - [ ] Better balance/function of the fishing net to have it fit better into TFCs gameplay and theme
-- [ ] Fishing net placement cost tweeks and removal/destorying so if the anchor is broken, the fishing net is also broken
+- [ ] Fishing net placement cost tweaks and removal/destorying so if the anchor is broken, the fishing net is also broken
 - [ ] Better fishing net capture mechanic, so it's more involved than just putting a fish in an inventory. Give it a more TFC feel and harder
 
 ### New Features to add
@@ -39,8 +40,8 @@
 - [ ] Allow food to be stored in jars of vinegar to be preserved.
 
 #### Horse Shoes
-- [ ] Provide a small speed boost for horses
-- [ ] Makes them immune to slowness in snow and long grass
+- [x] Provide a small speed boost for horses
+- [x] Makes them immune to slowness in snow and long grass
 
 #### Shellfish/Crab Trap
 - [ ] Produces shellfish or crabs in salt water if they are able to spawn in that area by spawning them in a trapping them.
@@ -49,7 +50,7 @@
 - [ ] Make boots and snowshoes support body temp mods
 
 #### Log Minecraft/Rock Minecart
-- [ ] Minecart that functions like a flat bed train car that holds logs. 
+- [ ] Minecart that functions like a flat bed train car that holds logs.
 - [ ] Minecart that functions like a traditional minecart holding rock and ore
 
 #### Other food storage stuff

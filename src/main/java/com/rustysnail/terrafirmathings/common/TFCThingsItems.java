@@ -11,6 +11,7 @@ import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
 import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
 import com.rustysnail.terrafirmathings.common.item.HoningSteelItem;
 import com.rustysnail.terrafirmathings.common.item.HookJavelinItem;
+import com.rustysnail.terrafirmathings.common.item.HorseshoeItem;
 import com.rustysnail.terrafirmathings.common.item.MetalBracingItem;
 import com.rustysnail.terrafirmathings.common.item.RopeBridgeBundleItem;
 import com.rustysnail.terrafirmathings.common.item.RopeJavelinItem;
@@ -219,6 +220,14 @@ public final class TFCThingsItems
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_SAPPHIRE = platinumCrown("sapphire", "Sapphire");
     public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOPAZ = platinumCrown("topaz", "Topaz");
     //public static final DeferredItem<CrownItem> PLATINUM_CROWN_TOURMALINE = platinumCrown("tourmaline", "Tourmaline");
+
+    // Horseshoes
+    public static final DeferredItem<HorseshoeItem> BRONZE_HORSESHOE = ITEMS.register("horseshoe/bronze",
+        () -> new HorseshoeItem(0.04, new Item.Properties().stacksTo(1).durability(TFCTiers.BRONZE.getUses() / 3)));
+    public static final DeferredItem<HorseshoeItem> WROUGHT_IRON_HORSESHOE = ITEMS.register("horseshoe/wrought_iron",
+        () -> new HorseshoeItem(0.05, new Item.Properties().stacksTo(1).durability(TFCTiers.WROUGHT_IRON.getUses() / 3)));
+    public static final DeferredItem<HorseshoeItem> STEEL_HORSESHOE = ITEMS.register("horseshoe/steel",
+        () -> new HorseshoeItem(0.07, new Item.Properties().stacksTo(1).durability(TFCTiers.STEEL.getUses() / 3)));
 
     //Metal Bracing
     public static final DeferredItem<MetalBracingItem> METAL_BRACING = ITEMS.register("metal_bracing",

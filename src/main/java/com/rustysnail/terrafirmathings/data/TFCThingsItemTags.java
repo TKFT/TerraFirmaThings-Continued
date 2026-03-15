@@ -148,6 +148,11 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCThingsItems.DURABLE_SNOW_SHOES.value())
             .add(TFCThingsItems.CRAMPONS.value());
 
+        tag(TFCThingsTags.Items.HORSESHOES)
+            .add(TFCThingsItems.BRONZE_HORSESHOE.value())
+            .add(TFCThingsItems.WROUGHT_IRON_HORSESHOE.value())
+            .add(TFCThingsItems.STEEL_HORSESHOE.value());
+
         tag(Tags.Items.RANGED_WEAPON_TOOLS)
             .addTag(TFCThingsTags.Items.JAVELINS)
             .addTag(TFCThingsTags.Items.SLINGS);

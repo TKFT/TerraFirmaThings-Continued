@@ -28,6 +28,7 @@ public class TFCThingsConfig
         public final HookJavelin HOOK_JAVELIN;
         public final Sling SLING;
         public final Whetstone WHETSTONE;
+        public final Horseshoe HORSESHOE;
         public final MasterList MASTER_LIST;
 
         Items(ModConfigSpec.Builder builder)
@@ -45,6 +46,7 @@ public class TFCThingsConfig
             HOOK_JAVELIN = new HookJavelin(builder);
             SLING = new Sling(builder);
             WHETSTONE = new Whetstone(builder);
+            HORSESHOE = new Horseshoe(builder);
             MASTER_LIST = new MasterList(builder);
 
             builder.pop();
@@ -387,6 +389,29 @@ public class TFCThingsConfig
             }
         }
 
+        public static class Horseshoe
+        {
+            public final ModConfigSpec.IntValue damageDistance;
+            public final ModConfigSpec.DoubleValue speedBonusMultiplier;
+
+            Horseshoe(ModConfigSpec.Builder builder)
+            {
+                builder.comment("Horseshoe Settings").push("horseshoe");
+
+                damageDistance = builder
+                    .comment("The distance in centimeters a horse must travel to apply one damage to its horseshoe.",
+                        "Approximately 100 cm = 1 block. 0 = horseshoes do not wear from movement.")
+                    .defineInRange("damageDistance", 1000, 0, Integer.MAX_VALUE);
+
+                speedBonusMultiplier = builder
+                    .comment("Multiplier applied to all horseshoe speed bonuses.",
+                        "1.0 = default tier bonuses. 0 = no speed bonus.")
+                    .defineInRange("speedBonusMultiplier", 1.0D, 0.0D, 10.0D);
+
+                builder.pop();
+            }
+        }
+
         public static class MasterList
         {
             public final ModConfigSpec.BooleanValue enableSnowShoes;
@@ -404,6 +429,7 @@ public class TFCThingsConfig
             public final ModConfigSpec.BooleanValue enableSlings;
             public final ModConfigSpec.BooleanValue enableWhetstones;
             public final ModConfigSpec.BooleanValue enableCrowns;
+            public final ModConfigSpec.BooleanValue enableHorseshoes;
 
             MasterList(ModConfigSpec.Builder builder)
             {
@@ -424,6 +450,7 @@ public class TFCThingsConfig
                 enableSlings = builder.define("enableSlings", true);
                 enableWhetstones = builder.define("enableWhetstones", true);
                 enableCrowns = builder.define("enableCrowns", true);
+                enableHorseshoes = builder.define("enableHorseshoes", true);
 
                 builder.pop();
             }

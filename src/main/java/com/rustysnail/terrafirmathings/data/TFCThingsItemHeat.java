@@ -72,6 +72,10 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
         surveyorsHammer("blue_steel", 1540f);
         surveyorsHammer("red_steel", 1540f);
 
+        horseshoe("bronze", 950f);
+        horseshoe("wrought_iron", 1535f);
+        horseshoe("steel", 1540f);
+
         add("honing_steel", new HeatDefinition(
             Ingredient.of(TFCThingsItems.HONING_STEEL.get()),
             CAP_INGOT, 1540f * 0.6f, 1540f * 0.8f));
@@ -189,5 +193,17 @@ public final class TFCThingsItemHeat extends TFCThingsDataManagerProvider<HeatDe
             default -> throw new IllegalArgumentException("Unknown metal: " + metal);
         };
         add("hook_javelin/" + metal, new HeatDefinition(ing, CAP_D_INGOT, melt * 0.6f, melt * 0.8f));
+    }
+
+    private void horseshoe(String metal, float melt)
+    {
+        Ingredient ing = switch (metal)
+        {
+            case "bronze" -> Ingredient.of(TFCThingsItems.BRONZE_HORSESHOE.get());
+            case "wrought_iron" -> Ingredient.of(TFCThingsItems.WROUGHT_IRON_HORSESHOE.get());
+            case "steel" -> Ingredient.of(TFCThingsItems.STEEL_HORSESHOE.get());
+            default -> throw new IllegalArgumentException("Unknown metal: " + metal);
+        };
+        add("horseshoe/" + metal, new HeatDefinition(ing, CAP_INGOT, melt * 0.6f, melt * 0.8f));
     }
 }

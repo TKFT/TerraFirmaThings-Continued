@@ -187,6 +187,13 @@ public class TerraFirmaThings
                         output.accept(TFCThingsItems.GEM_DISPLAY_ITEMS.get(rock).get());
                     }
                 }
+
+                if (m.enableHorseshoes.get())
+                {
+                    output.accept(TFCThingsItems.BRONZE_HORSESHOE.get());
+                    output.accept(TFCThingsItems.WROUGHT_IRON_HORSESHOE.get());
+                    output.accept(TFCThingsItems.STEEL_HORSESHOE.get());
+                }
             }).build());
 
     public TerraFirmaThings(IEventBus modEventBus, ModContainer modContainer)
