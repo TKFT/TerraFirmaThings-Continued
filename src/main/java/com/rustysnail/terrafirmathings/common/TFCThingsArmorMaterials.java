@@ -57,7 +57,7 @@ public final class TFCThingsArmorMaterials
     public static final Holder<ArmorMaterial> CRAMPONS = ARMOR_MATERIALS.register("crampons",
         () -> new ArmorMaterial(
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                map.put(ArmorItem.Type.BOOTS, 1);
+                map.put(ArmorItem.Type.BOOTS, 0);
                 map.put(ArmorItem.Type.LEGGINGS, 0);
                 map.put(ArmorItem.Type.CHESTPLATE, 0);
                 map.put(ArmorItem.Type.HELMET, 0);

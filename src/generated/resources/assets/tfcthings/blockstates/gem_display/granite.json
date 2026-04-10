@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfcthings:block/gem_display/granite",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfcthings:block/gem_display/granite"
+    },
+    "facing=south": {
+      "model": "tfcthings:block/gem_display/granite",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfcthings:block/gem_display/granite",
+      "y": 270
+    }
+  }
+}

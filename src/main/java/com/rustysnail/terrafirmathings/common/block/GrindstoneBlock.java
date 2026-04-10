@@ -3,8 +3,8 @@ package com.rustysnail.terrafirmathings.common.block;
 import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
+import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import com.rustysnail.terrafirmathings.common.blockentity.GrindstoneBlockEntity;
-import com.rustysnail.terrafirmathings.common.item.GrindstoneItem;
 import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
@@ -85,7 +85,7 @@ public class GrindstoneBlock extends BaseEntityBlock
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type)
     {
-        return level.isClientSide() ? null : createTickerHelper(type, TFCThingsBlockEntities.GRINDSTONE.get(),
+        return level.isClientSide() ? null : createTickerHelper(type, TFCThingsBlockEntities.GRINDSTONE_BASE.get(),
             GrindstoneBlockEntity::serverTick);
     }
 
@@ -197,7 +197,7 @@ public class GrindstoneBlock extends BaseEntityBlock
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        if (!be.hasGrindstone() && stack.getItem() instanceof GrindstoneItem)
+        if (!be.hasGrindstone() && stack.is(TFCThingsTags.Items.GRINDSTONE_WHEELS))
         {
             ItemStack toInsert = stack.copyWithCount(1);
             stack.shrink(1);

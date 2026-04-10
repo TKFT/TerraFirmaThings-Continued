@@ -14,7 +14,7 @@
     },
     {
       "type": "tfc:anvil_recipe",
-      "recipe": "tfcthings:anvil/metal_bracing_wrought_iron",
+      "recipe": "tfcthings:anvil/metal_bracing/wrought_iron",
       "text": "First, forge $(thing)Metal Bracing$() on an anvil (wrought iron shown; steel also works)."
     },
     {

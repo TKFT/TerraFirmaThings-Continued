@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableGemDisplays"
+    }
+  ],
+  "type": "tfc:advanced_shaped_crafting",
+  "input_column": 1,
+  "key": {
+    "C": {
+      "tag": "c:tools/chisel"
+    },
+    "R": {
+      "item": "tfc:rock/smooth/chalk"
+    }
+  },
+  "pattern": [
+    "RCR",
+    "RRR",
+    "R R"
+  ],
+  "remainder": {
+    "modifiers": [
+      {
+        "type": "tfc:damage_crafting_remainder"
+      }
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:gem_display/chalk"
+  }
+}

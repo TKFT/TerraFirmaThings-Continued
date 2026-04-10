@@ -106,7 +106,7 @@ public class GrindstoneBlockEntity extends BlockEntity implements RotationSinkBl
 
     public GrindstoneBlockEntity(BlockPos pos, BlockState state)
     {
-        super(TFCThingsBlockEntities.GRINDSTONE.get(), pos, state);
+        super(TFCThingsBlockEntities.GRINDSTONE_BASE.get(), pos, state);
 
         this.connection = preferredConnectionFor(state);
 

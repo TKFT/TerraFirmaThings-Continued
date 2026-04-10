@@ -16,20 +16,27 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 
-import net.dries007.tfc.common.component.size.IItemSize;
-import net.dries007.tfc.common.component.size.Size;
-import net.dries007.tfc.common.component.size.Weight;
+import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
+import net.dries007.tfc.common.fluids.FluidHelpers;
+import net.dries007.tfc.common.fluids.FluidProperty;
+import net.dries007.tfc.common.fluids.IFluidLoggable;
+import net.dries007.tfc.common.fluids.TFCFluids;
 
-public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
+public class GemDisplayBlock extends BaseEntityBlock implements IFluidLoggable
 {
     public static final MapCodec<GemDisplayBlock> CODEC = simpleCodec(GemDisplayBlock::new);
 
@@ -40,24 +47,43 @@ public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
     }
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final FluidProperty FLUID = TFCBlockStateProperties.ALL_WATER;
 
     public GemDisplayBlock(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any()
+            .setValue(FACING, Direction.NORTH)
+            .setValue(getFluidProperty(), getFluidProperty().keyFor(Fluids.EMPTY)));
     }
 
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        Fluid fluidForLogging = fluidState.getType();
+
+        if (fluidForLogging == TFCFluids.RIVER_WATER.get())
+        {
+            fluidForLogging = Fluids.WATER;
+        }
+
+        return this.defaultBlockState()
+            .setValue(FACING, context.getHorizontalDirection())
+            .setValue(getFluidProperty(), getFluidProperty().keyForOrEmpty(fluidForLogging));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING);
+        builder.add(FACING, getFluidProperty());
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state)
+    {
+        return RenderShape.MODEL;
     }
 
     @Override
@@ -65,18 +91,6 @@ public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state)
     {
         return new GemDisplayBlockEntity(pos, state);
-    }
-
-    @Override
-    public Size getSize(ItemStack stack)
-    {
-        return Size.LARGE;
-    }
-
-    @Override
-    public Weight getWeight(ItemStack stack)
-    {
-        return Weight.HEAVY;
     }
 
     @Override
@@ -98,6 +112,12 @@ public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    public FluidProperty getFluidProperty()
+    {
+        return FLUID;
     }
 
     @Override
@@ -127,6 +147,20 @@ public class GemDisplayBlock extends BaseEntityBlock implements IItemSize
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState,
+                                     LevelAccessor level, BlockPos currentPos, BlockPos facingPos)
+    {
+        FluidHelpers.tickFluid(level, currentPos, state);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return IFluidLoggable.super.getFluidState(state);
     }
 
     @Override

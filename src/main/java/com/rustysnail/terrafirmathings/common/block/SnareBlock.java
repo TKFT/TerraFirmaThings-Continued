@@ -116,11 +116,6 @@ public class SnareBlock extends BaseEntityBlock
             if (be instanceof SnareBlockEntity snareEntity)
             {
                 snareEntity.releaseCapture();
-                ItemStack bait = snareEntity.getBait();
-                if (!bait.isEmpty())
-                {
-                    Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, bait);
-                }
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);

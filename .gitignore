@@ -2,5 +2,5 @@
 /build/
 /.gradle/
 /run/
-/.claude/
 /src/generated/resources/.cache/
+/libs/

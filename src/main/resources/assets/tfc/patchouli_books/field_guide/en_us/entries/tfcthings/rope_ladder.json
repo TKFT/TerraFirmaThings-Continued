@@ -10,17 +10,17 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(thing)Rope Ladders$() automatically extend downward from placement, building a vertical climb path while consuming ladders from your inventory."
+      "text": "$(thing)Rope Ladders$() automatically extend downward from placement until it reaches a block or running out of segments."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "tfcthings:crafting/rope_ladder",
-      "text": "Crafted from jute fiber and lumber. Each craft yields 16 rope ladders."
+      "text": "Crafted from jute fiber and lumber."
     },
     {
       "type": "patchouli:text",
       "title": "Behavior",
-      "text": "Breaking a section can collapse sections below it depending on support.$(br2)Shift-right-click to pick up placed rope ladder segments."
+      "text": "Breaking a section can collapse sections below it depending on support.$(br2)Shift-right-click the top most segment to pick up a placed rope ladder."
     },
     {
       "type": "patchouli:multiblock",
@@ -40,7 +40,7 @@
           "0": "tfcthings:rope_ladder[facing=south]"
         }
       },
-      "enable_visualize": false,
+      "enable_visualize": true,
       "text": "A wall-mounted, auto-extending rope ladder."
     }
   ],

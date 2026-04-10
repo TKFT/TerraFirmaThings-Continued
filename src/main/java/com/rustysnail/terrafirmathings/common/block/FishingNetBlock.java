@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.common.blockentity.FishingNetBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -13,8 +14,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -29,10 +30,35 @@ import net.dries007.tfc.common.fluids.IFluidLoggable;
 public class FishingNetBlock extends BaseEntityBlock implements IFluidLoggable
 {
 
+    public enum Profile implements StringRepresentable
+    {
+        END("end"),
+        INNER_1("inner_1"),
+        INNER_2("inner_2"),
+        INNER_3("inner_3"),
+        MIDDLE("middle");
+
+        private final String name;
+
+        Profile(String name)
+        {
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName()
+        {
+            return name;
+        }
+    }
+
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
     public static final FluidProperty FLUID = TFCBlockStateProperties.ALL_WATER;
-    public static final IntegerProperty SAG = IntegerProperty.create("sag", 0, 7);
+    public static final EnumProperty<Profile> PROFILE = EnumProperty.create("profile", Profile.class);
+    public static final BooleanProperty BOW_SIDE = BooleanProperty.create("bow_side");
+
     public static final MapCodec<FishingNetBlock> CODEC = simpleCodec(FishingNetBlock::new);
+
     private static final VoxelShape SHAPE_X = Block.box(0, 0, 7, 16, 16, 9);
     private static final VoxelShape SHAPE_Z = Block.box(7, 0, 0, 9, 16, 16);
 
@@ -41,7 +67,8 @@ public class FishingNetBlock extends BaseEntityBlock implements IFluidLoggable
         super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(AXIS, Direction.Axis.X)
-            .setValue(SAG, 0)
+            .setValue(PROFILE, Profile.END)
+            .setValue(BOW_SIDE, false)
             .setValue(getFluidProperty(), getFluidProperty().keyFor(Fluids.EMPTY)));
     }
 
@@ -72,7 +99,7 @@ public class FishingNetBlock extends BaseEntityBlock implements IFluidLoggable
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(AXIS, SAG, getFluidProperty());
+        builder.add(AXIS, PROFILE, BOW_SIDE, getFluidProperty());
     }
 
     @Override
@@ -106,5 +133,4 @@ public class FishingNetBlock extends BaseEntityBlock implements IFluidLoggable
     {
         return Shapes.empty();
     }
-
 }

@@ -153,6 +153,7 @@ public class RopeJavelinItem extends JavelinItem
             level.addFreshEntity(javelin);
 
             setThrownState(stack, javelin.getUUID());
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
 
             level.playSound(null, javelin, TFCSounds.JAVELIN_THROWN.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }

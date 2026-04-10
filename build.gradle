@@ -36,6 +36,13 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    // Curios API
+    maven {
+        url 'https://maven.theillusivec4.top/'
+        content {
+            includeGroup "top.theillusivec4.curios"
+        }
+    }
     // Add here additional repositories if required by some of the dependencies below.
 }
 
@@ -153,6 +160,18 @@ dependencies {
     //TFC
     implementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 
+    // Curios API (optional — compile against the API jar only; full jar for local runtime testing)
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}:api")
+    localRuntime("top.theillusivec4.curios:curios-neoforge:${curios_version}")
+
+    // TFC Ambiental (optional — runtime API compat; compileOnly required because TFCThingsAmbientalCompat
+    // imports AmbientalRegistry and TemperatureModifier; localRuntime for dev testing)
+    compileOnly("curse.maven:tfc-ambiental-398442:${ambiental_version}")
+    localRuntime("curse.maven:tfc-ambiental-398442:${ambiental_version}")
+
+    // Cold Sweat — no compile dep needed; data-driven via raw JSON datagen
+    // Thermia — no compile dep needed; data-driven via raw JSON datagen
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
@@ -198,9 +217,9 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs << '-Xlint:deprecation'
 }
 
-// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {
     module {
         downloadSources = true

@@ -3,7 +3,6 @@ package com.rustysnail.terrafirmathings.data;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
 import com.mojang.serialization.Codec;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import net.minecraft.core.HolderLookup;

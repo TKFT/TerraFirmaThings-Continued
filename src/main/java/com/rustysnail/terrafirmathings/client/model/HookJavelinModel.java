@@ -14,6 +14,8 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
+// TODO: Convert to JSON/BlockBench Models
+
 public class HookJavelinModel extends Model
 {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(

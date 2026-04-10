@@ -1,0 +1,13 @@
+{
+  "values": [
+    "tfcthings:rope_javelin/copper",
+    "tfcthings:rope_javelin/bronze",
+    "tfcthings:rope_javelin/bismuth_bronze",
+    "tfcthings:rope_javelin/black_bronze",
+    "tfcthings:rope_javelin/wrought_iron",
+    "tfcthings:rope_javelin/steel",
+    "tfcthings:rope_javelin/black_steel",
+    "tfcthings:rope_javelin/blue_steel",
+    "tfcthings:rope_javelin/red_steel"
+  ]
+}

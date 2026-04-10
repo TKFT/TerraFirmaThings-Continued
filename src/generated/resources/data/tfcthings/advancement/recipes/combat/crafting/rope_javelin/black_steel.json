@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableRopeJavelin"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_javelin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:metal/javelin/black_steel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfcthings:crafting/rope_javelin/black_steel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_javelin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfcthings:crafting/rope_javelin/black_steel"
+    ]
+  }
+}

@@ -10,8 +10,8 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "tfcthings:surveyors_hammer/wrought_iron",
-      "text": "The $(thing)Surveyor's Hammer$() checks cave stability and scans local rock layers. It is available from Copper through all thesteels."
+      "item": "tfcthings:surveyors_hammer/steel",
+      "text": "The $(thing)Surveyor's Hammer$() checks cave stability and scans local rock layers. Available in all tool metals."
     },
     {
       "type": "patchouli:text",
@@ -30,12 +30,12 @@
     },
     {
       "type": "tfc:anvil_recipe",
-      "recipe": "tfcthings:anvil/surveyors_hammer_head/wrought_iron",
+      "recipe": "tfcthings:anvil/surveyors_hammer_head/steel",
       "text": "Hammer heads can be forged on an anvil (all tool metals have recipes)."
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/surveyors_hammer/wrought_iron",
+      "recipe": "tfcthings:crafting/surveyors_hammer/steel",
       "text": "Assemble a forged/cast head with a wooden rod to make the tool."
     },
     {

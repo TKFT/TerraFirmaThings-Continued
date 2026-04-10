@@ -1,0 +1,21 @@
+{
+  "base": {
+    "parent": "tfcthings:item/rope_javelin/wrought_iron/throwing_base"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    }
+  }
+}

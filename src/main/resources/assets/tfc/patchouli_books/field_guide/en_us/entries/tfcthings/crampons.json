@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableCrampons"}
+  ],
+  "name": "Crampons",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:crampons",
+  "sortnum": 2,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Crampons$() are spiked boot attachments that grip icy and slippery surfaces, preventing the sliding that would otherwise send you tumbling down frozen slopes.$(br2)They consume durability while actively negating slip on qualifying blocks."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/crampons",
+      "text": "Crafted from leather boots, jute fiber, iron nuggets, and metal bracing."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "tfcthings:crampons": 1
+  }
+}

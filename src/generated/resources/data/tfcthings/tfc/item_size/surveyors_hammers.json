@@ -2,6 +2,6 @@
   "ingredient": {
     "tag": "tfcthings:surveyors_hammers"
   },
-  "size": "normal",
-  "weight": "medium"
+  "size": "large",
+  "weight": "heavy"
 }

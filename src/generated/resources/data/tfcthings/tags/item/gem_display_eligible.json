@@ -8,6 +8,10 @@
     "tfc:gem/pyrite",
     "tfc:gem/ruby",
     "tfc:gem/sapphire",
-    "tfc:gem/topaz"
+    "tfc:gem/topaz",
+    {
+      "id": "#c:gems",
+      "required": false
+    }
   ]
 }

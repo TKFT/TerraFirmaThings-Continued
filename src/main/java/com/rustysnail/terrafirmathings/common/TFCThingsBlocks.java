@@ -7,6 +7,7 @@ import com.rustysnail.terrafirmathings.common.block.BearTrapBlock;
 import com.rustysnail.terrafirmathings.common.block.FishingNetAnchorBlock;
 import com.rustysnail.terrafirmathings.common.block.FishingNetBlock;
 import com.rustysnail.terrafirmathings.common.block.GemDisplayBlock;
+import com.rustysnail.terrafirmathings.common.block.GrainPileBlock;
 import com.rustysnail.terrafirmathings.common.block.GrindstoneBlock;
 import com.rustysnail.terrafirmathings.common.block.RopeBridgeBlock;
 import com.rustysnail.terrafirmathings.common.block.RopeLadderBlock;
@@ -70,13 +71,24 @@ public final class TFCThingsBlocks
             .sound(SoundType.WOOD)
             .noOcclusion()));
 
-    public static final DeferredBlock<GrindstoneBlock> GRINDSTONE = BLOCKS.register("grindstone",
+    public static final DeferredBlock<GrindstoneBlock> GRINDSTONE_BASE = BLOCKS.register("grindstone_base",
         () -> new GrindstoneBlock(BlockBehaviour.Properties.of()
             .mapColor(MapColor.STONE)
             .strength(3.5F)
             .sound(SoundType.STONE)
             .noOcclusion()
             .requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<GrainPileBlock> GRAIN_PILE = BLOCKS.register("grain_pile",
+        () -> new GrainPileBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_YELLOW)
+            .strength(0.3F)
+            .sound(SoundType.GRASS)
+            .noOcclusion()
+            .isValidSpawn((s, l, p, e) -> false)
+            .isRedstoneConductor((s, l, p) -> false)
+            .isSuffocating((s, l, p) -> false)
+            .isViewBlocking((s, l, p) -> false)));
 
     public static final Map<Rock, DeferredBlock<GemDisplayBlock>> GEM_DISPLAYS = new LinkedHashMap<>();
 

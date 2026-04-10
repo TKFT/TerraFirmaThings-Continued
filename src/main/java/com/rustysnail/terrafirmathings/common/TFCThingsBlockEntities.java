@@ -6,6 +6,7 @@ import com.rustysnail.terrafirmathings.common.blockentity.BearTrapBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.FishingNetAnchorBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.FishingNetBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.GemDisplayBlockEntity;
+import com.rustysnail.terrafirmathings.common.blockentity.GrainPileBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.GrindstoneBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.RopeBridgeBlockEntity;
 import com.rustysnail.terrafirmathings.common.blockentity.SnareBlockEntity;
@@ -36,7 +37,6 @@ public final class TFCThingsBlockEntities
         BLOCK_ENTITIES.register("snare", () ->
             buildWithoutDataFixer(BlockEntityType.Builder.of(SnareBlockEntity::new, TFCThingsBlocks.SNARE.get())));
 
-
     public static final Supplier<BlockEntityType<FishingNetAnchorBlockEntity>> FISHING_NET_ANCHOR =
         BLOCK_ENTITIES.register("fishing_net_anchor", () ->
             buildWithoutDataFixer(BlockEntityType.Builder.of(FishingNetAnchorBlockEntity::new, TFCThingsBlocks.FISHING_NET_ANCHOR.get())));
@@ -49,10 +49,16 @@ public final class TFCThingsBlockEntities
         BLOCK_ENTITIES.register("fishing_net", () ->
             buildWithoutDataFixer(BlockEntityType.Builder.of(FishingNetBlockEntity::new, TFCThingsBlocks.FISHING_NET.get())));
 
-    public static final Supplier<BlockEntityType<GrindstoneBlockEntity>> GRINDSTONE =
-        BLOCK_ENTITIES.register("grindstone", () ->
+    public static final Supplier<BlockEntityType<GrindstoneBlockEntity>> GRINDSTONE_BASE =
+        BLOCK_ENTITIES.register("grindstone_base", () ->
             buildWithoutDataFixer(BlockEntityType.Builder.of(GrindstoneBlockEntity::new,
-                TFCThingsBlocks.GRINDSTONE.get())));
+                TFCThingsBlocks.GRINDSTONE_BASE.get())));
+
+    public static final Supplier<BlockEntityType<GrainPileBlockEntity>> GRAIN_PILE =
+        BLOCK_ENTITIES.register("grain_pile", () ->
+            buildWithoutDataFixer(BlockEntityType.Builder.of(
+                GrainPileBlockEntity::new,
+                TFCThingsBlocks.GRAIN_PILE.get())));
 
     public static final Supplier<BlockEntityType<GemDisplayBlockEntity>> GEM_DISPLAY =
         BLOCK_ENTITIES.register("gem_display", () ->

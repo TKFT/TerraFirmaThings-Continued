@@ -1,16 +1,16 @@
 {
   "ingredient": [
     {
-      "item": "tfcthings:sling_ammo"
+      "item": "tfcthings:sling_ammo/heavy"
     },
     {
-      "item": "tfcthings:sling_ammo_spread"
+      "item": "tfcthings:sling_ammo/spread"
     },
     {
-      "item": "tfcthings:sling_ammo_light"
+      "item": "tfcthings:sling_ammo/light"
     },
     {
-      "item": "tfcthings:sling_ammo_fire"
+      "item": "tfcthings:sling_ammo/fire"
     }
   ],
   "size": "small",

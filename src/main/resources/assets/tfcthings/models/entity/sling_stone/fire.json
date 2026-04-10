@@ -1,0 +1,48 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "texture": "tfcthings:block/entity/sling_stone/fire",
+    "particle": "tfcthings:block/entity/sling_stone/fire"
+  },
+  "elements": [
+    {
+      "name": "core",
+      "from": [6.5, 6.5, 6.5], "to": [9.5, 9.5, 9.5],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#texture"}
+      }
+    },
+    {
+      "name": "tar_drip",
+      "from": [7.5, 5, 7.5], "to": [8.5, 7, 8.5],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#texture"}
+      }
+    },
+    {
+      "name": "tinder_wrap",
+      "from": [7, 6.5, 5], "to": [9, 9, 7],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#texture"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#texture"}
+      }
+    }
+  ]
+}

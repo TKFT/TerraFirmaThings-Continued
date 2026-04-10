@@ -1,0 +1,10 @@
+{
+  "values": [
+    "tfcthings:sling_ammo/heavy",
+    "tfcthings:sling_ammo/light",
+    {
+      "id": "#c:stones/loose",
+      "required": false
+    }
+  ]
+}

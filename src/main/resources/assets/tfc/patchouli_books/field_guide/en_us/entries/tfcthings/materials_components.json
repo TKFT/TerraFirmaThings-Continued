@@ -11,18 +11,22 @@
   "name": "Materials and Components",
   "category": "tfc:tfcthings",
   "icon": "tfcthings:metal_bracing",
-  "sortnum": 14,
+  "sortnum": 15,
   "read_by_default": true,
   "pages": [
     {
-      "type": "tfc:anvil_recipe",
-      "recipe": "tfcthings:anvil/metal_bracing_wrought_iron",
-      "text": "Metal Bracing (wrought iron variant) for reinforced gear recipes."
+      "type": "patchouli:text",
+      "text": "$(thing)Metal Bracing$() is a forged component used in $(thing)Hiking Boots$() and $(thing)Reinforced Slings$(). Forge it on an anvil from wrought iron or steel ingots."
     },
     {
       "type": "tfc:anvil_recipe",
-      "recipe": "tfcthings:anvil/metal_bracing_steel",
-      "text": "Metal Bracing (steel variant)."
+      "recipe": "tfcthings:anvil/metal_bracing/wrought_iron",
+      "text": "Wrought iron variant — yields 1 bracing per ingot."
+    },
+    {
+      "type": "tfc:anvil_recipe",
+      "recipe": "tfcthings:anvil/metal_bracing/steel",
+      "text": "Steel variant — yields 2 bracing per ingot."
     }
   ],
   "extra_recipe_mappings": {

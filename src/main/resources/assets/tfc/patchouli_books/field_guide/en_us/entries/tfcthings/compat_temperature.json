@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {"type": "neoforge:mod_loaded", "modid": "tfcambiental"},
+        {"type": "neoforge:mod_loaded", "modid": "cold_sweat"},
+        {"type": "neoforge:mod_loaded", "modid": "thermia"}
+      ]
+    }
+  ],
+  "name": "Temperature Mod Support",
+  "category": "tfc:tfcthings",
+  "icon": "tfcthings:snow_shoes",
+  "sortnum": 17,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TerraFirma Things registers insulation values for footwear and crowns with temperature mods. Effects apply automatically when the relevant mod is installed — no extra configuration required."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Snow Shoes",
+      "text": "$(li)$(thing)TFC Ambiental:$() +0.6 warmth, \u22120.15 potency$(li)$(thing)Cold Sweat:$() +4.0 cold insulation$(li)$(thing)Thermia:$() +0.12 insulation modifier"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hiking Boots",
+      "text": "$(li)$(thing)TFC Ambiental:$() +0.4 warmth, \u22120.15 potency$(li)$(thing)Cold Sweat:$() +2.0 cold insulation$(li)$(thing)Thermia:$() +0.08 insulation modifier"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Crowns",
+      "text": "$(li)$(thing)TFC Ambiental:$() \u22120.1 warmth, +0.05 potency$(li)$(thing)Cold Sweat:$() \u22122.0 cold insulation$(li)$(thing)Thermia:$() \u22120.2 insulation modifier"
+    }
+  ]
+}

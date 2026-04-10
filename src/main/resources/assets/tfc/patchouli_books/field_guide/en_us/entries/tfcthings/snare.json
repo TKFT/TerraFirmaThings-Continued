@@ -10,12 +10,22 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(thing)Snares$() are passive small-creature traps. Place them where wildlife passes and they will capture valid small mobs that enter the trap area."
+      "text": "$(thing)Snares$() are passive small-creature traps. They can capture mobs that walk into them directly, or passively attract and catch wildlife over time when baited."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "tfcthings:crafting/snare",
-      "text": "Crafted from wooden rods, lumber, and jute fiber."
+      "text": "Crafted from sticks, lumber, and jute fiber."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bait",
+      "text": "Right-click a snare with $(thing)grain$() or $(thing)seeds$() to insert bait. Bait is required for passive catches.$(br2)Shift-right-click an empty snare to remove bait without triggering it."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Passive Catch",
+      "text": "A baited snare checks periodically for a catch. Only animals that $(thing)naturally spawn in the local biome$() can be passively caught — exotic creatures from other climates will not appear.$(br2)Bait is consumed on a successful passive catch."
     },
     {
       "type": "patchouli:text",

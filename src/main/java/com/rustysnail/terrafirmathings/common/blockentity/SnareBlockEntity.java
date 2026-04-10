@@ -3,7 +3,6 @@ package com.rustysnail.terrafirmathings.common.blockentity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
@@ -25,8 +24,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -89,6 +91,7 @@ public class SnareBlockEntity extends BlockEntity
     private void attemptPassiveCatch(ServerLevel serverLevel)
     {
         EntityType<?> entityType = selectCatchableEntityType(serverLevel);
+        if (entityType == null) return;
 
         Entity spawned = entityType.create(serverLevel);
         if (!(spawned instanceof LivingEntity livingEntity)) return;
@@ -108,7 +111,7 @@ public class SnareBlockEntity extends BlockEntity
         {
             consumeBait();
             setBlockTriggered();
-            level.playSound(null, worldPosition, SoundEvents.TRIPWIRE_CLICK_ON, SoundSource.BLOCKS, 1.0f, 1.2f);
+            serverLevel.playSound(null, worldPosition, SoundEvents.TRIPWIRE_CLICK_ON, SoundSource.BLOCKS, 1.0f, 1.2f);
         }
         else
         {
@@ -116,11 +119,7 @@ public class SnareBlockEntity extends BlockEntity
         }
     }
 
-    /**
-     * Picks a random entity type from the SNARE_CATCHABLE tag.
-     * Falls back to CHICKEN if the tag is empty or missing.
-     * TODO: Pick only mobs that are valid to spawn in that area
-     */
+    @Nullable
     private EntityType<?> selectCatchableEntityType(ServerLevel serverLevel)
     {
         Iterable<Holder<EntityType<?>>> tagIterable = serverLevel.registryAccess()
@@ -131,10 +130,41 @@ public class SnareBlockEntity extends BlockEntity
 
         if (catchable.isEmpty())
         {
-            return EntityType.CHICKEN;
+            return null;
         }
 
-        return catchable.get(serverLevel.random.nextInt(catchable.size())).value();
+        Biome biome = serverLevel.getBiome(worldPosition).value();
+        List<EntityType<?>> valid = new ArrayList<>();
+        for (Holder<EntityType<?>> holder : catchable)
+        {
+            if (isValidForBiome(holder.value(), biome))
+            {
+                valid.add(holder.value());
+            }
+        }
+
+        if (valid.isEmpty())
+        {
+            return null;
+        }
+
+        return valid.get(serverLevel.random.nextInt(valid.size()));
+    }
+
+    private boolean isValidForBiome(EntityType<?> entityType, Biome biome)
+    {
+        MobSpawnSettings settings = biome.getMobSettings();
+        for (MobCategory category : MobCategory.values())
+        {
+            for (MobSpawnSettings.SpawnerData data : settings.getMobs(category).unwrap())
+            {
+                if (data.type == entityType)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean beginCapture(LivingEntity entity)

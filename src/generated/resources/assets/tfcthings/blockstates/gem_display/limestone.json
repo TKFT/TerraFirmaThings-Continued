@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfcthings:block/gem_display/limestone",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfcthings:block/gem_display/limestone"
+    },
+    "facing=south": {
+      "model": "tfcthings:block/gem_display/limestone",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfcthings:block/gem_display/limestone",
+      "y": 270
+    }
+  }
+}

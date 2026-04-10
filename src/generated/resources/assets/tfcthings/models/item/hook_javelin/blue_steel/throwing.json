@@ -1,0 +1,21 @@
+{
+  "base": {
+    "parent": "tfcthings:item/hook_javelin/blue_steel/throwing_base"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/hook_javelin/blue_steel/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/hook_javelin/blue_steel/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/hook_javelin/blue_steel/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/hook_javelin/blue_steel/gui"
+    }
+  }
+}

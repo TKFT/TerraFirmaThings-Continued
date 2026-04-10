@@ -4,7 +4,7 @@
   ],
   "name": "Fishing Net",
   "category": "tfc:tfcthings",
-  "icon": "tfcthings:fishing_net",
+  "icon": "tfcthings:fishing_net_anchor",
   "sortnum": 7,
   "read_by_default": true,
   "pages": [
@@ -17,7 +17,7 @@
       "type": "patchouli:crafting",
       "recipe": "tfcthings:crafting/fishing_net",
       "recipe2": "tfcthings:crafting/fishing_net_anchor",
-      "text": "Craft net segments and anchors from jute fiber (and stone for anchors)."
+      "text": "Craft a fishing net from jute fiber, and assemble an anchor from a net and a wooden fence."
     },
     {
       "type": "patchouli:text",
@@ -41,8 +41,8 @@
         ],
         "mapping": {
           "A": "tfcthings:fishing_net_anchor[axis=z]",
-          "N": "tfcthings:fishing_net[axis=z,fluid=water,sag=0]",
-          "0": "tfcthings:fishing_net[axis=z,fluid=water,sag=0]",
+          "N": "tfcthings:fishing_net[axis=z,fluid=water]",
+          "0": "tfcthings:fishing_net[axis=z,fluid=water]",
           "S": "tfc:rock/raw/chert"
         }
       },
@@ -52,7 +52,6 @@
   ],
   "extra_recipe_mappings": {
     "tfcthings:fishing_net": 1,
-    "tfcthings:fishing_net_anchor": 1,
-    "tfcthings:fishing_net_segment": 0
+    "tfcthings:fishing_net_anchor": 1
   }
 }

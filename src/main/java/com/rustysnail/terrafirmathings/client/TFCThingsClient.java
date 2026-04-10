@@ -4,10 +4,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.client.extensions.ItemRendererExtension;
-import com.rustysnail.terrafirmathings.client.model.GemNormalModel;
 import com.rustysnail.terrafirmathings.client.model.HookJavelinModel;
-import com.rustysnail.terrafirmathings.client.model.SlingStoneModel;
 import com.rustysnail.terrafirmathings.client.renderer.GemDisplayBlockEntityRenderer;
+import com.rustysnail.terrafirmathings.client.renderer.GrainPileBlockEntityRenderer;
 import com.rustysnail.terrafirmathings.client.renderer.GrindstoneBlockEntityRenderer;
 import com.rustysnail.terrafirmathings.client.renderer.HookJavelinItemRenderer;
 import com.rustysnail.terrafirmathings.client.renderer.RopeBridgeBlockEntityRenderer;
@@ -16,20 +15,26 @@ import com.rustysnail.terrafirmathings.client.renderer.SlingStoneRenderer;
 import com.rustysnail.terrafirmathings.client.renderer.ThrownHookJavelinRenderer;
 import com.rustysnail.terrafirmathings.client.renderer.ThrownRopeJavelinRenderer;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
+import com.rustysnail.terrafirmathings.common.block.GrainPileBlock;
 import com.rustysnail.terrafirmathings.common.TFCThingsEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.item.HookJavelinItem;
 import com.rustysnail.terrafirmathings.common.item.RopeJavelinItem;
 import javax.annotation.Nullable;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 public class TFCThingsClient
@@ -41,6 +46,7 @@ public class TFCThingsClient
         modBus.addListener(TFCThingsClient::registerLayerDefinitions);
         modBus.addListener(TFCThingsClient::clientSetup);
         modBus.addListener(TFCThingsClient::registerExtensions);
+        modBus.addListener(TFCThingsClient::registerAdditionalModels);
     }
 
     @SuppressWarnings("deprecation")
@@ -107,10 +113,10 @@ public class TFCThingsClient
         ItemProperties.register(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.get(), throwingId, TFCThingsClient::hookJavelinThrowingPredicate);
     }
 
-    private static float slingSpinningPredicate(net.minecraft.world.item.ItemStack stack,
-                                                net.minecraft.client.multiplayer.ClientLevel level,
-                                                net.minecraft.world.entity.LivingEntity entity,
-                                                int seed)
+    private static float slingSpinningPredicate(ItemStack stack,
+                                                ClientLevel ignoredLevel,
+                                                LivingEntity entity,
+                                                int ignoredSeed)
     {
         if (entity == null || !entity.isUsingItem()) return 0.0F;
         net.minecraft.world.item.ItemStack active = entity.getUseItem();
@@ -123,10 +129,10 @@ public class TFCThingsClient
         return (float) Math.floor(((chargeTime * powerRatio) % 8.0F) + 1.0F);
     }
 
-    private static float ropeJavelinThrownPredicate(net.minecraft.world.item.ItemStack stack,
-                                                    net.minecraft.client.multiplayer.ClientLevel level,
-                                                    net.minecraft.world.entity.LivingEntity entity,
-                                                    int seed)
+    private static float ropeJavelinThrownPredicate(ItemStack stack,
+                                                    ClientLevel ignoredLevel,
+                                                    LivingEntity entity,
+                                                    int ignoredSeed)
     {
         if (entity == null) return 0.0F;
         boolean main = entity.getMainHandItem() == stack;
@@ -135,10 +141,10 @@ public class TFCThingsClient
         return (main || off) && RopeJavelinItem.isThrown(stack) ? 1.0F : 0.0F;
     }
 
-    private static float hookJavelinThrownPredicate(net.minecraft.world.item.ItemStack stack,
-                                                    net.minecraft.client.multiplayer.ClientLevel level,
-                                                    net.minecraft.world.entity.LivingEntity entity,
-                                                    int seed)
+    private static float hookJavelinThrownPredicate(ItemStack stack,
+                                                    ClientLevel ignoredLevel,
+                                                    LivingEntity entity,
+                                                    int ignoredSeed)
     {
         if (entity == null) return 0.0F;
         boolean main = entity.getMainHandItem() == stack;
@@ -147,19 +153,19 @@ public class TFCThingsClient
         return (main || off) && HookJavelinItem.isThrown(stack) ? 1.0F : 0.0F;
     }
 
-    private static float ropeJavelinThrowingPredicate(net.minecraft.world.item.ItemStack stack,
-                                                      net.minecraft.client.multiplayer.ClientLevel level,
-                                                      net.minecraft.world.entity.LivingEntity entity,
-                                                      int seed)
+    private static float ropeJavelinThrowingPredicate(ItemStack stack,
+                                                      ClientLevel igoredLevel,
+                                                      LivingEntity entity,
+                                                      int ignoredSeed)
     {
         if (entity == null || RopeJavelinItem.isThrown(stack)) return 0.0F;
         return entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
     }
 
-    private static float hookJavelinThrowingPredicate(net.minecraft.world.item.ItemStack stack,
-                                                      net.minecraft.client.multiplayer.ClientLevel level,
-                                                      net.minecraft.world.entity.LivingEntity entity,
-                                                      int seed)
+    private static float hookJavelinThrowingPredicate(ItemStack stack,
+                                                      ClientLevel ignoredLevel,
+                                                      LivingEntity entity,
+                                                      int ignoreSeed)
     {
         if (entity == null || HookJavelinItem.isThrown(stack)) return 0.0F;
         return entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
@@ -194,11 +200,37 @@ public class TFCThingsClient
         event.registerItem(ItemRendererExtension.cached(() -> rendererFactory.apply((T) item)), item);
     }
 
+    private static void registerAdditionalModels(ModelEvent.RegisterAdditional event)
+    {
+        for (String gem : new String[] {"agate", "amethyst", "beryl", "diamond", "emerald", "garnet", "jade", "jasper", "lapis_lazuli", "nether_quartz", "opal", "prismarine_crystals", "pyrite", "ruby", "sapphire", "topaz", "tourmaline"})
+        {
+            event.register(ModelResourceLocation.standalone(
+                ResourceLocation.fromNamespaceAndPath("tfcthings", "block/gem_display/gems/" + gem)));
+        }
+        for (String type : new String[] {"heavy", "scatter", "light", "fire", "stone"})
+        {
+            event.register(ModelResourceLocation.standalone(
+                ResourceLocation.fromNamespaceAndPath("tfcthings", "entity/sling_stone/" + type)));
+        }
+        for (int layer = 1; layer <= 8; layer++)
+        {
+            // Base fallback models (also re-registered as standalone for BER lookup)
+            event.register(ModelResourceLocation.standalone(
+                ResourceLocation.fromNamespaceAndPath("tfcthings", "block/grain_pile/grain_pile_" + layer)));
+            // Known TFC grain models
+            for (GrainPileBlock.GrainVariant grain : GrainPileBlock.GrainVariant.values())
+            {
+                if (grain == GrainPileBlock.GrainVariant.UNKNOWN) continue;
+                event.register(ModelResourceLocation.standalone(
+                    ResourceLocation.fromNamespaceAndPath("tfcthings",
+                        "block/grain_pile/" + grain.getSerializedName() + "_" + layer)));
+            }
+        }
+    }
+
     private static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
-        event.registerLayerDefinition(GemNormalModel.LAYER_LOCATION, GemNormalModel::createBodyLayer);
         event.registerLayerDefinition(HookJavelinModel.LAYER_LOCATION, HookJavelinModel::createBodyLayer);
-        event.registerLayerDefinition(SlingStoneModel.LAYER_LOCATION, SlingStoneModel::createBodyLayer);
     }
 
     private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
@@ -207,10 +239,9 @@ public class TFCThingsClient
         event.registerEntityRenderer(TFCThingsEntities.THROWN_ROPE_JAVELIN.get(), ThrownRopeJavelinRenderer::new);
         event.registerEntityRenderer(TFCThingsEntities.THROWN_HOOK_JAVELIN.get(), ThrownHookJavelinRenderer::new);
         event.registerEntityRenderer(TFCThingsEntities.SLING_STONE.get(), SlingStoneRenderer::new);
-        //event.registerBlockEntityRenderer(TFCThingsBlockEntities.FISHING_NET_ANCHOR.get(), FishingNetAnchorRenderer::new);
         event.registerBlockEntityRenderer(TFCThingsBlockEntities.ROPE_BRIDGE.get(), RopeBridgeBlockEntityRenderer::new);
-        //event.registerBlockEntityRenderer(TFCThingsBlockEntities.FISHING_NET.get(), FishingNetBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TFCThingsBlockEntities.GEM_DISPLAY.get(), GemDisplayBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(TFCThingsBlockEntities.GRINDSTONE.get(), GrindstoneBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(TFCThingsBlockEntities.GRINDSTONE_BASE.get(), GrindstoneBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(TFCThingsBlockEntities.GRAIN_PILE.get(), GrainPileBlockEntityRenderer::new);
     }
 }

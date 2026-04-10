@@ -1,12 +1,6 @@
 {
   "values": [
-    "tfcthings:sling_ammo",
-    "tfcthings:sling_ammo_spread",
-    "tfcthings:sling_ammo_light",
-    "tfcthings:sling_ammo_fire",
-    {
-      "id": "#c:stones/loose",
-      "required": false
-    }
+    "#tfcthings:recoverable_sling_ammo",
+    "#tfcthings:nonrecoverable_sling_ammo"
   ]
 }

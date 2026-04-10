@@ -1,7 +1,7 @@
 {
   "type": "tfc:heating",
   "ingredient": {
-    "item": "tfcthings:steel_rope_javelin"
+    "item": "tfcthings:rope_javelin/steel"
   },
   "result_fluid": {
     "amount": 100,

@@ -7,8 +7,11 @@ import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
 import com.rustysnail.terrafirmathings.common.TFCThingsDataComponents;
 import com.rustysnail.terrafirmathings.common.TFCThingsEntities;
+import com.rustysnail.terrafirmathings.common.TFCThingsFoodTraits;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.condition.TFCThingsRecipeConditions;
+import com.rustysnail.terrafirmathings.compat.ambiental.TFCThingsAmbientalCompat;
+import com.rustysnail.terrafirmathings.compat.curios.TFCThingsCuriosCompat;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,10 +22,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -68,6 +73,7 @@ public class TerraFirmaThings
                 if (m.enableRopeBridge.get())
                 {
                     output.accept(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get());
+                    output.accept(TFCThingsItems.ROPE_BRIDGE_SEGMENT.get());
                 }
 
                 if (m.enableRopeLadder.get())
@@ -138,28 +144,41 @@ public class TerraFirmaThings
                 }
 
                 output.accept(TFCThingsItems.GOLD_CROWN_EMPTY.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_AGATE.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_AMETHYST.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_BERYL.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_DIAMOND.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_EMERALD.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_GARNET.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_JADE.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_JASPER.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_OPAL.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_RUBY.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_SAPPHIRE.get());
                 output.accept(TFCThingsItems.GOLD_CROWN_TOPAZ.get());
+                output.accept(TFCThingsItems.GOLD_CROWN_TOURMALINE.get());
+
                 output.accept(TFCThingsItems.PLATINUM_CROWN_EMPTY.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_AGATE.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_AMETHYST.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_BERYL.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_DIAMOND.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_EMERALD.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_GARNET.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_JADE.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_JASPER.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_OPAL.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_RUBY.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_SAPPHIRE.get());
                 output.accept(TFCThingsItems.PLATINUM_CROWN_TOPAZ.get());
+                output.accept(TFCThingsItems.PLATINUM_CROWN_TOURMALINE.get());
 
                 if (m.enableWhetstones.get())
                 {
-                    output.accept(TFCThingsItems.GRINDSTONE.get());
-                    output.accept(TFCThingsItems.GRINDSTONE_QUARTZ.get());
-                    output.accept(TFCThingsItems.GRINDSTONE_STEEL.get());
-                    output.accept(TFCThingsItems.GRINDSTONE_DIAMOND.get());
+                    output.accept(TFCThingsItems.GRINDSTONE_BASE.get());
+                    output.accept(TFCThingsItems.GRINDSTONE_WHEEL_QUARTZ.get());
+                    output.accept(TFCThingsItems.GRINDSTONE_WHEEL_STEEL.get());
+                    output.accept(TFCThingsItems.GRINDSTONE_WHEEL_DIAMOND.get());
                     output.accept(TFCThingsItems.WHETSTONE.get());
                     output.accept(TFCThingsItems.HONING_STEEL.get());
                     output.accept(TFCThingsItems.DIAMOND_HONING_STEEL.get());
@@ -174,7 +193,7 @@ public class TerraFirmaThings
                 {
                     output.accept(TFCThingsItems.SLING.get());
                     output.accept(TFCThingsItems.SLING_METAL.get());
-                    output.accept(TFCThingsItems.SLING_AMMO.get());
+                    output.accept(TFCThingsItems.SLING_AMMO_HEAVY.get());
                     output.accept(TFCThingsItems.SLING_AMMO_SPREAD.get());
                     output.accept(TFCThingsItems.SLING_AMMO_LIGHT.get());
                     output.accept(TFCThingsItems.SLING_AMMO_FIRE.get());
@@ -198,12 +217,23 @@ public class TerraFirmaThings
         TFCThingsDataComponents.DATA_COMPONENTS.register(modEventBus);
         TFCThingsBlocks.BLOCKS.register(modEventBus);
         TFCThingsBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        TFCThingsFoodTraits.TRAITS.register(modEventBus);
         TFCThingsItems.ITEMS.register(modEventBus);
         TFCThingsEntities.ENTITY_TYPES.register(modEventBus);
         TFCThingsRecipeConditions.CONDITION_CODECS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
+
+        if (ModList.get().isLoaded("curios"))
+        {
+            TFCThingsCuriosCompat.register(modEventBus);
+        }
+
+        if (ModList.get().isLoaded("tfcambiental"))
+        {
+            TFCThingsAmbientalCompat.register();
+        }
 
         if (FMLEnvironment.dist == Dist.CLIENT)
         {
@@ -238,6 +268,11 @@ public class TerraFirmaThings
         event.registerItem(ItemCapabilities.MOLD, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
         event.registerItem(ItemCapabilities.HEAT, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
         event.registerItem(ItemCapabilities.FLUID, ItemCapabilities::forMold, TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.get());
+
+        event.registerBlockEntity(
+            Capabilities.ItemHandler.BLOCK,
+            TFCThingsBlockEntities.GRAIN_PILE.get(),
+            (be, side) -> be.getItemHandler());
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)

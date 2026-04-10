@@ -1,13 +1,9 @@
 package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
-
-import com.jcraft.jorbis.Block;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
-import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
-import com.rustysnail.terrafirmathings.common.block.GemDisplayBlock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -15,7 +11,6 @@ import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blocks.TFCBlocks;
 
 public final class TFCThingsBlockTags extends BlockTagsProvider
 {
@@ -54,7 +49,16 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
             .add(TFCThingsBlocks.ROPE_BRIDGE.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .add(TFCThingsBlocks.GRINDSTONE.get())
+            .add(TFCThingsBlocks.GRINDSTONE_BASE.get())
             .add(TFCThingsBlocks.BEAR_TRAP.get());
+
+        tag(TFCThingsTags.Blocks.UNHOOKABLE)
+            .addTag(BlockTags.LEAVES)
+            .addTag(BlockTags.CROPS)
+            .add(net.minecraft.world.level.block.Blocks.VINE)
+            .add(net.minecraft.world.level.block.Blocks.BAMBOO)
+            .add(net.minecraft.world.level.block.Blocks.COBWEB)
+            .add(TFCThingsBlocks.ROPE_LADDER.get())
+            .add(TFCThingsBlocks.ROPE_BRIDGE.get());
     }
 }

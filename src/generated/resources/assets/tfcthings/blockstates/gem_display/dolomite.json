@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfcthings:block/gem_display/dolomite",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfcthings:block/gem_display/dolomite"
+    },
+    "facing=south": {
+      "model": "tfcthings:block/gem_display/dolomite",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfcthings:block/gem_display/dolomite",
+      "y": 270
+    }
+  }
+}

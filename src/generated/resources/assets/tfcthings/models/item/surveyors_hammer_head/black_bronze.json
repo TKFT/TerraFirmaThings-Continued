@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tfcthings:item/surveyors_hammer_head/black_bronze"
+  }
+}

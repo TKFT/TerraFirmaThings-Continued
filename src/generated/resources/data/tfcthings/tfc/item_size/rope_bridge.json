@@ -1,5 +1,7 @@
 {
-  "ingredient": [],
-  "size": "small",
-  "weight": "light"
+  "ingredient": {
+    "item": "tfcthings:rope_bridge"
+  },
+  "size": "normal",
+  "weight": "medium"
 }

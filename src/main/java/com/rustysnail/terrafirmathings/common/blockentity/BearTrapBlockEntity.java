@@ -4,6 +4,7 @@ import java.util.UUID;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsBlockEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
+import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -22,8 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 
 public class BearTrapBlockEntity extends BlockEntity
 {

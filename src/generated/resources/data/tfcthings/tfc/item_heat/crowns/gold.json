@@ -3,13 +3,28 @@
   "heat_capacity": 3.333333,
   "ingredient": [
     {
+      "item": "tfcthings:crown/gold_agate"
+    },
+    {
       "item": "tfcthings:crown/gold_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/gold_beryl"
     },
     {
       "item": "tfcthings:crown/gold_diamond"
     },
     {
       "item": "tfcthings:crown/gold_emerald"
+    },
+    {
+      "item": "tfcthings:crown/gold_garnet"
+    },
+    {
+      "item": "tfcthings:crown/gold_jade"
+    },
+    {
+      "item": "tfcthings:crown/gold_jasper"
     },
     {
       "item": "tfcthings:crown/gold_opal"
@@ -22,6 +37,9 @@
     },
     {
       "item": "tfcthings:crown/gold_topaz"
+    },
+    {
+      "item": "tfcthings:crown/gold_tourmaline"
     }
   ],
   "welding_temperature": 848.0

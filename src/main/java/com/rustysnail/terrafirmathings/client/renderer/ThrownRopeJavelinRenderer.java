@@ -13,7 +13,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.Vec3;
 
 import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.model.entity.JavelinModel;
@@ -24,7 +23,7 @@ public class ThrownRopeJavelinRenderer extends EntityRenderer<ThrownRopeJavelin>
         "tfc", "textures/entity/projectiles/stone_javelin.png");
     private static final float ROPE_THICKNESS = 0.012F;
     private static final float ROPE_SAG = 0.4F;
-    private static final String SUFFIX = "_rope_javelin";
+    private static final String PREFIX = "rope_javelin/";
     private final JavelinModel model;
 
     public ThrownRopeJavelinRenderer(EntityRendererProvider.Context context)
@@ -66,9 +65,9 @@ public class ThrownRopeJavelinRenderer extends EntityRenderer<ThrownRopeJavelin>
     public ResourceLocation getTextureLocation(ThrownRopeJavelin entity)
     {
         String path = BuiltInRegistries.ITEM.getKey(entity.getItem().getItem()).getPath();
-        if (path.endsWith(SUFFIX))
+        if (path.startsWith(PREFIX))
         {
-            String metal = path.substring(0, path.length() - SUFFIX.length());
+            String metal = path.substring(PREFIX.length());
             return ResourceLocation.fromNamespaceAndPath("tfc", "textures/entity/projectiles/" + metal + "_javelin.png");
         }
         return net.dries007.tfc.client.render.entity.ThrownJavelinRenderer.JAVELIN_TEXTURES
@@ -79,24 +78,8 @@ public class ThrownRopeJavelinRenderer extends EntityRenderer<ThrownRopeJavelin>
                             PoseStack poseStack, MultiBufferSource buffer)
     {
         poseStack.pushPose();
-
-        Vec3 handPos = RopeRenderHelper.getOwnerHandPosition(owner, partialTick);
-
-        double javelinX = Mth.lerp(partialTick, javelin.xOld, javelin.getX());
-        double javelinY = Mth.lerp(partialTick, javelin.yOld, javelin.getY());
-        double javelinZ = Mth.lerp(partialTick, javelin.zOld, javelin.getZ());
-
-        Vec3 forward = javelin.getViewVector(partialTick);
-        javelinX -= forward.x * 0.35;
-        javelinY -= forward.y * 0.35;
-        javelinZ -= forward.z * 0.35;
-
-        float dx = (float) (handPos.x - javelinX);
-        float dy = (float) (handPos.y - javelinY);
-        float dz = (float) (handPos.z - javelinZ);
-
-        RopeRenderHelper.renderRope(poseStack.last().pose(), buffer, dx, dy, dz, ROPE_THICKNESS, ROPE_SAG);
-
+        RopeRenderHelper.RopeRenderData data = RopeRenderHelper.computeRopeRenderData(owner, javelin, partialTick);
+        RopeRenderHelper.renderRope(poseStack.last().pose(), buffer, data.dx(), data.dy(), data.dz(), ROPE_THICKNESS, ROPE_SAG);
         poseStack.popPose();
     }
 }

@@ -14,6 +14,29 @@ import org.joml.Matrix4f;
 
 public final class RopeRenderHelper
 {
+    public record RopeRenderData(Vec3 handPos, Vec3 javelinPos, float dx, float dy, float dz) {}
+
+    public static RopeRenderData computeRopeRenderData(Entity owner, Entity javelin, float partialTick)
+    {
+        Vec3 handPos = getOwnerHandPosition(owner, partialTick);
+
+        double javelinX = Mth.lerp(partialTick, javelin.xOld, javelin.getX());
+        double javelinY = Mth.lerp(partialTick, javelin.yOld, javelin.getY());
+        double javelinZ = Mth.lerp(partialTick, javelin.zOld, javelin.getZ());
+
+        Vec3 forward = javelin.getViewVector(partialTick);
+        javelinX -= forward.x * 0.35;
+        javelinY -= forward.y * 0.35;
+        javelinZ -= forward.z * 0.35;
+
+        Vec3 javelinPos = new Vec3(javelinX, javelinY, javelinZ);
+        float dx = (float) (handPos.x - javelinX);
+        float dy = (float) (handPos.y - javelinY);
+        float dz = (float) (handPos.z - javelinZ);
+
+        return new RopeRenderData(handPos, javelinPos, dx, dy, dz);
+    }
+
     public static final int ROPE_SEGMENTS = 24;
 
     private static final int ROPE_RED = 96;
@@ -79,7 +102,7 @@ public final class RopeRenderHelper
             float y2 = dy * t2 - sag2;
             float z2 = dz * t2;
 
-            // Top face (bright)
+            // Top face
             addQuad(vc, poseMatrix,
                 x1 - thickness, y1 + thickness, z1 - thickness,
                 x1 + thickness, y1 + thickness, z1 - thickness,
@@ -93,7 +116,7 @@ public final class RopeRenderHelper
                 x2 - thickness, y2 + thickness, z2 + thickness,
                 ROPE_RED, ROPE_GREEN, ROPE_BLUE);
 
-            // Bottom face (dark)
+            // Bottom face
             addQuad(vc, poseMatrix,
                 x1 - thickness, y1 - thickness, z1 - thickness,
                 x1 + thickness, y1 - thickness, z1 - thickness,
@@ -135,7 +158,7 @@ public final class RopeRenderHelper
                 x2 + thickness, y2 - thickness, z2 + thickness,
                 ROPE_RED_DARK, ROPE_GREEN_DARK, ROPE_BLUE_DARK);
 
-            // Front face (segment start cap)
+            // Front face
             addQuad(vc, poseMatrix,
                 x1 - thickness, y1 - thickness, z1 + thickness,
                 x1 + thickness, y1 - thickness, z1 + thickness,
@@ -143,7 +166,7 @@ public final class RopeRenderHelper
                 x1 - thickness, y1 + thickness, z1 + thickness,
                 ROPE_RED_DARK, ROPE_GREEN_DARK, ROPE_BLUE_DARK);
 
-            // Back face (segment start cap)
+            // Back face
             addQuad(vc, poseMatrix,
                 x1 - thickness, y1 - thickness, z1 - thickness,
                 x1 + thickness, y1 - thickness, z1 - thickness,

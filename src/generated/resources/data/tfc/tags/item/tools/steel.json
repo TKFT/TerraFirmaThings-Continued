@@ -1,7 +1,7 @@
 {
   "values": [
+    "tfcthings:rope_javelin/steel",
     "tfcthings:hook_javelin/steel",
-    "tfcthings:surveyors_hammer/steel",
-    "tfcthings:steel_rope_javelin"
+    "tfcthings:surveyors_hammer/steel"
   ]
 }

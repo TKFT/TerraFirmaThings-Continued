@@ -1,0 +1,25 @@
+{
+  "values": [
+    "tfcthings:gem_display/granite",
+    "tfcthings:gem_display/diorite",
+    "tfcthings:gem_display/gabbro",
+    "tfcthings:gem_display/shale",
+    "tfcthings:gem_display/claystone",
+    "tfcthings:gem_display/limestone",
+    "tfcthings:gem_display/conglomerate",
+    "tfcthings:gem_display/dolomite",
+    "tfcthings:gem_display/chert",
+    "tfcthings:gem_display/chalk",
+    "tfcthings:gem_display/tuff",
+    "tfcthings:gem_display/rhyolite",
+    "tfcthings:gem_display/basalt",
+    "tfcthings:gem_display/andesite",
+    "tfcthings:gem_display/dacite",
+    "tfcthings:gem_display/quartzite",
+    "tfcthings:gem_display/slate",
+    "tfcthings:gem_display/phyllite",
+    "tfcthings:gem_display/schist",
+    "tfcthings:gem_display/gneiss",
+    "tfcthings:gem_display/marble"
+  ]
+}

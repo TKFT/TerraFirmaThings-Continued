@@ -1,0 +1,13 @@
+{
+  "values": {
+    "#tfcthings:crowns": {
+      "insulation_modifier": -0.2
+    },
+    "#tfcthings:hiking_boots": {
+      "insulation_modifier": 0.08
+    },
+    "#tfcthings:snowshoes": {
+      "insulation_modifier": 0.12
+    }
+  }
+}

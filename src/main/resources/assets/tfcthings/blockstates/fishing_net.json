@@ -1,6 +1,24 @@
 {
   "variants": {
-    "axis=x": {"model": "tfcthings:block/fishing_net_x"},
-    "axis=z": {"model": "tfcthings:block/fishing_net_z"}
+    "axis=x,bow_side=false,profile=end": {"model": "tfcthings:block/fishing_net/end"},
+    "axis=x,bow_side=false,profile=inner_1": {"model": "tfcthings:block/fishing_net/inner_1", "y": 180},
+    "axis=x,bow_side=false,profile=inner_2": {"model": "tfcthings:block/fishing_net/inner_2", "y": 180},
+    "axis=x,bow_side=false,profile=inner_3": {"model": "tfcthings:block/fishing_net/inner_3", "y": 180},
+    "axis=x,bow_side=false,profile=middle": {"model": "tfcthings:block/fishing_net/middle", "y": 180},
+    "axis=x,bow_side=true,profile=end": {"model": "tfcthings:block/fishing_net/end"},
+    "axis=x,bow_side=true,profile=inner_1": {"model": "tfcthings:block/fishing_net/inner_1"},
+    "axis=x,bow_side=true,profile=inner_2": {"model": "tfcthings:block/fishing_net/inner_2"},
+    "axis=x,bow_side=true,profile=inner_3": {"model": "tfcthings:block/fishing_net/inner_3"},
+    "axis=x,bow_side=true,profile=middle": {"model": "tfcthings:block/fishing_net/middle"},
+    "axis=z,bow_side=false,profile=end": {"model": "tfcthings:block/fishing_net/end", "y": 90},
+    "axis=z,bow_side=false,profile=inner_1": {"model": "tfcthings:block/fishing_net/inner_1", "y": 90},
+    "axis=z,bow_side=false,profile=inner_2": {"model": "tfcthings:block/fishing_net/inner_2", "y": 90},
+    "axis=z,bow_side=false,profile=inner_3": {"model": "tfcthings:block/fishing_net/inner_3", "y": 90},
+    "axis=z,bow_side=false,profile=middle": {"model": "tfcthings:block/fishing_net/middle", "y": 90},
+    "axis=z,bow_side=true,profile=end": {"model": "tfcthings:block/fishing_net/end", "y": 90},
+    "axis=z,bow_side=true,profile=inner_1": {"model": "tfcthings:block/fishing_net/inner_1", "y": 270},
+    "axis=z,bow_side=true,profile=inner_2": {"model": "tfcthings:block/fishing_net/inner_2", "y": 270},
+    "axis=z,bow_side=true,profile=inner_3": {"model": "tfcthings:block/fishing_net/inner_3", "y": 270},
+    "axis=z,bow_side=true,profile=middle": {"model": "tfcthings:block/fishing_net/middle", "y": 270}
   }
 }

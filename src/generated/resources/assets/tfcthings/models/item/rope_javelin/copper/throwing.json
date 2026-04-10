@@ -1,0 +1,21 @@
+{
+  "base": {
+    "parent": "tfcthings:item/rope_javelin/copper/throwing_base"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/rope_javelin/copper/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/rope_javelin/copper/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/rope_javelin/copper/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/rope_javelin/copper/gui"
+    }
+  }
+}

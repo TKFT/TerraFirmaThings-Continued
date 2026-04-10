@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DFD",
+    "FGF",
+    "DFD"
+  ],
+  "key": {
+    "D": {
+      "item": "tfc:powder/diamond"
+    },
+    "G": {
+      "item": "tfcthings:grindstone_wheel/steel"
+    },
+    "F": {
+      "item": "tfc:glue"
+    }
+  },
+  "result": {
+    "id": "tfcthings:grindstone_wheel/diamond",
+    "count": 1
+  }
+}

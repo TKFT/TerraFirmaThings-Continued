@@ -1,0 +1,8 @@
+{
+  "parent": "tfcthings:block/grain_pile/grain_pile_7",
+  "textures": {
+    "particle": "tfcthings:block/grain_pile/oat",
+    "side": "tfcthings:block/grain_pile/oat",
+    "top": "tfcthings:block/grain_pile/oat"
+  }
+}

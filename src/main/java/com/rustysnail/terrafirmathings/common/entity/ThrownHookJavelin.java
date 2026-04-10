@@ -3,13 +3,18 @@ package com.rustysnail.terrafirmathings.common.entity;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
+import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import com.rustysnail.terrafirmathings.common.item.HookJavelinItem;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,28 +24,56 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SupportType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import net.dries007.tfc.common.items.JavelinItem;
+
 public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
 {
+
+    public enum HookState
+    {
+        FLYING,
+        ANCHORED,
+        RETRACTING;
+
+        public static HookState fromInt(int i)
+        {
+            HookState[] values = values();
+            return (i >= 0 && i < values.length) ? values[i] : FLYING;
+        }
+    }
+
+    public static final float MIN_ROPE_LENGTH = 1.0F;
+
+    private static final double ROPE_CORRECTION_SPEED = 0.12;
+
+    private static final double ROPE_CORRECTION_MAX = 0.4;
+
+    private static final double RETRACT_STEP_SPEED = 1.5;
+
     private static final EntityDataAccessor<ItemStack> DATA_WEAPON =
         SynchedEntityData.defineId(ThrownHookJavelin.class, EntityDataSerializers.ITEM_STACK);
 
     private static final EntityDataAccessor<Float> DATA_ROPE_LENGTH =
         SynchedEntityData.defineId(ThrownHookJavelin.class, EntityDataSerializers.FLOAT);
 
-    private static final EntityDataAccessor<Boolean> DATA_IN_GROUND_SYNCED =
-        SynchedEntityData.defineId(ThrownHookJavelin.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_STATE =
+        SynchedEntityData.defineId(ThrownHookJavelin.class, EntityDataSerializers.INT);
 
-    private static final EntityDataAccessor<Boolean> DATA_RETRACTING =
-        SynchedEntityData.defineId(ThrownHookJavelin.class, EntityDataSerializers.BOOLEAN);
+    @Nullable
+    private BlockPos anchorPos = null;
 
-    private static double clamp(double value, double min, double max)
-    {
-        return Math.max(min, Math.min(max, value));
-    }
+    @Nullable
+    private Direction anchorFace = null;
+
+    @Nullable
+    private Vec3 anchorPoint = null;
+
 
     public ThrownHookJavelin(EntityType<? extends ThrownHookJavelin> type, Level level)
     {
@@ -80,12 +113,7 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
     public void setRopeLength(float length)
     {
         float maxLength = TFCThingsConfig.ITEMS.HOOK_JAVELIN.maxRopeLength.get().floatValue();
-        this.entityData.set(DATA_ROPE_LENGTH, Math.max(1.0F, Math.min(length, maxLength)));
-    }
-
-    public boolean isInGroundSynced()
-    {
-        return this.entityData.get(DATA_IN_GROUND_SYNCED);
+        this.entityData.set(DATA_ROPE_LENGTH, Math.max(MIN_ROPE_LENGTH, Math.min(length, maxLength)));
     }
 
     public void retractRope(float amount)
@@ -93,37 +121,70 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
         setRopeLength(getRopeLength() - amount);
     }
 
+    // TODO: Add extending ability to hook javelin
     public void extendRope(float amount)
     {
         setRopeLength(getRopeLength() + amount);
     }
 
-    public void shortenAndPullOwner(float amount)
+    public HookState getState()
     {
-        if (this.level().isClientSide())
-        {
-            return;
-        }
-
-        retractRope(amount);
+        return HookState.fromInt(this.entityData.get(DATA_STATE));
     }
 
-    public boolean isRetracting()
+    private void setState(HookState state)
     {
-        return this.entityData.get(DATA_RETRACTING);
+        this.entityData.set(DATA_STATE, state.ordinal());
     }
 
-    private void setRetracting(boolean value)
+    public boolean isFlying()
     {
-        this.entityData.set(DATA_RETRACTING, value);
+        return getState() == HookState.FLYING;
+    }
+
+    public boolean isAnchored()
+    {
+        return getState() == HookState.ANCHORED;
     }
 
     public void startAutoRetract()
     {
-        setRetracting(true);
+        setState(HookState.RETRACTING);
         this.setNoGravity(true);
         this.setNoPhysics(true);
         this.inGround = false;
+        this.setDeltaMovement(Vec3.ZERO);
+        this.anchorPos = null;
+        this.anchorFace = null;
+        this.anchorPoint = null;
+    }
+
+    private boolean canAnchorTo(Level level, BlockPos pos, BlockState state, Direction face)
+    {
+        if (!state.getFluidState().isEmpty()) return false;
+        if (state.canBeReplaced()) return false;
+        if (!state.isFaceSturdy(level, pos, face, SupportType.CENTER)) return false;
+        return !state.is(TFCThingsTags.Blocks.UNHOOKABLE);
+    }
+
+    private void enterAnchoredState(BlockHitResult result)
+    {
+        this.anchorPos = result.getBlockPos();
+        this.anchorFace = result.getDirection();
+        this.anchorPoint = result.getLocation();
+        setState(HookState.ANCHORED);
+
+        Entity owner = this.getOwner();
+        if (owner != null)
+        {
+            Vec3 ownerTether = owner instanceof Player p
+                ? getPlayerTetherPoint(p)
+                : owner.position().add(0.0, owner.getBbHeight() * 0.6, 0.0);
+            setRopeLength((float) result.getLocation().distanceTo(ownerTether));
+        }
+
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+            SoundEvents.TRIDENT_HIT_GROUND, SoundSource.PLAYERS, 0.8F, 1.2F);
     }
 
     @Override
@@ -131,9 +192,8 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
     {
         super.defineSynchedData(builder);
         builder.define(DATA_WEAPON, ItemStack.EMPTY);
-        builder.define(DATA_ROPE_LENGTH, 60.0F);
-        builder.define(DATA_IN_GROUND_SYNCED, false);
-        builder.define(DATA_RETRACTING, false);
+        builder.define(DATA_ROPE_LENGTH, 0.0F);
+        builder.define(DATA_STATE, HookState.FLYING.ordinal());
     }
 
     @Override
@@ -156,12 +216,25 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
             return;
         }
 
-        if (isRetracting())
+        switch (getState())
         {
-            tickRetract(owner);
-            return;
+            case FLYING -> tickFlying(owner);
+            case ANCHORED -> tickAnchored(owner);
+            case RETRACTING -> tickRetracting(owner);
         }
+    }
 
+    private void tickFlying(@Nullable Entity owner)
+    {
+        if (shouldDiscard(owner))
+        {
+            clearOwnerThrownState(owner);
+            this.discard();
+        }
+    }
+
+    private void tickAnchored(@Nullable Entity owner)
+    {
         if (shouldDiscard(owner))
         {
             clearOwnerThrownState(owner);
@@ -169,60 +242,106 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
             return;
         }
 
-        this.entityData.set(DATA_IN_GROUND_SYNCED, this.inGround);
+        if (anchorPos != null && anchorFace != null)
+        {
+            BlockState current = this.level().getBlockState(anchorPos);
+            if (!canAnchorTo(this.level(), anchorPos, current, anchorFace))
+            {
+                startAutoRetract();
+                return;
+            }
+        }
+
+        if (!(owner instanceof Player player))
+        {
+            return;
+        }
+
+        Vec3 anchorPt = getEffectiveAnchorPoint();
+        Vec3 tetherPt = getPlayerTetherPoint(player);
+        double dist = anchorPt.distanceTo(tetherPt);
 
         float maxLength = TFCThingsConfig.ITEMS.HOOK_JAVELIN.maxRopeLength.get().floatValue();
-        Vec3 ownerAnchor = getOwnerAnchor(owner);
-        double distanceToOwner = this.position().distanceTo(ownerAnchor);
-        if (distanceToOwner > maxLength)
+        if (dist > maxLength)
         {
             startAutoRetract();
             return;
         }
 
-        if ((this.inGround || isInGroundSynced()) && owner instanceof Player player)
+        applyRopeConstraint(player, anchorPt, tetherPt, dist);
+    }
+
+    private void tickRetracting(@Nullable Entity owner)
+    {
+        if (owner == null)
         {
-            if (player.isShiftKeyDown())
-            {
-                extendRope(0.2F);
-            }
+            this.discard();
+            return;
+        }
 
-            float ropeLength = getRopeLength();
+        this.setNoGravity(true);
+        this.setNoPhysics(true);
+        this.inGround = false;
 
-            if (!player.onGround() && this.getY() > player.getY() && distanceToOwner > ropeLength)
-            {
-                player.fallDistance = 0;
+        Vec3 target = owner.position();
+        Vec3 toTarget = target.subtract(this.position());
+        double dist = toTarget.length();
 
-                Vec3 hookPos = this.position();
-                Vec3 playerPos = getOwnerAnchor(player);
-                Vec3 rope = playerPos.subtract(hookPos).normalize();
-                Vec3 velocity = player.getDeltaMovement();
-                double speed = velocity.length();
+        if (dist < 1.0)
+        {
+            clearOwnerThrownState(owner);
+            this.discard();
+            return;
+        }
 
-                Vec3 motion = speed > 1.0e-6D
-                    ? velocity.scale(1.0D / speed).subtract(rope)
-                    : Vec3.ZERO;
+        Vec3 step = toTarget.normalize().scale(Math.min(RETRACT_STEP_SPEED, dist));
+        Vec3 next = this.position().add(step);
+        this.setPos(next.x, next.y, next.z);
+        this.setDeltaMovement(Vec3.ZERO);
+    }
 
-                double vx = clamp(motion.x * speed, -1.4D, 1.4D);
-                double vy = motion.y * speed;
-                if (vy > 1.0D)
-                {
-                    vy = 1.0D;
-                }
-                double vz = clamp(motion.z * speed, -1.4D, 1.4D);
+    private Vec3 getPlayerTetherPoint(LivingEntity entity)
+    {
+        return entity.position().add(0.0, entity.getBbHeight() * 0.6, 0.0);
+    }
 
-                if (speed < 0.09D && distanceToOwner > ropeLength + 0.3F)
-                {
-                    vy = 0.1D;
-                }
+    private Vec3 getEffectiveAnchorPoint()
+    {
+        return anchorPoint != null ? anchorPoint : this.position();
+    }
 
-                player.setDeltaMovement(vx, vy, vz);
-                player.hurtMarked = true;
-            }
-            else if (player.onGround() && distanceToOwner > ropeLength)
-            {
-                setRopeLength((float) distanceToOwner);
-            }
+    private void applyRopeConstraint(Player player, Vec3 anchorPt, Vec3 tetherPt, double dist)
+    {
+        float ropeLength = getRopeLength();
+        if (dist <= ropeLength)
+        {
+            return;
+        }
+
+        Vec3 radial = tetherPt.subtract(anchorPt).normalize();
+        Vec3 velocity = player.getDeltaMovement();
+        double radialSpeed = velocity.dot(radial);
+
+        Vec3 constrained;
+        if (radialSpeed > 0.0)
+        {
+            constrained = velocity.subtract(radial.scale(radialSpeed));
+        }
+        else
+        {
+            constrained = velocity;
+        }
+
+        double overlap = dist - ropeLength;
+        double correction = Math.min(overlap * ROPE_CORRECTION_SPEED, ROPE_CORRECTION_MAX);
+        constrained = constrained.add(radial.scale(-correction));
+
+        player.setDeltaMovement(constrained);
+        player.hurtMarked = true;
+
+        if (radialSpeed > 0.0 && velocity.y < 0.0)
+        {
+            player.fallDistance = 0.0F;
         }
     }
 
@@ -237,10 +356,15 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
             return;
         }
 
-        // Deal damage but bounce off (no capture for hook javelins)
-        float damage = 4.0F;
+        ItemStack weapon = getWeapon();
+        float baseDamage = weapon.getItem() instanceof JavelinItem jav ? jav.getThrownDamage() : 4.0F;
+        float damage = baseDamage + SharpnessHelper.getDamageBonusForThrown(weapon);
         DamageSource source = this.damageSources().arrow(this, owner != null ? owner : this);
-        target.hurt(source, damage);
+        boolean hurt = target.hurt(source, damage);
+        if (hurt)
+        {
+            consumeSharpnessFromOwnerItem(owner);
+        }
         this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
     }
 
@@ -248,10 +372,28 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
     protected void onHitBlock(BlockHitResult result)
     {
         super.onHitBlock(result);
-        Entity owner = this.getOwner();
-        if (owner != null)
+
+        if (this.level().isClientSide())
         {
-            setRopeLength((float) this.position().distanceTo(getOwnerAnchor(owner)));
+            return;
+        }
+
+        if (!isFlying())
+        {
+            return;
+        }
+
+        BlockPos pos = result.getBlockPos();
+        Direction face = result.getDirection();
+        BlockState state = this.level().getBlockState(pos);
+
+        if (canAnchorTo(this.level(), pos, state, face))
+        {
+            enterAnchoredState(result);
+        }
+        else
+        {
+            startAutoRetract();
         }
     }
 
@@ -265,6 +407,23 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
             tag.put("Weapon", weapon.save(this.registryAccess()));
         }
         tag.putFloat("RopeLength", getRopeLength());
+        tag.putInt("HookState", getState().ordinal());
+        if (anchorPos != null)
+        {
+            tag.putLong("AnchorPos", anchorPos.asLong());
+        }
+        if (anchorFace != null)
+        {
+            tag.putInt("AnchorFace", anchorFace.get3DDataValue());
+        }
+        if (anchorPoint != null)
+        {
+            CompoundTag pt = new CompoundTag();
+            pt.putDouble("x", anchorPoint.x);
+            pt.putDouble("y", anchorPoint.y);
+            pt.putDouble("z", anchorPoint.z);
+            tag.put("AnchorPoint", pt);
+        }
     }
 
     @Override
@@ -279,6 +438,23 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
         {
             setRopeLength(tag.getFloat("RopeLength"));
         }
+        if (tag.contains("HookState"))
+        {
+            setState(HookState.fromInt(tag.getInt("HookState")));
+        }
+        if (tag.contains("AnchorPos"))
+        {
+            this.anchorPos = BlockPos.of(tag.getLong("AnchorPos"));
+        }
+        if (tag.contains("AnchorFace"))
+        {
+            this.anchorFace = Direction.from3DDataValue(tag.getInt("AnchorFace"));
+        }
+        if (tag.contains("AnchorPoint"))
+        {
+            CompoundTag pt = tag.getCompound("AnchorPoint");
+            this.anchorPoint = new Vec3(pt.getDouble("x"), pt.getDouble("y"), pt.getDouble("z"));
+        }
     }
 
     @Override
@@ -287,47 +463,19 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
         return getWeapon();
     }
 
-    private void tickRetract(@Nullable Entity owner)
-    {
-        if (owner == null)
-        {
-            this.discard();
-            return;
-        }
-
-        this.inGround = false;
-        Vec3 anchor = getOwnerAnchor(owner);
-        Vec3 toAnchor = anchor.subtract(this.position());
-        double dist = toAnchor.length();
-
-        if (dist < 1.0)
-        {
-            clearOwnerThrownState(owner);
-            this.discard();
-            return;
-        }
-
-        Vec3 step = toAnchor.normalize().scale(Math.min(1.25D, dist));
-        Vec3 next = this.position().add(step);
-        this.setPos(next.x, next.y, next.z);
-        this.setDeltaMovement(Vec3.ZERO);
-    }
-
-    private boolean shouldDiscard(Entity owner)
+    private boolean shouldDiscard(@Nullable Entity owner)
     {
         if (owner == null || !owner.isAlive()) return true;
         if (!(owner instanceof LivingEntity living)) return true;
-
         return findLinkedThrownStack(living).isEmpty();
     }
 
-    private void clearOwnerThrownState(Entity owner)
+    private void clearOwnerThrownState(@Nullable Entity owner)
     {
         if (!(owner instanceof LivingEntity living))
         {
             return;
         }
-
         ItemStack linked = findLinkedThrownStack(living);
         if (!linked.isEmpty())
         {
@@ -335,9 +483,14 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
         }
     }
 
-    private Vec3 getOwnerAnchor(Entity owner)
+    private void consumeSharpnessFromOwnerItem(@Nullable Entity owner)
     {
-        return owner.position();
+        if (!(owner instanceof LivingEntity living)) return;
+        ItemStack linked = findLinkedThrownStack(living);
+        if (!linked.isEmpty())
+        {
+            SharpnessHelper.consumeCharge(linked);
+        }
     }
 
     private ItemStack findLinkedThrownStack(LivingEntity living)
@@ -347,13 +500,11 @@ public class ThrownHookJavelin extends AbstractArrow implements ItemSupplier
         {
             return mainHand;
         }
-
         ItemStack offHand = living.getOffhandItem();
         if (HookJavelinItem.isLinkedThrownStack(offHand, this.getUUID()))
         {
             return offHand;
         }
-
         return ItemStack.EMPTY;
     }
 }

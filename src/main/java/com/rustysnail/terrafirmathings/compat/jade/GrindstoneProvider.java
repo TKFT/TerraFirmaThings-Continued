@@ -17,7 +17,7 @@ public enum GrindstoneProvider implements IBlockComponentProvider
 {
     INSTANCE;
 
-    private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "grindstone");
+    private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "grindstone_base");
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config)

@@ -69,7 +69,7 @@
     {
       "type": "patchouli:text",
       "title": "Using Displays",
-      "text": "Right-click with a cut gem to insert. Right-click empty-hand to remove.$(br2)Supported gems: amethyst, diamond, emerald, lapis lazuli, opal, pyrite, ruby, sapphire, and topaz."
+      "text": "Right-click with a cut gem to insert. Right-click empty-hand to remove.$(br2)Built-in support covers all TFC gems (agate, amethyst, beryl, diamond, emerald, garnet, jade, jasper, opal, ruby, sapphire, topaz, tourmaline) plus common cross-mod gems matched via $(thing)c:gems/$() tags. Unknown gems fall back to item rendering."
     }
   ],
   "extra_recipe_mappings": {

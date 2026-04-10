@@ -1,15 +1,30 @@
 {
-  "forging_temperature": 636.0,
+  "forging_temperature": 1038.0,
   "heat_capacity": 3.333333,
   "ingredient": [
     {
+      "item": "tfcthings:crown/platinum_agate"
+    },
+    {
       "item": "tfcthings:crown/platinum_amethyst"
+    },
+    {
+      "item": "tfcthings:crown/platinum_beryl"
     },
     {
       "item": "tfcthings:crown/platinum_diamond"
     },
     {
       "item": "tfcthings:crown/platinum_emerald"
+    },
+    {
+      "item": "tfcthings:crown/platinum_garnet"
+    },
+    {
+      "item": "tfcthings:crown/platinum_jade"
+    },
+    {
+      "item": "tfcthings:crown/platinum_jasper"
     },
     {
       "item": "tfcthings:crown/platinum_opal"
@@ -22,7 +37,10 @@
     },
     {
       "item": "tfcthings:crown/platinum_topaz"
+    },
+    {
+      "item": "tfcthings:crown/platinum_tourmaline"
     }
   ],
-  "welding_temperature": 848.0
+  "welding_temperature": 1384.0
 }

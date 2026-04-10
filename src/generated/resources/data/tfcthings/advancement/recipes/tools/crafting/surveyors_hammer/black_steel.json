@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableProspectorsHammers"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tfcthings:surveyors_hammer_head/black_steel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfcthings:crafting/surveyors_hammer/black_steel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_head"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfcthings:crafting/surveyors_hammer/black_steel"
+    ]
+  }
+}

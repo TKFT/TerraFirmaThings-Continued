@@ -2,9 +2,9 @@ package com.rustysnail.terrafirmathings.compat.jade;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.blockentity.FishingNetAnchorBlockEntity;
+import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;

@@ -1,7 +1,6 @@
 package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
-
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
@@ -35,45 +34,40 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     private static final TagKey<Item> GRAINS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/grain"));
     private static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/seeds"));
 
+    private static final TagKey<Item> CURIOS_CROWN = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("curios", "crown"));
+
     @Override
     protected void addTags(HolderLookup.Provider provider)
     {
+        //TFCThings Tags
         tag(TFCThingsTags.Items.SLINGS)
             .add(TFCThingsItems.SLING.value())
             .add(TFCThingsItems.SLING_METAL.value());
 
-        tag(TFCThingsTags.Items.SLING_AMMO)
-            .add(TFCThingsItems.SLING_AMMO.value())
-            .add(TFCThingsItems.SLING_AMMO_SPREAD.value()).add(TFCThingsItems.SLING_AMMO_LIGHT.value())
-            .add(TFCThingsItems.SLING_AMMO_FIRE.value())
+        tag(TFCThingsTags.Items.RECOVERABLE_SLING_AMMO)
+            .add(TFCThingsItems.SLING_AMMO_HEAVY.value())
+            .add(TFCThingsItems.SLING_AMMO_LIGHT.value())
             .addOptionalTag(TFCTags.Items.STONES_LOOSE);
 
-        tag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
-            .add(TFCThingsItems.COPPER_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.STEEL_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.value());
+        tag(TFCThingsTags.Items.NONRECOVERABLE_SLING_AMMO)
+            .add(TFCThingsItems.SLING_AMMO_SPREAD.value())
+            .add(TFCThingsItems.SLING_AMMO_FIRE.value());
+
+        tag(TFCThingsTags.Items.SLING_AMMO)
+            .addTag(TFCThingsTags.Items.RECOVERABLE_SLING_AMMO)
+            .addTag(TFCThingsTags.Items.NONRECOVERABLE_SLING_AMMO);
+
+        {
+            var t = tag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
+            for (SurveyorsHammerFamily f : SurveyorsHammerFamily.ALL)
+            {
+                t.add(f.hammerItem.value());
+            }
+        }
 
         tag(TFCThingsTags.Items.JAVELINS)
-            .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.COPPER_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value())
-
-            .add(TFCThingsItems.STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.value());
+            .addTag(TFCThingsTags.Items.ROPE_JAVELINS)
+            .addTag(TFCThingsTags.Items.HOOK_JAVELINS);
 
         tag(TFCThingsTags.Items.SHARPENING_TOOLS)
             .add(TFCThingsItems.WHETSTONE.value())
@@ -93,7 +87,13 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCItems.GEMS.get(Ore.PYRITE).get())
             .add(TFCItems.GEMS.get(Ore.RUBY).get())
             .add(TFCItems.GEMS.get(Ore.SAPPHIRE).get())
-            .add(TFCItems.GEMS.get(Ore.TOPAZ).get());
+            .add(TFCItems.GEMS.get(Ore.TOPAZ).get())
+            .addOptionalTag(Tags.Items.GEMS);
+
+        {
+            var t = tag(TFCThingsTags.Items.GEM_DISPLAY_ITEMS);
+            TFCThingsItems.GEM_DISPLAY_ITEMS.values().forEach(di -> t.add(di.value()));
+        }
 
         tag(TFCThingsTags.Items.SHARPNESS_MINING_TOOLS)
             .addTag(ItemTags.PICKAXES)
@@ -112,7 +112,7 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptionalTag(TFCTags.Items.TOOLS_RED_STEEL);
 
         tag(TFCThingsTags.Items.SHARPNESS_WEAPONS)
-            .addTag(net.minecraft.tags.ItemTags.SWORDS)
+            .addTag(ItemTags.SWORDS)
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife")))
             .addOptionalTag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spear")));
 
@@ -127,13 +127,82 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(TFCThingsTags.Items.JAVELINS);
 
         tag(TFCThingsTags.Items.GRINDSTONE_WHEELS)
-            .add(TFCThingsItems.GRINDSTONE_QUARTZ.value())
-            .add(TFCThingsItems.GRINDSTONE_STEEL.value())
-            .add(TFCThingsItems.GRINDSTONE_DIAMOND.value());
+            .add(TFCThingsItems.GRINDSTONE_WHEEL_QUARTZ.value())
+            .add(TFCThingsItems.GRINDSTONE_WHEEL_STEEL.value())
+            .add(TFCThingsItems.GRINDSTONE_WHEEL_DIAMOND.value());
 
         tag(TFCThingsTags.Items.SNARE_BAIT)
             .addOptionalTag(GRAINS)
             .addOptionalTag(SEEDS);
+
+        tag(TFCThingsTags.Items.GRAIN_PILE_ITEMS)
+            .addOptionalTag(GRAINS);
+
+        tag(TFCThingsTags.Items.WHETSTONE_ROCKS)
+            .addOptional(ResourceLocation.parse("tfc:rock/loose/chert"))
+            .addOptional(ResourceLocation.parse("tfc:rock/loose/slate"))
+            .addOptional(ResourceLocation.parse("tfc:rock/loose/phyllite"))
+            .addOptional(ResourceLocation.parse("tfc:rock/loose/quartzite"))
+            .addOptional(ResourceLocation.parse("tfc:rock/mossy_loose/chert"))
+            .addOptional(ResourceLocation.parse("tfc:rock/mossy_loose/slate"))
+            .addOptional(ResourceLocation.parse("tfc:rock/mossy_loose/phyllite"))
+            .addOptional(ResourceLocation.parse("tfc:rock/mossy_loose/quartzite"));
+
+        {
+            var t = tag(TFCThingsTags.Items.CROWNS_GOLD);
+            t.add(TFCThingsItems.GOLD_CROWN_EMPTY.value());
+            for (CrownGem g : CrownGem.ALL)
+            {
+                t.add(g.goldResult.value());
+            }
+        }
+
+        {
+            var t = tag(TFCThingsTags.Items.CROWNS_PLATINUM);
+            t.add(TFCThingsItems.PLATINUM_CROWN_EMPTY.value());
+            for (CrownGem g : CrownGem.ALL)
+            {
+                t.add(g.platinumResult.value());
+            }
+        }
+
+        tag(TFCThingsTags.Items.CROWNS)
+            .addTag(TFCThingsTags.Items.CROWNS_GOLD)
+            .addTag(TFCThingsTags.Items.CROWNS_PLATINUM);
+
+        tag(TFCThingsTags.Items.SNOWSHOES)
+            .add(TFCThingsItems.SNOW_SHOES.value())
+            .add(TFCThingsItems.DURABLE_SNOW_SHOES.value());
+
+        tag(TFCThingsTags.Items.HIKING_BOOTS)
+            .add(TFCThingsItems.HIKING_BOOTS.value());
+
+        tag(TFCThingsTags.Items.CRAMPONS)
+            .add(TFCThingsItems.CRAMPONS.value());
+
+        {
+            var t = tag(TFCThingsTags.Items.ROPE_JAVELINS);
+            for (RopeJavelinFamily f : RopeJavelinFamily.ALL)
+            {
+                t.add(f.javelinItem.value());
+            }
+        }
+
+        {
+            var t = tag(TFCThingsTags.Items.HOOK_JAVELINS);
+            for (HookJavelinFamily f : HookJavelinFamily.ALL)
+            {
+                t.add(f.javelinItem.value());
+            }
+        }
+
+        tag(TFCThingsTags.Items.WARM_FOOTWEAR)
+            .addTag(TFCThingsTags.Items.SNOWSHOES)
+            .addTag(TFCThingsTags.Items.HIKING_BOOTS);
+
+        tag(TFCThingsTags.Items.LEATHER_LIKE_FOOTWEAR)
+            .addTag(TFCThingsTags.Items.SNOWSHOES)
+            .addTag(TFCThingsTags.Items.HIKING_BOOTS);
 
         tag(net.minecraft.tags.ItemTags.FOOT_ARMOR)
             .add(TFCThingsItems.HIKING_BOOTS.value())
@@ -165,41 +234,30 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(TFCThingsTags.Items.SHARPENING_TOOLS)
             .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
 
+        tag(TFCTags.Items.DEALS_CRUSHING_DAMAGE)
+            .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS);
+
         tag(TFCTags.Items.FIRED_MOLDS).add(TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.value());
         tag(TFCTags.Items.UNFIRED_MOLDS).add(TFCThingsItems.UNFIRED_SURVEYORS_HAMMER_HEAD_MOLD.value());
+        tag(TFCTags.Items.USABLE_IN_MOLD_TABLE).add(TFCThingsItems.SURVEYORS_HAMMER_HEAD_MOLD.value());
 
-        tag(TFCTags.Items.TOOLS_BISMUTH_BRONZE)
-            .add(TFCThingsItems.BISMUTH_BRONZE_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BISMUTH_BRONZE_SURVEYORS_HAMMER.value());
-        tag(TFCTags.Items.TOOLS_BLACK_BRONZE)
-            .add(TFCThingsItems.BLACK_BRONZE_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BLACK_BRONZE_ROPE_JAVELIN.value());
-        tag(TFCTags.Items.TOOLS_BRONZE)
-            .add(TFCThingsItems.BRONZE_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BRONZE_ROPE_JAVELIN.value());
+        for (RopeJavelinFamily f : RopeJavelinFamily.ALL)
+        {
+            tag(f.tfcToolsTag).add(f.javelinItem.value());
+        }
+        for (HookJavelinFamily f : HookJavelinFamily.ALL)
+        {
+            tag(f.tfcToolsTag).add(f.javelinItem.value());
+        }
+        for (SurveyorsHammerFamily f : SurveyorsHammerFamily.ALL)
+        {
+            tag(f.tfcToolsTag).add(f.hammerItem.value());
+        }
         tag(TFCTags.Items.TOOLS_BLACK_STEEL)
-            .add(TFCThingsItems.BLACK_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.BLACK_STEEL_SURVEYORS_HAMMER.value())
             .add(TFCThingsItems.HONING_STEEL.value())
             .add(TFCThingsItems.DIAMOND_HONING_STEEL.value());
-        tag(TFCTags.Items.TOOLS_COPPER)
-            .add(TFCThingsItems.COPPER_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.COPPER_SURVEYORS_HAMMER.value());
-        tag(TFCTags.Items.TOOLS_BLUE_STEEL)
-            .add(TFCThingsItems.BLUE_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.BLUE_STEEL_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.BLUE_STEEL_ROPE_JAVELIN.value());
-        tag(TFCTags.Items.TOOLS_RED_STEEL)
-            .add(TFCThingsItems.RED_STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.RED_STEEL_ROPE_JAVELIN.value())
-            .add(TFCThingsItems.RED_STEEL_SURVEYORS_HAMMER.value());
-        tag(TFCTags.Items.TOOLS_STEEL)
-            .add(TFCThingsItems.STEEL_HOOK_JAVELIN.value())
-            .add(TFCThingsItems.STEEL_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.STEEL_ROPE_JAVELIN.value());
-        tag(TFCTags.Items.TOOLS_WROUGHT_IRON)
-            .add(TFCThingsItems.WROUGHT_IRON_SURVEYORS_HAMMER.value())
-            .add(TFCThingsItems.WROUGHT_IRON_ROPE_JAVELIN.value());
+
+        tag(CURIOS_CROWN)
+            .addTag(TFCThingsTags.Items.CROWNS);
     }
 }

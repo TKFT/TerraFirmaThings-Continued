@@ -1,7 +1,7 @@
 {
   "type": "tfc:heating",
   "ingredient": {
-    "item": "tfcthings:bismuth_bronze_rope_javelin"
+    "item": "tfcthings:rope_javelin/bismuth_bronze"
   },
   "result_fluid": {
     "amount": 100,

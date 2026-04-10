@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,7 +19,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -126,7 +127,7 @@ public class BearTrapBlock extends BaseEntityBlock
     {
         ItemStack heldItem = player.getMainHandItem();
 
-        if (heldItem.getItem() instanceof ShovelItem)
+        if (heldItem.is(ItemTags.SHOVELS))
         {
             boolean newBuried = !state.getValue(BURIED);
             if (newBuried)
@@ -170,6 +171,12 @@ public class BearTrapBlock extends BaseEntityBlock
         BlockPos below = pos.below();
         BlockState belowState = level.getBlockState(below);
         return belowState.isFaceSturdy(level, below, Direction.UP);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state)
+    {
+        return RenderShape.MODEL;
     }
 
     @Override

@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "GRG",
+    "DGD"
+  ],
+  "key": {
+    "D": {
+      "item": "tfc:powder/diamond"
+    },
+    "G": {
+      "item": "tfc:glue"
+    },
+    "R": {
+      "item": "tfcthings:honing_steel_head"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:diamond_honing_steel_head"
+  },
+  "tier": 4
+}

@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_steel_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/steel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfcthings:crafting/grindstone_base/steel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_steel_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfcthings:crafting/grindstone_base/steel"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "tfc:welding",
+  "first_input": {
+    "item": "tfcthings:grindstone_wheel/quartz"
+  },
+  "result": {
+    "count": 1,
+    "id": "tfcthings:grindstone_wheel/steel"
+  },
+  "second_input": {
+    "tag": "c:double_sheets/black_steel"
+  },
+  "tier": 4
+}

@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "tfcthings:crafting/grindstone_base/wrought_iron"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wrought_iron_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/wrought_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wrought_iron_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "tfcthings:crafting/grindstone_base/wrought_iron"
+    ]
+  }
+}

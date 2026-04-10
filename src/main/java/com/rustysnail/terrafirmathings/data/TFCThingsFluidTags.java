@@ -1,7 +1,6 @@
 package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
-
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import net.minecraft.core.HolderLookup;

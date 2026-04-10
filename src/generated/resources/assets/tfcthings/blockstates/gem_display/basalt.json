@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfcthings:block/gem_display/basalt",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfcthings:block/gem_display/basalt"
+    },
+    "facing=south": {
+      "model": "tfcthings:block/gem_display/basalt",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfcthings:block/gem_display/basalt",
+      "y": 270
+    }
+  }
+}

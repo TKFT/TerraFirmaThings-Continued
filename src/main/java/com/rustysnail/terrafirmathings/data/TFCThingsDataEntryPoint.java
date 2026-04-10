@@ -3,7 +3,6 @@ package com.rustysnail.terrafirmathings.data;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -56,6 +55,29 @@ public final class TFCThingsDataEntryPoint
 
         event.getGenerator().addProvider(event.includeServer(), new TFCThingsItemSizes(output, lookup));
         event.getGenerator().addProvider(event.includeServer(), new TFCThingsItemHeat(output, lookup));
-        event.getGenerator().addProvider(event.includeServer(), new TFCThingsHeatingRecipes(output, lookup));
+        event.getGenerator().addProvider(event.includeServer(), new TFCThingsItemDamageResistance(output, lookup));
+        event.getGenerator().addProvider(event.includeServer(), new TFCThingsRecipes(output, lookup));
+
+        event.getGenerator().addProvider(
+            event.includeServer(),
+            new TFCThingsColdSweatInsulatorProvider(output)
+        );
+
+        event.getGenerator().addProvider(
+            event.includeServer(),
+            new TFCThingsThermiaInsulatorProvider(output)
+        );
+
+        event.getGenerator().addProvider(
+            event.includeClient(),
+            new TFCThingsItemModelProvider(output)
+        );
+
+        event.getGenerator().addProvider(
+            event.includeClient(),
+            new TFCThingsBlockModelAndStateProvider(output)
+        );
+
+        event.getGenerator().addProvider(true, new TFCThingsSanityChecks());
     }
 }

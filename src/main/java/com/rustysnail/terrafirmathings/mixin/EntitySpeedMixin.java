@@ -2,8 +2,6 @@ package com.rustysnail.terrafirmathings.mixin;
 
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
-import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
-import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -42,9 +40,14 @@ public abstract class EntitySpeedMixin
         }
 
         BlockState blockState = entity.level().getBlockState(entity.blockPosition());
+        if (blockState.getBlock().getSpeedFactor() == 1.0F)
+        {
+            blockState = entity.level().getBlockState(entity.getBlockPosBelowThatAffectsMyMovement());
+        }
+
         ItemStack feetItem = player.getItemBySlot(EquipmentSlot.FEET);
 
-        if (blockState.is(TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW) && feetItem.getItem() instanceof SnowShoesItem)
+        if (blockState.is(TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW) && feetItem.is(TFCThingsTags.Items.SNOWSHOES))
         {
             double shoePower = TFCThingsConfig.ITEMS.SNOW_SHOES.shoePower.get();
             float newFactor = tfcthings$calculateNewSpeedFactor(currentFactor, shoePower);
@@ -52,7 +55,7 @@ public abstract class EntitySpeedMixin
             return;
         }
 
-        if (blockState.is(TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW) && feetItem.getItem() instanceof HikingBootsItem)
+        if (blockState.is(TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW) && feetItem.is(TFCThingsTags.Items.HIKING_BOOTS))
         {
             double bootPower = TFCThingsConfig.ITEMS.HIKING_BOOTS.bootPower.get();
             float newFactor = tfcthings$calculateNewSpeedFactor(currentFactor, bootPower);

@@ -1,0 +1,21 @@
+{
+  "base": {
+    "parent": "tfcthings:item/rope_javelin/bismuth_bronze/throwing_base"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/rope_javelin/bismuth_bronze/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/rope_javelin/bismuth_bronze/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/rope_javelin/bismuth_bronze/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/rope_javelin/bismuth_bronze/gui"
+    }
+  }
+}

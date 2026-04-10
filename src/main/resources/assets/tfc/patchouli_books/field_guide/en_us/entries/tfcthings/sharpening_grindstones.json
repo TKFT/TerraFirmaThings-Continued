@@ -2,19 +2,19 @@
   "neoforge:conditions": [
     {"type": "tfcthings:config_enabled", "flag": "enableWhetstones"}
   ],
-  "name": "Sharpening and Grindstones",
+  "name": "Sharpening $(br)and Grindstones",
   "category": "tfc:tfcthings",
-  "icon": "tfcthings:grindstone",
+  "icon": "tfcthings:grindstone_base",
   "sortnum": 13,
   "read_by_default": true,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Sharpening adds $(thing)charges$() to axes, picks, shovels, swords, and other sharpenable tools. Charges boost $(thing)mining speed$() while digging and add $(thing)flat damage$() on the next hit — then consume one charge.$(br2)Three tiers of sharpener determine the charge cap and power."
+      "text": "Sharpening allows the player to sharpen axes, picks, shovels, swords, and other tools and weapons. Charges increase the $(thing)mining speed$() of tools while digging and increase the $(thing)damage$() of weapons, then consume one sharpness charge.$(br2)Three tiers of sharpener determine the charge cap and power."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/whetstone",
+      "type": "tfc:knapping_recipe",
+      "recipe": "tfcthings:knapping/whetstone",
       "text": "$(thing)Whetstones$() are the simplest sharpener. Hold in one hand, sharpenable tool in the other, then right-click. Each use takes one durability from the whetstone. Caps at 64 charges ($(#008000)Tier 1$())."
     },
     {
@@ -28,9 +28,9 @@
       "text": "$(thing)Honing Steel$() — assemble from head and two wooden rods. Faster than a whetstone, adds more charges per use, and caps at 128 charges ($(#0000AA)Tier 2$()). Takes durability per use."
     },
     {
-      "type": "tfc:welding_recipe",
-      "recipe": "tfcthings:welding/diamond_honing_steel_head",
-      "text": "Weld together the diamond honing steel head."
+      "type": "patchouli:crafting",
+      "recipe": "tfcthings:crafting/diamond_honing_steel_head",
+      "text": "Craft the diamond sharpening head from diamond dust and glue."
     },
     {
       "type": "patchouli:crafting",
@@ -44,23 +44,26 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/grindstone_base_wrought_iron",
-      "recipe2": "tfcthings:crafting/grindstone_base_steel",
+      "recipe": "tfcthings:crafting/grindstone_base/wrought_iron",
+      "recipe2": "tfcthings:crafting/grindstone_base/steel"
+    },
+    {
+      "type": "patchouli:text",
       "text": "The $(thing)Grindstone$() block is an automated sharpening station. Craft the base frame from iron or steel rods and lumber."
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/grindstone_quartz",
+      "recipe": "tfcthings:crafting/grindstone_wheel/quartz",
       "text": "$(thing)Quartz Wheel$() — the basic grindstone wheel. Crafted from quartzite blocks around an axle. Corresponds to Tier 1 sharpening."
     },
     {
       "type": "tfc:welding_recipe",
-      "recipe": "tfcthings:welding/grindstone_steel",
+      "recipe": "tfcthings:welding/grindstone_wheel/steel",
       "text": "$(thing)Steel Wheel$() — weld a Quartz Wheel with a Black Steel double sheet. Corresponds to Tier 2 sharpening."
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/grindstone_diamond",
+      "recipe": "tfcthings:crafting/grindstone_wheel/diamond",
       "text": "$(thing)Diamond Wheel$() — surround a Steel Wheel with diamond powder. Corresponds to Tier 3 sharpening."
     },
     {
@@ -75,11 +78,9 @@
     "tfcthings:diamond_honing_steel": 5,
     "tfcthings:honing_steel_head": 2,
     "tfcthings:diamond_honing_steel_head": 4,
-    "tfcthings:grindstone": 7,
-    "tfcthings:honing_steel_grindstone": 7,
-    "tfcthings:diamond_grindstone": 7,
-    "tfcthings:grindstone_quartz": 8,
-    "tfcthings:grindstone_steel": 9,
-    "tfcthings:grindstone_diamond": 10
+    "tfcthings:grindstone_base": 7,
+    "tfcthings:grindstone_wheel/quartz": 9,
+    "tfcthings:grindstone_wheel/steel": 10,
+    "tfcthings:grindstone_wheel/diamond": 11
   }
 }

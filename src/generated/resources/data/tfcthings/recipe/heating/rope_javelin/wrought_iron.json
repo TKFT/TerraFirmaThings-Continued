@@ -1,7 +1,7 @@
 {
   "type": "tfc:heating",
   "ingredient": {
-    "item": "tfcthings:wrought_iron_rope_javelin"
+    "item": "tfcthings:rope_javelin/wrought_iron"
   },
   "result_fluid": {
     "amount": 100,

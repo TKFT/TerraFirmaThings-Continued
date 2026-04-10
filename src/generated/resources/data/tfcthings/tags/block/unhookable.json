@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#minecraft:leaves",
+    "#minecraft:crops",
+    "minecraft:vine",
+    "minecraft:bamboo",
+    "minecraft:cobweb",
+    "tfcthings:rope_ladder",
+    "tfcthings:rope_bridge"
+  ]
+}

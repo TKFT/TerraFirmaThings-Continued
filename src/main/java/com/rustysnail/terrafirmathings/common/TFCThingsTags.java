@@ -22,6 +22,8 @@ public class TFCThingsTags
 
         public static final TagKey<Block> GEM_DISPLAY = tag("gem_displays");
 
+        public static final TagKey<Block> UNHOOKABLE = tag("unhookable");
+
         private static TagKey<Block> tag(String name)
         {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, name));
@@ -45,10 +47,16 @@ public class TFCThingsTags
     public static class Items
     {
         public static final TagKey<Item> GEM_DISPLAY_ELIGIBLE = tag("gem_display_eligible");
+        public static final TagKey<Item> GEM_DISPLAY_ITEMS = tag("gem_display_items");
 
         public static final TagKey<Item> JAVELINS = tag("javelins");
+        public static final TagKey<Item> ROPE_JAVELINS = tag("rope_javelins");
+        public static final TagKey<Item> HOOK_JAVELINS = tag("hook_javelins");
+
         public static final TagKey<Item> SLINGS = tag("slings");
         public static final TagKey<Item> SLING_AMMO = tag("sling_ammo");
+        public static final TagKey<Item> RECOVERABLE_SLING_AMMO = tag("recoverable_sling_ammo");
+        public static final TagKey<Item> NONRECOVERABLE_SLING_AMMO = tag("nonrecoverable_sling_ammo");
         public static final TagKey<Item> SHARPENING_TOOLS = tag("sharpening_tools");
         public static final TagKey<Item> SURVEYORS_HAMMERS = tag("surveyors_hammers");
         public static final TagKey<Item> SHARPENING_TOOL_HEADS = tag("sharpening_tool_heads");
@@ -60,6 +68,20 @@ public class TFCThingsTags
         public static final TagKey<Item> GRINDSTONE_WHEELS = tag("grindstone_wheels");
 
         public static final TagKey<Item> SNARE_BAIT = tag("snare_bait");
+
+        public static final TagKey<Item> GRAIN_PILE_ITEMS = tag("grain_pile_items");
+
+        public static final TagKey<Item> WHETSTONE_ROCKS = tag("stones/loose/whetstone");
+
+        public static final TagKey<Item> CROWNS = tag("crowns");
+        public static final TagKey<Item> CROWNS_GOLD = tag("crowns_gold");
+        public static final TagKey<Item> CROWNS_PLATINUM = tag("crowns_platinum");
+
+        public static final TagKey<Item> SNOWSHOES = tag("snowshoes");
+        public static final TagKey<Item> HIKING_BOOTS = tag("hiking_boots");
+        public static final TagKey<Item> CRAMPONS = tag("crampons");
+        public static final TagKey<Item> WARM_FOOTWEAR = tag("warm_footwear");
+        public static final TagKey<Item> LEATHER_LIKE_FOOTWEAR = tag("leather_like_footwear");
 
         private static TagKey<Item> tag(String name)
         {

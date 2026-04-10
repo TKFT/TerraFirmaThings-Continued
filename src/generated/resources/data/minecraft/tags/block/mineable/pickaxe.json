@@ -21,7 +21,7 @@
     "tfcthings:gem_display/schist",
     "tfcthings:gem_display/gneiss",
     "tfcthings:gem_display/marble",
-    "tfcthings:grindstone",
+    "tfcthings:grindstone_base",
     "tfcthings:bear_trap"
   ]
 }

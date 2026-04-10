@@ -1,5 +1,6 @@
 package com.rustysnail.terrafirmathings.common.util;
 
+import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsDataComponents;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import net.minecraft.world.item.ItemStack;
@@ -35,5 +36,20 @@ public final class SharpnessHelper
     public static boolean isSharpenable(ItemStack stack)
     {
         return !stack.isEmpty() && stack.is(TFCThingsTags.Items.SHARPENABLE);
+    }
+
+    public static float getDamageBonusForTier(int charges)
+    {
+        if (charges <= 0) return 0.0F;
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get())
+            return TFCThingsConfig.ITEMS.WHETSTONE.tier3WeaponBonus.get().floatValue();
+        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesWhetstone.get())
+            return TFCThingsConfig.ITEMS.WHETSTONE.tier2WeaponBonus.get().floatValue();
+        return TFCThingsConfig.ITEMS.WHETSTONE.tier1WeaponBonus.get().floatValue();
+    }
+
+    public static float getDamageBonusForThrown(ItemStack stack)
+    {
+        return getDamageBonusForTier(getCharges(stack));
     }
 }

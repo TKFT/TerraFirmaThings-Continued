@@ -8,7 +8,7 @@
   "type": "tfc:advanced_shapeless_crafting",
   "ingredients": [
     {
-      "item": "tfcthings:sling_ammo"
+      "item": "tfcthings:sling_ammo/heavy"
     },
     {
       "tag": "c:tools/hammer"
@@ -26,6 +26,6 @@
   },
   "result": {
     "count": 1,
-    "id": "tfcthings:sling_ammo_spread"
+    "id": "tfcthings:sling_ammo/spread"
   }
 }

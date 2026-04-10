@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {"type": "tfcthings:config_enabled", "flag": "enableGrainPiles"}
+  ],
+  "name": "Grain Pile",
+  "category": "tfc:tfcthings",
+  "icon": "tfc:food/wheat",
+  "sortnum": 14,
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(thing)Grain Piles$() store loose grain directly on the ground without a container. Grain stored this way decays over time like food. Piles with a solid ceiling above them are considered $(thing)sheltered$() and decay more slowly."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Forming a Pile",
+      "text": "Grain piles have no crafted item. To form one, $(thing)Sneak + Right-Click$() on a sturdy solid surface while holding a valid grain item. A single item is placed into the new pile automatically.$(br2)You can also shift-click to bulk-fill an existing pile from your stack."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Inserting and Extracting",
+      "text": "$(thing)Right-click$() an existing pile with matching grain to add one item at a time.$(br2)$(thing)Right-click$() with an empty hand to extract grain.$(br2)Only one type of grain can be stored per pile. Mixing grain types is not allowed — you will receive a warning if you try."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fill Levels",
+      "text": "Each pile has 8 visible fill levels. As more grain is added the pile grows taller. When a pile reaches capacity, dropped grain items nearby will overflow upward into a new pile in the air above, or into an adjacent pile already there."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Grain Types",
+      "text": "Built-in supported grains render with their own textures: $(thing)Barley, Corn, Oat, Rice, Rye,$() and $(thing)Wheat$(). Other modded grains tagged as valid pile items will store and function correctly but render using a generic hay fallback appearance until explicit support is added."
+    }
+  ]
+}

@@ -34,6 +34,7 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_STACK =
         SynchedEntityData.defineId(ThrownRopeBridge.class, EntityDataSerializers.ITEM_STACK);
 
+
     public ThrownRopeBridge(EntityType<? extends ThrownRopeBridge> type, Level level)
     {
         super(type, level);
@@ -87,7 +88,7 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
     @Override
     protected void onHitEntity(EntityHitResult result)
     {
-        // Do nothing on entity hit, just pass through
+
     }
 
     @Override
@@ -126,31 +127,37 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
         int xDif = end.getX() - start.getX();
         int zDif = end.getZ() - start.getZ();
         boolean axis = Math.abs(zDif) > Math.abs(xDif);
-        int length = axis ? Math.abs(zDif) : Math.abs(xDif);
+
+        int span = axis ? Math.abs(zDif) : Math.abs(xDif);
+        int segmentCount = span + 1;
         int yDif = start.getY() - end.getY();
 
-        if (length - 1 > maxLength)
+        if (segmentCount - 1 > maxLength)
         {
             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_exceeds_max", maxLength));
             return;
         }
 
-        if (length - 1 > availableInInventory)
+        if (segmentCount > availableInInventory)
         {
             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_too_long"));
             return;
         }
 
-        if (length > 1 && ((length - 2) / 8) < Math.abs(yDif))
+        if (segmentCount > 1 && ((segmentCount - 2) / 5) < Math.abs(yDif))
         {
             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_too_steep"));
             return;
         }
 
+        double primaryDistance = axis
+            ? Math.abs(hitLocation.z - player.getZ())
+            : Math.abs(hitLocation.x - player.getX());
         double secondaryDeviation = axis
             ? Math.abs(hitLocation.x - player.getX())
             : Math.abs(hitLocation.z - player.getZ());
-        if (secondaryDeviation > 0.75)
+        double angle = Math.toDegrees(Math.atan2(secondaryDeviation, primaryDistance));
+        if (angle > TFCThingsConfig.ITEMS.ROPE_BRIDGE.maxPlacementAngle.get())
         {
             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_diagonal"));
             return;
@@ -166,12 +173,22 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
             direction = xDif > 0 ? Direction.EAST : Direction.WEST;
         }
 
-        start = start.relative(direction);
-        end = end.relative(direction.getOpposite());
+        end = axis
+            ? new BlockPos(start.getX(), end.getY(), end.getZ())
+            : new BlockPos(end.getX(), end.getY(), start.getZ());
 
-        length = axis ? Math.abs(end.getZ() - start.getZ()) + 1 : Math.abs(end.getX() - start.getX()) + 1;
+        if (isValidBridgeAnchor(start))
+        {
+            player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_no_support"));
+            return;
+        }
+        if (isValidBridgeAnchor(end))
+        {
+            player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_no_support"));
+            return;
+        }
 
-        List<BridgeInfo> bridgePath = calculateBridgePath(player, start, end, direction, yDif, length);
+        List<BridgeInfo> bridgePath = calculateBridgePath(player, start, end, direction, yDif, segmentCount);
         if (bridgePath == null)
         {
             return;
@@ -298,7 +315,7 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
                             startHeight = 7;
                             startDif--;
                         }
-                        else if (((remainingPieces - 1) / 8) < startDif - 1)
+                        else if (((remainingPieces - 1) / 5) < startDif - 1)
                         {
                             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_too_steep"));
                             return null;
@@ -330,7 +347,7 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
                             endHeight = 7;
                             endDif--;
                         }
-                        else if (((remainingPieces - 1) / 8) < endDif - 1)
+                        else if (((remainingPieces - 1) / 5) < endDif - 1)
                         {
                             player.sendSystemMessage(Component.translatable("tfcthings.tooltip.rope_bridge_too_steep"));
                             return null;
@@ -384,6 +401,14 @@ public class ThrownRopeBridge extends ThrowableProjectile implements ItemSupplie
             }
         }
         return currentHeight;
+    }
+
+    private boolean isValidBridgeAnchor(BlockPos pos)
+    {
+        BlockState anchorState = this.level().getBlockState(pos);
+        if (!anchorState.canBeReplaced()) return true;
+        BlockState belowState = this.level().getBlockState(pos.below());
+        return belowState.getCollisionShape(this.level(), pos.below()).isEmpty();
     }
 
     private boolean shouldReplaceBlock(BlockPos pos)

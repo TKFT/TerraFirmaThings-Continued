@@ -21,6 +21,7 @@ public record TFCThingsConfigCondition(String flag) implements ICondition
         {
             case "enableSnowShoes" -> m.enableSnowShoes.get();
             case "enableHikingBoots" -> m.enableHikingBoots.get();
+            case "enableCrampons" -> m.enableCrampons.get();
             case "enableBearTrap" -> m.enableBearTrap.get();
             case "enableSnare" -> m.enableSnare.get();
             case "enableFishingNet" -> m.enableFishingNet.get();

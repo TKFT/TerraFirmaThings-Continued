@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 
 public class SlingItem extends ProjectileWeaponItem
 {
+    private static final int MIN_CHARGE_TICKS = 10;
 
     public SlingItem(Properties properties)
     {
@@ -27,6 +28,12 @@ public class SlingItem extends ProjectileWeaponItem
 
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles()
+    {
+        return this::isValidAmmo;
+    }
+
+    @Override
+    public Predicate<ItemStack> getAllSupportedProjectiles(ItemStack stack)
     {
         return this::isValidAmmo;
     }
@@ -84,6 +91,8 @@ public class SlingItem extends ProjectileWeaponItem
         if (level.isClientSide()) return;
 
         int chargeTime = getUseDuration(stack, entity) - timeLeft;
+        if (chargeTime < MIN_CHARGE_TICKS) return;
+
         int maxPower = TFCThingsConfig.ITEMS.SLING.maxPower.get();
         int chargeSpeed = TFCThingsConfig.ITEMS.SLING.chargeSpeed.get();
 
@@ -103,11 +112,13 @@ public class SlingItem extends ProjectileWeaponItem
         float velocity = 1.6f * (power / maxPower) * ammoType.getVelocityMultiplier();
         float inaccuracy = 0.5f * (8 - Math.min(power, 8));
 
-        spawnProjectile(level, player, totalPower, velocity, inaccuracy, ammoType);
+        ItemStack ammoStack = ammo != null ? ammo.stack().copyWithCount(1) : ItemStack.EMPTY;
+
+        spawnProjectile(level, player, totalPower, velocity, inaccuracy, ammoType, ammoStack);
 
         for (int i = 0; i < ammoType.getScatterCount(); i++)
         {
-            spawnProjectile(level, player, power, velocity * 0.75f, inaccuracy + 2.5f, ammoType);
+            spawnProjectile(level, player, power, velocity * 0.75f, inaccuracy + 2.5f, ammoType, ammoStack);
         }
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
@@ -121,9 +132,9 @@ public class SlingItem extends ProjectileWeaponItem
         stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
     }
 
-    private void spawnProjectile(Level level, Player player, float power, float velocity, float inaccuracy, SlingAmmoItem.AmmoType ammoType)
+    private void spawnProjectile(Level level, Player player, float power, float velocity, float inaccuracy, SlingAmmoItem.AmmoType ammoType, ItemStack ammoStack)
     {
-        SlingStoneEntity stone = new SlingStoneEntity(level, player, power, ammoType);
+        SlingStoneEntity stone = new SlingStoneEntity(level, player, power, ammoType, ammoStack);
         stone.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, velocity, inaccuracy);
         level.addFreshEntity(stone);
     }

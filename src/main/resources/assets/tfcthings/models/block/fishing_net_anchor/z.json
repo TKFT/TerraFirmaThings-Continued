@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "tfcthings:block/fishing_net",
+    "post": "minecraft:block/oak_planks",
+    "net": "tfcthings:block/fishing_net"
+  },
+  "elements": [
+    {
+      "from": [6, 0, 6],
+      "to": [10, 16, 10],
+      "faces": {
+        "down": {"texture": "#post"},
+        "up": {"texture": "#post"},
+        "north": {"texture": "#post"},
+        "south": {"texture": "#post"},
+        "west": {"texture": "#post"},
+        "east": {"texture": "#post"}
+      }
+    },
+    {
+      "from": [7.5, 1, 0],
+      "to": [8.5, 15, 16],
+      "faces": {
+        "west": {"texture": "#net", "uv": [0, 0, 16, 16]},
+        "east": {"texture": "#net", "uv": [0, 0, 16, 16]}
+      }
+    }
+  ]
+}

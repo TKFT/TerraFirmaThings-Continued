@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableSlings"
+    }
+  ],
+  "type": "tfc:knapping",
+  "knapping_type": "tfc:leather",
+  "pattern": [
+    "  ###",
+    "    #",
+    " ####",
+    "##   ",
+    "#    "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:sling"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableWhetstones"
+    }
+  ],
+  "type": "tfc:knapping",
+  "ingredient": {
+    "tag": "tfcthings:stones/loose/whetstone"
+  },
+  "knapping_type": "tfc:rock",
+  "pattern": [
+    "     ",
+    "#####",
+    "#####",
+    "#####",
+    "     "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:whetstone"
+  }
+}

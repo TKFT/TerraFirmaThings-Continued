@@ -26,7 +26,6 @@ public enum SnareProvider implements IBlockComponentProvider
         IThemeHelper t = IThemeHelper.get();
         boolean triggered = accessor.getBlockState().getValue(SnareBlock.TRIGGERED);
 
-        // Status line
         if (triggered)
         {
             tooltip.add(t.danger(Component.translatable("jade.tfcthings.snare.triggered")));
@@ -40,7 +39,7 @@ public enum SnareProvider implements IBlockComponentProvider
             tooltip.add(t.info(Component.translatable("jade.tfcthings.snare.empty")));
         }
 
-        // Bait line
+
         ItemStack bait = be.getBait();
         if (!bait.isEmpty())
         {

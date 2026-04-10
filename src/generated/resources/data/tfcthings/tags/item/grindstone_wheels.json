@@ -1,7 +1,7 @@
 {
   "values": [
-    "tfcthings:grindstone_quartz",
-    "tfcthings:grindstone_steel",
-    "tfcthings:grindstone_diamond"
+    "tfcthings:grindstone_wheel/quartz",
+    "tfcthings:grindstone_wheel/steel",
+    "tfcthings:grindstone_wheel/diamond"
   ]
 }

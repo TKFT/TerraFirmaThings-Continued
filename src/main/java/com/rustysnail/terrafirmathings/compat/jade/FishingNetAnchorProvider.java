@@ -2,7 +2,6 @@ package com.rustysnail.terrafirmathings.compat.jade;
 
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.blockentity.FishingNetAnchorBlockEntity;
-import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -43,7 +42,6 @@ public enum FishingNetAnchorProvider implements IBlockComponentProvider, StreamS
     }
 
     @Override
-    @Nullable
     public Data streamData(BlockAccessor accessor)
     {
         FishingNetAnchorBlockEntity be = (FishingNetAnchorBlockEntity) accessor.getBlockEntity();

@@ -1,0 +1,38 @@
+{
+  "base": {
+    "parent": "tfcthings:item/rope_javelin/steel/in_hand"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "overrides": [
+    {
+      "model": "tfcthings:item/rope_javelin/steel/throwing",
+      "predicate": {
+        "tfcthings:throwing": 1
+      }
+    },
+    {
+      "model": "tfcthings:item/rope",
+      "predicate": {
+        "tfcthings:thrown": 1
+      }
+    }
+  ],
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/rope_javelin/steel/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/rope_javelin/steel/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/rope_javelin/steel/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/rope_javelin/steel/gui"
+    }
+  },
+  "textures": {
+    "particle": "tfcthings:item/rope_javelin/steel"
+  }
+}

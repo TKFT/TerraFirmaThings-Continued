@@ -1,7 +1,6 @@
 package com.rustysnail.terrafirmathings.data;
 
 import java.util.Set;
-
 import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import net.minecraft.core.HolderLookup;
@@ -28,7 +27,7 @@ public final class TFCThingsBlockLootTables extends BlockLootSubProvider
         dropSelf(TFCThingsBlocks.BEAR_TRAP.get());
         dropSelf(TFCThingsBlocks.SNARE.get());
         dropSelf(TFCThingsBlocks.FISHING_NET_ANCHOR.get());
-        dropSelf(TFCThingsBlocks.GRINDSTONE.get());
+        dropSelf(TFCThingsBlocks.GRINDSTONE_BASE.get());
 
         add(TFCThingsBlocks.FISHING_NET.get(),
             createSingleItemTable(TFCThingsItems.FISHING_NET_ITEM.get()));
@@ -38,6 +37,8 @@ public final class TFCThingsBlockLootTables extends BlockLootSubProvider
                 .withPool(LootPool.lootPool()
                     .setRolls(ConstantValue.exactly(1.0F))
                     .add(LootItem.lootTableItem(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()))));
+
+        add(TFCThingsBlocks.GRAIN_PILE.get(), LootTable.lootTable());
 
         for (var entry : TFCThingsBlocks.GEM_DISPLAYS.entrySet())
         {

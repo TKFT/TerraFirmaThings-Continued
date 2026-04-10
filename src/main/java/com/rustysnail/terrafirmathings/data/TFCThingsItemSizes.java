@@ -1,7 +1,6 @@
 package com.rustysnail.terrafirmathings.data;
 
 import java.util.concurrent.CompletableFuture;
-
 import com.rustysnail.terrafirmathings.common.TFCThingsBlocks;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
@@ -24,14 +23,14 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
     protected void addData(HolderLookup.Provider provider)
     {
         add("javelins", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsTags.Items.JAVELINS), Size.NORMAL, Weight.MEDIUM));
+            Ingredient.of(TFCThingsTags.Items.JAVELINS), Size.LARGE, Weight.HEAVY));
 
         add("slings", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsTags.Items.SLINGS), Size.NORMAL, Weight.MEDIUM));
+            Ingredient.of(TFCThingsTags.Items.SLINGS), Size.LARGE, Weight.HEAVY));
 
         add("sling_ammo", new ItemSizeDefinition(
             Ingredient.of(
-                TFCThingsItems.SLING_AMMO.get(),
+                TFCThingsItems.SLING_AMMO_HEAVY.get(),
                 TFCThingsItems.SLING_AMMO_SPREAD.get(),
                 TFCThingsItems.SLING_AMMO_LIGHT.get(),
                 TFCThingsItems.SLING_AMMO_FIRE.get()),
@@ -44,27 +43,10 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
             Ingredient.of(TFCThingsTags.Items.GRINDSTONE_WHEELS), Size.LARGE, Weight.HEAVY));
 
         add("surveyors_hammers", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsTags.Items.SURVEYORS_HAMMERS), Size.NORMAL, Weight.MEDIUM));
+            Ingredient.of(TFCThingsTags.Items.SURVEYORS_HAMMERS), Size.LARGE, Weight.HEAVY));
 
         add("crowns", new ItemSizeDefinition(
-            Ingredient.of(
-                TFCThingsItems.GOLD_CROWN_EMPTY.get(),
-                TFCThingsItems.GOLD_CROWN_AMETHYST.get(),
-                TFCThingsItems.GOLD_CROWN_DIAMOND.get(),
-                TFCThingsItems.GOLD_CROWN_EMERALD.get(),
-                TFCThingsItems.GOLD_CROWN_OPAL.get(),
-                TFCThingsItems.GOLD_CROWN_RUBY.get(),
-                TFCThingsItems.GOLD_CROWN_SAPPHIRE.get(),
-                TFCThingsItems.GOLD_CROWN_TOPAZ.get(),
-                TFCThingsItems.PLATINUM_CROWN_EMPTY.get(),
-                TFCThingsItems.PLATINUM_CROWN_AMETHYST.get(),
-                TFCThingsItems.PLATINUM_CROWN_DIAMOND.get(),
-                TFCThingsItems.PLATINUM_CROWN_EMERALD.get(),
-                TFCThingsItems.PLATINUM_CROWN_OPAL.get(),
-                TFCThingsItems.PLATINUM_CROWN_RUBY.get(),
-                TFCThingsItems.PLATINUM_CROWN_SAPPHIRE.get(),
-                TFCThingsItems.PLATINUM_CROWN_TOPAZ.get()),
-            Size.LARGE, Weight.HEAVY));
+            Ingredient.of(TFCThingsTags.Items.CROWNS), Size.LARGE, Weight.HEAVY));
 
         add("hiking_boots", new ItemSizeDefinition(
             Ingredient.of(TFCThingsItems.HIKING_BOOTS.get()), Size.NORMAL, Weight.MEDIUM));
@@ -82,7 +64,10 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
             Ingredient.of(TFCThingsItems.METAL_BRACING.get()), Size.SMALL, Weight.LIGHT));
 
         add("rope_bridge_bundle", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()), Size.SMALL, Weight.LIGHT));
+            Ingredient.of(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()), Size.NORMAL, Weight.MEDIUM));
+
+        add("rope_bridge", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsItems.ROPE_BRIDGE_SEGMENT.get()), Size.NORMAL, Weight.MEDIUM));
 
         add("bear_trap_half", new ItemSizeDefinition(
             Ingredient.of(TFCThingsItems.BEAR_TRAP_HALF.get()), Size.NORMAL, Weight.HEAVY));
@@ -97,9 +82,12 @@ public final class TFCThingsItemSizes extends TFCThingsDataManagerProvider<ItemS
             Ingredient.of(TFCThingsItems.FISHING_NET_ANCHOR.get()), Size.LARGE, Weight.HEAVY));
 
         add("rope_bridge", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsBlocks.ROPE_BRIDGE.get()), Size.SMALL, Weight.LIGHT));
+            Ingredient.of(TFCThingsBlocks.ROPE_BRIDGE.get()), Size.NORMAL, Weight.MEDIUM));
 
         add("rope_ladder", new ItemSizeDefinition(
-            Ingredient.of(TFCThingsBlocks.ROPE_LADDER.get()), Size.SMALL, Weight.LIGHT));
+            Ingredient.of(TFCThingsBlocks.ROPE_LADDER.get()), Size.NORMAL, Weight.MEDIUM));
+
+        add("gem_display", new ItemSizeDefinition(
+            Ingredient.of(TFCThingsTags.Items.GEM_DISPLAY_ITEMS), Size.LARGE, Weight.HEAVY));
     }
 }

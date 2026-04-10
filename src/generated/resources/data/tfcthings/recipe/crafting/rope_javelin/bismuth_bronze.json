@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableRopeJavelin"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "J": {
+      "item": "tfc:metal/javelin/bismuth_bronze"
+    },
+    "R": {
+      "item": "tfc:jute_fiber"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RJR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfcthings:rope_javelin/bismuth_bronze"
+  }
+}

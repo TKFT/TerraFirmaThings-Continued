@@ -5,14 +5,18 @@ import java.util.Map;
 import java.util.UUID;
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
-import com.rustysnail.terrafirmathings.common.item.CramponsItem;
-import com.rustysnail.terrafirmathings.common.item.HikingBootsItem;
-import com.rustysnail.terrafirmathings.common.item.SnowShoesItem;
+import com.rustysnail.terrafirmathings.common.block.GrainPileBlock;
+import com.rustysnail.terrafirmathings.common.blockentity.GrainPileBlockEntity;
 import com.rustysnail.terrafirmathings.common.util.FootwearHelper;
 import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -30,8 +34,11 @@ import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+
+import net.dries007.tfc.common.entities.misc.ThrownJavelin;
 
 @EventBusSubscriber(modid = TerraFirmaThings.MOD_ID)
 public final class TFCThingsEvents
@@ -51,7 +58,7 @@ public final class TFCThingsEvents
         }
 
         ItemStack feetItem = player.getItemBySlot(EquipmentSlot.FEET);
-        if (!(feetItem.getItem() instanceof CramponsItem))
+        if (!feetItem.is(TFCThingsTags.Items.CRAMPONS))
         {
             return;
         }
@@ -82,9 +89,9 @@ public final class TFCThingsEvents
         UUID playerId = player.getUUID();
         ItemStack feetItem = player.getItemBySlot(EquipmentSlot.FEET);
 
-        boolean wearingSnowShoes = feetItem.getItem() instanceof SnowShoesItem;
-        boolean wearingHikingBoots = feetItem.getItem() instanceof HikingBootsItem;
-        boolean wearingCrampons = feetItem.getItem() instanceof CramponsItem;
+        boolean wearingSnowShoes = feetItem.is(TFCThingsTags.Items.SNOWSHOES);
+        boolean wearingHikingBoots = feetItem.is(TFCThingsTags.Items.HIKING_BOOTS);
+        boolean wearingCrampons = feetItem.is(TFCThingsTags.Items.CRAMPONS);
 
         if (!wearingSnowShoes && !wearingHikingBoots && !wearingCrampons)
         {
@@ -169,7 +176,7 @@ public final class TFCThingsEvents
             return;
         }
 
-        float bonus = TFCThingsConfig.ITEMS.WHETSTONE.weaponSharpnessBonus.get().floatValue() * sharpnessTierMultiplier(charges);
+        float bonus = SharpnessHelper.getDamageBonusForTier(charges);
         event.addModifier(
             Attributes.ATTACK_DAMAGE,
             new AttributeModifier(SHARPNESS_DAMAGE_ID, bonus, AttributeModifier.Operation.ADD_VALUE),
@@ -184,13 +191,27 @@ public final class TFCThingsEvents
         {
             return;
         }
-
-        DamageSource source = event.getSource();
-        if (!(source.getEntity() instanceof Player player))
+        if (event.getEntity().level().isClientSide())
         {
             return;
         }
-        if (player.level().isClientSide())
+
+        DamageSource source = event.getSource();
+
+        if (source.getDirectEntity() instanceof ThrownJavelin tfcJavelin)
+        {
+            ItemStack weapon = tfcJavelin.getItem();
+            float bonus = SharpnessHelper.getDamageBonusForThrown(weapon);
+            if (bonus > 0.0F)
+            {
+                event.setAmount(event.getAmount() + bonus);
+                SharpnessHelper.consumeCharge(weapon);
+                tfcJavelin.setItem(weapon);
+            }
+            return;
+        }
+
+        if (!(source.getEntity() instanceof Player player))
         {
             return;
         }
@@ -270,13 +291,6 @@ public final class TFCThingsEvents
         event.getToolTip().add(net.minecraft.network.chat.Component.translatable("tfcthings.tooltip.sharpness", charges).withStyle(color));
     }
 
-    private static int sharpnessTierMultiplier(int charges)
-    {
-        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get()) return 3;
-        if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesWhetstone.get()) return 2;
-        return 1;
-    }
-
     private static float getTierMiningBonus(int charges)
     {
         if (charges > TFCThingsConfig.ITEMS.WHETSTONE.maxChargesHoningSteel.get()) return TFCThingsConfig.ITEMS.WHETSTONE.tier3MiningBonus.get().floatValue();
@@ -294,6 +308,126 @@ public final class TFCThingsEvents
     private static boolean lacksSharpnessMiningToolTag(ItemStack stack)
     {
         return stack.isEmpty() || !stack.is(TFCThingsTags.Items.SHARPNESS_MINING_TOOLS);
+    }
+
+    @SubscribeEvent
+    public static void onRightClickBlockForGrainPile(PlayerInteractEvent.RightClickBlock event)
+    {
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableGrainPiles.get()) return;
+
+        Player player = event.getEntity();
+        Level level = player.level();
+        if (!player.isShiftKeyDown()) return;
+        if (event.getHand() != InteractionHand.MAIN_HAND) return;
+
+        ItemStack stack = player.getMainHandItem();
+        if (stack.isEmpty() || !stack.is(TFCThingsTags.Items.GRAIN_PILE_ITEMS)) return;
+
+        BlockPos clickedPos = event.getPos();
+        Direction face = event.getFace();
+        BlockState clickedState = level.getBlockState(clickedPos);
+
+        if (clickedState.getBlock() instanceof GrainPileBlock grainPileBlock)
+        {
+            event.setCanceled(true);
+            if (level.isClientSide()) return;
+
+            if (!(level.getBlockEntity(clickedPos) instanceof GrainPileBlockEntity be)) return;
+
+            if (!be.isEmpty() && !ItemStack.isSameItem(be.getGrainType(), stack))
+            {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("tfcthings.grain_pile.wrong_type"), true);
+                return;
+            }
+
+            if (be.isFull() && face == Direction.UP)
+            {
+                BlockPos above = clickedPos.above();
+                BlockState aboveState = level.getBlockState(above);
+
+                if (aboveState.isAir())
+                {
+                    int inserted = GrainPileBlock.formPile(level, above, stack, grainPileBlock);
+                    if (inserted > 0)
+                    {
+                        stack.shrink(inserted);
+                        level.playSound(null, above, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 0.6f, 1.0f);
+                    }
+                }
+                else if (aboveState.getBlock() instanceof GrainPileBlock
+                    && level.getBlockEntity(above) instanceof GrainPileBlockEntity aboveBe)
+                {
+                    if (!aboveBe.isEmpty() && !ItemStack.isSameItem(aboveBe.getGrainType(), stack))
+                        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("tfcthings.grain_pile.wrong_type"), true);
+                    else if (aboveBe.canInsertGrain(stack))
+                    {
+                        int before = stack.getCount();
+                        aboveBe.insertGrain(stack);
+                        if (before - stack.getCount() > 0)
+                        {
+                            aboveBe.syncBlockState();
+                            level.playSound(null, above, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 0.6f, 1.0f);
+                        }
+                    }
+                }
+                return;
+            }
+
+            int before = stack.getCount();
+            be.insertGrain(stack);
+            if (before - stack.getCount() > 0)
+            {
+                be.syncBlockState();
+                level.playSound(null, clickedPos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 0.6f, 1.0f);
+            }
+            return;
+        }
+
+        if (face != Direction.UP) return;
+        if (!clickedState.isFaceSturdy(level, clickedPos, Direction.UP)) return;
+
+        BlockPos targetPos = clickedPos.above();
+        BlockState targetState = level.getBlockState(targetPos);
+        if (targetState.getBlock() instanceof GrainPileBlock) return;
+        if (!targetState.isAir()) return;
+
+        event.setCanceled(true);
+        if (level.isClientSide()) return;
+
+        int consumed = GrainPileBlock.formPile(level, targetPos, stack, TFCThingsBlocks.GRAIN_PILE.get());
+        if (consumed > 0)
+        {
+            stack.shrink(consumed);
+            level.playSound(null, targetPos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 0.6f, 1.0f);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLeftClickGrainPile(PlayerInteractEvent.LeftClickBlock event)
+    {
+        if (!TFCThingsConfig.ITEMS.MASTER_LIST.enableGrainPiles.get()) return;
+
+        Player player = event.getEntity();
+        Level level = player.level();
+        if (level.isClientSide()) return;
+        if (player.getAbilities().instabuild) return;
+
+        BlockPos pos = event.getPos();
+        if (!(level.getBlockState(pos).getBlock() instanceof GrainPileBlock)) return;
+        if (!(level.getBlockEntity(pos) instanceof GrainPileBlockEntity be)) return;
+
+        int toExtract = player.isShiftKeyDown() ? 16 : 1;
+        ItemStack extracted = be.extractGrain(toExtract);
+
+        if (!extracted.isEmpty())
+        {
+            be.syncBlockState();
+            if (!player.addItem(extracted))
+                Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, extracted);
+            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0f, 1.2f);
+        }
+
+        event.setCanceled(true);
     }
 
     private static boolean isPlayerOnTag(Player player, Level level,

@@ -1,0 +1,38 @@
+{
+  "base": {
+    "parent": "tfcthings:item/rope_javelin/wrought_iron/in_hand"
+  },
+  "gui_light": "front",
+  "loader": "neoforge:separate_transforms",
+  "overrides": [
+    {
+      "model": "tfcthings:item/rope_javelin/wrought_iron/throwing",
+      "predicate": {
+        "tfcthings:throwing": 1
+      }
+    },
+    {
+      "model": "tfcthings:item/rope",
+      "predicate": {
+        "tfcthings:thrown": 1
+      }
+    }
+  ],
+  "perspectives": {
+    "fixed": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "ground": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "gui": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    },
+    "none": {
+      "parent": "tfcthings:item/rope_javelin/wrought_iron/gui"
+    }
+  },
+  "textures": {
+    "particle": "tfcthings:item/rope_javelin/wrought_iron"
+  }
+}

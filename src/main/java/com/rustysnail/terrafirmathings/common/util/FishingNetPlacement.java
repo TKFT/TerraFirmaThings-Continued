@@ -11,12 +11,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import net.dries007.tfc.common.fluids.TFCFluids;
 
 public final class FishingNetPlacement
 {
+
+    private static final double FLOW_THRESHOLD = 0.05;
 
     public static @NotNull Result place(@NotNull ServerLevel level, @NotNull BlockPos a, @NotNull BlockPos b)
     {
@@ -29,11 +35,20 @@ public final class FishingNetPlacement
             BlockPos p = segInfo.pos();
 
             var fluidProp = FishingNetBlock.FLUID;
-            var fluidKey = fluidProp.keyFor(Fluids.WATER);
+            FluidState fluidState = level.getFluidState(p);
+            Fluid fluidForLogging = fluidState.getType();
+
+            if (fluidForLogging == TFCFluids.RIVER_WATER.get())
+            {
+                fluidForLogging = Fluids.WATER;
+            }
+
+            var fluidKey = fluidProp.keyForOrEmpty(fluidForLogging);
 
             BlockState seg = TFCThingsBlocks.FISHING_NET.get().defaultBlockState()
                 .setValue(FishingNetBlock.AXIS, plan.axis)
-                .setValue(FishingNetBlock.SAG, segInfo.sag())
+                .setValue(FishingNetBlock.PROFILE, segInfo.profile())
+                .setValue(FishingNetBlock.BOW_SIDE, plan.bowSide)
                 .setValue(fluidProp, fluidKey);
 
             level.setBlock(p, seg, 3);
@@ -72,12 +87,12 @@ public final class FishingNetPlacement
     {
         if (a.getY() != b.getY())
         {
-            return new Plan(new Result(Status.NOT_SAME_Y, Direction.Axis.X, 0, 0, 0), Direction.Axis.X, 0, a.getY(), a.getY(), List.of());
+            return new Plan(new Result(Status.NOT_SAME_Y, Direction.Axis.X, 0, 0, 0), Direction.Axis.X, false, 0, a.getY(), a.getY(), List.of());
         }
 
         if (a.getX() != b.getX() && a.getZ() != b.getZ())
         {
-            return new Plan(new Result(Status.NOT_ALIGNED, Direction.Axis.X, 0, 0, 0), Direction.Axis.X, 0, a.getY(), a.getY(), List.of());
+            return new Plan(new Result(Status.NOT_ALIGNED, Direction.Axis.X, 0, 0, 0), Direction.Axis.X, false, 0, a.getY(), a.getY(), List.of());
         }
 
         Direction.Axis axis = (a.getX() != b.getX()) ? Direction.Axis.X : Direction.Axis.Z;
@@ -85,14 +100,17 @@ public final class FishingNetPlacement
 
         if (dist < 2 || dist > FishingNetUtil.MAX_SPAN)
         {
-            return new Plan(new Result(Status.TOO_FAR, axis, dist, 0, 0), axis, dist, a.getY(), a.getY(), List.of());
+            return new Plan(new Result(Status.TOO_FAR, axis, dist, 0, 0), axis, false, dist, a.getY(), a.getY(), List.of());
         }
 
         int step = (axis == Direction.Axis.X) ? Integer.signum(b.getX() - a.getX()) : Integer.signum(b.getZ() - a.getZ());
         int yStart = a.getY() - 1;
         int yBottom = yStart;
 
-        List<Segment> place = new ArrayList<>();
+        List<List<BlockPos>> columns = new ArrayList<>(dist - 1);
+        double totalPerpFlow = 0.0;
+        int flowSamples = 0;
+
         BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
 
         for (int i = 1; i < dist; i++)
@@ -100,8 +118,7 @@ public final class FishingNetPlacement
             int x = (axis == Direction.Axis.X) ? a.getX() + step * i : a.getX();
             int z = (axis == Direction.Axis.Z) ? a.getZ() + step * i : a.getZ();
 
-            double f = Math.sin(Math.PI * i / (double) dist);
-            int sag = (int) Math.round(f * 7.0);
+            List<BlockPos> col = new ArrayList<>();
 
             for (int dy = 0; dy < FishingNetUtil.MAX_DEPTH; dy++)
             {
@@ -111,28 +128,63 @@ public final class FishingNetPlacement
                 p.set(x, y, z);
 
                 FluidState fs = level.getFluidState(p);
-                if (!fs.is(TFCThingsTags.Fluids.FISHING_NET_PLACEABLE))
-                {
-                    break;
-                }
+                if (!fs.is(TFCThingsTags.Fluids.FISHING_NET_PLACEABLE)) break;
 
                 BlockState s = level.getBlockState(p);
-                if (!s.isAir() && !s.canBeReplaced())
-                {
-                    break;
-                }
+                if (!s.isAir() && !s.canBeReplaced()) break;
 
-                place.add(new Segment(p.immutable(), sag));
+                Vec3 flow = fs.getFlow(level, p);
+                double perp = (axis == Direction.Axis.X) ? flow.z : flow.x;
+                totalPerpFlow += perp;
+                flowSamples++;
+
+                col.add(p.immutable());
                 yBottom = Math.min(yBottom, y);
             }
+
+            columns.add(col);
         }
 
-        if (place.isEmpty())
+        boolean anyWater = columns.stream().anyMatch(col -> !col.isEmpty());
+        if (!anyWater)
         {
-            return new Plan(new Result(Status.NO_WATER, axis, dist, 0, 0), axis, dist, a.getY(), a.getY(), List.of());
+            return new Plan(new Result(Status.NO_WATER, axis, dist, 0, 0), axis, false, dist, a.getY(), a.getY(), List.of());
         }
 
-        return new Plan(new Result(Status.OK, axis, dist, place.size(), 0), axis, dist, a.getY(), yBottom, place);
+        double avgPerpFlow = flowSamples > 0 ? totalPerpFlow / flowSamples : 0.0;
+        boolean hasMeaningfulFlow = Math.abs(avgPerpFlow) >= FLOW_THRESHOLD;
+        boolean bowSide = avgPerpFlow >= 0.0;
+
+        final var place = getSegments(columns, dist, hasMeaningfulFlow);
+
+        return new Plan(new Result(Status.OK, axis, dist, place.size(), 0), axis, bowSide, dist, a.getY(), yBottom, place);
+    }
+
+    private static @NotNull List<Segment> getSegments(List<List<BlockPos>> columns, int dist, boolean hasMeaningfulFlow)
+    {
+        List<Segment> place = new ArrayList<>();
+        for (int i = 0; i < columns.size(); i++)
+        {
+            int colIndex = i + 1;
+            int distFromEnd = Math.min(colIndex, dist - colIndex);
+
+            FishingNetBlock.Profile profile = hasMeaningfulFlow
+                ? switch (distFromEnd)
+            {
+                case 1 -> FishingNetBlock.Profile.END;
+                case 2 -> FishingNetBlock.Profile.INNER_1;
+                case 3 -> FishingNetBlock.Profile.INNER_2;
+                case 4 -> FishingNetBlock.Profile.INNER_3;
+                default -> FishingNetBlock.Profile.MIDDLE;
+            }
+                : FishingNetBlock.Profile.END;
+
+            for (BlockPos pos : columns.get(i))
+            {
+                place.add(new Segment(pos, profile));
+            }
+        }
+        return place;
     }
 
     private FishingNetPlacement() {}
@@ -152,7 +204,7 @@ public final class FishingNetPlacement
         public boolean hasError() {return status != Status.OK;}
     }
 
-    private record Segment(BlockPos pos, int sag) {}
+    private record Segment(BlockPos pos, FishingNetBlock.Profile profile) {}
 
-    private record Plan(Result result, Direction.Axis axis, int distance, int yTop, int yBottom, List<Segment> toPlace) {}
+    private record Plan(Result result, Direction.Axis axis, boolean bowSide, int distance, int yTop, int yBottom, List<Segment> toPlace) {}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.mojang.serialization.MapCodec;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.blockentity.RopeBridgeBlockEntity;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -34,6 +35,7 @@ public class RopeBridgeBlock extends BaseEntityBlock
     public static final IntegerProperty OFFSET = IntegerProperty.create("offset", 0, 7);
     public static final BooleanProperty AXIS = BooleanProperty.create("axis");
     public static final MapCodec<RopeBridgeBlock> CODEC = simpleCodec(RopeBridgeBlock::new);
+    private static final int MAX_BRIDGE_SCAN = 256;
 
     public RopeBridgeBlock(Properties properties)
     {
@@ -93,16 +95,131 @@ public class RopeBridgeBlock extends BaseEntityBlock
         }
 
         boolean axis = state.getValue(AXIS);
-
         Direction dir1 = axis ? Direction.NORTH : Direction.EAST;
         Direction dir2 = axis ? Direction.SOUTH : Direction.WEST;
 
-        collapseBridgeInDirection(level, pos, dir1, axis);
-        collapseBridgeInDirection(level, pos, dir2, axis);
+        BlockPos seed1 = findNextBridge(level, pos, dir1, axis);
+        BlockPos seed2 = findNextBridge(level, pos, dir2, axis);
+
+        if (seed1 != null)
+        {
+            List<BlockPos> span1 = collectBridgeSpan(level, seed1, axis);
+            if (isValidBridgeSpan(level, span1))
+                collapseBridgeSpan(level, span1);
+        }
+        if (seed2 != null)
+        {
+            List<BlockPos> span2 = collectBridgeSpan(level, seed2, axis);
+            if (isValidBridgeSpan(level, span2))
+                collapseBridgeSpan(level, span2);
+        }
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock,
+                                   BlockPos neighborPos, boolean movedByPiston)
+    {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+
+        if (level.isClientSide() || movedByPiston) return;
+        if (!neighborPos.equals(pos.below())) return;
+
+        BlockState belowState = level.getBlockState(pos.below());
+        if (!belowState.getCollisionShape(level, pos.below()).isEmpty()) return;
+
+        boolean axis = state.getValue(AXIS);
+        List<BlockPos> span = collectBridgeSpan(level, pos, axis);
+        if (isValidBridgeSpan(level, span))
+            collapseBridgeSpan(level, span);
+    }
+
+    private List<BlockPos> collectBridgeSpan(Level level, BlockPos startPos, boolean axis)
+    {
+        Direction dir1 = axis ? Direction.NORTH : Direction.EAST;
+        Direction dir2 = axis ? Direction.SOUTH : Direction.WEST;
+
+        List<BlockPos> headward = new ArrayList<>();
+        collectInDirection(level, startPos, dir1, axis, headward);
+
+        List<BlockPos> tailward = new ArrayList<>();
+        collectInDirection(level, startPos, dir2, axis, tailward);
+
+        List<BlockPos> span = new ArrayList<>(headward.size() + 1 + tailward.size());
+        for (int i = headward.size() - 1; i >= 0; i--)
+            span.add(headward.get(i));
+        span.add(startPos);
+        span.addAll(tailward);
+        return span;
+    }
+
+    private void collectInDirection(Level level, BlockPos from, Direction direction, boolean axis,
+                                    List<BlockPos> result)
+    {
+        BlockPos current = findNextBridge(level, from, direction, axis);
+        while (current != null && result.size() < MAX_BRIDGE_SCAN)
+        {
+            result.add(current);
+            current = findNextBridge(level, current, direction, axis);
+        }
+    }
+
+    @Nullable
+    private BlockPos findNextBridge(Level level, BlockPos from, Direction direction, boolean axis)
+    {
+        BlockPos next = from.relative(direction);
+        if (isBridgeBlock(level, next, axis)) return next;
+        if (isBridgeBlock(level, next.above(), axis)) return next.above();
+        if (isBridgeBlock(level, next.below(), axis)) return next.below();
+        return null;
+    }
+
+    private boolean isBridgeBlock(Level level, BlockPos pos, boolean axis)
+    {
+        BlockState state = level.getBlockState(pos);
+        return state.getBlock() instanceof RopeBridgeBlock && state.getValue(AXIS) == axis;
+    }
+
+    private BlockPos[] findBridgeEndpoints(List<BlockPos> span)
+    {
+        return new BlockPos[] {span.getFirst(), span.getLast()};
+    }
+
+    private boolean hasEndpointSupport(Level level, BlockPos pos)
+    {
+        return !hasDirectSupportBelow(level, pos);
+    }
+
+    private boolean isValidBridgeSpan(Level level, List<BlockPos> span)
+    {
+        if (span.isEmpty()) return true;
+        BlockPos[] endpoints = findBridgeEndpoints(span);
+        return hasEndpointSupport(level, endpoints[0])
+            || hasEndpointSupport(level, endpoints[1]);
+    }
+
+    private void collapseBridgeSpan(Level level, List<BlockPos> span)
+    {
+        for (BlockPos pos : span)
+        {
+            if (level.getBlockState(pos).getBlock() instanceof RopeBridgeBlock)
+            {
+                popResource(level, pos, new ItemStack(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()));
+                level.removeBlock(pos, false);
+            }
+        }
+    }
+
+    private boolean hasDirectSupportBelow(Level level, BlockPos pos)
+    {
+        BlockPos below = pos.below();
+        BlockState belowState = level.getBlockState(below);
+        if (belowState.getBlock() instanceof RopeBridgeBlock) return false;
+        return !belowState.getCollisionShape(level, below).isEmpty();
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+                                               BlockHitResult hitResult)
     {
         if (player.isShiftKeyDown())
         {
@@ -157,7 +274,8 @@ public class RopeBridgeBlock extends BaseEntityBlock
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         if (stack.is(Items.STICK))
         {
@@ -246,43 +364,5 @@ public class RopeBridgeBlock extends BaseEntityBlock
             return dirs.getFirst() + (state.getValue(AXIS) ? 0 : 2);
         }
         return 0;
-    }
-
-    private void collapseBridgeInDirection(Level level, BlockPos startPos, Direction direction, boolean axis)
-    {
-        BlockPos currentPos = startPos.relative(direction);
-
-        while (true)
-        {
-            BlockState currentState = level.getBlockState(currentPos);
-
-            if (currentState.getBlock() instanceof RopeBridgeBlock && currentState.getValue(AXIS) == axis)
-            {
-                popResource(level, currentPos, new ItemStack(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()));
-                level.removeBlock(currentPos, false);
-                currentPos = currentPos.relative(direction);
-                continue;
-            }
-
-            BlockState aboveState = level.getBlockState(currentPos.above());
-            if (aboveState.getBlock() instanceof RopeBridgeBlock && aboveState.getValue(AXIS) == axis)
-            {
-                popResource(level, currentPos.above(), new ItemStack(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()));
-                level.removeBlock(currentPos.above(), false);
-                currentPos = currentPos.relative(direction).above();
-                continue;
-            }
-
-            BlockState belowState = level.getBlockState(currentPos.below());
-            if (belowState.getBlock() instanceof RopeBridgeBlock && belowState.getValue(AXIS) == axis)
-            {
-                popResource(level, currentPos.below(), new ItemStack(TFCThingsItems.ROPE_BRIDGE_BUNDLE.get()));
-                level.removeBlock(currentPos.below(), false);
-                currentPos = currentPos.relative(direction).below();
-                continue;
-            }
-
-            break;
-        }
     }
 }

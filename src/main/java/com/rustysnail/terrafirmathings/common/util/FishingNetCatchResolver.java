@@ -2,7 +2,6 @@ package com.rustysnail.terrafirmathings.common.util;
 
 import java.util.List;
 import java.util.UUID;
-
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

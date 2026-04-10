@@ -5,6 +5,7 @@ import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsEntities;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.item.RopeJavelinItem;
+import com.rustysnail.terrafirmathings.common.util.SharpnessHelper;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +27,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import net.dries007.tfc.common.items.JavelinItem;
 
 public class ThrownRopeJavelin extends AbstractArrow implements ItemSupplier
 {
@@ -240,8 +243,11 @@ public class ThrownRopeJavelin extends AbstractArrow implements ItemSupplier
             return;
         }
 
+        ItemStack weapon = getWeapon();
+        float baseDamage = weapon.getItem() instanceof JavelinItem jav ? jav.getThrownDamage() : 4.0F;
+        float damage = baseDamage + SharpnessHelper.getDamageBonusForThrown(weapon);
         DamageSource source = this.damageSources().arrow(this, owner != null ? owner : this);
-        boolean hurt = target.hurt(source, 4.0F);
+        boolean hurt = target.hurt(source, damage);
 
         if (hurt)
         {
@@ -256,6 +262,7 @@ public class ThrownRopeJavelin extends AbstractArrow implements ItemSupplier
             this.setDeltaMovement(Vec3.ZERO);
 
             syncCapturedToOwnerItem(owner, capturedEntityUuid);
+            consumeSharpnessFromOwnerItem(owner);
             this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
         }
         else
@@ -408,6 +415,16 @@ public class ThrownRopeJavelin extends AbstractArrow implements ItemSupplier
         if (!linked.isEmpty())
         {
             RopeJavelinItem.clearThrownState(linked);
+        }
+    }
+
+    private void consumeSharpnessFromOwnerItem(@Nullable Entity owner)
+    {
+        if (!(owner instanceof LivingEntity living)) return;
+        ItemStack linked = findLinkedThrownStack(living);
+        if (!linked.isEmpty())
+        {
+            SharpnessHelper.consumeCharge(linked);
         }
     }
 

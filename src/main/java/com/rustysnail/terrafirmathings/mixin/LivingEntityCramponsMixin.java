@@ -2,7 +2,7 @@ package com.rustysnail.terrafirmathings.mixin;
 
 import com.rustysnail.terrafirmathings.TFCThingsConfig;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
-import com.rustysnail.terrafirmathings.common.item.CramponsItem;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,13 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-
-import javax.annotation.Nullable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityCramponsMixin
@@ -50,7 +47,7 @@ public abstract class LivingEntityCramponsMixin
         }
 
         ItemStack feetItem = player.getItemBySlot(EquipmentSlot.FEET);
-        if (!(feetItem.getItem() instanceof CramponsItem))
+        if (!feetItem.is(TFCThingsTags.Items.CRAMPONS))
         {
             return original;
         }

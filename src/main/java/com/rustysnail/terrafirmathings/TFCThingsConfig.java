@@ -2,6 +2,8 @@ package com.rustysnail.terrafirmathings;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+// TODO: Tweak default values, clean up text entries
+
 public class TFCThingsConfig
 {
 
@@ -28,6 +30,7 @@ public class TFCThingsConfig
         public final HookJavelin HOOK_JAVELIN;
         public final Sling SLING;
         public final Whetstone WHETSTONE;
+        public final GrainPile GRAIN_PILE;
         public final MasterList MASTER_LIST;
 
         Items(ModConfigSpec.Builder builder)
@@ -45,6 +48,7 @@ public class TFCThingsConfig
             HOOK_JAVELIN = new HookJavelin(builder);
             SLING = new Sling(builder);
             WHETSTONE = new Whetstone(builder);
+            GRAIN_PILE = new GrainPile(builder);
             MASTER_LIST = new MasterList(builder);
 
             builder.pop();
@@ -61,13 +65,13 @@ public class TFCThingsConfig
 
                 damageDistance = builder
                     .comment("The distance in centimeters walked through snow required to apply one damage to the shoes.",
-                        "Approximately 100 cm = 1 block. 0 = snow shoes won't be damaged by walking through snow.")
+                        "100 cm = 1 block. Setting to 0 will disable the snow shoes from taking damaged.")
                     .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 shoePower = builder
                     .comment("The percentage of the TFC slowdown effect that the snow shoes will negate.",
-                        "1 = no slowdown when walking through snow.",
-                        "0 = the shoes are useless.")
+                        "1 = remove all the slowdown effects of snow.",
+                        "0 = snow shoes have no effect on movement speed.")
                     .defineInRange("shoePower", 1.0D, 0.0D, 1.0D);
 
                 builder.pop();
@@ -85,13 +89,13 @@ public class TFCThingsConfig
 
                 damageDistance = builder
                     .comment("The distance in centimeters walked through plants required to apply one damage to the boots.",
-                        "Approximately 100 cm = 1 block. 0 = hiking boots won't be damaged by walking through plants.")
+                        "100 cm = 1 block. Setting to 0 will disable the hiking boots from taking damaged.")
                     .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 bootPower = builder
                     .comment("The percentage of the TFC plant slowdown effect that the hiking boots will negate.",
-                        "1 = no slowdown when walking through plants.",
-                        "0 = the boots are useless.")
+                        "1 = remove all the slowdown effects of snow.",
+                        "0 = snow shoes have no effect on movement speed.")
                     .defineInRange("bootPower", 1.0D, 0.0D, 1.0D);
 
                 builder.pop();
@@ -108,7 +112,7 @@ public class TFCThingsConfig
 
                 damageDistance = builder
                     .comment("The distance in centimeters walked on ice required to apply one damage to the crampons.",
-                        "Approximately 100 cm = 1 block. 0 = crampons won't be damaged by walking on ice.")
+                        "100 cm = 1 block. Setting to 0 will disable the crampons from taking damaged.")
                     .defineInRange("damageDistance", 500, 0, Integer.MAX_VALUE);
 
                 builder.pop();
@@ -128,8 +132,7 @@ public class TFCThingsConfig
                 builder.comment("Bear Trap Settings").push("bearTrap");
 
                 breakChance = builder
-                    .comment("Percent chance for a bear trap to break when harvested after being activated.",
-                        "A predator breakout will attempt to break the trap with double this chance.")
+                    .comment("Percent chance for a bear trap to break when harvested after being activated.")
                     .defineInRange("breakChance", 0.1D, 0.0D, 1.0D);
 
                 breakoutChance = builder
@@ -146,14 +149,14 @@ public class TFCThingsConfig
                 healthCut = builder
                     .comment("The fraction of an entity's health that is dealt as damage when stepping in a trap.",
                         "E.g. 3 = 1/3 current health dealt as damage.",
-                        "Less than 1 will deal more damage than current health, probably an instakill.",
+                        "Less than 1 will deal more damage than current health",
                         "Set to 0 to do no damage.")
                     .defineInRange("healthCut", 3.0D, 0.0D, 20.0D);
 
                 fixedDamage = builder
                     .comment("The amount of fixed damage points dealt by a bear trap.",
                         "This will override the fractional health cut setting if set to a value greater than 0.")
-                    .defineInRange("fixedDamage", 0.0D, 0.0D, Double.MAX_VALUE);
+                    .defineInRange("fixedDamage", 0.0D, 0.0D, 1000000.0D);
 
                 builder.pop();
             }
@@ -196,6 +199,7 @@ public class TFCThingsConfig
         public static class RopeBridge
         {
             public final ModConfigSpec.IntValue maxLength;
+            public final ModConfigSpec.DoubleValue maxPlacementAngle;
 
             RopeBridge(ModConfigSpec.Builder builder)
             {
@@ -204,6 +208,10 @@ public class TFCThingsConfig
                 maxLength = builder
                     .comment("The maximum length of a rope bridge that can be thrown.")
                     .defineInRange("maxLength", 100, 1, 256);
+
+                maxPlacementAngle = builder
+                    .comment("Maximum allowed angle (in degrees) between the throw direction and the bridge axis when placing. Lower values require a more precise straight throw. 0 = perfectly straight only, 44 = any angle accepted.")
+                    .defineInRange("maxPlacementAngle", 4.0, 0.0, 30.0);
 
                 builder.pop();
             }
@@ -240,7 +248,7 @@ public class TFCThingsConfig
 
                 pullStrength = builder
                     .comment("The strength of the pull when reeling in with the rope javelin.",
-                        "Higher values pull the player faster.")
+                        "Higher values pull the entity faster.")
                     .defineInRange("pullStrength", 1.0D, 0.1D, 5.0D);
 
                 builder.pop();
@@ -258,7 +266,7 @@ public class TFCThingsConfig
 
                 maxRopeLength = builder
                     .comment("The maximum length of rope for the hook javelin grapple.")
-                    .defineInRange("maxRopeLength", 30, 10, 64);
+                    .defineInRange("maxRopeLength", 32, 10, 64);
 
                 retractAmount = builder
                     .comment("The amount of rope retracted per right-click while airborne.",
@@ -285,11 +293,11 @@ public class TFCThingsConfig
 
                 maxPower = builder
                     .comment("The maximum power a fully charged sling can reach.")
-                    .defineInRange("maxPower", 8, 1, 100);
+                    .defineInRange("maxPower", 12, 1, 100);
 
                 chargeSpeed = builder
                     .comment("The number of ticks to reach max power. Lower = faster charge.")
-                    .defineInRange("chargeSpeed", 1, 1, 200);
+                    .defineInRange("chargeSpeed", 70, 1, 200);
 
                 builder.pop();
             }
@@ -306,7 +314,9 @@ public class TFCThingsConfig
             public final ModConfigSpec.IntValue maxChargesWhetstone;
             public final ModConfigSpec.IntValue maxChargesHoningSteel;
             public final ModConfigSpec.IntValue maxChargesDiamondHoningSteel;
-            public final ModConfigSpec.DoubleValue weaponSharpnessBonus;
+            public final ModConfigSpec.DoubleValue tier1WeaponBonus;
+            public final ModConfigSpec.DoubleValue tier2WeaponBonus;
+            public final ModConfigSpec.DoubleValue tier3WeaponBonus;
             public final ModConfigSpec.DoubleValue tier1MiningBonus;
             public final ModConfigSpec.DoubleValue tier2MiningBonus;
             public final ModConfigSpec.DoubleValue tier3MiningBonus;
@@ -330,45 +340,56 @@ public class TFCThingsConfig
                     .defineInRange("chargesPerDiamondHoningSteel", 4, 1, 256);
 
                 ticksPerWhetstoneUse = builder
-                    .comment("Use time in ticks for whetstone sharpening. 20 ticks = 1 second.")
-                    .defineInRange("ticksPerWhetstoneUse", 30, 0, 72000);
+                    .comment("Use time in ticks for whetstone sharpening.")
+                    .defineInRange("ticksPerWhetstoneUse", 40, 0, 72000);
 
                 ticksPerHoningSteelUse = builder
-                    .comment("Use time in ticks for honing steel sharpening. 10 ticks = 0.5 seconds.")
-                    .defineInRange("ticksPerHoningSteelUse", 15, 0, 72000);
+                    .comment("Use time in ticks for honing steel sharpening.")
+                    .defineInRange("ticksPerHoningSteelUse", 30, 0, 72000);
 
                 ticksPerDiamondHoningSteelUse = builder
-                    .comment("Use time in ticks for diamond honing steel sharpening. 0 ticks = instant.")
-                    .defineInRange("ticksPerDiamondHoningSteelUse", 10, 0, 72000);
+                    .comment("Use time in ticks for diamond honing steel sharpening.")
+                    .defineInRange("ticksPerDiamondHoningSteelUse", 20, 0, 72000);
 
                 maxChargesWhetstone = builder
                     .comment("Maximum sharpness charges a tool can hold from whetstone use.")
-                    .defineInRange("maxChargesWhetstone", 64, 1, 1024);
+                    .defineInRange("maxChargesWhetstone", 50, 1, 1024);
 
                 maxChargesHoningSteel = builder
                     .comment("Maximum sharpness charges a tool can hold from honing steel use.")
-                    .defineInRange("maxChargesHoningSteel", 128, 1, 1024);
+                    .defineInRange("maxChargesHoningSteel", 100, 1, 1024);
 
                 maxChargesDiamondHoningSteel = builder
                     .comment("Maximum sharpness charges a tool can hold from diamond honing steel use.")
-                    .defineInRange("maxChargesDiamondHoningSteel", 256, 1, 1024);
+                    .defineInRange("maxChargesDiamondHoningSteel", 200, 1, 1024);
 
-                weaponSharpnessBonus = builder
-                    .comment("Flat attack damage bonus applied per hit while a weapon has sharpness charges in hearts. Formula is bonus * tier = final bonus")
-                    .defineInRange("sharpnessBonus", 1.0D, 0.0D, 20.0D);
+                tier1WeaponBonus = builder
+                    .comment("Flat attack damage bonus (hearts) per hit at Tier 1 sharpness (1 to maxChargesWhetstone charges).",
+                        "Comparable in feel to Minecraft Sharpness I.")
+                    .defineInRange("tier1WeaponBonus", 0.5D, 0.0D, 20.0D);
+
+                tier2WeaponBonus = builder
+                    .comment("Flat attack damage bonus (hearts) per hit at Tier 2 sharpness (maxChargesWhetstone+1 to maxChargesHoningSteel charges).",
+                        "Comparable in feel to Minecraft Sharpness III.")
+                    .defineInRange("tier2WeaponBonus", 1D, 0.0D, 20.0D);
+
+                tier3WeaponBonus = builder
+                    .comment("Flat attack damage bonus (hearts) per hit at Tier 3 sharpness (maxChargesHoningSteel+1 to maxChargesDiamondHoningSteel charges).",
+                        "Comparable in feel to Minecraft Sharpness V.")
+                    .defineInRange("tier3WeaponBonus", 1.5D, 0.0D, 20.0D);
 
                 tier1MiningBonus = builder
-                    .comment("Mining speed bonus added when the tool has Tier 1 sharpness (1-64 charges).",
+                    .comment("Mining speed bonus added when the tool has Tier 1 sharpness (1 to maxChargesWhetstone charges).",
                         "Default matches vanilla Efficiency I (+2).")
                     .defineInRange("tier1MiningBonus", 2.0D, 0.0D, 100.0D);
 
                 tier2MiningBonus = builder
-                    .comment("Mining speed bonus added when the tool has Tier 2 sharpness (65-128 charges).",
+                    .comment("Mining speed bonus added when the tool has Tier 2 sharpness (maxChargesWhetstone+1 to maxChargesHoningSteel charges).",
                         "Default matches vanilla Efficiency III (+10).")
                     .defineInRange("tier2MiningBonus", 10.0D, 0.0D, 100.0D);
 
                 tier3MiningBonus = builder
-                    .comment("Mining speed bonus added when the tool has Tier 3 sharpness (129-256 charges).",
+                    .comment("Mining speed bonus added when the tool has Tier 3 sharpness (maxChargesHoningSteel+1 to maxChargesDiamondHoningSteel charges).",
                         "Default matches vanilla Efficiency V (+26).")
                     .defineInRange("tier3MiningBonus", 26.0D, 0.0D, 100.0D);
 
@@ -382,6 +403,35 @@ public class TFCThingsConfig
                         "Progress per tick = speed * multiplier. Operation completes when progress >= ticksPerOperation.",
                         "Default of 12.0 calibrates so a water wheel (~0.079 rad/tick) adds ~1 progress/tick.")
                     .defineInRange("grindstoneSpeedMultiplier", 12.0D, 0.1D, 1000.0D);
+
+                builder.pop();
+            }
+        }
+
+        public static class GrainPile
+        {
+            public final ModConfigSpec.IntValue maxCapacity;
+            public final ModConfigSpec.DoubleValue decayModifier;
+            public final ModConfigSpec.DoubleValue shelterDecayModifier;
+
+            GrainPile(ModConfigSpec.Builder builder)
+            {
+                builder.comment("Grain Pile Settings").push("grainPile");
+
+                maxCapacity = builder
+                    .comment("Maximum number of grain items a single pile block can hold.")
+                    .defineInRange("maxCapacity", 128, 1, 1024);
+
+                decayModifier = builder
+                    .comment("Decay rate modifier for grain in an unsheltered pile.",
+                        "Values > 1 accelerate decay; values < 1 slow it down.",
+                        "TFC default for no trait = 1.0. A value of 0.5 doubles shelf life.")
+                    .defineInRange("decayModifier", 0.8, 0.01, 10.0);
+
+                shelterDecayModifier = builder
+                    .comment("Decay rate modifier for grain in a sheltered pile (sky blocked).",
+                        "Should generally be lower than decayModifier.")
+                    .defineInRange("shelterDecayModifier", 0.5, 0.01, 10.0);
 
                 builder.pop();
             }
@@ -404,6 +454,7 @@ public class TFCThingsConfig
             public final ModConfigSpec.BooleanValue enableSlings;
             public final ModConfigSpec.BooleanValue enableWhetstones;
             public final ModConfigSpec.BooleanValue enableCrowns;
+            public final ModConfigSpec.BooleanValue enableGrainPiles;
 
             MasterList(ModConfigSpec.Builder builder)
             {
@@ -424,6 +475,7 @@ public class TFCThingsConfig
                 enableSlings = builder.define("enableSlings", true);
                 enableWhetstones = builder.define("enableWhetstones", true);
                 enableCrowns = builder.define("enableCrowns", true);
+                enableGrainPiles = builder.define("enableGrainPiles", true);
 
                 builder.pop();
             }

@@ -20,54 +20,18 @@
     {
       "type": "tfc:anvil_recipe",
       "recipe": "tfcthings:anvil/crown/platinum_empty",
-      "text": "Forge an empty platinum crown from a platinum double sheet."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_amethyst",
-      "recipe2": "tfcthings:crafting/crown/platinum_amethyst",
-      "text": "Amethyst crown variants."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_diamond",
-      "recipe2": "tfcthings:crafting/crown/platinum_diamond",
-      "text": "Diamond crown variants."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_emerald",
-      "recipe2": "tfcthings:crafting/crown/platinum_emerald",
-      "text": "Emerald crown variants."
+      "text": "Forge an empty platinum crown from a platinum double sheet. Requires another mod to add platinum to the game."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "tfcthings:crafting/crown/gold_opal",
       "recipe2": "tfcthings:crafting/crown/platinum_opal",
-      "text": "Opal crown variants."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_ruby",
-      "recipe2": "tfcthings:crafting/crown/platinum_ruby",
-      "text": "Ruby crown variants."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_sapphire",
-      "recipe2": "tfcthings:crafting/crown/platinum_sapphire",
-      "text": "Sapphire crown variants."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "tfcthings:crafting/crown/gold_topaz",
-      "recipe2": "tfcthings:crafting/crown/platinum_topaz",
-      "text": "Topaz crown variants."
+      "text": "Set a gem into an empty crown using a hammer. TFC gem variants: opal, ruby, sapphire, and topaz."
     },
     {
       "type": "patchouli:text",
-      "title": "Additional Registered Variants",
-      "text": "Item variants for agate, beryl, garnet, jade, jasper, and tourmaline are registered. If recipe data for those is added later, they will appear in the same two-step workflow."
+      "title": "Additional Variants",
+      "text": "Crown items are also registered for amethyst, diamond, emerald, agate, beryl, garnet, jade, jasper, and tourmaline. These become craftable when another mod provides the corresponding gem item."
     }
   ],
   "extra_recipe_mappings": {
@@ -75,29 +39,29 @@
     "tfcthings:crown/platinum_empty": 2,
     "tfcthings:crown/gold_amethyst": 3,
     "tfcthings:crown/platinum_amethyst": 3,
-    "tfcthings:crown/gold_diamond": 4,
-    "tfcthings:crown/platinum_diamond": 4,
-    "tfcthings:crown/gold_emerald": 5,
-    "tfcthings:crown/platinum_emerald": 5,
-    "tfcthings:crown/gold_opal": 6,
-    "tfcthings:crown/platinum_opal": 6,
-    "tfcthings:crown/gold_ruby": 7,
-    "tfcthings:crown/platinum_ruby": 7,
-    "tfcthings:crown/gold_sapphire": 8,
-    "tfcthings:crown/platinum_sapphire": 8,
-    "tfcthings:crown/gold_topaz": 9,
-    "tfcthings:crown/platinum_topaz": 9,
-    "tfcthings:crown/gold_agate": 10,
-    "tfcthings:crown/platinum_agate": 10,
-    "tfcthings:crown/gold_beryl": 10,
-    "tfcthings:crown/platinum_beryl": 10,
-    "tfcthings:crown/gold_garnet": 10,
-    "tfcthings:crown/platinum_garnet": 10,
-    "tfcthings:crown/gold_jade": 10,
-    "tfcthings:crown/platinum_jade": 10,
-    "tfcthings:crown/gold_jasper": 10,
-    "tfcthings:crown/platinum_jasper": 10,
-    "tfcthings:crown/gold_tourmaline": 10,
-    "tfcthings:crown/platinum_tourmaline": 10
+    "tfcthings:crown/gold_diamond": 3,
+    "tfcthings:crown/platinum_diamond": 3,
+    "tfcthings:crown/gold_emerald": 3,
+    "tfcthings:crown/platinum_emerald": 3,
+    "tfcthings:crown/gold_opal": 3,
+    "tfcthings:crown/platinum_opal": 3,
+    "tfcthings:crown/gold_ruby": 3,
+    "tfcthings:crown/platinum_ruby": 3,
+    "tfcthings:crown/gold_sapphire": 3,
+    "tfcthings:crown/platinum_sapphire": 3,
+    "tfcthings:crown/gold_topaz": 3,
+    "tfcthings:crown/platinum_topaz": 3,
+    "tfcthings:crown/gold_agate": 3,
+    "tfcthings:crown/platinum_agate": 3,
+    "tfcthings:crown/gold_beryl": 3,
+    "tfcthings:crown/platinum_beryl": 3,
+    "tfcthings:crown/gold_garnet": 3,
+    "tfcthings:crown/platinum_garnet": 3,
+    "tfcthings:crown/gold_jade": 3,
+    "tfcthings:crown/platinum_jade": 3,
+    "tfcthings:crown/gold_jasper": 3,
+    "tfcthings:crown/platinum_jasper": 3,
+    "tfcthings:crown/gold_tourmaline": 3,
+    "tfcthings:crown/platinum_tourmaline": 3
   }
 }

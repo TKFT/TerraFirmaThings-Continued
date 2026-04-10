@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "tfc:rock/loose/chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/loose/slate",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/loose/phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/loose/quartzite",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/mossy_loose/chert",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/mossy_loose/slate",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/mossy_loose/phyllite",
+      "required": false
+    },
+    {
+      "id": "tfc:rock/mossy_loose/quartzite",
+      "required": false
+    }
+  ]
+}

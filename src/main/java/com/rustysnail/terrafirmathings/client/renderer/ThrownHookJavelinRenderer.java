@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 
 public class ThrownHookJavelinRenderer extends EntityRenderer<ThrownHookJavelin>
 {
@@ -39,16 +38,6 @@ public class ThrownHookJavelinRenderer extends EntityRenderer<ThrownHookJavelin>
         return "steel";
     }
 
-    private static ResourceLocation getShaftTextureLocation(String metal)
-    {
-        return ResourceLocation.fromNamespaceAndPath("tfc", "textures/entity/projectiles/" + metal + "_javelin.png");
-    }
-
-    private static ResourceLocation getHeadTextureLocation(String metal)
-    {
-        return ResourceLocation.fromNamespaceAndPath("tfcthings", "textures/entity/hook_javelin/" + metal + ".png");
-    }
-
     private final HookJavelinModel model;
 
     public ThrownHookJavelinRenderer(EntityRendererProvider.Context context)
@@ -68,18 +57,24 @@ public class ThrownHookJavelinRenderer extends EntityRenderer<ThrownHookJavelin>
     public void render(ThrownHookJavelin entity, float entityYaw, float partialTick, PoseStack poseStack,
                        MultiBufferSource buffer, int packedLight)
     {
+        String metal = resolveMetal(entity);
+        ResourceLocation shaftTexture = ResourceLocation.fromNamespaceAndPath(
+            "tfc", "textures/entity/projectiles/" + metal + "_javelin.png");
+        ResourceLocation headTexture = ResourceLocation.fromNamespaceAndPath(
+            "tfcthings", "textures/entity/hook_javelin/" + metal + ".png");
+
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTick, entity.yRotO, entity.getYRot()) - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTick, entity.xRotO, entity.getXRot()) + 90.0F));
 
-        String metal = resolveMetal(entity);
         VertexConsumer shaftBuffer = ItemRenderer.getFoilBufferDirect(
-            buffer, this.model.renderType(getShaftTextureLocation(metal)), false, false);
+            buffer, this.model.renderType(shaftTexture), false, false);
         this.model.renderShaft(poseStack, shaftBuffer, packedLight, OverlayTexture.NO_OVERLAY, -1);
 
         VertexConsumer headBuffer = ItemRenderer.getFoilBufferDirect(
-            buffer, this.model.renderType(getHeadTextureLocation(metal)), false, false);
+            buffer, this.model.renderType(headTexture), false, false);
         this.model.renderHookHead(poseStack, headBuffer, packedLight, OverlayTexture.NO_OVERLAY, -1);
+
         poseStack.popPose();
 
         Entity owner = entity.getOwner();
@@ -94,32 +89,17 @@ public class ThrownHookJavelinRenderer extends EntityRenderer<ThrownHookJavelin>
     @Override
     public ResourceLocation getTextureLocation(ThrownHookJavelin entity)
     {
-        return getShaftTextureLocation(resolveMetal(entity));
+        return ResourceLocation.fromNamespaceAndPath(
+            "tfcthings", "textures/entity/hook_javelin/" + resolveMetal(entity) + ".png");
     }
 
     private void renderRope(ThrownHookJavelin javelin, Entity owner, float partialTick,
                             PoseStack poseStack, MultiBufferSource buffer)
     {
         poseStack.pushPose();
-
-        Vec3 handPos = RopeRenderHelper.getOwnerHandPosition(owner, partialTick);
-
-        double javelinX = Mth.lerp(partialTick, javelin.xOld, javelin.getX());
-        double javelinY = Mth.lerp(partialTick, javelin.yOld, javelin.getY());
-        double javelinZ = Mth.lerp(partialTick, javelin.zOld, javelin.getZ());
-
-        Vec3 forward = javelin.getViewVector(partialTick);
-        javelinX -= forward.x * 0.35;
-        javelinY -= forward.y * 0.35;
-        javelinZ -= forward.z * 0.35;
-
-        float dx = (float) (handPos.x - javelinX);
-        float dy = (float) (handPos.y - javelinY);
-        float dz = (float) (handPos.z - javelinZ);
-
-        float sag = javelin.isInGroundSynced() ? ROPE_SAG_GROUNDED : ROPE_SAG_FLYING;
-        RopeRenderHelper.renderRope(poseStack.last().pose(), buffer, dx, dy, dz, ROPE_THICKNESS, sag);
-
+        RopeRenderHelper.RopeRenderData data = RopeRenderHelper.computeRopeRenderData(owner, javelin, partialTick);
+        float sag = javelin.isAnchored() ? ROPE_SAG_GROUNDED : ROPE_SAG_FLYING;
+        RopeRenderHelper.renderRope(poseStack.last().pose(), buffer, data.dx(), data.dy(), data.dz(), ROPE_THICKNESS, sag);
         poseStack.popPose();
     }
 }
