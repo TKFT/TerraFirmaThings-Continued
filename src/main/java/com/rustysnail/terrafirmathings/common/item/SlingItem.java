@@ -26,6 +26,7 @@ public class SlingItem extends ProjectileWeaponItem
         super(properties);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles()
     {

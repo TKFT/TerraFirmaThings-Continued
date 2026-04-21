@@ -50,7 +50,7 @@ public final class TFCThingsArmorMaterials
             0,
             SoundEvents.ARMOR_EQUIP_LEATHER,
             () -> Ingredient.EMPTY,
-            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "durable_snow_shoes"))),
+            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(TerraFirmaThings.MOD_ID, "snow_shoes"))),
             0f,
             0f
         ));

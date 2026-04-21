@@ -1,6 +1,0 @@
-{
-  "parent": "item/trident_in_hand",
-  "textures": {
-    "particle": "tfcthings:item/rope_javelin/blue_steel"
-  }
-}

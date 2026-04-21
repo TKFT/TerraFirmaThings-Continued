@@ -5,6 +5,7 @@
 - [ ] Higher quality sling stone entity models and textures.
 - [ ] Balance items and make recipe changes.
 - [ ] Better crampon texture and armor model.
+- [ ] Recipe for crampons
 - [ ] Patchouli HTML export for the online field guide
 - [ ] Grindstone wheel Create support, to make it a native Create energy consumer.
 - [ ] Tweak sling damage and force values. 
@@ -23,9 +24,10 @@
 #### Shellfish/Crab Trap
 - [ ] Produces shellfish or crabs in salt water if they are able to spawn in that area by spawning them in a trapping them.
 
-#### Pickling Jars
+#### Pickling Jars from TFC Homestead
 - [ ] Function like the jars in TFC Homestead
 - [ ] Allow food to be stored in jars of vinegar to be preserved.
 
 #### Other food storage stuff
+- [ ] Need to look into Firmalife more and see what other food storage items and blocks to add
 - [ ] Other cellars, deep freeze, canning/jaring more items, etc?????
