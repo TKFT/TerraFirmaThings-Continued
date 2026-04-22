@@ -37,6 +37,9 @@ jobs:
             let tag = '${{ github.event.release.tag_name }}';
             return tag.startsWith('v') ? tag.slice(1) : tag;
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build
         run: ./gradlew build
         env:
@@ -45,10 +48,10 @@ jobs:
       - name: Publish
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:
-          modrinth-id: ${{ env.MODRINTH_ID }}
+          modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
 
-          curseforge-id: ${{ env.CURSEFORGE_ID }}
+          curseforge-id: ${{ vars.CURSEFORGE_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
