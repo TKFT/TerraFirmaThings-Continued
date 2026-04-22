@@ -1,0 +1,63 @@
+name: Publish TerraFirmaThings Continued 1.21.x
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Get Version
+        id: version
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            let tag = '${{ github.event.release.tag_name }}';
+            return tag.startsWith('v') ? tag.slice(1) : tag;
+
+      - name: Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+        env:
+          VERSION: ${{ steps.version.outputs.result }}
+
+      - name: Publish
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
+
+          curseforge-id: ${{ secrets.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-tag: ${{ github.event.release.tag_name }}
+
+          name: TerraFirmaThings Continued-${{ steps.version.outputs.result }}
+          version: ${{ steps.version.outputs.result }}
+          changelog: ${{ github.event.release.body }}
+          java: 21
+          loaders: |
+            neoforge
+
+          changelog-file: CHANGELOG.md
