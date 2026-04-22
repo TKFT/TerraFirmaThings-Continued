@@ -51,7 +51,7 @@ jobs:
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_API_KEY }}
 
-          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+          curseforge-id: 1479788
           curseforge-token: ${{ secrets.CURSEFORGE_API_KEY }}
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
