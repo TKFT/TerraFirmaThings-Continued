@@ -7,10 +7,12 @@ import com.rustysnail.terrafirmathings.common.TFCThingsTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 
 public final class TFCThingsBlockTags extends BlockTagsProvider
 {
@@ -29,10 +31,10 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
 
         tag(TFCThingsTags.Blocks.SNOW_SHOES_NEGATE_SLOW)
             .addTag(BlockTags.SNOW)
-            .add(net.dries007.tfc.common.blocks.TFCBlocks.SNOW_PILE.get())
-            .add(net.minecraft.world.level.block.Blocks.SNOW)
-            .add(net.minecraft.world.level.block.Blocks.SNOW_BLOCK)
-            .add(net.minecraft.world.level.block.Blocks.POWDER_SNOW);
+            .add(TFCBlocks.SNOW_PILE.get())
+            .add(Blocks.SNOW)
+            .add(Blocks.SNOW_BLOCK)
+            .add(Blocks.POWDER_SNOW);
 
         tag(TFCThingsTags.Blocks.HIKING_BOOTS_NEGATE_SLOW)
             .addOptionalTag(TFCTags.Blocks.NATURAL_REGROWING_PLANTS)
@@ -55,9 +57,9 @@ public final class TFCThingsBlockTags extends BlockTagsProvider
         tag(TFCThingsTags.Blocks.UNHOOKABLE)
             .addTag(BlockTags.LEAVES)
             .addTag(BlockTags.CROPS)
-            .add(net.minecraft.world.level.block.Blocks.VINE)
-            .add(net.minecraft.world.level.block.Blocks.BAMBOO)
-            .add(net.minecraft.world.level.block.Blocks.COBWEB)
+            .add(Blocks.VINE)
+            .add(Blocks.BAMBOO)
+            .add(Blocks.COBWEB)
             .add(TFCThingsBlocks.ROPE_LADDER.get())
             .add(TFCThingsBlocks.ROPE_BRIDGE.get());
     }
