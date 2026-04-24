@@ -13,10 +13,12 @@
   ],
   "key": {
     "D": {
-      "item": "tfc:powder/diamond"
+      "item": "tfc:powder/diamond",
+      "tags": "c:dust/diamond"
     },
     "G": {
-      "item": "tfc:glue"
+      "item": "tfc:glue",
+      "tags": "c:glue"
     },
     "R": {
       "item": "tfcthings:honing_steel_head"

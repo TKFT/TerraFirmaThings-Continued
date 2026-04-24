@@ -12,6 +12,14 @@
     {
       "id": "#c:gems",
       "required": false
+    },
+    {
+      "id": "#c:flawless_gems",
+      "required": false
+    },
+    {
+      "id": "#c:exquisite_gems",
+      "required": false
     }
   ]
 }

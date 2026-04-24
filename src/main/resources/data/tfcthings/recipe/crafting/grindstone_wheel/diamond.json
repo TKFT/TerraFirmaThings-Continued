@@ -13,13 +13,15 @@
   ],
   "key": {
     "D": {
-      "item": "tfc:powder/diamond"
+      "item": "tfc:powder/diamond",
+      "tags": "c:dust/diamond"
     },
     "G": {
       "item": "tfcthings:grindstone_wheel/steel"
     },
     "F": {
-      "item": "tfc:glue"
+      "item": "tfc:glue",
+      "tags":  "c:glue"
     }
   },
   "result": {

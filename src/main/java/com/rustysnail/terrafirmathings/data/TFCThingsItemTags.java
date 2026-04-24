@@ -33,6 +33,8 @@ public final class TFCThingsItemTags extends ItemTagsProvider
 
     private static final TagKey<Item> GRAINS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/grain"));
     private static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/seeds"));
+    private static final TagKey<Item> FLAWLESS_GEMS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "flawless_gems"));
+    private static final TagKey<Item> EXQUISITE_GEMS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "exquisite_gems"));
 
     private static final TagKey<Item> CURIOS_CROWN = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("curios", "crown"));
 
@@ -88,7 +90,9 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCItems.GEMS.get(Ore.RUBY).get())
             .add(TFCItems.GEMS.get(Ore.SAPPHIRE).get())
             .add(TFCItems.GEMS.get(Ore.TOPAZ).get())
-            .addOptionalTag(Tags.Items.GEMS);
+            .addOptionalTag(Tags.Items.GEMS)
+            .addOptionalTag(FLAWLESS_GEMS)
+            .addOptionalTag(EXQUISITE_GEMS);
 
         {
             var t = tag(TFCThingsTags.Items.GEM_DISPLAY_ITEMS);
