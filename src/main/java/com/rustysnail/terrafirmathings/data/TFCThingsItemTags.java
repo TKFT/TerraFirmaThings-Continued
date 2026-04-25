@@ -50,12 +50,12 @@ public final class TFCThingsItemTags extends ItemTagsProvider
         this.lookupFuture = lookup;
 
         makeConditional(Tags.Items.TOOLS_IGNITER, new TFCThingsConfigCondition("enableTagFixes"));
-        makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/lapis")), new TFCThingsConfigCondition("enableTagFixes"));
+        makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/lapis")), new TFCThingsConfigCondition("enableTagFixes"));
         for(String gem : gemNames) {
-            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
+            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
         }
         for(String gem : gemNames.subList(3, gemNames.size())) {
-            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gem/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
+            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gems/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
         }
 
     }
@@ -269,14 +269,14 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .add(TFCItems.FLINT_AND_PYRITE.get());
 
         for(String gem : gemNames) {
-            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/" + gem)))
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/" + gem)))
                 .add(TagEntry.element((ResourceLocation.parse("tfc:powder/" + gem))));
         }
-        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/lapis")))
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/lapis")))
             .add(TagEntry.element((ResourceLocation.parse("tfc:powder/lapis_lazuli"))));
 
         for(String gem : gemNames.subList(3, gemNames.size())) {
-            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gem/" + gem)))
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gems/" + gem)))
                 .add(TagEntry.element((ResourceLocation.parse("tfc:gem/" + gem))));
         }
 
@@ -292,6 +292,9 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptional(ResourceLocation.parse("tfc:food/snowberry"))
             .addOptional(ResourceLocation.parse("tfc:food/strawberry"))
             .addOptional(ResourceLocation.parse("tfc:food/wintergreen_berry"));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/saltpeter")))
+                .add(TagEntry.element((ResourceLocation.parse("fc:powder/saltpeter"))));
 
         //TFC TAGS
         tag(TFCTags.Items.TOOL_RACK_TOOLS)

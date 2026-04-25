@@ -9,7 +9,11 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public final class TFCThingsBiomeTags extends BiomeTagsProvider
 {
-    public TFCThingsBiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper existingFileHelper)
+    public TFCThingsBiomeTags(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookup,
+        ExistingFileHelper existingFileHelper
+    )
     {
         super(output, lookup, TerraFirmaThings.MOD_ID, existingFileHelper);
     }
