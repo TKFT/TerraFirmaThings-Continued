@@ -1,18 +1,32 @@
 package com.rustysnail.terrafirmathings.data;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.rustysnail.terrafirmathings.TerraFirmaThings;
 import com.rustysnail.terrafirmathings.common.TFCThingsItems;
 import com.rustysnail.terrafirmathings.common.TFCThingsTags;
+import com.rustysnail.terrafirmathings.common.condition.TFCThingsConfigCondition;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import net.dries007.tfc.common.TFCTags;
@@ -21,6 +35,10 @@ import net.dries007.tfc.common.items.TFCItems;
 
 public final class TFCThingsItemTags extends ItemTagsProvider
 {
+
+    private final CompletableFuture<HolderLookup.Provider> lookupFuture;
+    private final Map<ResourceLocation, List<ICondition>> conditionalTags = new LinkedHashMap<>();
+
     public TFCThingsItemTags(
         PackOutput output,
         CompletableFuture<HolderLookup.Provider> lookup,
@@ -29,7 +47,20 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     )
     {
         super(output, lookup, blockTags, TerraFirmaThings.MOD_ID, existingFileHelper);
+        this.lookupFuture = lookup;
+
+        makeConditional(Tags.Items.TOOLS_IGNITER, new TFCThingsConfigCondition("enableTagFixes"));
+        makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/lapis")), new TFCThingsConfigCondition("enableTagFixes"));
+        for(String gem : gemNames) {
+            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
+        }
+        for(String gem : gemNames.subList(3, gemNames.size())) {
+            makeConditional(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gem/" + gem)), new TFCThingsConfigCondition("enableTagFixes"));
+        }
+
     }
+
+    private static final List<String> gemNames = List.of("amethyst", "diamond", "emerald", "opal", "pyrite", "ruby", "sapphire", "topaz");
 
     private static final TagKey<Item> GRAINS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/grain"));
     private static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/seeds"));
@@ -225,11 +256,42 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(TFCThingsTags.Items.JAVELINS)
             .addTag(TFCThingsTags.Items.SLINGS);
 
-        tag(Tags.Items.TOOLS_SPEAR).addTag(TFCThingsTags.Items.JAVELINS);
+        tag(Tags.Items.TOOLS_SPEAR)
+            .addTag(TFCThingsTags.Items.JAVELINS);
+
         tag(Tags.Items.TOOLS)
             .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
             .addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
 
+
+        //Extra Common Tag fixes
+        tag(Tags.Items.TOOLS_IGNITER)
+            .add(TFCItems.FLINT_AND_PYRITE.get());
+
+        for(String gem : gemNames) {
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/" + gem)))
+                .add(TagEntry.element((ResourceLocation.parse("tfc:powder/" + gem))));
+        }
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dust/lapis")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/lapis_lazuli"))));
+
+        for(String gem : gemNames.subList(3, gemNames.size())) {
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gem/" + gem)))
+                .add(TagEntry.element((ResourceLocation.parse("tfc:gem/" + gem))));
+        }
+
+        tag(Tags.Items.FOODS_BERRY)
+            .addOptional(ResourceLocation.parse("tfc:food/blackberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/blueberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/bunchkberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/cloudberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/cranberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/elderberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/gooseberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/raspberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/snowberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/strawberry"))
+            .addOptional(ResourceLocation.parse("tfc:food/wintergreen_berry"));
 
         //TFC TAGS
         tag(TFCTags.Items.TOOL_RACK_TOOLS)
@@ -263,5 +325,58 @@ public final class TFCThingsItemTags extends ItemTagsProvider
 
         tag(CURIOS_CROWN)
             .addTag(TFCThingsTags.Items.CROWNS);
+    }
+
+    private void makeConditional(TagKey<Item> tag, ICondition... conditions)
+    {
+        conditionalTags.put(tag.location(), List.of(conditions));
+    }
+
+    @Override
+    public CompletableFuture<?> run(CachedOutput cache)
+    {
+        return super.run(cache)
+            .thenCombine(lookupFuture, (ignored, registries) -> registries)
+            .thenCompose(registries -> patchConditionalTags(cache, registries));
+    }
+
+    private CompletableFuture<?> patchConditionalTags(CachedOutput cache, HolderLookup.Provider registries)
+    {
+        if (conditionalTags.isEmpty())
+        {
+            return CompletableFuture.completedFuture(null);
+        }
+
+        final List<CompletableFuture<?>> futures = new ArrayList<>();
+
+        try
+        {
+            for (var entry : conditionalTags.entrySet())
+            {
+                final ResourceLocation tagId = entry.getKey();
+                final List<ICondition> conditions = entry.getValue();
+                final Path path = getPath(tagId);
+
+                if (!Files.exists(path))
+                {
+                    continue;
+                }
+
+                final JsonObject json;
+                try (var reader = Files.newBufferedReader(path))
+                {
+                    json = JsonParser.parseReader(reader).getAsJsonObject();
+                }
+
+                ICondition.writeConditions(registries, json, conditions);
+                futures.add(DataProvider.saveStable(cache, json, path));
+            }
+        }
+        catch (IOException e)
+        {
+            return CompletableFuture.failedFuture(e);
+        }
+
+        return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
     }
 }

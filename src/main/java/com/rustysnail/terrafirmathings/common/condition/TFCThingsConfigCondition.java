@@ -34,6 +34,7 @@ public record TFCThingsConfigCondition(String flag) implements ICondition
             case "enableSlings" -> m.enableSlings.get();
             case "enableWhetstones" -> m.enableWhetstones.get();
             case "enableCrowns" -> m.enableCrowns.get();
+            case "enableTagFixes" -> m.enableTagFixes.get();
             default -> false;
         };
     }

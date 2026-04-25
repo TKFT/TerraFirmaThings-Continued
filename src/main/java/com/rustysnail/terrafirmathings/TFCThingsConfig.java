@@ -455,6 +455,7 @@ public class TFCThingsConfig
             public final ModConfigSpec.BooleanValue enableWhetstones;
             public final ModConfigSpec.BooleanValue enableCrowns;
             public final ModConfigSpec.BooleanValue enableGrainPiles;
+            public final ModConfigSpec.BooleanValue enableTagFixes;
 
             MasterList(ModConfigSpec.Builder builder)
             {
@@ -476,6 +477,7 @@ public class TFCThingsConfig
                 enableWhetstones = builder.define("enableWhetstones", true);
                 enableCrowns = builder.define("enableCrowns", true);
                 enableGrainPiles = builder.define("enableGrainPiles", true);
+                enableTagFixes = builder.comment("Adds missing common tags to TFC items and blocks").define("enableTagFixes", true);
 
                 builder.pop();
             }

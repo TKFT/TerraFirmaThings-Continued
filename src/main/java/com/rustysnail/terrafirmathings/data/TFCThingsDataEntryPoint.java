@@ -45,6 +45,11 @@ public final class TFCThingsDataEntryPoint
 
         event.getGenerator().addProvider(
             event.includeServer(),
+            new TFCThingsBiomeTags(output, lookup, event.getExistingFileHelper())
+        );
+
+        event.getGenerator().addProvider(
+            event.includeServer(),
             new LootTableProvider(
                 output,
                 Set.of(),
