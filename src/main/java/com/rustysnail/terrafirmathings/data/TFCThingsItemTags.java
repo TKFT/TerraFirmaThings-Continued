@@ -32,6 +32,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.items.TFCItems;
+import net.dries007.tfc.util.Metal;
 
 public final class TFCThingsItemTags extends ItemTagsProvider
 {
@@ -61,6 +62,24 @@ public final class TFCThingsItemTags extends ItemTagsProvider
     }
 
     private static final List<String> gemNames = List.of("amethyst", "diamond", "emerald", "opal", "pyrite", "ruby", "sapphire", "topaz");
+    private static final List<String> TOOL_METALS = List.of("bismuth_bronze", "black_bronze", "bronze", "copper", "wrought_iron", "steel", "black_steel", "blue_steel", "red_steel");
+    private static final List<String> ALL_METALS = List.of("bismuth_bronze", "black_bronze", "bronze", "copper", "wrought_iron", "steel", "black_steel", "blue_steel", "red_steel", "bismuth", "brass", "gold", "nickle", "rose_gold", "silver", "tin", "zinc", "steerling_silver", "cast_iron");
+    private static final List<String> ORES = List.of("native_copper", "native_gold", "hematite", "native_silver", "cassiterite", "bismuthinite", "garnierite", "malachite", "magnetite", "limonite", "sphalerite", "tetrahedrite");
+    private static final List<String> ORE_TYPES = List.of("small", "poor", "normal", "rich");
+    private static final Map<String, String> ORE_TO_METAL = Map.ofEntries(
+        Map.entry("native_copper", "copper"),
+        Map.entry("native_gold", "gold"),
+        Map.entry("hematite", "iron"),
+        Map.entry("native_silver", "silver"),
+        Map.entry("cassiterite", "tin"),
+        Map.entry("bismuthinite", "bismuth"),
+        Map.entry("garnierite", "nickle"),
+        Map.entry("malachite", "copper"),
+        Map.entry("magnetite", "iron"),
+        Map.entry("limonite", "iron"),
+        Map.entry("sphalerite", "zinc"),
+        Map.entry("tetrahedrite", "copper")
+    );
 
     private static final TagKey<Item> GRAINS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/grain"));
     private static final TagKey<Item> SEEDS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/seeds"));
@@ -268,14 +287,16 @@ public final class TFCThingsItemTags extends ItemTagsProvider
         tag(Tags.Items.TOOLS_IGNITER)
             .add(TFCItems.FLINT_AND_PYRITE.get());
 
-        for(String gem : gemNames) {
+        for (String gem : gemNames)
+        {
             tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/" + gem)))
                 .add(TagEntry.element((ResourceLocation.parse("tfc:powder/" + gem))));
         }
         tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/lapis")))
             .add(TagEntry.element((ResourceLocation.parse("tfc:powder/lapis_lazuli"))));
 
-        for(String gem : gemNames.subList(3, gemNames.size())) {
+        for (String gem : gemNames.subList(3, gemNames.size()))
+        {
             tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "gems/" + gem)))
                 .add(TagEntry.element((ResourceLocation.parse("tfc:gem/" + gem))));
         }
@@ -294,7 +315,110 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addOptional(ResourceLocation.parse("tfc:food/wintergreen_berry"));
 
         tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/saltpeter")))
-                .add(TagEntry.element((ResourceLocation.parse("fc:powder/saltpeter"))));
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/saltpeter"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/charcoal")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/charcoal"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/coke")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/coke"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/kaolinite")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/kaolinite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/graphite")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/graphite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/sylvite")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/sylvite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/salt")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/salt"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/flux")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/flux"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/wood_ash")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/wood_ash"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/soda_ash")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/soda_ash"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "dusts/lime")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:powder/lime"))));
+
+        for (String metal : ALL_METALS)
+        {
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "plates/" + metal)))
+                .add(TagEntry.element((ResourceLocation.parse("tfc:metal/sheet/" + metal))));
+            tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "double_plates/" + metal)))
+                .add(TagEntry.element((ResourceLocation.parse("tfc:metal/double_sheet/" + metal))));
+        }
+
+        tag(Tags.Items.BUCKETS_EMPTY)
+            .add(TFCItems.RED_STEEL_BUCKET.asItem())
+            .add(TFCItems.BLUE_STEEL_BUCKET.asItem())
+            .add(TFCItems.WOODEN_BUCKET.asItem());
+
+        for (String oreType : ORE_TYPES)
+        {
+            for (String ore : ORES)
+            {
+                tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/" + oreType + "/" + ORE_TO_METAL.get(ore))))
+                    .add(TagEntry.element((ResourceLocation.parse("tfc:ore/" + oreType + "_" + ore))));
+
+                tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/" + ORE_TO_METAL.get(ore) + "/" + oreType)))
+                    .add(TagEntry.element((ResourceLocation.parse("tfc:ore/" + oreType + "_" + ore))));
+
+                tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/" + ORE_TO_METAL.get(ore))))
+                    .add(TagEntry.element((ResourceLocation.parse("tfc:ore/" + oreType + "_" + ore))));
+            }
+        }
+
+        for (String gem : gemNames) {
+             tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/" + gem)))
+                .add(TagEntry.element((ResourceLocation.parse("tfc:ore/" + gem))));
+        }
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/redstone")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/cinnabar"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/redstone")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/cryolite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/flux")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/borax"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/graphite")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/graphite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/saltpeter")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/salpeter"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/sulpur")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/sulpur"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/sylvite")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/sylvite"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "raw_materials/salt")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:ore/halite"))));
+
+        tag(Tags.Items.FERTILIZERS)
+            .addOptional(ResourceLocation.parse("tfc:compost"))
+            .addOptional(ResourceLocation.parse("tfc:food/shellfish"))
+            .addOptional(ResourceLocation.parse("tfc:powder/saltpeter"))
+            .addOptional(ResourceLocation.parse("tfc:groundcover/guano"))
+            .addOptional(ResourceLocation.parse("tfc:powder/wood_ash"))
+            .addOptional(ResourceLocation.parse("tfc:powder/sylvite"));
+
+        //TODO: Bricks, Mud Bricks and other Brick type items.
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/sandpaper")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:sandpaper"))));
+
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/spindle")))
+            .add(TagEntry.element((ResourceLocation.parse("tfc:spindle"))));
 
         //TFC TAGS
         tag(TFCTags.Items.TOOL_RACK_TOOLS)
