@@ -16,7 +16,11 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 
 public final class TFCThingsBlockTags extends BlockTagsProvider
 {
-    public TFCThingsBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper existingFileHelper)
+    public TFCThingsBlockTags(
+        PackOutput output,
+        CompletableFuture<HolderLookup.Provider> lookup,
+        ExistingFileHelper existingFileHelper
+    )
     {
         super(output, lookup, TerraFirmaThings.MOD_ID, existingFileHelper);
     }

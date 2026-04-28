@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "tfcthings:config_enabled",
+      "flag": "enableTagFixes"
+    }
+  ],
   "values": [
     "tfc:gem/pyrite"
   ]
