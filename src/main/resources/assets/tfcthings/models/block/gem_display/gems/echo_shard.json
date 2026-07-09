@@ -3,7 +3,7 @@
   "parent": "minecraft:block/block",
   "ambientocclusion": false,
   "textures": {
-    "gem": "tfcthings:block/gem_display/gems/amethyst_shard",
+    "gem": "tfcthings:block/gem_display/gems/echo_shard",
     "particle": "#gem"
   },
   "elements": [
@@ -709,6 +709,5 @@
         "angle": -45
       }
     }
-  ],
-  "render_type": "minecraft:translucent"
+  ]
 }

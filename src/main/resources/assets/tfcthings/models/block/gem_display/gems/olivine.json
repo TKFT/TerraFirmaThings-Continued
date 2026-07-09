@@ -3,7 +3,7 @@
   "parent": "minecraft:block/block",
   "ambientocclusion": false,
   "textures": {
-    "gem": "tfcthings:block/gem_display/gems/diamond",
+    "gem": "tfcthings:block/gem_display/gems/olivine",
     "particle": "#gem"
   },
   "elements": [
