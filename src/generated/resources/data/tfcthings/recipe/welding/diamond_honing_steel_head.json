@@ -14,7 +14,8 @@
     "id": "tfcthings:diamond_honing_steel_head"
   },
   "second_input": {
-    "item": "tfc:powder/diamond"
+    "item": "tfc:powder/diamond",
+    "tags": "c:dusts/diamond"
   },
   "tier": 4
 }

@@ -14,7 +14,7 @@
   "key": {
     "D": {
       "item": "tfc:powder/diamond",
-      "tags": "c:dust/diamond"
+      "tags": "c:dusts/diamond"
     },
     "G": {
       "item": "tfc:glue",

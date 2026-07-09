@@ -12,7 +12,7 @@
       "item": "tfc:metal/javelin/black_bronze"
     },
     "R": {
-      "item": "tfc:jute_fiber"
+      "tag": "c:ropes"
     }
   },
   "pattern": [

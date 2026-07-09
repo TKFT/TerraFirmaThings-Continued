@@ -230,6 +230,7 @@ public final class TFCThingsItemTags extends ItemTagsProvider
             .addTag(TFCThingsTags.Items.SURVEYORS_HAMMERS)
             .addTag(TFCThingsTags.Items.SHARPENING_TOOLS);
 
+        tag(Tags.Items.ROPES).add(TFCItems.ROPE.key());
 
         //TFC TAGS
         tag(TFCTags.Items.TOOL_RACK_TOOLS)

@@ -19,7 +19,7 @@
       "item": "minecraft:leather_boots"
     },
     "L": {
-      "item": "minecraft:iron_nugget"
+      "tags": "c:chains/iron"
     },
     "M": {
       "item": "tfcthings:metal_bracing"

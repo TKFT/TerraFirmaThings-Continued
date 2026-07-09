@@ -25,6 +25,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
@@ -223,7 +224,7 @@ public class TFCThingsRecipes extends RecipeProvider
 
     private void ropeJavelinCrafting(RecipeOutput output)
     {
-        Item juteFiber = TFCItems.JUTE_FIBER.get();
+        TagKey<Item> rope = Tags.Items.ROPES;
         RecipeOutput conditioned = output.withConditions(
             RecipeConditions.flag(RecipeConditions.ROPE_JAVELIN));
         for (RopeJavelinFamily m : RopeJavelinFamily.ALL)
@@ -231,7 +232,7 @@ public class TFCThingsRecipes extends RecipeProvider
             Item tfcJavelin = TFCItems.METAL_ITEMS.get(m.tfcMetal).get(Metal.ItemType.JAVELIN).get();
             ShapedRecipeBuilder
                 .shaped(RecipeCategory.COMBAT, m.javelinItem.get())
-                .define('R', Ingredient.of(juteFiber))
+                .define('R', Ingredient.of(rope))
                 .define('J', Ingredient.of(tfcJavelin))
                 .pattern("RRR")
                 .pattern("RJR")
@@ -243,14 +244,14 @@ public class TFCThingsRecipes extends RecipeProvider
 
     private void hookJavelinCrafting(RecipeOutput output)
     {
-        Item juteFiber = TFCItems.JUTE_FIBER.get();
+        TagKey<Item> rope = Tags.Items.ROPES;
         RecipeOutput conditioned = output.withConditions(
             RecipeConditions.flag(RecipeConditions.HOOK_JAVELINS));
         for (HookJavelinFamily m : HookJavelinFamily.ALL)
         {
             ShapedRecipeBuilder
                 .shaped(RecipeCategory.COMBAT, m.javelinItem.get())
-                .define('R', Ingredient.of(juteFiber))
+                .define('R', Ingredient.of(rope))
                 .define('H', Ingredient.of(m.headItem.get()))
                 .define('S', Ingredient.of(WOODEN_RODS))
                 .pattern("RRR")

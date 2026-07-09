@@ -19,7 +19,7 @@
       "tag": "tfc:lumber"
     },
     "R": {
-      "item": "tfc:jute_fiber"
+      "tag": "c:ropes"
     }
   },
   "result": {

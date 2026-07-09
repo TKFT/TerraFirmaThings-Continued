@@ -12,7 +12,7 @@
       "item": "tfcthings:hook_javelin_head/blue_steel"
     },
     "R": {
-      "item": "tfc:jute_fiber"
+      "tag": "c:ropes"
     },
     "S": {
       "tag": "c:rods/wooden"
