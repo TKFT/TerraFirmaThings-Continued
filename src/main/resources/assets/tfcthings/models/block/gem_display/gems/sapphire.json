@@ -7,7 +7,7 @@
     32
   ],
   "textures": {
-    "gem": "tfcthings:block/gem_display/gems/sapphire_displayed",
+    "gem": "tfcthings:block/gem_display/gems/sapphire",
     "particle": "#gem"
   },
   "elements": [
